@@ -25,7 +25,29 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+    
+    <dependency>
+      <groupId>com.github.hazendaz.spotbugs</groupId>
+      <artifactId>spotbugs-maven-plugin</artifactId>
+      <version>3.1.0-RC4</version>
+      <type>maven-plugin</type>
+    </dependency>
+    
+    <dependency>
+      <groupId>net.sourceforge.pmd</groupId>
+      <artifactId>pmd</artifactId>
+      <version>6.51.0</version>
+      <type>pom</type>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.puppycrawl.tools</groupId>
+      <artifactId>checkstyle</artifactId>
+      <version>10.4</version>
+    </dependency>
+
   </dependencies>
+  
 
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
