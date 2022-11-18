@@ -2,8 +2,10 @@ package kourpa;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import javax.swing.*;
-public class MyProfile extends JFrame implements ActionListener {
+import java.awt.event.KeyListener;
+public class MyProfile extends JFrame implements ActionListener, KeyListener {
    JFrame frame = new JFrame();
    JPanel panel = new JPanel();
    JLabel userLabel = new JLabel("User");
@@ -84,7 +86,8 @@ public class MyProfile extends JFrame implements ActionListener {
        b4.addActionListener(this);
        b5.addActionListener(this);
        b6.addActionListener(this);
-      
+       userText.addKeyListener(this);
+        
        b1.setBounds(300,20,80,25);
        b1.setText("Change");
        panel.add(b1);
@@ -126,4 +129,34 @@ public class MyProfile extends JFrame implements ActionListener {
             p3Text.setText("");
         }
     }
+    
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int key = e.getKeyCode();
+        if (key == KeyEvent.VK_ENTER & e.getSource() == userText){
+            
+        }
+        if (key == KeyEvent.VK_ENTER & e.getSource() == passwordText){
+            
+        }
+        if (key == KeyEvent.VK_ENTER & e.getSource() == emailText){
+            
+        }
+        if (key == KeyEvent.VK_ENTER & e.getSource() == p1Text){
+            
+        }
+        if (key == KeyEvent.VK_ENTER & e.getSource() == p2Text){
+            
+        }
+        if (key == KeyEvent.VK_ENTER & e.getSource() == p3Text){
+            
+        }
+    }
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+    @Override
+    public void keyReleased(KeyEvent e) {
+    }
+   
 }
