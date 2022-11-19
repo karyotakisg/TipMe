@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 public class MyProfile extends JFrame implements ActionListener, KeyListener, MouseListener {
-   JFrame frame = new JFrame(); //creation of the necesery components for the class//
+   JFrame frame = new JFrame(); //creation of the necesery components for  MyProfile GUI//
    JPanel panel = new JPanel();
    JLabel userLabel = new JLabel("User");
    JTextField userText = new JTextField(25);
@@ -231,7 +231,7 @@ public class MyProfile extends JFrame implements ActionListener, KeyListener, Mo
     @Override
     public void mouseClicked(MouseEvent e) {}
     @Override
-    public void mousePressed(MouseEvent e) {
+    public void mousePressed(MouseEvent e) { //The menu button (top button) change color to cyan when the user presses them.
         if(e.getSource() == b1Icon ){
             b1Icon.setBackground(Color.CYAN);
         }
@@ -249,7 +249,7 @@ public class MyProfile extends JFrame implements ActionListener, KeyListener, Mo
     @Override
     public void mouseReleased(MouseEvent e) {}
     @Override
-    public void mouseEntered(MouseEvent e) {
+    public void mouseEntered(MouseEvent e) { //hovering a menu button changes its color.
         if(e.getSource() == b1Icon ){
         b1Icon.setBackground(Color.YELLOW);
         }
