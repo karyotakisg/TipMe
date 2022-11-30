@@ -1,4 +1,6 @@
+<<<<<<< HEAD
 #Wed Nov 30 10:22:51 EET 2022
+
 module-resource*?\:checkstyle-suppressions.xml=86B541FD737BD3B8BC31C52DB9AFB613F1D1FDDA
 module-resource*?\:checkstyle-xpath-suppressions.xml=57B39E952E204495BD634DFE2869996A0A264014
 configuration*?=BF3D9AACDC141B83F4C82CF93A2548F46E63188B
