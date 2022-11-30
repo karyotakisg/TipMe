@@ -188,7 +188,7 @@ public class MyProfile extends JFrame implements ActionListener, KeyListener, Mo
         }
         //go to another section of the app when user press a button. For example, when the user press the homepage button, open the homepage interface//
         if(e.getSource() == b1Icon ){
-          
+          Upload upload = new Upload();
         }
         if(e.getSource() == b2Icon ){
             
