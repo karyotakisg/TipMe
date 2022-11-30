@@ -9,6 +9,6 @@ public class Main {
         ar.add(user1);
         people.put(0,ar);
         MyProfile obj = new MyProfile(user1);
-        obj.menu();   
+         
     }
 }

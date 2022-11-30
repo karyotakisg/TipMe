@@ -23,11 +23,6 @@ public class MyProfile extends JFrame implements ActionListener, KeyListener, Mo
    JButton b4 = new JButton();
    JButton b5 = new JButton();
    JButton b6 = new JButton();
-   
-   
-   
-   
-
      MyProfile(User user){ //constructor of the MyProfile GUI
         frame.setTitle("MyProfile");
         frame.setSize(1000,1000);
@@ -125,7 +120,8 @@ public class MyProfile extends JFrame implements ActionListener, KeyListener, Mo
        diaryArea.setBounds(50,600,800,300);
        diaryArea.setBorder(BorderFactory.createLineBorder(Color.black));
        panel.add(diaryArea);
-       
+       Menu men = new Menu();
+       panel.add(men);
        frame.setVisible(true);
     }
     public void menu(){  //Creates the menu of the app 
@@ -152,19 +148,8 @@ public class MyProfile extends JFrame implements ActionListener, KeyListener, Mo
         if(e.getSource() == b6 ){
             p3Text.setText("");
         }
-        //go to another section of the app when user press a button. For example, when the user press the homepage button, open the homepage interface//
-        if(e.getSource() == b1Icon ){
-          
-        }
-        if(e.getSource() == b2Icon ){
-            
-        }
-        if(e.getSource() == b3Icon ){
-           
-        }
-        if(e.getSource() == b4Icon ){
-            
-        }
+       
+        
         
     }
     
@@ -191,60 +176,18 @@ public class MyProfile extends JFrame implements ActionListener, KeyListener, Mo
             
         }
     }
-   
     @Override
     public void keyReleased(KeyEvent e) {}
     @Override
     public void mouseClicked(MouseEvent e) {}
     @Override
-    public void mousePressed(MouseEvent e) { //The menu button (top button) change color to cyan when the user presses them.
-        if(e.getSource() == b1Icon ){
-            b1Icon.setBackground(Color.CYAN);
-        }
-         if(e.getSource() == b2Icon ){
-            b2Icon.setBackground(Color.CYAN);
-        }
-        if(e.getSource() == b3Icon ){
-            b3Icon.setBackground(Color.CYAN);
-        }
-        if(e.getSource() == b4Icon ){
-           b4Icon.setBackground(Color.CYAN);
-        }
-        
-    }
+    public void mousePressed(MouseEvent e) {}
     @Override
     public void mouseReleased(MouseEvent e) {}
     @Override
-    public void mouseEntered(MouseEvent e) { //hovering a menu button changes its color.
-        if(e.getSource() == b1Icon ){
-        b1Icon.setBackground(Color.YELLOW);
-        }
-        if(e.getSource() == b2Icon ){
-            b2Icon.setBackground(Color.YELLOW);
-            }
-        if(e.getSource() == b3Icon ){
-        b3Icon.setBackground(Color.YELLOW);
-        }
-        if(e.getSource() == b4Icon ){
-            b4Icon.setBackground(Color.YELLOW);
-            }
-
-    }
+    public void mouseEntered(MouseEvent e) {}
     @Override
-    public void mouseExited(MouseEvent e) {
-        if(e.getSource() == b1Icon ){
-            b1Icon.setBackground(new Color(240,240,240));
-            }
-            if(e.getSource() == b2Icon ){
-                b2Icon.setBackground(new Color(240,240,240));
-                }
-            if(e.getSource() == b3Icon ){
-            b3Icon.setBackground(new Color(240,240,240));
-            }
-            if(e.getSource() == b4Icon ){
-                b4Icon.setBackground(new Color(240,240,240));
-                }
-         }
+    public void mouseExited(MouseEvent e) {}
     @Override
     public void keyTyped(KeyEvent e) {}
    }
