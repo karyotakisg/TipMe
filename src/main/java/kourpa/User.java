@@ -14,6 +14,9 @@ public class User {
         this.p2 = p2;
         this.p3 = p3;
     }
+    public User() {
+
+    }
     public void setUsername(String username){
         this.username = username;
     }
