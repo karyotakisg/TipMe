@@ -5,6 +5,7 @@ import javax.swing.*;
 public class MyProfile extends JFrame implements ActionListener, KeyListener {
     JFrame frame = new JFrame(); //creation of the necesery components for  MyProfile GUI//
     JPanel panel = new JPanel();
+    JPanel panel2 = new JPanel();
     JLabel userLabel = new JLabel("User");
     JTextField userText = new JTextField(25);
     JLabel passwordLabel = new JLabel("Password");
@@ -32,6 +33,12 @@ public class MyProfile extends JFrame implements ActionListener, KeyListener {
         panel.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
         panel.setLayout(null);
         frame.add(panel); 
+        panel2.setBackground(Color.ORANGE);
+        panel2.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
+        panel2.setBounds(0,0,100,50);
+        panel2.setLayout(null);
+        frame.add(panel);
+        panel.add(panel2);
         userLabel.setBounds(310,200,165,25);
         panel.add(userLabel);
         userText.setBounds(400,200,165,25);
@@ -102,7 +109,7 @@ public class MyProfile extends JFrame implements ActionListener, KeyListener {
         diaryArea.setBorder(BorderFactory.createLineBorder(Color.black));
         panel.add(diaryArea);
         Menu men = new Menu();
-        panel.add(men);
+        panel2.add(men);
         getContentPane().add(men);
         frame.setVisible(true);
        b1.addActionListener(this);
