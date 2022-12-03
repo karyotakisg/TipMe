@@ -7,6 +7,5 @@ import java.util.HashMap;
         User user1 = new User("user1","George2021","george@gmail.com","sports","science","movies");
         ar.add(user1);
         people.put(0,ar);
-        MyProfile obj = new MyProfile(user1);
     }
 }
