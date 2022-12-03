@@ -62,6 +62,7 @@ public class MyProfile extends JFrame implements ActionListener, KeyListener {
         p3Text.setBounds(400, 350, 165, 25);
         panel.add(p3Text);
         p3Text.setText(user.getp3());
+<<<<<<< HEAD
         b1.addActionListener(this);
         b2.addActionListener(this);
         b3.addActionListener(this);
@@ -105,6 +106,138 @@ public class MyProfile extends JFrame implements ActionListener, KeyListener {
         panel.add(men);
         getContentPane().add(men);
         frame.setVisible(true);
+||||||| 75101ed
+
+       b1.addActionListener(this);
+       b2.addActionListener(this);
+       b3.addActionListener(this);
+       b4.addActionListener(this);
+       b5.addActionListener(this);
+       b6.addActionListener(this);
+       userText.addKeyListener(this);
+       passwordText.addKeyListener(this);
+       emailText.addKeyListener(this);
+       p1Text.addKeyListener(this);
+       p2Text.addKeyListener(this);
+       p3Text.addKeyListener(this);
+
+      
+       
+        
+       b1.setBounds(600,200,80,25);//placing of buttons//
+       b1.setText("Change");
+       panel.add(b1);
+       b2.setBounds(600,230,80,25);
+       b2.setText("Change");
+       panel.add(b2);
+       b3.setBounds(600,260,80,25);
+       b3.setText("Change");
+       panel.add(b3);
+       b4.setBounds(600,290,80,25);
+       b4.setText("Change");
+       panel.add(b4);
+       b5.setBounds(600,320,80,25);
+       b5.setText("Change");
+       panel.add(b5);
+       b6.setBounds(600,350,80,25);
+       b6.setText("Change");
+       panel.add(b6);
+       JLabel labelForPosts = new JLabel("<html><font size = '22' color = 'black'><strong>My Posts</strong><text-align: center></font><</html> ");
+       labelForPosts.setBounds(400,420,200,150);
+       Icon diary = new ImageIcon("src/main/resources/diaryIcon.png");
+       labelForPosts.setIcon(diary);
+       panel.add(labelForPosts);
+       
+       JTextArea diaryArea = new JTextArea("Here the user can see his posts!"); // will be changed later. string setted for the purposes of the presentation
+       diaryArea.setBounds(50,600,800,300);
+       diaryArea.setBorder(BorderFactory.createLineBorder(Color.black));
+       panel.add(diaryArea);
+       Menu men = new Menu();
+       panel.add(men);
+       frame.setVisible(true);
+    }
+    public void menu(){  //Creates the menu of the app 
+        
+=======
+
+       b1.addActionListener(this);
+       b2.addActionListener(this);
+       b3.addActionListener(this);
+       b4.addActionListener(this);
+       b5.addActionListener(this);
+       b6.addActionListener(this);
+       userText.addKeyListener(this);
+       passwordText.addKeyListener(this);
+       emailText.addKeyListener(this);
+       p1Text.addKeyListener(this);
+       p2Text.addKeyListener(this);
+       p3Text.addKeyListener(this);
+
+      
+       
+        
+       b1.setBounds(600,200,80,25);//placing of buttons//
+       b1.setText("Change");
+       panel.add(b1);
+       b2.setBounds(600,230,80,25);
+       b2.setText("Change");
+       panel.add(b2);
+       b3.setBounds(600,260,80,25);
+       b3.setText("Change");
+       panel.add(b3);
+       b4.setBounds(600,290,80,25);
+       b4.setText("Change");
+       panel.add(b4);
+       b5.setBounds(600,320,80,25);
+       b5.setText("Change");
+       panel.add(b5);
+       b6.setBounds(600,350,80,25);
+       b6.setText("Change");
+       panel.add(b6);
+
+       JLabel labelForPosts = new JLabel("<html><font size = '22' color = 'black'><strong>My Posts</strong><text-align: center></font><</html> ");
+       labelForPosts.setBounds(400,420,200,150);
+       Icon diary = new ImageIcon("src/main/resources/diaryIcon.png");
+       labelForPosts.setIcon(diary);
+       panel.add(labelForPosts);
+       
+       JTextArea diaryArea = new JTextArea("Here the user can see his posts!"); // will be changed later. string setted for the purposes of the presentation
+       diaryArea.setBounds(50,600,800,300);
+       diaryArea.setBorder(BorderFactory.createLineBorder(Color.black));
+       panel.add(diaryArea);
+       Menu men = new Menu();
+       panel.add(men);
+       frame.setVisible(true);
+    }
+    public void menu(){  //Creates the menu of the ap
+        panel.add(b1Icon);
+        panel.add(b2Icon);
+        panel.add(b3Icon);
+        panel.add(b4Icon);
+        b1Icon.setBounds(300,0,100,50);
+        b2Icon.setBounds(400,0,100,50);
+        b3Icon.setBounds(500,0,100,50);
+        b4Icon.setBounds(600,0,100,50);
+        b1Icon.addActionListener(this);
+        b2Icon.addActionListener(this);
+        b3Icon.addActionListener(this);
+        b4Icon.addActionListener(this);
+        b1Icon.addMouseListener(this);
+        b2Icon.addMouseListener(this);
+        b3Icon.addMouseListener(this);
+        b4Icon.addMouseListener(this);
+        javax.swing.border.Border br = BorderFactory.createLineBorder(Color.black);
+        panel2.setBorder(br);
+        panel2.setBackground(new Color(18,18,18));
+        panel2.setBounds(0,0,1000,50);
+        panel2.setLayout(null);
+        panel.add(panel2);
+        b1Icon.setBackground(new Color(240,240,240));
+        b2Icon.setBackground(new Color(240,240,240));
+        b3Icon.setBackground(new Color(240,240,240));
+        b4Icon.setBackground(new Color(240,240,240));
+
+>>>>>>> 07b25852caecbbd4a65863713f57dd0154504410
     }
     @Override
     public void actionPerformed(ActionEvent e) {
