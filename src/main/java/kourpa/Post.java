@@ -10,7 +10,4 @@ public class Post {
 		System.out.println(outer);
 		return outer;
 	}
-	 public static void main(String[] args) {
-		Upload upload = new Upload();
-	}
 }
