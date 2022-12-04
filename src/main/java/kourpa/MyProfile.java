@@ -113,10 +113,6 @@ public class MyProfile extends JFrame implements ActionListener, KeyListener { /
         p3Text.addKeyListener(this);
         Menu menu = new Menu();
         panel.add(menu,BorderLayout.NORTH);
-        //JPanel panel2 = new JPanel();
-        //panel2.setBounds(0,0,500,50);
-        //panel2.setBackground(new Color(50, 50, 50));
-        //this.add(panel2, BorderLayout.CENTER);
         this.add(panel);
         this.setVisible(true);
     }
