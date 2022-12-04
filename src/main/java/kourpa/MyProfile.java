@@ -2,10 +2,8 @@ package kourpa;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-public class MyProfile extends JFrame implements ActionListener, KeyListener {
-    JFrame frame = new JFrame(); //creation of the necesery components for  MyProfile GUI//
+public class MyProfile extends JFrame implements ActionListener, KeyListener { //initialization of the necesery components
     JPanel panel = new JPanel();
-    JPanel panel2 = new JPanel();
     JLabel userLabel = new JLabel("User");
     JTextField userText = new JTextField(25);
     JLabel passwordLabel = new JLabel("Password");
@@ -25,20 +23,13 @@ public class MyProfile extends JFrame implements ActionListener, KeyListener {
     JButton b5 = new JButton();
     JButton b6 = new JButton();
     MyProfile(User user){ //constructor of the MyProfile GUI
-        frame.setTitle("MyProfile");
-        frame.setSize(1000,1000);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-        frame.getContentPane().setBackground(Color.CYAN);
+        super("MyProfile");
+        setSize(1000,1000);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        this.getContentPane().setBackground(Color.CYAN);
         panel.setBackground(Color.ORANGE);
         panel.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
-        panel.setLayout(null);
-        frame.add(panel); 
-        panel2.setBackground(Color.ORANGE);
-        panel2.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
-        panel2.setBounds(0,0,100,50);
-        panel2.setLayout(null);
-        frame.add(panel);
-        panel.add(panel2);
+        panel.setLayout(null); 
         userLabel.setBounds(310,200,165,25);
         panel.add(userLabel);
         userText.setBounds(400,200,165,25);
@@ -108,22 +99,26 @@ public class MyProfile extends JFrame implements ActionListener, KeyListener {
         diaryArea.setBounds(50,600,800,300);
         diaryArea.setBorder(BorderFactory.createLineBorder(Color.black));
         panel.add(diaryArea);
-        Menu men = new Menu();
-        panel2.add(men);
-        getContentPane().add(men);
-        frame.setVisible(true);
-       b1.addActionListener(this);
-       b2.addActionListener(this);
-       b3.addActionListener(this);
-       b4.addActionListener(this);
-       b5.addActionListener(this);
-       b6.addActionListener(this);
-       userText.addKeyListener(this);
-       passwordText.addKeyListener(this);
-       emailText.addKeyListener(this);
-       p1Text.addKeyListener(this);
-       p2Text.addKeyListener(this);
-       p3Text.addKeyListener(this);
+        b1.addActionListener(this);
+        b2.addActionListener(this);
+        b3.addActionListener(this);
+        b4.addActionListener(this);
+        b5.addActionListener(this);
+        b6.addActionListener(this);
+        userText.addKeyListener(this);
+        passwordText.addKeyListener(this);
+        emailText.addKeyListener(this);
+        p1Text.addKeyListener(this);
+        p2Text.addKeyListener(this);
+        p3Text.addKeyListener(this);
+        Menu menu = new Menu();
+        panel.add(menu,BorderLayout.NORTH);
+        //JPanel panel2 = new JPanel();
+        //panel2.setBounds(0,0,500,50);
+        //panel2.setBackground(new Color(50, 50, 50));
+        //this.add(panel2, BorderLayout.CENTER);
+        this.add(panel);
+        this.setVisible(true);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
