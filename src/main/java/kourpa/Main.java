@@ -12,7 +12,6 @@ import java.sql.Statement;
 		try {
 			Connection conn = DriverManager.getConnection(jdbcUrl);
         } catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
