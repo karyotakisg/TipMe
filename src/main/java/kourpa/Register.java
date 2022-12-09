@@ -1,3 +1,4 @@
+
 package kourpa;
 
 import javax.swing.JButton;
@@ -291,11 +292,3 @@ public class Register {
 			LoginPage loginPage = new LoginPage(idpas.getLogininfo());
 		} */
 	
-		
-			
-	
-	
-
-
-
-
