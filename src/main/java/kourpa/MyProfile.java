@@ -1,9 +1,12 @@
 package kourpa;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
 public class MyProfile extends JFrame implements ActionListener, KeyListener {
-    JFrame frame = new JFrame(); //creation of the necesery components for  MyProfile GUI//
+    
+	JFrame frame = new JFrame(); //creation of the necesery components for  MyProfile GUI//
     JPanel panel = new JPanel();
     JPanel panel2 = new JPanel();
     JLabel userLabel = new JLabel("User");
@@ -24,6 +27,7 @@ public class MyProfile extends JFrame implements ActionListener, KeyListener {
     JButton b4 = new JButton();
     JButton b5 = new JButton();
     JButton b6 = new JButton();
+   
     MyProfile(User user){ //constructor of the MyProfile GUI
         frame.setTitle("MyProfile");
         frame.setSize(1000,1000);

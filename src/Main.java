@@ -13,26 +13,24 @@ public class Main {
 		try {
 			Connection conn = DriverManager.getConnection(jdbcUrl);
 		
-		    String userTable = "CREATE TABLE User "
-				+ "(UserId INT NOT NULL PRIMARY KEY"
-				+ "username VARCHAR(30) NOT NULL"
-				+ "password VARCHAR(30) NOT NULL"
-				+ "email VARCHAR(30) NOT NULL"
-				+ "PhoneNumber CHAR(10)"
-				+ "Sex VARCHAR(6)"
-				+ "BirthDate DATE NOT NULL"
-				+ "Interest1 VARCHAR(30)"
-				+ "Interest2 VARCHAR(30)"
-				+ "Interest3 VARCHAR(30))";
+		  /*  CREATE TABLE User (UserId INTEGER PRIMARY KEY, 
+		    	username VARCHAR(30) NOT NULL,
+				password VARCHAR(30) NOT NULL,
+				email VARCHAR(30) NOT NULL,
+				PhoneNumber CHAR(10),
+				Sex VARCHAR(6),
+				BirthDate DATE NOT NULL,
+				Interest1 VARCHAR(30),
+				Interest2 VARCHAR(30),
+				Interest3 VARCHAR(30));
 		
-		    String postTable = "CREATE TABLE Post "
-				+ "(PostId INT NOT NULL PRIMARY KEY"
-				+ "Text VARCHAR(200) NOT NULL"
-				+ "Category VARRCHAR(30) NOT NULL"
-				+ "UploadDate DATE NOT NULL"
-				+ "Likes INT NOT NULL"
-				+ "UserId VARCHAR(30) NOT NULL"
-				+ "FOREIGN KEY (UserId) REFERENCES User";
+		    CREATE TABLE Post (PostId INTEGER PRIMARY KEY,
+				Text VARCHAR(200) NOT NULL,
+				Category VARRCHAR(30) NOT NULL,
+				UploadDate DATE NOT NULL,
+				Likes INT NOT NULL,
+				UserId INTEGER NOT NULL,
+				FOREIGN KEY (UserId) REFERENCES User); */
 		
 		    Statement st = conn.createStatement();
 		    st.executeUpdate(userTable);
