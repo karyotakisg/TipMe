@@ -136,7 +136,7 @@ public class LoginPage implements ActionListener {
 				  s.printStackTrace();
 			  }
 			
-		
+		}
 		if (e.getSource() == registerButton) {
 			userIDField.setText("");
 			userPasswordField.setText("");
@@ -145,6 +145,6 @@ public class LoginPage implements ActionListener {
 			Register.register();
 		}
 
-	}
+	
   }
 }
