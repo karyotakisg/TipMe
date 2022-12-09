@@ -8,17 +8,4 @@ public class Main {
 		Register.register();
 		
 	}
-
-
-
-
-
-
-
-
-
-     
-	
-	}
-
-
+}
