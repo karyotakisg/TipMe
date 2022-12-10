@@ -2,7 +2,7 @@ package kourpa;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-public class MyProfile extends JFrame implements ActionListener, KeyListener { //initialization of the necesery components
+public class MyProfile extends JFrame implements ActionListener { //initialization of the necesery components
     JPanel panel = new JPanel();
     JLabel userLabel = new JLabel("User");
     JTextField userText = new JTextField(25);
@@ -65,13 +65,7 @@ public class MyProfile extends JFrame implements ActionListener, KeyListener { /
         b3.addActionListener(this);
         b4.addActionListener(this);
         b5.addActionListener(this);
-        b6.addActionListener(this);
-        userText.addKeyListener(this);
-        passwordText.addKeyListener(this);
-        emailText.addKeyListener(this);
-        p1Text.addKeyListener(this);
-        p2Text.addKeyListener(this);
-        p3Text.addKeyListener(this); 
+        b6.addActionListener(this); 
         b1.setBounds(600,200,80,25);//placing of buttons//
         b1.setText("Change");
         panel.add(b1);
@@ -99,70 +93,51 @@ public class MyProfile extends JFrame implements ActionListener, KeyListener { /
         diaryArea.setBounds(50,600,800,300);
         diaryArea.setBorder(BorderFactory.createLineBorder(Color.black));
         panel.add(diaryArea);
-        b1.addActionListener(this);
-        b2.addActionListener(this);
-        b3.addActionListener(this);
-        b4.addActionListener(this);
-        b5.addActionListener(this);
-        b6.addActionListener(this);
-        userText.addKeyListener(this);
-        passwordText.addKeyListener(this);
-        emailText.addKeyListener(this);
-        p1Text.addKeyListener(this);
-        p2Text.addKeyListener(this);
-        p3Text.addKeyListener(this);
         Menu menu = new Menu();
         panel.add(menu,BorderLayout.NORTH);
         this.add(panel);
-        this.setVisible(true);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);    
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         //delete the existing text when the user presses the button "change"//
         if(e.getSource() == b1 ){
-            userText.setText("");
+            userText.setText("");  
+            sumbitButton but = new sumbitButton();
+            panel.add(but);
+            this.setVisible(true);
         }
         if(e.getSource() == b2 ){
             passwordText.setText("");
+            sumbitButton but = new sumbitButton();
+            panel.add(but);
+            this.setVisible(true);
         }
         if(e.getSource() == b3 ){
             emailText.setText("");
+            sumbitButton but = new sumbitButton();
+            panel.add(but);
+            this.setVisible(true);
         }
         if(e.getSource() == b4 ){
             p1Text.setText("");
+            sumbitButton but = new sumbitButton();
+            panel.add(but);
+            this.setVisible(true);
         }
         if(e.getSource() == b5 ){
             p2Text.setText("");
+            sumbitButton but = new sumbitButton();
+            panel.add(but);
+            this.setVisible(true);
         }
         if(e.getSource() == b6 ){
             p3Text.setText("");
+            sumbitButton but = new sumbitButton();
+            panel.add(but);
+            this.setVisible(true);
         }      
     }  
-    @Override
-    public void keyPressed(KeyEvent e) {
-        //for submitting changes in the user setting after pressing enter//
-        int key = e.getKeyCode();
-        if (key == KeyEvent.VK_ENTER & e.getSource() == userText){
-            
-        }
-        if (key == KeyEvent.VK_ENTER & e.getSource() == passwordText){
-            
-        }
-        if (key == KeyEvent.VK_ENTER & e.getSource() == emailText){
-            
-        }
-        if (key == KeyEvent.VK_ENTER & e.getSource() == p1Text){
-            
-        }
-        if (key == KeyEvent.VK_ENTER & e.getSource() == p2Text){
-            
-        }
-        if (key == KeyEvent.VK_ENTER & e.getSource() == p3Text){
-            
-        }
-    }
-    @Override
-    public void keyReleased(KeyEvent e) {}
-    @Override
-    public void keyTyped(KeyEvent e) {}
+  
 }
