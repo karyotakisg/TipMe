@@ -2,7 +2,8 @@ package kourpa;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-public class MyProfile extends JFrame implements ActionListener { //initialization of the necesery components
+public class MyProfile extends JFrame implements ActionListener {
+    JFrame frame = new JFrame(); //creation of the necesery components for  MyProfile GUI//
     JPanel panel = new JPanel();
     JLabel userLabel = new JLabel("User");
     JTextField userText = new JTextField(25);
@@ -44,22 +45,22 @@ public class MyProfile extends JFrame implements ActionListener { //initializati
         panel.add(emailLabel);
         emailText.setBounds(400, 260, 165, 25);
         panel.add(emailText); 
-        emailText.setText(user.getMail());
+        emailText.setText(user.getEmail());
         p1Label.setBounds(310, 290, 165, 25);
         panel.add(p1Label);
         p1Text.setBounds(400, 290, 165, 25);
         panel.add(p1Text);
-        p1Text.setText(user.getp1());
+        p1Text.setText(user.getInterest1());
         p2Label.setBounds(310, 320, 165, 25);
         panel.add(p2Label);
         p2Text.setBounds(400, 320, 165, 25);
         panel.add(p2Text);
-        p2Text.setText(user.getp2());
+        p2Text.setText(user.getInterest2());
         p3Label.setBounds(310, 350, 165, 25);
         panel.add(p3Label);
         p3Text.setBounds(400, 350, 165, 25);
         panel.add(p3Text);
-        p3Text.setText(user.getp3());
+        p3Text.setText(user.getInterest3());
         b1.addActionListener(this);
         b2.addActionListener(this);
         b3.addActionListener(this);
