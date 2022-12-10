@@ -1,7 +1,19 @@
 package kourpa;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
 public class Menu  extends JPanel implements ActionListener, KeyListener, MouseListener { //creates the menu at the top of the screen for each section of the app
     Icon upload = new ImageIcon("src/main/resources/Upload.png");
     Icon myProfile = new ImageIcon("src/main/resources/MyProfile.png");
@@ -41,10 +53,20 @@ public class Menu  extends JPanel implements ActionListener, KeyListener, MouseL
     @Override
     public void actionPerformed(ActionEvent e) {  //go to another section of the app when user press a button.
         if(e.getSource() == b1Icon ){
-        
+            Upload up = new Upload();
+            up.Upload();
         }
-        if(e.getSource() == b3Icon ){
+
+
+        if(e.getSource() == b2Icon ){
+            MyProfile prof = new MyProfile();
+            prof.MyProfile();
            
+        }
+
+        if(e.getSource() == b3Icon ){
+            Feed f = new Feed();
+            f.Feed();        
         }
         if(e.getSource() == b4Icon ){
             
