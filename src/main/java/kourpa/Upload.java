@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
+import javax.swing.border.LineBorder;
 
 public class Upload {
 
@@ -25,22 +26,28 @@ public class Upload {
 		jf.getContentPane().setBackground(Color.ORANGE);
 		JButton jb = new JButton("Upload");
 
-		jf.setBounds(500, 200, 800, 550);
+		jf.setBounds(500, 200, 600, 400);
 
 		jf.setLayout(null);
-		jb.setBounds(350, 420, 80, 50);
+		jb.setBounds(250, 290, 80, 50);
 
 		JTextArea textarea = new JTextArea();
-		textarea.setBounds(35, 100, 710, 300);
+		textarea.setBounds(35, 100, 510, 180);
+		textarea.setLineWrap(true);
+		textarea.setWrapStyleWord(true);
+		LineBorder line = new LineBorder(Color.BLACK);
+		textarea.setBorder(line);
 		jf.add(textarea);
 
 		jb.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				// χρήση storePost από Post
 				setTip(textarea.getText());
 				Post post = new Post();
-				post.storeMessage(tip, categ);
+				User user = new User();
+				post.storePost(user.getUsername(),tip, categ);
 				jf.setVisible(false);
 				JOptionPane.showMessageDialog(null, "Your tip is uploaded!");
 			}
@@ -49,7 +56,7 @@ public class Upload {
 
 		String[] categories = {"General", "Sport", "Science", "Cook", "Video Games", "Nature" };
 		JComboBox<Object> cb = new JComboBox<Object>(categories);
-		cb.setBounds(665, 45, 80, 30);
+		cb.setBounds(465, 45, 80, 30);
 		jf.add(cb);
 
 		cb.addItemListener(new ItemListener() {
@@ -63,7 +70,7 @@ public class Upload {
 		});
 
 		JLabel jlc = new JLabel("Choose Category");
-		jlc.setBounds(550, 45, 100, 30);
+		jlc.setBounds(360, 45, 100, 30);
 		jf.add(jlc);
 
 		JLabel jlt = new JLabel("Texts your thoughts");
