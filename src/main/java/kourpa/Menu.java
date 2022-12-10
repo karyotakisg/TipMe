@@ -2,8 +2,7 @@ package kourpa;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-public class Menu  extends JPanel implements ActionListener, KeyListener, MouseListener  { //creates the menu at the top of the screen for each section of the app
-    JPanel panel = new JPanel();
+public class Menu  extends JPanel implements ActionListener, KeyListener, MouseListener { //creates the menu at the top of the screen for each section of the app
     Icon upload = new ImageIcon("src/main/resources/Upload.png");
     Icon myProfile = new ImageIcon("src/main/resources/MyProfile.png");
     Icon homepage = new ImageIcon("src/main/resources/Homepage.png");
@@ -13,10 +12,10 @@ public class Menu  extends JPanel implements ActionListener, KeyListener, MouseL
     JButton b3Icon = new JButton(homepage);
     JButton b4Icon = new JButton(explore);
     public Menu(){
-        panel.add(b1Icon);
-        panel.add(b2Icon);
-        panel.add(b3Icon);
-        panel.add(b4Icon);
+        this.add(b1Icon);
+        this.add(b2Icon);
+        this.add(b3Icon);
+        this.add(b4Icon);
         b1Icon.setBounds(300,0,100,50);
         b2Icon.setBounds(400,0,100,50);
         b3Icon.setBounds(500,0,100,50);
@@ -30,10 +29,10 @@ public class Menu  extends JPanel implements ActionListener, KeyListener, MouseL
         b3Icon.addMouseListener(this);
         b4Icon.addMouseListener(this);
         javax.swing.border.Border br = BorderFactory.createLineBorder(Color.BLACK);
-        panel.setBorder(br);
-        panel.setBackground(new Color (18,18,18));
-        panel.setBounds(0,0,1000,50);
-        panel.setLayout(null);
+        this.setBorder(br);
+        this.setBackground(new Color (18,18,18));
+        this.setBounds(0,0,1000,50);
+        this.setLayout(null);
         b1Icon.setBackground(new Color(240,240,240));
         b2Icon.setBackground(new Color(240,240,240));
         b3Icon.setBackground(new Color(240,240,240));
@@ -43,9 +42,6 @@ public class Menu  extends JPanel implements ActionListener, KeyListener, MouseL
     public void actionPerformed(ActionEvent e) {  //go to another section of the app when user press a button.
         if(e.getSource() == b1Icon ){
         
-        }
-        if(e.getSource() == b2Icon ){
-            
         }
         if(e.getSource() == b3Icon ){
            
@@ -110,3 +106,4 @@ public class Menu  extends JPanel implements ActionListener, KeyListener, MouseL
     @Override
     public void keyReleased(KeyEvent e) {}
 }
+
