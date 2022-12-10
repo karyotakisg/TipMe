@@ -3,7 +3,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 public class Menu  extends JPanel implements ActionListener, KeyListener, MouseListener  { //creates the menu at the top of the screen for each section of the app
-    JPanel panel = new JPanel();
     Icon upload = new ImageIcon("src/main/resources/Upload.png");
     Icon myProfile = new ImageIcon("src/main/resources/MyProfile.png");
     Icon homepage = new ImageIcon("src/main/resources/Homepage.png");
