@@ -1,28 +1,39 @@
 package kourpa;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
 public class MyProfile extends JFrame implements ActionListener {
-    JFrame frame = new JFrame(); //creation of the necesery components for  MyProfile GUI//
+  
+	JFrame frame = new JFrame(); //creation of the necesery components for  MyProfile GUI//
     JPanel panel = new JPanel();
     JLabel userLabel = new JLabel("User");
-    JTextField userText = new JTextField(25);
+    //
+    public JTextField userText = new JTextField(25);
     JLabel passwordLabel = new JLabel("Password");
-    JPasswordField passwordText = new JPasswordField(25);
+    //
+    public JPasswordField passwordText = new JPasswordField(25);
     JLabel emailLabel = new JLabel("Email");
-    JTextField emailText = new JTextField(25);
+    //
+    public JTextField emailText = new JTextField(25);
     JLabel p1Label = new JLabel("Preference 1");
-    JTextField p1Text = new JTextField(25);
+    //
+    public JTextField p1Text = new JTextField(25);
     JLabel p2Label = new JLabel("Preference 2");
-    JTextField p2Text = new JTextField(25);
+    //
+    public JTextField p2Text = new JTextField(25);
     JLabel p3Label = new JLabel("Preference 3");
-    JTextField p3Text = new JTextField(25);
+    //
+    public JTextField p3Text = new JTextField(25);
+    
     JButton b1 = new JButton();
     JButton b2 = new JButton();
     JButton b3 = new JButton();
     JButton b4 = new JButton();
     JButton b5 = new JButton();
     JButton b6 = new JButton();
+   
     MyProfile(User user){ //constructor of the MyProfile GUI
         super("MyProfile");
         setSize(1000,1000);
@@ -100,6 +111,7 @@ public class MyProfile extends JFrame implements ActionListener {
         this.setLocationRelativeTo(null);
         this.setVisible(true);    
     }
+   
     @Override
     public void actionPerformed(ActionEvent e) {
         //delete the existing text when the user presses the button "change"//

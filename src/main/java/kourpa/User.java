@@ -11,7 +11,24 @@ public class User {
 	String interest1;
 	String interest2;
 	String interest3;
-    public User(String u,String p,)
+    
+	public User() {}
+	
+	public User(String u, String p, String f, String l, String s, String e, String ph, String b, String i1, String i2, String i3) {
+		
+		this.username = u;
+		this.password = p;
+		this.firstName = f;
+		this.lastName = l;
+		this.sex = s;
+		this.email = e;
+		this.phoneNumber = ph;
+		this.birthDate = b;
+		this.interest1 = i1;
+		this.interest2 = i2;
+		this.interest3 = i3;
+	}
+	
 	public String getUsername() {
 		return username;
 	}

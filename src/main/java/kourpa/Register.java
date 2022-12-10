@@ -215,17 +215,27 @@ public class Register {
 					Connection conn = DriverManager.getConnection(jdbcUrl);
 					Statement statement = conn.createStatement();
 
-					System.out.println("Connected");
+					//System.out.println("Connected");
 
 					// Save preferences in the database
-					String query = "INSERT INTO User(username, " + "password, " + "email, " + "PhoneNumber, " + "Sex, "
+					String query = "INSERT INTO User(username, " 
+					+ "password, " 
+					+ "email, " 
+					+ "PhoneNumber, " 
+					+ "Sex, "
 					// + "BirthDate, "
-							+ "Interest1, " + "Interest2, " + "Interest3)" + " VALUES(" + "'" + user.getUsername() + "'"
-							+ "," + "'" + user.getPassword() + "'" + "," + "'" + user.getEmail() + "'" + "," + "'"
-							+ user.getPhoneNumber() + "'" + "," + "'" + user.getSex() + "'" + ","
+					+ "Interest1, " 
+					+ "Interest2, " 
+					+ "Interest3)" + 
+					" VALUES(" + "'" + user.getUsername() + "'" + "," 
+					+ "'" + user.getPassword() + "'" + "," 
+					+ "'" + user.getEmail() + "'" + "," 
+					+ "'" + user.getPhoneNumber() + "'" + "," 
+					+ "'" + user.getSex() + "'" + ","
 					// + user.getBirthDate() + ","
-							+ "'" + user.getInterest1() + "'" + "," + "'" + user.getInterest2() + "'" + "," + "'"
-							+ user.getInterest3() + "'" + ");";
+					+ "'" + user.getInterest1() + "'" + "," 
+					+ "'" + user.getInterest2() + "'" + ","
+					+ "'"+ user.getInterest3() + "'" + ");";
 
 					statement.executeUpdate(query);
 
