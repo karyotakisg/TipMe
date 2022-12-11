@@ -109,8 +109,8 @@ public class LoginPage implements ActionListener {
 						  frame.dispose();
 						  WelcomePage welcomePage = new WelcomePage();
 						  
-						  loggedIn = true;
-						  break;
+						  loggedIn = true;					  
+						  break;	  
 						  
 					  }  
 					if (!loggedIn) {
