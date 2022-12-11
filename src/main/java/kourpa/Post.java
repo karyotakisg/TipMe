@@ -4,6 +4,9 @@ package kourpa;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Date;
+
+import javax.swing.JOptionPane;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -118,7 +121,7 @@ public class Post {
 				
 				if (rs.next()) {
 			       System.out.println("The number of likes was increased successfully");
-			                          
+			       JOptionPane.showMessageDialog(null, "Successfull like");                  
 				}
 				
 			} catch (SQLException s) {
@@ -158,40 +161,37 @@ public class Post {
 			} catch (SQLException s) {
 				  // TODO Auto-generated catch block
 				  System.out.println("Failed to connect and get the number of likes");
-				  s.printStackTrace();
-				  
+				  s.printStackTrace();  
 			}
-			
-			
 		}
-
-
 }
+/*
+JButton button = new JButton("Like");
+				button.setBounds(250, 20, 60, 30);
+				panel.add(button);
+				
+				button.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						if(postlike.containsKey(code.getText()) == false) {
+							JOptionPane.showMessageDialog(null, "This code does not exist. Try one other code");
+						} else if (postlike.containsKey(code.getText()) == true) {
+							if (postlike.get(code.getText()) == 0) {
+								postlike.put(code.getText(), 1);
+								inner_frame.dispose();
+								JOptionPane.showMessageDialog(null, "Successfull like");
+							} else {
+								JOptionPane.showMessageDialog(null, "You already like this post. Try one other code");
+								System.out.println(postlike);
+							}
+						}
+						
+					}
+				});
+*/
 
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 
 	//διαμόρφωση στοιχείων (δεν αποτελεί κoμμάτι της βάσης) η οποία καλεί την receivePost
