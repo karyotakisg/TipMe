@@ -31,7 +31,7 @@ public class Post {
 
 	//αποθήκευση ποστ στην βαση με στοιχεια όνομα, κατηγορία, κείμενο -- void
 		
-		public void storePost() {
+		public void storePost(String tip, String categ) {
 			String jdbcUrl = "jdbc:sqlite:socialmedia.db";
 			try {
 				Connection conn = DriverManager.getConnection(jdbcUrl);
@@ -45,8 +45,8 @@ public class Post {
 				
 				 */
 				String query = "INSERT INTO Post(Text, " + "Category, " + "UploadDate, " + "Likes, "
-								+ "UserId)" + " VALUES(" + "'" + up.getTip() + "'"
-								+ "," + "'" + up.getCateg() + "'" + "," + "'" + strDate + "'" + "," + "'"
+								+ "UserId)" + " VALUES(" + "'" + tip + "'"
+								+ "," + "'" + categ + "'" + "," + "'" + strDate + "'" + "," + "'"
 								+ 0 + "'" + "," + "'" + 5 + "'" + ");";
 						
 				

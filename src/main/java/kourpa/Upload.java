@@ -48,7 +48,7 @@ public class Upload {
 				setTip(textarea.getText());
 				Post post = new Post();
 				User user = new User();
-				 post.storePost();
+				 post.storePost(tip, categ);
 				jf.setVisible(false);
 				JOptionPane.showMessageDialog(null, "Your tip is uploaded!");
 			}
