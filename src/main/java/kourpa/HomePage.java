@@ -27,7 +27,7 @@ public class HomePage {
         frame.setSize(1000, 1000);
         center.setBounds(100, 100, 800, 600 );
         
-        frame.setVisible(true);
+        
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.add(feed);
 
@@ -48,28 +48,21 @@ public class HomePage {
 
 			//System.out.println("Connected");
 
-			// Get the right posts from the database
+		// Get the right posts from the database
 			
-			String query = "SELECT User.username, Post.text, Post.uploaddate, Post.likes"
-					       + "FROM Post, User"
-					       + "WHERE Post.userId = User.userId AND Post.category IN (" 
-					       + "'" + user.getInterest1() + "'" + ", " 
-					       + "'" + user.getInterest2() + "'" + ", " 
-					       + "'" + user.getInterest3() + "'" + ")" 
-					       + "COLLATE NOCASE"
-					       + "ORDER BY uploaddate;";
+		String query = "SELECT User.username, Post.text, Post.uploaddate, Post.likes, Post.Category FROM Post, User WHERE Post.userId = User.userId AND (Post.Category = " + "'" + u.getInterest1() + "'" + "COLLATE NOCASE  OR Post.Category = " + "'" + u.getInterest2() + "'" + "COLLATE NOCASE OR Post.Category = " + "'" + u.getInterest1() + "'" + "COLLATE NOCASE) ORDER BY uploadDate DESC;";
 
 		ResultSet rs = statement.executeQuery(query);
 
 		while (rs.next()) {
-			
 			JTextArea post = new JTextArea();
-			post.setText(rs.getString("username") + "         "  + rs.getString("category") + "\n" + "\n" + rs.getString("text"));
+			post.setText(rs.getString("username") + "             Likes: " + rs.getString("likes")+ "            " + rs.getString("uploaddate") + "\n" + "\n" + "\n" + rs.getString("text") + "\n" + "\n" +"\n" + "Category:  " + rs.getString("Category"));
 			post.setEditable(false);
             center.add(post);
 			
 		}    
-			  
+		
+		frame.setVisible(true);
 		
 		} catch (SQLException s) {
 			System.out.println("Error");

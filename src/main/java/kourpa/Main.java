@@ -23,6 +23,8 @@ public class Main {
 		user.setInterest2("Sports");
 		user.setInterest3("Cooking");
 		HomePage h = new HomePage(user);
+		
+		//Register.register();
 	
 	}
 
