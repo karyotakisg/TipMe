@@ -50,6 +50,7 @@ public class Upload {
 				User user = new User();
 				 post.storePost(tip, categ);
 				jf.setVisible(false);
+				post.storePost(tip, categ);
 				JOptionPane.showMessageDialog(null, "Your tip is uploaded!");
 			}
 		});
