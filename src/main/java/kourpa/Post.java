@@ -39,8 +39,16 @@ public class Post {
 
 				System.out.println("Connected");
 				
+				/*
 				String query = "INSERT INTO Post(Text, " + "Category, " + "UploadDate)" + " VALUES(" + "'" + up.getTip() + "'"
 								+ "," + "'" + up.getCateg() + "'" + "," + "'" + strDate + "'" + ");";
+				
+				 */
+				String query = "INSERT INTO Post(Text, " + "Category, " + "UploadDate, " + "Likes, "
+								+ "UserId)" + " VALUES(" + "'" + up.getTip() + "'"
+								+ "," + "'" + up.getCateg() + "'" + "," + "'" + strDate + "'" + "," + "'"
+								+ 0 + "'" + "," + "'" + 5 + "'" + ");";
+						
 				
 				statement.executeUpdate(query);
 				
