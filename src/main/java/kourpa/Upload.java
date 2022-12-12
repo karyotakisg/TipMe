@@ -1,4 +1,5 @@
 package kourpa;
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,9 +18,8 @@ public class Upload {
 
 	private String tip;
 	private String categ;
-	private int likes;
 	/* Set graphics of upload */
-	
+
 	public Upload() {
 
 		JFrame jf = new JFrame();
@@ -47,16 +47,14 @@ public class Upload {
 				// χρήση storePost από Post
 				setTip(textarea.getText());
 				Post post = new Post();
-				User user = new User();
-				 post.storePost(tip, categ);
-				jf.setVisible(false);
 				post.storePost(tip, categ);
+				jf.setVisible(false);
 				JOptionPane.showMessageDialog(null, "Your tip is uploaded!");
 			}
 		});
 		jf.add(jb);
 
-		String[] categories = {"General", "Sport", "Science", "Cook", "Video Games", "Nature" };
+		String[] categories = { "General", "Sport", "Science", "Cook", "Video Games", "Nature" };
 		JComboBox<Object> cb = new JComboBox<Object>(categories);
 		cb.setBounds(465, 45, 80, 30);
 		jf.add(cb);
@@ -80,10 +78,8 @@ public class Upload {
 		jf.add(jlt);
 
 		jf.setVisible(true);
-		
 
 	}
-	
 
 	public String getTip() {
 		return tip;
@@ -98,14 +94,7 @@ public class Upload {
 	}
 
 	public void setCateg(String categ) {
-		
+
 		this.categ = categ;
-	}
-	
-	public void setLikes(int likes) {
-		this.likes = likes;
-	}
-	public int getLikes() {
-		return likes;
 	}
 }

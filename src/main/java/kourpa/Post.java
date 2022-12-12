@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat;
 public class Post {
 	//String jdbcUrl = "jdbc:sqlite:socialmedia.db" ;
 	
-	
+	private int likes;
 	
 	Upload up = new Upload();
 	//SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -154,7 +154,7 @@ public class Post {
 				
 				if (rs.next()) {
 			        int likes = rs.getInt("Likes");
-			        up.setLikes(likes);
+			        setLikes(likes);
 			                          
 				}
 				
@@ -163,6 +163,13 @@ public class Post {
 				  System.out.println("Failed to connect and get the number of likes");
 				  s.printStackTrace();  
 			}
+		}
+		
+		public void setLikes(int likes) {
+			this.likes = likes;
+		}
+		public int getLikes() {
+			return likes;
 		}
 }
 /*
