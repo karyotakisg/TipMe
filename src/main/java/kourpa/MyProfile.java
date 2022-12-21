@@ -44,7 +44,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
     Color hoverColor = Color.decode("#00aced");
     String s= "sumbit";
     JDialog dial = new JDialog(this,"Dialog Box");
-    JButton dialBut = new JButton("ok");
+    JButton dialBut = new JButton("OK");
     MyProfile(User user){ //constructor of the MyProfile GUI
         super("MyProfile");
         user1 = user;
@@ -134,18 +134,12 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
         user.setInterest3(p3Text.getText());
         String jdbcUrl = "jdbc:sqlite:socialmedia.db";
         try {
-            // Creating a new Connection
+        	// Creating a new Connection
             Connection conn = DriverManager.getConnection(jdbcUrl);
             Statement statement = conn.createStatement(); 
-            String query = "UPDATE User"
-                    + "SET password = " + user.getPassword() + ", "
-                    + "Email = " + user.getEmail() + ", "
-                    + "Interest1 = " + user.getInterest1() + ", "
-                    + "Interest2 = " + user.getInterest2() + ", "
-                    + "Interest3 = " + user.getInterest3() + ", "
-                    + "WHERE username = " + user.getUsername() + ";";
-                    statement.executeUpdate(query);
-        } catch (SQLException e) {}
+            String query = "UPDATE User SET password = " + "'"+ user.getPassword() +"'" + ", " + "Email = " + "'" + user.getEmail() + "'" + ", " + "Interest1 = " + "'" + user.getInterest1() + "'" + ", " + "Interest2 = " + "'" + user.getInterest2() + "'" + ", " + "Interest3 = " + "'" + user.getInterest3() + "'" + ", " + "PhoneNumber = " + user.getPhoneNumber() + " " + "WHERE username = " + "'" + user.getUsername() + "'" + ";";
+            statement.executeUpdate(query);
+        } catch (SQLException e) { e.printStackTrace(); }
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -165,7 +159,15 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
             panel.add(sumbitButton);
             this.add(panel); 
             changeButton.setVisible(false);
-            setFieldsEditable();
+            //setFieldsEditable();
+           
+            //The only fields a User can modify:
+            passwordText.setEditable(true); //
+            emailText.setEditable(true); //
+            p1Text.setEditable(true); //
+            p2Text.setEditable(true); // 
+            p3Text.setEditable(true); //
+            phoneNumberText.setEditable(true); //
         }   
     }
     @Override
