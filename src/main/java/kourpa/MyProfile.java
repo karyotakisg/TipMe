@@ -132,12 +132,15 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
         user.setInterest1(p1Text.getText());
         user.setInterest2(p2Text.getText());
         user.setInterest3(p3Text.getText());
+        user.setPhoneNumber(phoneNumberText.getText());
         String jdbcUrl = "jdbc:sqlite:socialmedia.db";
         try {
         	// Creating a new Connection
             Connection conn = DriverManager.getConnection(jdbcUrl);
             Statement statement = conn.createStatement(); 
-            String query = "UPDATE User SET password = " + "'"+ user.getPassword() +"'" + ", " + "Email = " + "'" + user.getEmail() + "'" + ", " + "Interest1 = " + "'" + user.getInterest1() + "'" + ", " + "Interest2 = " + "'" + user.getInterest2() + "'" + ", " + "Interest3 = " + "'" + user.getInterest3() + "'" + ", " + "PhoneNumber = " + user.getPhoneNumber() + " " + "WHERE username = " + "'" + user.getUsername() + "'" + ";";
+            String query = "UPDATE User SET password = " + "'"+ user.getPassword() +"'" + ", " + "Email = " + "'" + user.getEmail() + "'" + ", " +  "Sex =" + "'" + user.getSex() + "'" + ", " + "Interest1 = " + "'" + user.getInterest1() + "'" + ", " + "Interest2 = " + "'" + user.getInterest2() + "'" + ", " + "Interest3 = " + "'" + user.getInterest3() + "'" + ", " + "PhoneNumber = " + user.getPhoneNumber() + " " + "WHERE username = " + "'" + user.getUsername() + "'" + ";";
+            // + "FirstName = " + "'" + user.getFirstName() + "'" + ", "
+            // +  "LastName =" + "'" + user.getLastName() + "'" + ", "
             statement.executeUpdate(query);
         } catch (SQLException e) { e.printStackTrace(); }
     }
@@ -167,7 +170,10 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
             p1Text.setEditable(true); //
             p2Text.setEditable(true); // 
             p3Text.setEditable(true); //
-            phoneNumberText.setEditable(true); //
+            phoneNumberText.setEditable(true);//
+            sexText.setEditable(true); //
+            //firstNameText.setEditable(true); //
+            //lastNameText.setEditable(true); //
         }   
     }
     @Override
