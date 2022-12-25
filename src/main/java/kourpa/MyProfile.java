@@ -142,15 +142,15 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
         	// Creating a new Connection
             Connection conn = DriverManager.getConnection(jdbcUrl);
             Statement statement = conn.createStatement(); 
-            String query = "UPDATE User SET password = " + "'"+ user.getPassword() +"'" + ", " + "Email = " + "'" + user.getEmail() + "'" + ", " +  "Sex =" + "'" + user.getSex() + "'" + ", " + "Interest1 = " + "'" + user.getInterest1() + "'" + ", " + "Interest2 = " + "'" + user.getInterest2() + "'" + ", " + "Interest3 = " + "'" + user.getInterest3() + "'" + ", " + "PhoneNumber = " + user.getPhoneNumber() + " " + "WHERE username = " + "'" + user.getUsername() + "'" + ";"
-             + "FirstName = " + "'" + user.getFirstName() + "'" + ", "
-             +  "LastName =" + "'" + user.getLastName() + "'" + ", ";
+            String query = "UPDATE User SET password = " + "'"+ user.getPassword() +"'" + ", " + "Email = " + "'" + user.getEmail() + "'" + ", " +  "Sex =" + "'" + user.getSex() + "'" + ", " + "Interest1 = " + "'" + user.getInterest1() + "'" + ", " + "Interest2 = " + "'" + user.getInterest2() + "'" + ", " + "Interest3 = " + "'" + user.getInterest3() + "'" + ", " + "PhoneNumber = " + user.getPhoneNumber() + " " + "WHERE username = " + "'" + user.getUsername() + "'" + ";";
+            // + "FirstName = " + "'" + user.getFirstName() + "'" + ", "
+            // +  "LastName =" + "'" + user.getLastName() + "'" + ", ";
             statement.executeUpdate(query);
         } catch (SQLException e) { e.printStackTrace(); }
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        //make TextArea editable and create sumbit button
+        //make TextArea editable and create submit button
         if(e.getSource() == changeButton) {
             changeButton.setVisible(false);
             s = s.toUpperCase();
@@ -167,7 +167,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
             this.add(panel);
             
             changeButton.setVisible(false);
-            setFieldsEditable();
+            //setFieldsEditable();
            
             //The only fields a User can modify:
             passwordText.setEditable(true); 
@@ -177,8 +177,8 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
             p3Text.setEditable(true); 
             phoneNumberText.setEditable(true);
             sexText.setEditable(true); 
-            firstNameText.setEditable(true); 
-            lastNameText.setEditable(true); 
+            //firstNameText.setEditable(true); 
+            //lastNameText.setEditable(true); 
         }   
     }
     @Override
@@ -188,7 +188,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
         setValuesInTextAreas();
         dial.setSize(500,500);
         dial.setLocationRelativeTo(null);
-        JLabel dialLabel = new JLabel("You have sumbitted your changes with success",SwingConstants.CENTER);
+        JLabel dialLabel = new JLabel("You have submitted your changes with success",SwingConstants.CENTER);
         dialLabel.setSize(100,50);
         dial.add(dialLabel,BorderLayout.CENTER);
         dialBut.setSize(100,50);
