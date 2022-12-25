@@ -1,3 +1,4 @@
+package kourpa.kourpatestclasses;
 public class ExploreButtons {
 
 	public static String numbers(int n) {

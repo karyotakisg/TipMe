@@ -56,9 +56,10 @@ public class HomePage {
 
 		while (rs.next()) {
 			JTextArea post = new JTextArea();
-			post.setText(rs.getString("username") + "             Likes: " + rs.getString("likes")+ "            " + rs.getString("uploaddate") + "\n" + "\n" + "\n" + rs.getString("text") + "\n" + "\n" +"\n" + "Category:  " + rs.getString("Category"));
+			post.setText(" " + rs.getString("username") + "             Likes: " + rs.getString("likes")+ "            " + rs.getString("uploaddate") + "\n" + "\n" + "\n" + rs.getString("text") + "\n" + "\n" +"\n" + "Category:  " + rs.getString("Category"));
 			post.setEditable(false);
-            center.add(post);
+            post.setForeground(Color.black);
+			center.add(post);
 			
 		}    
 		

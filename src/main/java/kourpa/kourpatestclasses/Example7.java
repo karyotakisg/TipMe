@@ -1,3 +1,4 @@
+package kourpa.kourpatestclasses;
 import javax.swing.*;
 
 public class Example7 extends JFrame{

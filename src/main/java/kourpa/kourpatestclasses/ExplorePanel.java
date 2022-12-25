@@ -1,4 +1,4 @@
-//package kourpa;
+package kourpa.kourpatestclasses;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -20,6 +20,7 @@ public class ExplorePanel {
 		    jf.add(p0, BorderLayout.CENTER);
 			category = "Science";
 			CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p0);
+			p0.setBackground(Color.orange);
 			//p0.add(m);
 
 
