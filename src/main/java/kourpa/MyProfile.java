@@ -34,7 +34,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
     JLabel birthdayLabel = new JLabel("Birthday");
     JLabel labelForPosts = new JLabel("<html><font size = '22' color = 'black'><strong>My Posts</strong><text-align: center></font><</html> ");
     Icon diary = new ImageIcon("src/main/resources/diaryIcon.png");
-    JTextArea diaryArea = new JTextArea("Here the user can see his posts!");
+    JTextArea diaryArea = new JTextArea(20,50);
     Menu menu = new Menu();
     JButton changeButton = new JButton();
     JButton sumbitButton = new JButton();
@@ -42,11 +42,13 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
     Color textColor = Color.decode("#ffffff");
     Color backgroundColor = Color.decode("#000000");
     Color hoverColor = Color.decode("#00aced");
-    String s= "sumbit";
+    String s= "submit";
     JDialog dial = new JDialog(this,"Dialog Box");
     JButton dialBut = new JButton("OK");
     MyProfile(User user){ //constructor of the MyProfile GUI
-        super("MyProfile");
+        super("GetTip()-MyProfile");
+        Image ic =  Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\logo.png");  
+        this.setIconImage(ic);
         user1 = user;
         setSize(1000,1000);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
@@ -118,11 +120,13 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
         labelForPosts.setIcon(diary);
         panel.add(labelForPosts);
         setFieldsUneditable();
-        diaryArea.setBounds(50,600,800,300);
-        diaryArea.setBorder(BorderFactory.createLineBorder(Color.black));
-        panel.add(diaryArea);
-        panel.add(menu,BorderLayout.NORTH);
+        
+        textAreaSetup();
+        
+        setTextinTextArea();;
+        scrollbarSetup();
         this.add(panel);
+        panel.add(menu,BorderLayout.NORTH);
         this.setLocationRelativeTo(null);
         this.setVisible(true);    
     }
@@ -138,9 +142,9 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
         	// Creating a new Connection
             Connection conn = DriverManager.getConnection(jdbcUrl);
             Statement statement = conn.createStatement(); 
-            String query = "UPDATE User SET password = " + "'"+ user.getPassword() +"'" + ", " + "Email = " + "'" + user.getEmail() + "'" + ", " +  "Sex =" + "'" + user.getSex() + "'" + ", " + "Interest1 = " + "'" + user.getInterest1() + "'" + ", " + "Interest2 = " + "'" + user.getInterest2() + "'" + ", " + "Interest3 = " + "'" + user.getInterest3() + "'" + ", " + "PhoneNumber = " + user.getPhoneNumber() + " " + "WHERE username = " + "'" + user.getUsername() + "'" + ";";
-            // + "FirstName = " + "'" + user.getFirstName() + "'" + ", "
-            // +  "LastName =" + "'" + user.getLastName() + "'" + ", "
+            String query = "UPDATE User SET password = " + "'"+ user.getPassword() +"'" + ", " + "Email = " + "'" + user.getEmail() + "'" + ", " +  "Sex =" + "'" + user.getSex() + "'" + ", " + "Interest1 = " + "'" + user.getInterest1() + "'" + ", " + "Interest2 = " + "'" + user.getInterest2() + "'" + ", " + "Interest3 = " + "'" + user.getInterest3() + "'" + ", " + "PhoneNumber = " + user.getPhoneNumber() + " " + "WHERE username = " + "'" + user.getUsername() + "'" + ";"
+             + "FirstName = " + "'" + user.getFirstName() + "'" + ", "
+             +  "LastName =" + "'" + user.getLastName() + "'" + ", ";
             statement.executeUpdate(query);
         } catch (SQLException e) { e.printStackTrace(); }
     }
@@ -160,20 +164,21 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
             sumbitButton.setBounds(600, 260, 150, 50);
             sumbitButton.addMouseListener(this); 
             panel.add(sumbitButton);
-            this.add(panel); 
+            this.add(panel);
+            
             changeButton.setVisible(false);
-            //setFieldsEditable();
+            setFieldsEditable();
            
             //The only fields a User can modify:
-            passwordText.setEditable(true); //
-            emailText.setEditable(true); //
-            p1Text.setEditable(true); //
-            p2Text.setEditable(true); // 
-            p3Text.setEditable(true); //
-            phoneNumberText.setEditable(true);//
-            sexText.setEditable(true); //
-            //firstNameText.setEditable(true); //
-            //lastNameText.setEditable(true); //
+            passwordText.setEditable(true); 
+            emailText.setEditable(true); 
+            p1Text.setEditable(true); 
+            p2Text.setEditable(true);  
+            p3Text.setEditable(true); 
+            phoneNumberText.setEditable(true);
+            sexText.setEditable(true); 
+            firstNameText.setEditable(true); 
+            lastNameText.setEditable(true); 
         }   
     }
     @Override
@@ -218,7 +223,6 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
         }
     }
     public void setFieldsEditable(){
-        userText.setEditable(true);
         passwordText.setEditable(true);
         emailText.setEditable(true);
         p1Text.setEditable(true);
@@ -255,5 +259,19 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
         sexText.setText(user1.getSex());
         birthdayText.setText(user1.getBirthDate());
         phoneNumberText.setText(user1.getPhoneNumber());
+    }
+    public void setTextinTextArea(){
+        diaryArea.setText("Posts");
+        diaryArea.setEditable(false);
+    }
+    public void textAreaSetup(){
+        diaryArea.setBorder(BorderFactory.createLineBorder(Color.black));
+        setTextinTextArea();
+        this.add(diaryArea);
+    }
+    public void scrollbarSetup(){
+        JScrollPane scrollbar= new JScrollPane(diaryArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollbar.setBounds(100,600,800,300);
+        this.add(scrollbar);
     }
 }
