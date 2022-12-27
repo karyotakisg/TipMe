@@ -1,10 +1,13 @@
 package kourpa;
 
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Date;
 
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import java.sql.PreparedStatement;
@@ -171,7 +174,41 @@ public class Post {
 		public int getLikes() {
 			return likes;
 		}
+
+		public JButton getLikeButton(int postid) {
+			
+			JButton likeButton = new JButton("Like");
+			likeButton.setBounds(250, 20, 60, 30);
+			likeButton.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+				
+					String query = "UPDATE Post SET Likes = Likes+1 WHERE PostId =" + postid;
+					
+					String jdbcUrl = "jdbc:sqlite:socialmedia.db";
+					try {
+						Connection conn = DriverManager.getConnection(jdbcUrl);
+						Statement statement = conn.createStatement();
+						
+						statement.executeQuery(query);
+						
+						
+					} catch (SQLException s) {
+						  // TODO Auto-generated catch block
+						  System.out.println("Failed to connect and get the number of likes");
+						  s.printStackTrace();  
+					}
+					
+				}});
+			
+			return likeButton;
+		}
 }
+
+
+
 /*
 JButton button = new JButton("Like");
 				button.setBounds(250, 20, 60, 30);
