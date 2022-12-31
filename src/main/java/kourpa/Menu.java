@@ -44,7 +44,7 @@ public class Menu  extends JPanel implements ActionListener, KeyListener, MouseL
         
         }
         if(e.getSource() == b3Icon ){
-           
+
         }
         if(e.getSource() == b4Icon ){
             
@@ -100,10 +100,12 @@ public class Menu  extends JPanel implements ActionListener, KeyListener, MouseL
             }
     }
     @Override
-    public void keyTyped(KeyEvent e) {}
+    public void keyTyped(KeyEvent e) {
+    }
     @Override
-    public void keyPressed(KeyEvent e) {}
+    public void keyPressed(KeyEvent e) {
+    }
     @Override
-    public void keyReleased(KeyEvent e) {}
+    public void keyReleased(KeyEvent e) {        
+    }
 }
-

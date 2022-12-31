@@ -253,9 +253,6 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 	}
 	public void textAreaSetup() {
 		p.setBorder(BorderFactory.createLineBorder(Color.black));
-		//diaryArea.setBorder(BorderFactory.createLineBorder(Color.black));
-		//setTextinTextArea();
-		//this.add(diaryArea);
 		this.add(p);
 	}
 	public void scrollbarSetup() {
@@ -292,5 +289,8 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 	panel.add(phoneNumberLabel);
 	panel.add(changeButton);
 	panel.add(labelForPosts);
+	}
+	public  JPanel getPanel(){
+		return panel;
 	}
 }
