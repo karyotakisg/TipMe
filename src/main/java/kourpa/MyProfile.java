@@ -290,7 +290,13 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 	panel.add(changeButton);
 	panel.add(labelForPosts);
 	}
-	public  JPanel getPanel(){
+	public  JPanel getPanel(){ // The following methods are created for testing purposes
 		return panel;
+	}
+	public JButton getChangeButton() {
+		return changeButton;
+	}
+	public JLabel getSexLabel() {
+		return sexLabel;
 	}
 }
