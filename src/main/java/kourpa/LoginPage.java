@@ -28,15 +28,17 @@ public class LoginPage implements ActionListener {
 	JButton resetButton = new JButton("Reset");
 	JTextField userIDField = new JTextField();
 	JPasswordField userPasswordField = new JPasswordField();
-	JLabel userIDLabel = new JLabel("username:");
-	JLabel userPasswordLabel = new JLabel("password:");
+	JLabel userIDLabel = new JLabel("Username:");
+	JLabel userPasswordLabel = new JLabel("Password:");
 	JLabel messageLabel = new JLabel();
 	JLabel tryAgainLabel = new JLabel();
 
-	HashMap<String, String> logininfo = new HashMap<String, String>();
+	//HashMap<String, String> logininfo = new HashMap<String, String>();
 
 	
 	LoginPage() {
+		
+		frame.getContentPane().setBackground(Color.orange);
 		
 		userIDLabel.setBounds(50,100,75,25);
 		userPasswordLabel.setBounds(50,150,75,25);
@@ -110,7 +112,7 @@ public class LoginPage implements ActionListener {
 						  messageLabel.setForeground(Color.green);
 						  messageLabel.setText("Login successful!");
 						  frame.dispose();
-						  WelcomePage welcomePage = new WelcomePage();
+						  new WelcomePage();
 						  
 						  loggedIn = true;
 						  break;

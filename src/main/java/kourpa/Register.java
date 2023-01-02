@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Register {
@@ -34,7 +35,7 @@ public class Register {
 
 		// Creating JLabels and JTextFields in Sign Up page
 
-		JLabel welcomeLabel = new JLabel("Welcome to TipMe");
+		JLabel welcomeLabel = new JLabel("Welcome to GetTip()");
 		welcomeLabel.setBounds(50, 7, 250, 25);
 		welcomeLabel.setFont(new Font("TimesRoman", 40, 25));
 		welcomeLabel.setForeground(Color.BLUE.brighter());
@@ -158,6 +159,21 @@ public class Register {
 		submitButton.setBounds(100, 440, 100, 25);
 		panel.add(submitButton);
 
+		JLabel sameUserNameLabel = new JLabel();
+		sameUserNameLabel.setBounds(28, 540, 1000, 25);
+		sameUserNameLabel.setText("");
+		panel.add(sameUserNameLabel);
+
+		JLabel emptyUserNameText = new JLabel();
+		emptyUserNameText.setBounds(260, 225, 150, 25);
+		emptyUserNameText.setText("");
+		panel.add(emptyUserNameText);
+
+		JLabel emptyPasswordText = new JLabel();
+		emptyPasswordText.setBounds(260, 255, 150, 25);
+		emptyPasswordText.setText("");
+		panel.add(emptyPasswordText);
+
 		frame.setVisible(true);
 
 		// Creating a new user object in order to save User's preferences
@@ -167,6 +183,15 @@ public class Register {
 		submitButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
+				emptyUserNameText.setText(" ");
+				emptyPasswordText.setText(" ");
+				
+				boolean emptyFields = false;
+
+				if (userNameText.getText().equals(" ") || String.valueOf(passwordText.getPassword()).isEmpty())
+					emptyFields = true;
+
 				// Saving User's preferences
 				user.setUsername(userNameText.getText());
 				user.setPassword(String.valueOf(passwordText.getPassword()));
@@ -207,6 +232,8 @@ public class Register {
 					}
 				}
 
+				boolean sameUserName = false;
+
 				// SQLite connection URL
 				String jdbcUrl = "jdbc:sqlite:socialmedia.db";
 
@@ -215,19 +242,48 @@ public class Register {
 					Connection conn = DriverManager.getConnection(jdbcUrl);
 					Statement statement = conn.createStatement();
 
-					System.out.println("Connected");
+					String checkValidQuery = "SELECT Username FROM User";
 
-					// Save preferences in the database
-					String query = "INSERT INTO User(username, " + "password, " + "email, " + "PhoneNumber, " + "Sex, "
-					// + "BirthDate, "
-							+ "Interest1, " + "Interest2, " + "Interest3)" + " VALUES(" + "'" + user.getUsername() + "'"
-							+ "," + "'" + user.getPassword() + "'" + "," + "'" + user.getEmail() + "'" + "," + "'"
-							+ user.getPhoneNumber() + "'" + "," + "'" + user.getSex() + "'" + ","
-					// + user.getBirthDate() + ","
-							+ "'" + user.getInterest1() + "'" + "," + "'" + user.getInterest2() + "'" + "," + "'"
-							+ user.getInterest3() + "'" + ");";
+					ResultSet rs = statement.executeQuery(checkValidQuery);
 
-					statement.executeUpdate(query);
+					while (rs.next()) {
+
+						if (user.getUsername().equals(rs.getString("Username"))) {
+
+							sameUserName = true;
+							break;
+						}
+
+					}
+
+					if (emptyFields || sameUserName) {
+						
+						if (userNameText.getText().isEmpty())
+							emptyUserNameText.setText("Empty Username Field");
+						else if (sameUserName)
+							sameUserNameLabel.setText("This Username already exists. Try another one!");
+
+						if (String.valueOf(passwordText.getPassword()).isEmpty())
+							emptyPasswordText.setText("Empty Password Field");
+
+					} else {
+
+						// Save preferences in the database
+						String query = "INSERT INTO User"
+								+ "(username, password, email, PhoneNumber, Sex, Interest1, Interest2, Interest3, FirstName, LastName)"
+								+ " VALUES(" + "'" + user.getUsername() + "'" + "," + "'" + user.getPassword() + "'"
+								+ "," + "'" + user.getEmail() + "'" + "," + "'" + user.getPhoneNumber() + "'" + ","
+								+ "'" + user.getSex() + "'" + "," + "'" + user.getInterest1() + "'" + "," + "'"
+								+ user.getInterest2() + "'" + "," + "'" + user.getInterest3() + "'" + "," + "'"
+								+ user.getFirstName() + "'" + "," + "'" + user.getLastName() + "'" + ");";
+
+						statement.executeUpdate(query);
+
+						// After signing up, opening the "Log in" page
+						frame.dispose();
+						new LoginPage();
+
+					}
 
 				} catch (SQLException s) {
 					// TODO Auto-generated catch block
@@ -235,9 +291,8 @@ public class Register {
 					s.printStackTrace();
 				}
 
-				// After signing up, opening the "Log in" page
-				frame.dispose();
-				LoginPage loginPage = new LoginPage();
+				// }
+
 			}
 
 		});
@@ -247,7 +302,7 @@ public class Register {
 			public void actionPerformed(ActionEvent e) {
 
 				frame.dispose();
-				LoginPage loginPage = new LoginPage();
+				new LoginPage();
 
 			}
 
