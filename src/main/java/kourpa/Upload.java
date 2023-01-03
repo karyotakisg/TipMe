@@ -21,8 +21,6 @@ import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
 
-import com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck;
-
 public class Upload {
 
 	private String tip;
@@ -38,6 +36,7 @@ public class Upload {
 	JPanel jpgridright = new JPanel();
 	
 	JButton jb = new JButton("Upload");
+	JButton jbinfo = new JButton("Info");
 
 	public Upload() {
 		
@@ -48,19 +47,11 @@ public class Upload {
 		jp.setBackground(new Color(255, 102, 0));
 		jp.setLayout(new BorderLayout(1, 1));
 		
-		jp.setSize(600, 400);
-		jpsouth.setSize(450, 200);
-		jpnorth.setSize(450, 280);
-		jpgridleft.setSize(225, 140);
-		jpgridright.setSize(225, 140);
-		jpeast.setSize(50, 400);
-		jpwest.setSize(50, 400);
-		
-		//new FlowLayout(FlowLayout.CENTER)
 		jpnorth.setLayout(new GridLayout(3, 2));
 		jpnorth.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		jpgridleft.setLayout(new FlowLayout(FlowLayout.LEFT));
 		jpgridright.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		jpsouth.setLayout(new FlowLayout(FlowLayout.CENTER));
 		jpgridleft.setBackground(new Color(255, 102, 0));
 		jpgridright.setBackground(new Color(255, 102, 0));
 		jpsouth.setBackground(new Color(255, 102, 0));
@@ -68,9 +59,6 @@ public class Upload {
 		jpeast.setBackground(new Color(255, 102, 0));
 		jpwest.setBackground(new Color(255, 102, 0));
 		
-		
-		jb.setBounds(250, 290, 80, 50);
-
 		JTextArea textarea = new JTextArea();
 		textarea.setLineWrap(true);
 		textarea.setWrapStyleWord(true);
@@ -79,30 +67,9 @@ public class Upload {
 		Font f = new Font("Calibri",Font.PLAIN,15);
 		textarea.setFont(f);
 		
-		jb.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				int number = textarea.getText().length();
-				if (number < 1) {
-					JOptionPane.showMessageDialog(null, "There is no tip to upload " + "("
-				+ number + " / 200 character)");
-				} else if (number > 200) {
-					JOptionPane.showMessageDialog(null, "Your it is too large "
-				+ "("+ number + " / 200 character)");
-				} else {
-					// χρήση storePost από Post
-					setTip(textarea.getText());
-					Post post = new Post();
-					post.storePost(tip, categ);
-					jf.setVisible(false);
-					JOptionPane.showMessageDialog(null,
-							"Your tip is uploaded " +
-					"("+ number +" / 200 character)");
-				}
-			}
-		});
+		
 		jpsouth.add(jb);
+		jpsouth.add(jbinfo);
 		
 		JLabel jlc = new JLabel("Choose Category");
 		jpgridright.add(jlc);
@@ -144,6 +111,39 @@ public class Upload {
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		jp.add(scrollPane, BorderLayout.CENTER);
 		jf.setVisible(true);
+		
+		jbinfo.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				int number = textarea.getText().length();
+				JOptionPane.showMessageDialog(null,
+						"The number of character: " + number);	
+			}
+		});
+		
+		jb.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				int number = textarea.getText().length();
+				if (number < 1) {
+					JOptionPane.showMessageDialog(null, "There is no tip to upload " + "("
+				+ number + " / 200 character)");
+				} else if (number > 200) {
+					JOptionPane.showMessageDialog(null, "Your it is too large "
+				+ "("+ number + " / 200 character)");
+				} else {
+					jf.dispose();
+					setTip(textarea.getText());
+					Post post = new Post();
+					post.storePost(tip, categ);
+					JOptionPane.showMessageDialog(null,
+							"Your tip is uploaded " +
+					"("+ number +" / 200 character)");
+				}
+			}
+		});
 
 	}
 
