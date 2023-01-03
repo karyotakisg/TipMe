@@ -53,7 +53,6 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		user1 = user;
 		setSize(1000, 1000);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.getContentPane().setBackground(Color.CYAN);
 		userLabel.setBounds(310, 100, 165, 25);
 		userText.setBounds(400, 100, 165, 25);
 		passwordLabel.setBounds(310, 130, 165, 25);
@@ -262,7 +261,8 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		this.add(scrollbar);
 	}
 	public void panelSetup(){
-	panel.setBackground(Color.ORANGE);
+	Color col = new Color(255, 102, 0);
+	panel.setBackground(col);
 	panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
 	panel.setLayout(null);
 	panel.add(userLabel);
