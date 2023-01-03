@@ -1,12 +1,28 @@
 package kourpa;
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JColorChooser;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.ButtonGroup;
 import javax.swing.event.InternalFrameListener;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import org.apache.maven.settings.Settings;
 import org.w3c.dom.events.MouseEvent;
-
 import net.sf.saxon.trans.SymbolicName.F;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.*;
 
 
@@ -18,7 +34,7 @@ public class HomePage implements ActionListener {
     private final JPanel west = new JPanel();
     private final JPanel center = new JPanel();
     private final JPanel south = new JPanel();
-    private final JButton colorPick;
+    private final JRadioButton colorPick;
     private final JRadioButton darkMode;
     private final JRadioButton lightMode;
     private final ButtonGroup radioGroup;
@@ -34,10 +50,9 @@ public class HomePage implements ActionListener {
 		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
 		frame.setSize(1000, 1000);	
-		frame.setVisible(true);
         frame.setBackground(Color.BLACK);
 
-		feed.setLayout(new BorderLayout(0, 3));
+		feed.setLayout(new BorderLayout(0, 1));
         feed.setBackground(Color.BLACK);
 
 		//Get Message count
@@ -72,15 +87,15 @@ public class HomePage implements ActionListener {
 		
         //Layouts for each panel
         Menu MenuBar = new Menu();
-        east.setLayout(new GridLayout(20, 1, 1, 1));
+        east.setLayout(new GridLayout(16, 1, 0, 0));
         west.setLayout(new GridLayout(5, 1, 10, 10));
         center.setLayout(new GridLayout(count, 1, 5, 10));
         
 
 		//Colors for each panel
-		south.setBackground(new Color(27, 97, 181));
-		east.setBackground(new Color(27, 97, 181));
-		west.setBackground(new Color(27, 97, 181));
+		south.setBackground(new Color(255, 102, 0));
+		east.setBackground(new Color(255, 102, 0));
+		west.setBackground(new Color(255, 102, 0));
         center.setBackground(Color.BLACK);
 
         //Sizes for each panel and logo placement
@@ -123,40 +138,46 @@ public class HomePage implements ActionListener {
         west.add(food);
 
         //RadioButton modifications
+        ImageIcon iconColorChooser = new ImageIcon("src\\main\\resources\\colors.png");
         darkMode = new JRadioButton("Dark Mode", false);
         lightMode = new JRadioButton("Light Mode", false);
         plainMode = new JRadioButton("Plain Mode", true);
+        colorPick = new JRadioButton("Other", iconColorChooser, false);
         
 
         darkMode.setBackground(Color.DARK_GRAY);
         lightMode.setBackground(Color.WHITE);
-        plainMode.setBackground(new Color(27, 97, 181));
+        plainMode.setBackground(new Color(255, 102, 0));
+        colorPick.setBackground(Color.LIGHT_GRAY);
         darkMode.setForeground(Color.WHITE);
         plainMode.setForeground(Color.WHITE);
 
         east.add(plainMode);
         east.add(darkMode);
         east.add(lightMode);
+        east.add(colorPick);
 
         radioGroup = new ButtonGroup();
         radioGroup.add(darkMode);
         radioGroup.add(lightMode);
         radioGroup.add(plainMode);
+        radioGroup.add(colorPick);
         darkMode.addActionListener(this);
         lightMode.addActionListener(this);
         plainMode.addActionListener(this);
+        colorPick.addActionListener(this);
 
         //Color chooser buttons modifications
-        ImageIcon iconColorChooser = new ImageIcon("src\\main\\resources\\colors.png");
+        /*ImageIcon iconColorChooser = new ImageIcon("src\\main\\resources\\colors.png");
         colorPick = new JButton("Pick a color", iconColorChooser);
         colorPick.setCursor(new Cursor(Cursor.HAND_CURSOR));
         colorPick.setSize(80, 30);
         colorPick.addActionListener(this);
-        east.add(colorPick);
+        east.add(colorPick);*/
 
         //Slogan in the southern panel of the feed
         south.setLayout(new FlowLayout(FlowLayout.CENTER));
-        Font fontSlogan = new Font("MV Boli", Font.BOLD, 25);
+        Font fontSlogan = new Font("Serif", Font.BOLD, 25);
         slogan.setForeground(Color.WHITE);
         slogan.setFont(fontSlogan);
         south.add(slogan);
@@ -181,25 +202,26 @@ public class HomePage implements ActionListener {
                 /*Panel creation in order to separate the User information (username, date, category), the actual message 
                  and the like button through BorderLayout */
 			    JPanel post = new JPanel(new BorderLayout(1, 1));
-			    Font font = new Font("MV Boli", Font.PLAIN, 20);
-                Font fontLike = new Font("MV Boli", Font.BOLD, 15);
+			    Font font = new Font("Serif", Font.PLAIN, 20);
+                Font fontLike = new Font("Serif", Font.BOLD, 15);
+                Color labelBackground;
 
                 //User's Information modifications and data passing to the 1st textarea
                 JTextArea postUserInfo = new JTextArea();
 			    postUserInfo.setText(rs.getString("username") + "            " + rs.getString("uploaddate") + "            "
 			     + rs.getString("Category"));
-			    postUserInfo.setBackground(new Color(52, 106, 159));
+			    postUserInfo.setBackground(Color.WHITE);
 			    postUserInfo.setEditable(false);
 			    postUserInfo.setFont(font);
-			    postUserInfo.setForeground(Color.WHITE);
+			    postUserInfo.setForeground(Color.BLACK);
 
                 //User's message modification and data passing to the 2nd textarea
 			    JTextArea postMessage = new JTextArea();
 			    postMessage.setText(rs.getString("text"));
-			    postMessage.setBackground(new Color(52, 106, 159, 202));
+			    postMessage.setBackground(Color.WHITE);
 			    postMessage.setEditable(false);
 			    postMessage.setFont(font);
-			    postMessage.setForeground(Color.WHITE);
+			    postMessage.setForeground(Color.BLACK);
 			
 			
                 //showcase the like button
@@ -207,14 +229,14 @@ public class HomePage implements ActionListener {
 			    JButton like = new JButton("1233", icon);
 			    like.setFont(fontLike);
 			    like.setPreferredSize(new Dimension(100, 30 ));
-                like.setBackground(new Color(52, 106, 159));
+                like.setBackground(Color.white);
 			    like.setForeground(Color.WHITE);
                 like.setFocusable(false);
 
                 //Place it in the southern panel of the BorderLayout 
                 JPanel southLike = new JPanel(new FlowLayout(FlowLayout.LEFT));
                 southLike.setSize(900, 30);
-                southLike.setBackground(new Color(52, 106, 159, 202));
+                southLike.setBackground(Color.white);
                 southLike.add(like);
 
                 //final adding
@@ -244,6 +266,8 @@ public class HomePage implements ActionListener {
 		JScrollPane scr = new JScrollPane(center, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		feed.add(scr, BorderLayout.CENTER);
 		scr.getVerticalScrollBar().setUnitIncrement(12);
+		
+		frame.setVisible(true);
 
         
     }
@@ -254,16 +278,22 @@ public class HomePage implements ActionListener {
             east.setBackground(Color.DARK_GRAY);
             west.setBackground(Color.DARK_GRAY);
             south.setBackground(Color.DARK_GRAY);
+            
+            slogan.setForeground(Color.WHITE);
 
         } else if (e.getSource() == lightMode) {   
             east.setBackground(Color.white);
             west.setBackground(Color.WHITE);
             south.setBackground(Color.WHITE);
+            
+            slogan.setForeground(Color.BLACK);
 
         } else if (e.getSource() == plainMode){
-            south.setBackground(new Color(27, 97, 181));
-            east.setBackground(new Color(27, 97, 181));
-            west.setBackground(new Color(27, 97, 181));
+            south.setBackground(new Color(255, 102, 0));
+            east.setBackground(new Color(255, 102, 0));
+            west.setBackground(new Color(255, 102, 0));
+            
+            slogan.setForeground(Color.WHITE);
 
         } else if (e.getSource() == colorPick) {
             JColorChooser colorChoose = new JColorChooser();
@@ -271,12 +301,40 @@ public class HomePage implements ActionListener {
             south.setBackground(col);
             east.setBackground(col);
             west.setBackground(col);
-        }
+        } 
     }
 
     //necessary method in order to dispose the correct frame when clicking on the menu buttons
     public final JFrame getMainFrame(){
         return frame;
     }
+    
+    /*Color bord = new Color(204, 0, 51);
+    Color brown = new Color(102, 51, 0);
+    public Color getCategoryColor(String categ) {
+    	if (categ == "Sports") {
+    		return Color.BLUE; 		
+    	} else if (categ == "Education") {
+    		return Color.DARK_GRAY;
+    	} else if (categ == "Environment") {
+    		return Color.GREEN;
+    	} else if (categ == "Fashion") {
+    		return Color.PINK;
+		} else if (categ == "Science") {
+    		return  Color.YELLOW;
+		} else if (categ == "Art") {
+    		return Color.ORANGE;
+		} else if (categ == "Food") {
+    		return brown;
+		} else if (categ == "Travel") {
+    		return Color.pink;
+    	} else if (categ == "Fitness") {
+    		return bord;
+    	} else if (categ == "Music") {
+    		return Color.BLACK;
+    	} else {
+    		return Color.CYAN;
+    	}
+	}*/
 
 }
