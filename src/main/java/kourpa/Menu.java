@@ -1,6 +1,7 @@
 package kourpa;
-
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -12,12 +13,14 @@ import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
 
 public class Menu  extends JPanel implements ActionListener, KeyListener, MouseListener { //creates the menu at the top of the screen for each section of the app
     
-	//User user = new User();
-	
+	User user = new User();
+    
 	Icon upload = new ImageIcon("src/main/resources/Upload.png");
     Icon myProfile = new ImageIcon("src/main/resources/MyProfile.png");
     Icon homepage = new ImageIcon("src/main/resources/Homepage.png");
@@ -26,15 +29,21 @@ public class Menu  extends JPanel implements ActionListener, KeyListener, MouseL
     JButton b2Icon = new JButton(myProfile);
     JButton b3Icon = new JButton(homepage);
     JButton b4Icon = new JButton(explore);
+    
+
     public Menu(){
-        this.add(b1Icon);
-        this.add(b2Icon);
         this.add(b3Icon);
         this.add(b4Icon);
-        b1Icon.setBounds(300,0,100,50);
-        b2Icon.setBounds(400,0,100,50);
-        b3Icon.setBounds(500,0,100,50);
-        b4Icon.setBounds(600,0,100,50);
+        this.add(b2Icon);
+        this.add(b1Icon);
+        
+
+        b1Icon.setPreferredSize(new Dimension(100, 50 ));
+        b2Icon.setPreferredSize(new Dimension(100, 50 ));
+        b3Icon.setPreferredSize(new Dimension(100, 50 ));
+        b4Icon.setPreferredSize(new Dimension(100, 50 ));
+        
+        
         b1Icon.addActionListener(this);
         b2Icon.addActionListener(this);
         b3Icon.addActionListener(this);
@@ -43,33 +52,35 @@ public class Menu  extends JPanel implements ActionListener, KeyListener, MouseL
         b2Icon.addMouseListener(this);
         b3Icon.addMouseListener(this);
         b4Icon.addMouseListener(this);
+
         javax.swing.border.Border br = BorderFactory.createLineBorder(Color.BLACK);
         this.setBorder(br);
         this.setBackground(new Color (18,18,18));
-        this.setBounds(0,0,1000,50);
-        this.setLayout(null);
+        this.setBounds(150,0,850,50);
+        this.setLayout(new FlowLayout(FlowLayout.CENTER));
         b1Icon.setBackground(new Color(240,240,240));
         b2Icon.setBackground(new Color(240,240,240));
         b3Icon.setBackground(new Color(240,240,240));
         b4Icon.setBackground(new Color(240,240,240));
     }
+
+    
     @Override
     public void actionPerformed(ActionEvent e) {  //go to another section of the app when user press a button.
         if(e.getSource() == b1Icon ){
-            Upload up = new Upload();
-            up.Upload();
+        
+               
         }
 
 
         if(e.getSource() == b2Icon ){
-            MyProfile prof = new MyProfile();
-            prof.MyProfile();
            
         }
 
         if(e.getSource() == b3Icon ){
-            Feed f = new Feed();
-            f.Feed();        
+            HomePage hp = new HomePage(user);
+            hp.getMainFrame().dispose();
+
         }
         if(e.getSource() == b4Icon ){
             
