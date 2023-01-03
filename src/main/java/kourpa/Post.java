@@ -1,12 +1,16 @@
 package kourpa;
 
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Date;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
@@ -177,9 +181,17 @@ public class Post {
 
 		public JButton getLikeButton(int postid) {
 			
-			JButton likeButton = new JButton("Like");
-			likeButton.setBounds(250, 20, 60, 30);
-			likeButton.addActionListener(new ActionListener() {
+			  Font fontLike = new Font("Serif", Font.BOLD, 15);
+				ImageIcon icon = new ImageIcon("src\\main\\resources\\like.png");
+				JButton like = new JButton(icon);
+				like.setFont(fontLike);
+			    like.setPreferredSize(new Dimension(100, 30 ));
+			    like.setBackground(Color.white);
+			    like.setForeground(Color.WHITE);
+	            like.setFocusable(false);
+			
+			//likeButton.setBounds(250, 20, 60, 30);
+			like.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -203,7 +215,7 @@ public class Post {
 					
 				}});
 			
-			return likeButton;
+			return like;
 		}
 }
 
