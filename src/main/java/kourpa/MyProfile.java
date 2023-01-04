@@ -53,6 +53,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
     private ButtonGroup radioGroup;
     private JRadioButton plainMode;
 	ImageIcon iconColorChooser = new ImageIcon("src\\main\\resources\\colors.png");
+    JButton logoutButton = new JButton();
 	MyProfile(User user, Color col) { // constructor of the MyProfile GUI
 		super("GetTip()-MyProfile");
 		Image ic = Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\logo.png");
@@ -99,6 +100,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		textAreaSetup();
 		setTextinPostArea();
 		scrollbarSetup();
+        logoutButtonSetup();
 		this.add(panel);
 		panel.add(menu, BorderLayout.NORTH);
 		eastPanelSetup();
@@ -175,6 +177,10 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			p.setVisible(false);
 			p.setVisible(true);
         }
+        if(e.getSource()==logoutButton) {
+			//new LoginPage();
+			dispose();
+		}
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -350,6 +356,19 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
         colorPick.addActionListener(this);
 		panel.add(east);
 	}
+    public void logoutButtonSetup(){
+		logoutButton.setBounds(625, 220, 100, 25);
+		logoutButton.setText("Log out");
+		logoutButton.addActionListener(this);
+		logoutButton.setFocusable(false);
+		logoutButton.setHorizontalTextPosition(JButton.CENTER);
+        logoutButton.setBackground(backgroundColor);
+		logoutButton.setForeground(textColor);
+        logoutButton.setOpaque(true);
+        panel.add(logoutButton);
+       
+		
+    }
 	public Color getColor(){ // returns the color of the panel so other sections on the app can use it
 		return panel.getBackground();
 	}
