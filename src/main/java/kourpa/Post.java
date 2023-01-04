@@ -202,12 +202,14 @@ public class Post {
 					String query = "UPDATE Post SET Likes = Likes+1 WHERE PostId =" + postid;
 					
 					String jdbcUrl = "jdbc:sqlite:socialmedia.db";
+					
 					try {
 						Connection conn = DriverManager.getConnection(jdbcUrl);
 						Statement statement = conn.createStatement();
 						
-						statement.executeQuery(query);
+						statement.executeUpdate(query);
 						
+						conn.close();
 						
 					} catch (SQLException s) {
 						  // TODO Auto-generated catch block
