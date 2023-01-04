@@ -340,7 +340,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
         lightMode.addActionListener(this);
         plainMode.addActionListener(this);
         colorPick.addActionListener(this);
-
+		panel.add(east);
 		
 	}
 	public  JPanel getPanel(){ // The following methods are created for testing purposes
