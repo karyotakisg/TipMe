@@ -105,6 +105,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		panel.add(menu, BorderLayout.NORTH);
 		eastPanelSetup();
 		this.setLocationRelativeTo(null);
+		this.setResizable(false);
 		this.setVisible(true);
 	}
 	public void sumbit(User user) {
@@ -289,7 +290,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 	}
 	public void textAreaSetup() {
 		p.setBorder(BorderFactory.createLineBorder(Color.black));
-		panel.add(p);
+		panel.add(p,BorderLayout.SOUTH);
 	}
 	public void scrollbarSetup() {
 		JScrollPane scrollbar = new JScrollPane(p, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
@@ -298,6 +299,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		this.add(scrollbar);
 	}
 	public void panelSetup(){
+	panel.setLayout(new BorderLayout());
 	Color col = new Color(255, 102, 0);
 	panel.setBackground(col);
 	panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
@@ -357,7 +359,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		panel.add(east);
 	}
     public void logoutButtonSetup(){
-		logoutButton.setBounds(625, 220, 100, 25);
+		logoutButton.setBounds(850, 15, 100, 25);
 		logoutButton.setText("Log out");
 		logoutButton.addActionListener(this);
 		logoutButton.setFocusable(false);
@@ -369,7 +371,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
        
 		
     }
-	public Color getColor(){ // returns the color of the panel so other sections on the app can use it
+	public Color getColor(){ // returns the color of the panel so other sections of the app can use it
 		return panel.getBackground();
 	}
 	public  JPanel getPanel(){ // The following methods are created for testing purposes
