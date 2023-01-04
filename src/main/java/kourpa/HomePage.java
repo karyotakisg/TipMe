@@ -217,7 +217,7 @@ public class HomePage implements ActionListener {
 
                 //User's Information modifications and data passing to the 1st textarea
                 JTextArea postUserInfo = new JTextArea();
-			    postUserInfo.setText(rs.getString("username") + "            " + rs.getString("uploaddate"));
+			    postUserInfo.setText(rs.getString("username") + "            " + rs.getString("uploaddate") + "            " + rs.getString("Category"));
 			    postUserInfo.setBackground(getCategoryColor(rs.getString("Category")));
 			    postUserInfo.setEditable(false);
 			    postUserInfo.setFont(font);
@@ -250,8 +250,6 @@ public class HomePage implements ActionListener {
                 southLike.setSize(900, 30);
                 southLike.setBackground(Color.white);
                 southLike.add(like);
-                southLike.add(Box.createHorizontalStrut(20));
-                southLike.add(categ);
                 southLike.add(Box.createHorizontalStrut(10));
                 southLike.add(getIcon(rs.getString("Category")));                
 
