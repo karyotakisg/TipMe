@@ -347,6 +347,8 @@ public class Register {
 
 						statement.executeUpdate(query);
 
+						conn.close();
+						
 						// After signing up, opening the "Log in" page
 						frame.dispose();
 						new LoginPage();
