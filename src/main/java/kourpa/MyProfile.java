@@ -52,6 +52,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
     private JRadioButton lightMode;
     private ButtonGroup radioGroup;
     private JRadioButton plainMode;
+	ImageIcon iconColorChooser = new ImageIcon("src\\main\\resources\\colors.png");
 	MyProfile(User user) { // constructor of the MyProfile GUI
 		super("GetTip()-MyProfile");
 		Image ic = Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\logo.png");
@@ -150,6 +151,25 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			changeButton.setVisible(false);
 			setFieldsEditable();
 		}
+		if (e.getSource() == darkMode) {
+            east.setBackground(Color.DARK_GRAY);
+            this.setBackground(Color.DARK_GRAY);
+            this.setBackground(Color.DARK_GRAY);
+        } else if (e.getSource() == lightMode) {   
+            east.setBackground(Color.white);
+            this.setBackground(Color.WHITE);
+            this.setBackground(Color.WHITE);
+        } else if (e.getSource() == plainMode){
+            this.setBackground(new Color(255, 102, 0));
+            east.setBackground(new Color(255, 102, 0));
+            this.setBackground(new Color(255, 102, 0));
+        } else if (e.getSource() == colorPick) {
+            JColorChooser colorChoose = new JColorChooser();
+            Color col = JColorChooser.showDialog(null, "Pick a color!", Color.LIGHT_GRAY);
+            this.setBackground(col);
+            east.setBackground(col);
+            this.setBackground(col);
+        }
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -298,7 +318,28 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 	}
 	public void eastPanelSetup(){
 		east.setLayout(new GridLayout());
-
+		darkMode = new JRadioButton("Dark Mode", false);
+        lightMode = new JRadioButton("Light Mode", false);
+        plainMode = new JRadioButton("Plain Mode", true);
+        colorPick = new JRadioButton("Other", iconColorChooser, false);
+		darkMode.setBackground(Color.DARK_GRAY);
+        lightMode.setBackground(Color.WHITE);
+        plainMode.setBackground(new Color(255, 102, 0));
+        colorPick.setBackground(Color.LIGHT_GRAY);
+        darkMode.setForeground(Color.WHITE);
+        plainMode.setForeground(Color.WHITE);
+        east.add(plainMode);
+        east.add(darkMode);
+        east.add(lightMode);
+        east.add(colorPick);
+        radioGroup.add(darkMode);
+        radioGroup.add(lightMode);
+        radioGroup.add(plainMode);
+        radioGroup.add(colorPick);
+        darkMode.addActionListener(this);
+        lightMode.addActionListener(this);
+        plainMode.addActionListener(this);
+        colorPick.addActionListener(this);
 
 		
 	}
