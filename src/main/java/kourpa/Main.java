@@ -1,4 +1,5 @@
 package kourpa;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 public class Main {  
@@ -8,6 +9,6 @@ public class Main {
       	User user1 = new User("v.talos","8210146","Evangelos","Talos","Male","v.talos23@gmail.com","6906502673","2003-02-07","Programming","Sports","Sports");
         ar.add(user1);
         people.put(0,ar);
-        MyProfile obj = new MyProfile(user1); 
+        MyProfile obj = new MyProfile(user1, Color.ORANGE); 
 	}
 }

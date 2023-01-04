@@ -53,7 +53,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
     private ButtonGroup radioGroup;
     private JRadioButton plainMode;
 	ImageIcon iconColorChooser = new ImageIcon("src\\main\\resources\\colors.png");
-	MyProfile(User user) { // constructor of the MyProfile GUI
+	MyProfile(User user, Color col) { // constructor of the MyProfile GUI
 		super("GetTip()-MyProfile");
 		Image ic = Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\logo.png");
 		this.setIconImage(ic);
@@ -101,6 +101,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		scrollbarSetup();
 		this.add(panel);
 		panel.add(menu, BorderLayout.NORTH);
+		eastPanelSetup();
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
@@ -152,23 +153,27 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			setFieldsEditable();
 		}
 		if (e.getSource() == darkMode) {
+			p.setVisible(false);
+			p.setVisible(true);
             east.setBackground(Color.DARK_GRAY);
-            this.setBackground(Color.DARK_GRAY);
-            this.setBackground(Color.DARK_GRAY);
-        } else if (e.getSource() == lightMode) {   
+            panel.setBackground(Color.DARK_GRAY);
+        } else if (e.getSource() == lightMode) {
+			p.setVisible(false);
+			p.setVisible(true);
             east.setBackground(Color.white);
-            this.setBackground(Color.WHITE);
-            this.setBackground(Color.WHITE);
+            panel.setBackground(Color.WHITE);
         } else if (e.getSource() == plainMode){
-            this.setBackground(new Color(255, 102, 0));
+			p.setVisible(false);
+			p.setVisible(true);
+            panel.setBackground(new Color(255, 102, 0));
             east.setBackground(new Color(255, 102, 0));
-            this.setBackground(new Color(255, 102, 0));
         } else if (e.getSource() == colorPick) {
             JColorChooser colorChoose = new JColorChooser();
             Color col = JColorChooser.showDialog(null, "Pick a color!", Color.LIGHT_GRAY);
-            this.setBackground(col);
+            panel.setBackground(col);
             east.setBackground(col);
-            this.setBackground(col);
+			p.setVisible(false);
+			p.setVisible(true);
         }
 	}
 	@Override
@@ -193,7 +198,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		if (e.getSource() == dialBut) {
 			dial.dispose();
 			this.dispose();
-			MyProfile obj = new MyProfile(user1);
+			MyProfile obj = new MyProfile(user1,this.getColor());
 		}
 	}
 	@Override
@@ -278,7 +283,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 	}
 	public void textAreaSetup() {
 		p.setBorder(BorderFactory.createLineBorder(Color.black));
-		this.add(p);
+		panel.add(p);
 	}
 	public void scrollbarSetup() {
 		JScrollPane scrollbar = new JScrollPane(p, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
@@ -317,17 +322,13 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 	panel.add(labelForPosts);
 	}
 	public void eastPanelSetup(){
-		east.setLayout(new GridLayout());
+		east.setLayout(new GridLayout(4,1));
 		east.setBackground(new Color(255, 102, 0));
-		east.setBounds(700,700,150,200);
+		east.setBounds(850,100,150,200);
 		darkMode = new JRadioButton("Dark Mode", false);
-		darkMode.setSize(30,30);
         lightMode = new JRadioButton("Light Mode", false);
-		lightMode.setSize(30,30);
-        plainMode = new JRadioButton("Plain Mode", true);
-		plainMode.setSize(30,30);
+        plainMode = new JRadioButton("Plain Mode", true);		
         colorPick = new JRadioButton("Other", iconColorChooser, false);
-		colorPick.setSize(30,30);
 		darkMode.setBackground(Color.DARK_GRAY);
         lightMode.setBackground(Color.WHITE);
         plainMode.setBackground(new Color(255, 102, 0));
@@ -338,6 +339,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
         east.add(darkMode);
         east.add(lightMode);
         east.add(colorPick);
+		radioGroup = new ButtonGroup();
         radioGroup.add(darkMode);
         radioGroup.add(lightMode);
         radioGroup.add(plainMode);
@@ -346,8 +348,10 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
         lightMode.addActionListener(this);
         plainMode.addActionListener(this);
         colorPick.addActionListener(this);
-		this.add(east);
-		
+		panel.add(east);
+	}
+	public Color getColor(){ // returns the color of the panel so other sections on the app can use it
+		return panel.getBackground();
 	}
 	public  JPanel getPanel(){ // The following methods are created for testing purposes
 		return panel;
