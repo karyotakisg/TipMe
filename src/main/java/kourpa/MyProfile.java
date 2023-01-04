@@ -47,6 +47,11 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 	JDialog dial = new JDialog(this, "Dialog Box");
 	JButton dialBut = new JButton("OK");
 	JPanel east = new JPanel();
+	private JRadioButton colorPick;
+    private JRadioButton darkMode;
+    private JRadioButton lightMode;
+    private ButtonGroup radioGroup;
+    private JRadioButton plainMode;
 	MyProfile(User user) { // constructor of the MyProfile GUI
 		super("GetTip()-MyProfile");
 		Image ic = Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\logo.png");
