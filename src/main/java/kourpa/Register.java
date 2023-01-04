@@ -1,6 +1,7 @@
 
 package kourpa;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -11,6 +12,7 @@ import javax.swing.JTextField;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Statement;
@@ -23,33 +25,44 @@ public class Register {
 
 	// Creating register graphics
 	public static void register() {
-
+		
 		JPanel panel = new JPanel();
 		JFrame frame = new JFrame();
 		frame.setSize(500, 650);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(panel);
-
 		panel.setLayout(null);
-		panel.setBackground(Color.orange);
+		panel.setBackground(new Color(51, 153, 255));
 
 		// Creating JLabels and JTextFields in Sign Up page
 
+		ImageIcon icon = new ImageIcon("src\\main\\resources\\GetTip.png");
+		Image image = icon.getImage();
+		Image scaledImage = image.getScaledInstance(300, 300, Image.SCALE_SMOOTH); //The image appears when the user opens a full screen
+		
+		ImageIcon scaledIcon = new ImageIcon(scaledImage);
+		
+		JLabel tips = new JLabel(scaledIcon);
+		tips.setBounds(600, 100, 300, 300);
+		panel.add(tips);
+		
 		JLabel welcomeLabel = new JLabel("Welcome to GetTip()");
-		welcomeLabel.setBounds(50, 7, 250, 25);
-		welcomeLabel.setFont(new Font("TimesRoman", 40, 25));
-		welcomeLabel.setForeground(Color.BLUE.brighter());
+		welcomeLabel.setBounds(40, 7, 300, 25);
 		panel.add(welcomeLabel);
+		welcomeLabel.setFont(new Font("Verdana", Font.BOLD, 25));
+		welcomeLabel.setForeground(new Color(255, 255, 255));
+		//panel.add(welcomeLabel);
 
 		JLabel accountLabel = new JLabel("Create new account");
-		accountLabel.setBounds(50, 40, 200, 25);
-		accountLabel.setFont(new Font("Bold", 35, 20));
+		accountLabel.setBounds(70, 40, 200, 25);
+		accountLabel.setFont(new Font("Yu Gothic UI Semilight", 35, 20));
 		accountLabel.setForeground(Color.BLACK);
 		panel.add(accountLabel);
 
 		JLabel firstNameLabel = new JLabel("First Name");
 		firstNameLabel.setBounds(20, 70, 80, 50);
 		firstNameLabel.setForeground(Color.BLACK);
+		//firstNameLabel.setFont(new Font("Calibri", 23, 15));
 		panel.add(firstNameLabel);
 
 		JTextField firstNameText = new JTextField(20);
@@ -105,7 +118,7 @@ public class Register {
 		passwordText.setForeground(Color.black);
 		panel.add(passwordText);
 
-		JButton loginButton = new JButton("Already have an Account? Login!");
+		JButton loginButton = new JButton("Already have an Account? Login!"); //If the user already owns an account, he/she is able to directly log in
 		loginButton.setBounds(30, 500, 250, 30);
 		panel.add(loginButton);
 
@@ -120,8 +133,8 @@ public class Register {
 		panel.add(cb);
 
 		// Interest options
-		String[] categories = { "COOKING", "SPORTS", "PROGRAMMING", "DRIVING", "HEALTH", "DANCING", "NATURE", "HISTORY",
-				"GEOGRAPHY", "PHYSICS", "MATHS", "CHEMISTRY" };
+		String[] categories = { "SCIENCE", "SPORTS", "MUSIC", "FASHION", "TRAVEL", "FITNESS", "ART", "EDUCATION",
+				"ENVIROMENT", "FOOD" }; //10 categories of different topics from which the user can choose his favorites based on his interests
 
 		// First Interest options menu
 		JComboBox<Object> cat1 = new JComboBox<Object>(categories);
@@ -136,7 +149,6 @@ public class Register {
 		// Second Interest options menu
 		JComboBox<Object> cat2 = new JComboBox<Object>(categories);
 		cat2.setBounds(100, 350, 100, 25);
-		;
 		panel.add(cat2);
 
 		JLabel interest2Label = new JLabel("Interest 2");
@@ -147,7 +159,6 @@ public class Register {
 		// Third Interest options menu
 		JComboBox<Object> cat3 = new JComboBox<Object>(categories);
 		cat3.setBounds(100, 380, 100, 25);
-		;
 		panel.add(cat3);
 
 		JLabel interest3Label = new JLabel("Interest 3");
@@ -155,24 +166,44 @@ public class Register {
 		interest3Label.setForeground(Color.black);
 		panel.add(interest3Label);
 
-		JButton submitButton = new JButton("Submit");
+		JButton submitButton = new JButton("Submit"); //The user presses the "Submit" button to create his account
 		submitButton.setBounds(100, 440, 100, 25);
 		panel.add(submitButton);
 
-		JLabel sameUserNameLabel = new JLabel();
+		JLabel sameUserNameLabel = new JLabel(); //This message appears when the user declares a username that already belongs to another user
 		sameUserNameLabel.setBounds(28, 540, 1000, 25);
 		sameUserNameLabel.setText("");
 		panel.add(sameUserNameLabel);
 
-		JLabel emptyUserNameText = new JLabel();
-		emptyUserNameText.setBounds(260, 225, 150, 25);
-		emptyUserNameText.setText("");
-		panel.add(emptyUserNameText);
+		JLabel emptyOrLongUserNameText = new JLabel(); //This message appears when the user doesn't declare a username or when the username he declared is longer than 30 characters
+		emptyOrLongUserNameText.setBounds(260, 225, 250, 25);
+		emptyOrLongUserNameText.setText("");
+		panel.add(emptyOrLongUserNameText);
 
-		JLabel emptyPasswordText = new JLabel();
-		emptyPasswordText.setBounds(260, 255, 150, 25);
-		emptyPasswordText.setText("");
-		panel.add(emptyPasswordText);
+		JLabel emptyOrLongPasswordText = new JLabel(); //This message appears when the user doesn't declare a password or when the password he declared is longer than 30 characters
+		emptyOrLongPasswordText.setBounds(260, 255, 250, 25);
+		emptyOrLongPasswordText.setText("");
+		panel.add(emptyOrLongPasswordText);
+
+		JLabel emptyOrLongEmailText = new JLabel(); //This message appears when the user doesn't declare an email or when the email he declared is longer than 30 characters
+		emptyOrLongEmailText.setBounds(260, 185, 250, 25);
+		emptyOrLongEmailText.setText("");
+		panel.add(emptyOrLongEmailText);
+
+		JLabel incorrectPhoneNumber = new JLabel(); //This message appears when the user adds adds an invalid phone number (not 10 digits)
+		incorrectPhoneNumber.setBounds(260, 155, 250, 25);
+		incorrectPhoneNumber.setText("");
+		panel.add(incorrectPhoneNumber);
+
+		JLabel longFirstName = new JLabel(); //This message appears when the First Name is longer than 30 characters
+		longFirstName.setBounds(260, 85, 250, 25);
+		longFirstName.setText("");
+		panel.add(longFirstName);
+
+		JLabel longLastName = new JLabel(); //This message appears when the First Name is longer than 30 characters
+		longLastName.setBounds(260, 125, 250, 25);
+		longLastName.setText("");
+		panel.add(longLastName);
 
 		frame.setVisible(true);
 
@@ -181,16 +212,32 @@ public class Register {
 
 		// What happens when user presses the "Submit" button
 		submitButton.addActionListener(new ActionListener() {
+			/**
+			 *
+			 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				emptyUserNameText.setText(" ");
-				emptyPasswordText.setText(" ");
-				
-				boolean emptyFields = false;
+				emptyOrLongUserNameText.setText(" ");
+				emptyOrLongPasswordText.setText(" ");
+				emptyOrLongEmailText.setText(" ");
+				incorrectPhoneNumber.setText(" ");
+				longFirstName.setText("");
+				longLastName.setText("");
 
-				if (userNameText.getText().equals(" ") || String.valueOf(passwordText.getPassword()).isEmpty())
+				boolean emptyFields = false; //Checks if there is an empty field that souldn't be empty
+
+				if (userNameText.getText().isEmpty() || String.valueOf(passwordText.getPassword()).isEmpty()
+						|| emailText.getText().isEmpty())
 					emptyFields = true;
+
+				boolean longFields = false; //Checks for too long fields or invalid phone number
+
+				if ((userNameText.getText().length() > 30) || (String.valueOf(passwordText.getPassword()).length() > 30)
+						|| (emailText.getText().length() > 30)
+						|| ((phoneNumberText.getText().length() != 10) && !(phoneNumberText.getText().isEmpty()))
+						|| (firstNameText.getText().length() > 30) || (lastNameText.getText().length() > 30))
+					longFields = true;
 
 				// Saving User's preferences
 				user.setUsername(userNameText.getText());
@@ -200,6 +247,7 @@ public class Register {
 				user.setEmail(emailText.getText());
 				user.setPhoneNumber(phoneNumberText.getText());
 
+				//set user's sex
 				if (cb.getSelectedItem().equals("Male")) {
 					user.setSex("Male");
 
@@ -207,6 +255,8 @@ public class Register {
 					user.setSex("Female");
 				}
 
+				
+				//set user's interests
 				for (int i = 0; i < categories.length; i++) {
 					if (cat1.getSelectedItem().equals(categories[i])) {
 
@@ -232,12 +282,13 @@ public class Register {
 					}
 				}
 
-				boolean sameUserName = false;
-
+				boolean sameUserName = false; //Checks if the selectable username already exists
+				
 				// SQLite connection URL
 				String jdbcUrl = "jdbc:sqlite:socialmedia.db";
 
 				try {
+					
 					// Creating a new Connection
 					Connection conn = DriverManager.getConnection(jdbcUrl);
 					Statement statement = conn.createStatement();
@@ -256,15 +307,33 @@ public class Register {
 
 					}
 
-					if (emptyFields || sameUserName) {
-						
+					if (emptyFields || sameUserName || longFields) {
+
 						if (userNameText.getText().isEmpty())
-							emptyUserNameText.setText("Empty Username Field");
+							emptyOrLongUserNameText.setText("Empty Username Field");
 						else if (sameUserName)
 							sameUserNameLabel.setText("This Username already exists. Try another one!");
 
 						if (String.valueOf(passwordText.getPassword()).isEmpty())
-							emptyPasswordText.setText("Empty Password Field");
+							emptyOrLongPasswordText.setText("Empty Password Field");
+
+						if (emailText.getText().isEmpty())
+							emptyOrLongEmailText.setText("Empty E-mail Field");
+
+						if (userNameText.getText().length() > 30)
+							emptyOrLongUserNameText.setText("Username too long. Try another one!");
+
+						if (String.valueOf(passwordText.getPassword()).length() > 30)
+							emptyOrLongPasswordText.setText("Password too long. Try another one!");
+
+						if ((phoneNumberText.getText().length() != 10) && !(phoneNumberText.getText().isEmpty()))
+							incorrectPhoneNumber.setText("Not a Phone Number");
+
+						if (firstNameText.getText().length() > 30)
+							longFirstName.setText("First Name too long. Try again!");
+
+						if (lastNameText.getText().length() > 30)
+							longLastName.setText("Last Name too long. Try again!");
 
 					} else {
 
