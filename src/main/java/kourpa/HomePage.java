@@ -210,7 +210,7 @@ public class HomePage implements ActionListener {
                 JTextArea postUserInfo = new JTextArea();
 			    postUserInfo.setText(rs.getString("username") + "            " + rs.getString("uploaddate") + "            "
 			     + rs.getString("Category"));
-			    postUserInfo.setBackground(Color.WHITE);
+			    postUserInfo.setBackground(getCategoryColor(rs.getString("Category")));
 			    postUserInfo.setEditable(false);
 			    postUserInfo.setFont(font);
 			    postUserInfo.setForeground(Color.BLACK);
@@ -309,32 +309,32 @@ public class HomePage implements ActionListener {
         return frame;
     }
     
-    /*Color bord = new Color(204, 0, 51);
+    Color bord = new Color(204, 0, 51);
     Color brown = new Color(102, 51, 0);
-    public Color getCategoryColor(String categ) {
-    	if (categ == "Sports") {
+    public  Color getCategoryColor(String categ) {
+    	if (categ.equals("Sports")) {
     		return Color.BLUE; 		
-    	} else if (categ == "Education") {
+    	} else if (categ.equals("Education")) {
     		return Color.DARK_GRAY;
-    	} else if (categ == "Environment") {
+    	} else if (categ.equals("Environment")) {
     		return Color.GREEN;
-    	} else if (categ == "Fashion") {
+    	} else if (categ.equals("Programming")) {
     		return Color.PINK;
-		} else if (categ == "Science") {
+		} else if (categ.equals("Science")) {
     		return  Color.YELLOW;
-		} else if (categ == "Art") {
+		} else if (categ.equals("Art")) {
     		return Color.ORANGE;
-		} else if (categ == "Food") {
+		} else if (categ.equals("Food")) {
     		return brown;
-		} else if (categ == "Travel") {
+		} else if (categ.equals("Travel")) {
     		return Color.pink;
-    	} else if (categ == "Fitness") {
+    	} else if (categ.equals("Fitness")) {
     		return bord;
-    	} else if (categ == "Music") {
+    	} else if (categ.equals("Music")) {
     		return Color.BLACK;
     	} else {
     		return Color.CYAN;
     	}
-	}*/
+	}
 
 }
