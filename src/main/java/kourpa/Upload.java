@@ -98,7 +98,6 @@ public class Upload {
 			}
 		});
 
-
 		jf.add(jp);
 		jp.add(jpsouth, BorderLayout.SOUTH);
 		jp.add(jpnorth, BorderLayout.NORTH);

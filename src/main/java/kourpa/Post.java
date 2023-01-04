@@ -28,7 +28,7 @@ public class Post {
 	
 	private int likes;
 	
-	Upload up = new Upload();
+	
 	//SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
 	Date now = new Date();
@@ -105,6 +105,7 @@ public class Post {
 	
 	//μέτρηση λαικ - αύξηση κατά 1 των αριθμό των λαικ
 		public void countLike() {
+			Upload up = new Upload();
 			//String query = "UPDATE Post " +
 			//		"SET Likes = Likes + 1" +
 			//		"WHERE Text = + ? AND username = ? ";
@@ -142,6 +143,7 @@ public class Post {
 	
 		//επιστρέφει το νούμερο των λαικ που έχει
 		public void receiveLike() {
+			Upload up = new Upload();
 			//String query = "SELECT Likes FROM Post, User WHERE Text = ? AND username = ? ";
 			String query = "SELECT Likes FROM Post, User WHERE Text =" + up.getTip() + "AND username =" + user.getUsername() +";";
 			
