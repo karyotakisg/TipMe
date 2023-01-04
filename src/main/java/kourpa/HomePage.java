@@ -7,6 +7,7 @@ import javax.swing.JColorChooser;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.event.InternalFrameListener;
 import javax.swing.Icon;
@@ -87,7 +88,7 @@ public class HomePage implements ActionListener {
 		
         //Layouts for each panel
         Menu MenuBar = new Menu();
-        east.setLayout(new GridLayout(16, 1, 0, 0));
+        east.setLayout(new GridLayout(9, 1, 0, 0));
         west.setLayout(new GridLayout(5, 1, 10, 10));
         center.setLayout(new GridLayout(count, 1, 5, 10));
         
@@ -101,8 +102,8 @@ public class HomePage implements ActionListener {
         //Sizes for each panel and logo placement
 		MenuBar.setPreferredSize(new Dimension(200, 50));
 		south.setPreferredSize(new Dimension(200, 60 ));
-		east.setPreferredSize(new Dimension(150, 200));
-		west.setPreferredSize(new Dimension(150, 200));
+		east.setPreferredSize(new Dimension(100, 200));
+		west.setPreferredSize(new Dimension(100, 200));
         logo2.setBounds(0, 0, 150, 50);
         
         //Image decorations in western panel of BorderLayout
@@ -136,6 +137,8 @@ public class HomePage implements ActionListener {
         west.add(travel);
         west.add(fitness);
         west.add(food);
+        
+        
 
         //RadioButton modifications
         ImageIcon iconColorChooser = new ImageIcon("src\\main\\resources\\colors.png");
@@ -156,6 +159,12 @@ public class HomePage implements ActionListener {
         east.add(darkMode);
         east.add(lightMode);
         east.add(colorPick);
+        
+        east.add(art);
+        east.add(music);
+        east.add(travel);
+        east.add(fitness);
+        east.add(food);
 
         radioGroup = new ButtonGroup();
         radioGroup.add(darkMode);
@@ -208,8 +217,7 @@ public class HomePage implements ActionListener {
 
                 //User's Information modifications and data passing to the 1st textarea
                 JTextArea postUserInfo = new JTextArea();
-			    postUserInfo.setText(rs.getString("username") + "            " + rs.getString("uploaddate") + "            "
-			     + rs.getString("Category"));
+			    postUserInfo.setText(rs.getString("username") + "            " + rs.getString("uploaddate"));
 			    postUserInfo.setBackground(getCategoryColor(rs.getString("Category")));
 			    postUserInfo.setEditable(false);
 			    postUserInfo.setFont(font);
@@ -232,12 +240,20 @@ public class HomePage implements ActionListener {
                 like.setBackground(Color.white);
 			    like.setForeground(Color.WHITE);
                 like.setFocusable(false);
-
+                
+                //Category Label
+                JLabel categ = new JLabel(rs.getString("Category"));
+                categ.setFont(font);
+              
                 //Place it in the southern panel of the BorderLayout 
                 JPanel southLike = new JPanel(new FlowLayout(FlowLayout.LEFT));
                 southLike.setSize(900, 30);
                 southLike.setBackground(Color.white);
                 southLike.add(like);
+                southLike.add(Box.createHorizontalStrut(20));
+                southLike.add(categ);
+                southLike.add(Box.createHorizontalStrut(10));
+                southLike.add(getIcon(rs.getString("Category")));                
 
                 //final adding
 			    post.add(postUserInfo, BorderLayout.NORTH);
@@ -309,31 +325,79 @@ public class HomePage implements ActionListener {
         return frame;
     }
     
-    Color bord = new Color(204, 0, 51);
-    Color brown = new Color(102, 51, 0);
+    public JLabel getIcon(String categ) {
+    	if (categ.equals("Sports")) {
+    		ImageIcon iconSports = new ImageIcon("src\\main\\resources\\sports2.png");
+    		JLabel sports = new JLabel(iconSports);
+    		return sports;
+    	} else if (categ.equals("Education")) {
+    		ImageIcon iconEdu = new ImageIcon("src\\main\\resources\\academic.png");
+            JLabel academic = new JLabel(iconEdu);
+            return academic;
+    	} else if (categ.equals("Environment")) {
+    		ImageIcon iconEnvironment = new ImageIcon("src\\main\\resources\\environment.png");
+            JLabel environment = new JLabel(iconEnvironment);
+            return environment;
+    	} else if (categ.equals("Fashion")) {
+    		ImageIcon iconFashion = new ImageIcon("src\\main\\resources\\fashion.png");
+            JLabel fashion = new JLabel(iconFashion);
+            return fashion;
+		} else if (categ.equals("Science")) {
+			ImageIcon iconScience = new ImageIcon("src\\main\\resources\\science.png");
+	        JLabel science = new JLabel(iconScience);
+	        return science;
+		} else if (categ.equals("Art")) {
+	        ImageIcon iconArt = new ImageIcon("src\\main\\resources\\art.png");
+	        JLabel art = new JLabel(iconArt);
+	        return art;
+		} else if (categ.equals("Food")) {
+			ImageIcon iconFood = new ImageIcon("src\\main\\resources\\food.png");
+    	    JLabel food = new JLabel(iconFood);
+    	    return food;			
+		} else if (categ.equals("Travel")) {
+			ImageIcon iconTravel = new ImageIcon("src\\main\\resources\\travel.png");
+	        JLabel travel = new JLabel(iconTravel);
+	        return travel;
+    	} else if (categ.equals("Fitness")) {
+    		ImageIcon iconFit = new ImageIcon("src\\main\\resources\\fitness.png");
+            JLabel fitness = new JLabel(iconFit);
+            return fitness;
+    	} else if (categ.equals("Music")) {
+    	    ImageIcon iconMusic = new ImageIcon("src\\main\\resources\\music.png");
+	        JLabel music = new JLabel(iconMusic);
+	        return music;
+    	} else { 
+    		JLabel general = new JLabel ("  "); 
+    		return general;
+    	}
+	}
+
+    
+    
+     
     public  Color getCategoryColor(String categ) {
     	if (categ.equals("Sports")) {
-    		return Color.BLUE; 		
+    		return new Color(0, 102, 255);		
     	} else if (categ.equals("Education")) {
-    		return Color.DARK_GRAY;
+    		return new Color(255, 204, 0);
     	} else if (categ.equals("Environment")) {
-    		return Color.GREEN;
-    	} else if (categ.equals("Programming")) {
-    		return Color.PINK;
+    		return new Color(0, 153, 51);
+    	} else if (categ.equals("Fashion")) {
+    		return new Color(198, 78, 126);
 		} else if (categ.equals("Science")) {
-    		return  Color.YELLOW;
+    		return  new Color(30, 25, 98);
 		} else if (categ.equals("Art")) {
-    		return Color.ORANGE;
+    		return new Color(204, 0, 51);
 		} else if (categ.equals("Food")) {
-    		return brown;
+    		return new Color(153, 51, 0);
 		} else if (categ.equals("Travel")) {
-    		return Color.pink;
+    		return new Color(235, 250, 255);
     	} else if (categ.equals("Fitness")) {
-    		return bord;
+    		return new Color(101, 253, 208);
     	} else if (categ.equals("Music")) {
-    		return Color.BLACK;
+    		return new Color(240, 131, 189);
     	} else {
-    		return Color.CYAN;
+    		return Color.LIGHT_GRAY;
     	}
 	}
 
