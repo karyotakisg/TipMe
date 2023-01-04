@@ -50,7 +50,8 @@ public class HomePage implements ActionListener {
         frame.setTitle("GetTip");
 		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
-		frame.setSize(1000, 1000);	
+		frame.setBounds(20, 20, 1200, 1000);
+		
         frame.setBackground(Color.BLACK);
 
 		feed.setLayout(new BorderLayout(0, 1));
@@ -90,7 +91,7 @@ public class HomePage implements ActionListener {
         Menu MenuBar = new Menu();
         east.setLayout(new GridLayout(9, 1, 0, 0));
         west.setLayout(new GridLayout(5, 1, 10, 10));
-        center.setLayout(new GridLayout(count, 1, 5, 10));
+        center.setLayout(new GridLayout(count, 1, 5, 3));
         
 
 		//Colors for each panel
@@ -217,7 +218,7 @@ public class HomePage implements ActionListener {
 
                 //User's Information modifications and data passing to the 1st textarea
                 JTextArea postUserInfo = new JTextArea();
-			    postUserInfo.setText(rs.getString("username") + "            " + rs.getString("uploaddate") + "            " + rs.getString("Category"));
+			    postUserInfo.setText(rs.getString("username") + "            " + rs.getString("uploaddate"));
 			    postUserInfo.setBackground(getCategoryColor(rs.getString("Category")));
 			    postUserInfo.setEditable(false);
 			    postUserInfo.setFont(font);
@@ -225,7 +226,7 @@ public class HomePage implements ActionListener {
 
                 //User's message modification and data passing to the 2nd textarea
 			    JTextArea postMessage = new JTextArea();
-			    postMessage.setText(rs.getString("text"));
+			    postMessage.setText(rs.getString("text") + "\n");
 			    postMessage.setBackground(Color.WHITE);
 			    postMessage.setEditable(false);
 			    postMessage.setFont(font);
@@ -250,6 +251,8 @@ public class HomePage implements ActionListener {
                 southLike.setSize(900, 30);
                 southLike.setBackground(Color.white);
                 southLike.add(like);
+                southLike.add(Box.createHorizontalStrut(20));
+                southLike.add(categ);
                 southLike.add(Box.createHorizontalStrut(10));
                 southLike.add(getIcon(rs.getString("Category")));                
 
@@ -329,39 +332,39 @@ public class HomePage implements ActionListener {
     		JLabel sports = new JLabel(iconSports);
     		return sports;
     	} else if (categ.equals("Education")) {
-    		ImageIcon iconEdu = new ImageIcon("src\\main\\resources\\academic.png");
+    		ImageIcon iconEdu = new ImageIcon("src\\main\\resources\\academic2.png");
             JLabel academic = new JLabel(iconEdu);
             return academic;
     	} else if (categ.equals("Environment")) {
-    		ImageIcon iconEnvironment = new ImageIcon("src\\main\\resources\\environment.png");
+    		ImageIcon iconEnvironment = new ImageIcon("src\\main\\resources\\environment2.png");
             JLabel environment = new JLabel(iconEnvironment);
             return environment;
     	} else if (categ.equals("Fashion")) {
-    		ImageIcon iconFashion = new ImageIcon("src\\main\\resources\\fashion.png");
+    		ImageIcon iconFashion = new ImageIcon("src\\main\\resources\\fashion2.png");
             JLabel fashion = new JLabel(iconFashion);
             return fashion;
 		} else if (categ.equals("Science")) {
-			ImageIcon iconScience = new ImageIcon("src\\main\\resources\\science.png");
+			ImageIcon iconScience = new ImageIcon("src\\main\\resources\\science2.png");
 	        JLabel science = new JLabel(iconScience);
 	        return science;
 		} else if (categ.equals("Art")) {
-	        ImageIcon iconArt = new ImageIcon("src\\main\\resources\\art.png");
+	        ImageIcon iconArt = new ImageIcon("src\\main\\resources\\art2.png");
 	        JLabel art = new JLabel(iconArt);
 	        return art;
 		} else if (categ.equals("Food")) {
-			ImageIcon iconFood = new ImageIcon("src\\main\\resources\\food.png");
+			ImageIcon iconFood = new ImageIcon("src\\main\\resources\\food2.png");
     	    JLabel food = new JLabel(iconFood);
     	    return food;			
 		} else if (categ.equals("Travel")) {
-			ImageIcon iconTravel = new ImageIcon("src\\main\\resources\\travel.png");
+			ImageIcon iconTravel = new ImageIcon("src\\main\\resources\\travel2.png");
 	        JLabel travel = new JLabel(iconTravel);
 	        return travel;
     	} else if (categ.equals("Fitness")) {
-    		ImageIcon iconFit = new ImageIcon("src\\main\\resources\\fitness.png");
+    		ImageIcon iconFit = new ImageIcon("src\\main\\resources\\fitness2.png");
             JLabel fitness = new JLabel(iconFit);
             return fitness;
     	} else if (categ.equals("Music")) {
-    	    ImageIcon iconMusic = new ImageIcon("src\\main\\resources\\music.png");
+    	    ImageIcon iconMusic = new ImageIcon("src\\main\\resources\\music2.png");
 	        JLabel music = new JLabel(iconMusic);
 	        return music;
     	} else { 

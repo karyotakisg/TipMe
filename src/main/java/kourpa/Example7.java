@@ -1,4 +1,7 @@
-package kourpa.kourpatestclasses;
+package kourpa;
+
+import java.awt.BorderLayout;
+
 import javax.swing.*;
 
 public class Example7 extends JFrame{
@@ -7,7 +10,7 @@ public class Example7 extends JFrame{
 		//ExplorePanel p1 = new ExplorePanel(0);
 		ExploreKourpaTest k = new ExploreKourpaTest();
 		k.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        k.setSize(5000, 5000);
+		k.setBounds(20, 20, 1000, 1500);
 	    k.setVisible(true);
 	    k.pack();
 
