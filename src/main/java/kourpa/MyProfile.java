@@ -318,10 +318,16 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 	}
 	public void eastPanelSetup(){
 		east.setLayout(new GridLayout());
+		east.setBackground(new Color(255, 102, 0));
+		east.setBounds(700,700,150,200);
 		darkMode = new JRadioButton("Dark Mode", false);
+		darkMode.setSize(30,30);
         lightMode = new JRadioButton("Light Mode", false);
+		lightMode.setSize(30,30);
         plainMode = new JRadioButton("Plain Mode", true);
+		plainMode.setSize(30,30);
         colorPick = new JRadioButton("Other", iconColorChooser, false);
+		colorPick.setSize(30,30);
 		darkMode.setBackground(Color.DARK_GRAY);
         lightMode.setBackground(Color.WHITE);
         plainMode.setBackground(new Color(255, 102, 0));
@@ -340,7 +346,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
         lightMode.addActionListener(this);
         plainMode.addActionListener(this);
         colorPick.addActionListener(this);
-		panel.add(east);
+		this.add(east);
 		
 	}
 	public  JPanel getPanel(){ // The following methods are created for testing purposes
