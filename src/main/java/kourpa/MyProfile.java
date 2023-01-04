@@ -46,6 +46,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 	String s = "submit";
 	JDialog dial = new JDialog(this, "Dialog Box");
 	JButton dialBut = new JButton("OK");
+	JPanel east = new JPanel();
 	MyProfile(User user) { // constructor of the MyProfile GUI
 		super("GetTip()-MyProfile");
 		Image ic = Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\logo.png");
@@ -289,6 +290,12 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 	panel.add(phoneNumberLabel);
 	panel.add(changeButton);
 	panel.add(labelForPosts);
+	}
+	public void eastPanelSetup(){
+		east.setLayout(new GridLayout());
+
+
+		
 	}
 	public  JPanel getPanel(){ // The following methods are created for testing purposes
 		return panel;
