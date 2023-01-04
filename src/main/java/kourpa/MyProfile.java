@@ -178,7 +178,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			p.setVisible(true);
         }
         if(e.getSource()==logoutButton) {
-			//new LoginPage();
+			new LoginPage();
 			dispose();
 		}
 	}
