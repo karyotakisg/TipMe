@@ -49,7 +49,7 @@ public class ExplorePanel {
 
 
 		} else if(x == 1) {
-			 p1 = new JPanel();
+			p1 = new JPanel();
 			p1.setPreferredSize(new Dimension(600,600));
 			p1.setLayout(new GridLayout(3, 1, 10, 10));
 			category = "Sports";

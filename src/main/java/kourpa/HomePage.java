@@ -70,15 +70,13 @@ public class HomePage implements ActionListener {
 			String query = "SELECT Text FROM Post, User WHERE Post.userId = User.userId AND (Post.Category = "
 					+ "'" + u.getInterest1() + "'" + "COLLATE NOCASE  OR Post.Category = " + "'" + u.getInterest2()
 					+ "'" + "COLLATE NOCASE OR Post.Category = " + "'" + u.getInterest3() + "'"
-					+ "COLLATE NOCASE);";
+					+ " COLLATE NOCASE);";
 
 			ResultSet rs = statement.executeQuery(query);
 
 			while (rs.next()) {
 				count++; //count the number of posts
 			}
-
-			System.out.println(count);
 			
 			conn.close();
 		
@@ -204,7 +202,7 @@ public class HomePage implements ActionListener {
 
 		    // Get the right posts from the database
 			
-		    String query = "SELECT User.username, Post.text, Post.uploaddate, Post.likes, Post.Category FROM Post, User WHERE Post.userId = User.userId AND (Post.Category = " + "'" + u.getInterest1() + "'" + "COLLATE NOCASE  OR Post.Category = " + "'" + u.getInterest2() + "'" + "COLLATE NOCASE OR Post.Category = " + "'" + u.getInterest1() + "'" + "COLLATE NOCASE) ORDER BY uploadDate DESC;";
+		    String query = "SELECT User.username, Post.text, Post.uploaddate, Post.likes, Post.Category FROM Post, User WHERE Post.userId = User.userId AND (Post.Category = " + "'" + u.getInterest1() + "'" + "COLLATE NOCASE  OR Post.Category = " + "'" + u.getInterest2() + "'" + "COLLATE NOCASE OR Post.Category = " + "'" + u.getInterest3() + "'" + "COLLATE NOCASE) ORDER BY uploadDate DESC;";
 
 		    ResultSet rs = statement.executeQuery(query);
 
