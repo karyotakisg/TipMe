@@ -1,4 +1,3 @@
-
 package kourpa;
 
 import javax.swing.ImageIcon;
@@ -381,20 +380,3 @@ public class Register {
 
 }
 
-//What happens when you press the register button	
-/*
- * @Override public void actionPerformed(ActionEvent e) {
- * 
- * if (e.getSource() == registerButton) {
- * 
- * String jdbcUrl = "jdbc:sqlite:socialmedia.db";
- * 
- * try { Connection conn = DriverManager.getConnection(jdbcUrl); Statement
- * statement = conn.createStatement();
- * 
- * } catch (SQLException s) { // TODO Auto-generated catch block
- * System.out.println("Failed to connect"); s.printStackTrace(); }
- * 
- * frame.dispose(); IDandPasswords idpas = new IDandPasswords(); LoginPage
- * loginPage = new LoginPage(idpas.getLogininfo()); }
- */
