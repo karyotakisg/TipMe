@@ -21,7 +21,7 @@ import javax.swing.JTextField;
 public class LoginPage implements ActionListener {
 
 	// Log in graphics
-	JFrame frame = new JFrame();
+	JFrame frame = new JFrame("Log In");
 	JButton loginButton = new JButton("Login");
 	JButton registerButton = new JButton("Register");
 	JButton resetButton = new JButton("Reset");
@@ -36,15 +36,17 @@ public class LoginPage implements ActionListener {
 
 	LoginPage() {
 
-		frame.getContentPane().setBackground(Color.orange);
+		frame.getContentPane().setBackground(new Color(51, 153, 255));
 
 		userIDLabel.setBounds(50, 100, 75, 25);
 		userPasswordLabel.setBounds(50, 150, 75, 25);
 
-		messageLabel.setBounds(30, 250, 1200, 35);
-		messageLabel.setFont(new Font(null, Font.ITALIC, 25));
+		messageLabel.setBounds(20, 250, 1200, 35);
+		messageLabel.setFont(new Font("Verdana", Font.BOLD, 20));
+		messageLabel.setForeground(new Color(130, 12, 10));
 
-		tryAgainLabel.setBounds(40, 300, 1200, 35);
+		tryAgainLabel.setBounds(150, 280, 1200, 50);
+		tryAgainLabel.setForeground(Color.black);
 
 		userIDField.setBounds(125, 100, 200, 25);
 		userPasswordField.setBounds(125, 150, 200, 25);
@@ -57,7 +59,7 @@ public class LoginPage implements ActionListener {
 		resetButton.setFocusable(false);
 		resetButton.addActionListener(this);
 
-		registerButton.setBounds(145, 350, 100, 25);
+		registerButton.setBounds(138, 350, 100, 25);
 		registerButton.setFocusable(false);
 		registerButton.addActionListener(this);
 
@@ -72,6 +74,7 @@ public class LoginPage implements ActionListener {
 		frame.add(registerButton);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(420, 420);
+		frame.setResizable(false);
 		frame.setLayout(null);
 		frame.setVisible(true);
 
@@ -84,6 +87,8 @@ public class LoginPage implements ActionListener {
 			userIDField.setText("");
 			userPasswordField.setText("");
 			messageLabel.setText("");
+		    tryAgainLabel.setText("");
+			
 		}
 
 		String jdbcUrl = "jdbc:sqlite:socialmedia.db";
@@ -105,7 +110,8 @@ public class LoginPage implements ActionListener {
 
 				while (rs.next()) {
 
-					if (rs.getString("username").equals(userID) && rs.getString("password").equals(password)) {
+					if ((rs.getString("username").equals(userID) && rs.getString("password").equals(password))
+							&& !(userID.isEmpty() && password.isEmpty())) {
 
 						messageLabel.setForeground(Color.green);
 						messageLabel.setText("Login successful!");
@@ -116,7 +122,7 @@ public class LoginPage implements ActionListener {
 						break;
 
 					}
-
+					
 					if (!loggedIn) {
 
 						userIDField.setText("");
@@ -137,7 +143,7 @@ public class LoginPage implements ActionListener {
 			}
 
 		}
-		
+
 		if (e.getSource() == registerButton) {
 			userIDField.setText("");
 			userPasswordField.setText("");

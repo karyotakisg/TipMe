@@ -26,7 +26,7 @@ public class Register {
 	public static void register() {
 		
 		JPanel panel = new JPanel();
-		JFrame frame = new JFrame();
+		JFrame frame = new JFrame("Welcome to GetTip()");
 		frame.setSize(500, 650);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(panel);
