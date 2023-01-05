@@ -47,8 +47,8 @@ public class Upload {
 		jp.setBackground(new Color(255, 102, 0));
 		jp.setLayout(new BorderLayout(1, 1));
 		
-		jpnorth.setLayout(new GridLayout(3, 2));
-		jpnorth.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		jpnorth.setLayout(new GridLayout(2, 1));
+		jpnorth.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		jpgridleft.setLayout(new FlowLayout(FlowLayout.LEFT));
 		jpgridright.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		jpsouth.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -78,15 +78,13 @@ public class Upload {
 		JComboBox<Object> cb = new JComboBox<Object>(categories);
 		jpgridright.add(cb);
 		
-		JLabel empty = new JLabel();
 		JLabel jl5 = new JLabel("Text your tip");
 		jpgridleft.add(jl5);
 		
-		jpnorth.add(empty);
-		jpnorth.add(empty);
-		jpnorth.add(empty);
+		
 		jpnorth.add(jpgridright);
 		jpnorth.add(jpgridleft);
+		
 
 		cb.addItemListener(new ItemListener() {
 
@@ -106,7 +104,7 @@ public class Upload {
 		jp.add(jpwest, BorderLayout.WEST);
 		
 		JScrollPane scrollPane = new JScrollPane(textarea,
-				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		jp.add(scrollPane, BorderLayout.CENTER);
 		jf.setVisible(true);
@@ -115,7 +113,7 @@ public class Upload {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				int number = textarea.getText().length();
+				int number = textarea.getText().length() - (int)textarea.getText().lines().count();
 				JOptionPane.showMessageDialog(null,
 						"The number of character: " + number);	
 			}
@@ -125,7 +123,7 @@ public class Upload {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				int number = textarea.getText().length();
+				int number = textarea.getText().length() - (int)textarea.getText().lines().count();
 				if (number < 1) {
 					JOptionPane.showMessageDialog(null, "There is no tip to upload " + "("
 				+ number + " / 200 character)");
