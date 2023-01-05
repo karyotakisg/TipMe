@@ -45,7 +45,7 @@ public class ExploreButtons {
 			Color c1 = new Color(30, 25, 98);
 			return c1;
 		} else if (n == 1) {
-			Color c2 = new Color(0, 102, 255);
+			Color c2 = new Color(0, 102, 204);
 			return c2;
 		} else if (n == 2) {
 			Color c3 = new Color(240, 131, 189);

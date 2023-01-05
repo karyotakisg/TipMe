@@ -55,7 +55,7 @@ public class Menu  extends JPanel implements ActionListener, KeyListener, MouseL
 
         javax.swing.border.Border br = BorderFactory.createLineBorder(Color.BLACK);
         this.setBorder(br);
-        this.setBackground(new Color (18,18,18));
+        this.setBackground(Color.BLACK);
         this.setBounds(0,0,1000,50);
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
         b1Icon.setBackground(new Color(240,240,240));
