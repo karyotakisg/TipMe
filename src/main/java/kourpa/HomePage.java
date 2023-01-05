@@ -38,14 +38,14 @@ public class HomePage  {
     private final JPanel south = new JPanel();
     JTextArea postScreen = new JTextArea();
     Icon logo = new ImageIcon("src\\main\\resources\\music2.png"); 
-    /*private final JRadioButton colorPick;
-    private final JRadioButton darkMode;
-    private final JRadioButton lightMode;
-    private final ButtonGroup radioGroup;
-    private final JRadioButton plainMode;
-    Icon logo = new ImageIcon("src\\main\\resources\\logo.png"); 
-    JLabel logo2 =  new JLabel(logo);
-    JLabel slogan = new JLabel("Give me just the tip!");*/
+    ///*private final JRadioButton colorPick;
+    //private final JRadioButton darkMode;
+    //private final JRadioButton lightMode;
+    //private final ButtonGroup radioGroup;
+    //private final JRadioButton plainMode;
+    //Icon logo = new ImageIcon("src\\main\\resources\\logo.png"); 
+    //JLabel logo2 =  new JLabel(logo);
+    //JLabel slogan = new JLabel("Give me just the tip!");
 
     HomePage() {}
     
@@ -238,12 +238,12 @@ public class HomePage  {
 			@Override
 			public void actionPerformed(ActionEvent e) {	
 				if (e.getSource() == delete) {
+					delete.setBackground(Color.RED);
 					int input = JOptionPane.showOptionDialog(null, "Are you sure you want to delete?", null, 
-					JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+					JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, null, null);
 					if(input == JOptionPane.OK_OPTION) {
-						center.remove(post);
-				
-						
+						delete.setBackground(new Color(246, 246, 246));
+						center.remove(post);			
 					}		
 				}
 			}
