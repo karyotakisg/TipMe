@@ -128,7 +128,7 @@ public class HomePage  {
 
 		    // Get the right posts from the database
 			
-		    String query = "SELECT User.username, Post.text, Post.uploaddate, Post.likes, Post.Category FROM Post, User WHERE Post.userId = User.userId AND (Post.Category = " + "'" + u.getInterest1() + "'" + "COLLATE NOCASE  OR Post.Category = " + "'" + u.getInterest2() + "'" + "COLLATE NOCASE OR Post.Category = " + "'" + u.getInterest3() + "'" + "COLLATE NOCASE) ORDER BY uploadDate DESC;";
+		    String query = "SELECT Post.PostId, User.username, Post.text, Post.uploaddate, Post.likes, Post.Category FROM Post, User WHERE Post.userId = User.userId AND (Post.Category = " + "'" + u.getInterest1() + "'" + "COLLATE NOCASE  OR Post.Category = " + "'" + u.getInterest2() + "'" + "COLLATE NOCASE OR Post.Category = " + "'" + u.getInterest3() + "'" + "COLLATE NOCASE) ORDER BY uploadDate DESC;";
 
 		    ResultSet rs = statement.executeQuery(query);
 		    while (rs.next()) {
@@ -194,8 +194,15 @@ public class HomePage  {
    }   
    public JPanel getSouthLike(String text, JPanel center, JPanel post) {
 	   	Font fontLike = new Font("Calibri", Font.PLAIN, 5);
-	    JPanel southLike = new JPanel(new FlowLayout(FlowLayout.LEFT));
-	   	//showcase the like button
+	    JPanel southLike = new JPanel(new FlowLayout(FlowLayout.LEFT));	    
+	    
+	    //  int postid = rs.getInt("PostId");
+        
+	    //showcase the like button
+	    
+	    //Post p = new Post();
+	    //p.getLikeButton(postid);
+	    
 	    ImageIcon likeB = new ImageIcon("src\\main\\resources\\like.png");
 	    JButton like = new JButton(likeB);
 	    like.setFont(fontLike);			    
@@ -252,6 +259,7 @@ public class HomePage  {
 	    southLike.setPreferredSize(new Dimension(700, 40));
 	    southLike.setBorder(BorderFactory.createRaisedBevelBorder());               
 	    
+	    //southLike.add( p.getLikeButton(postid));
 	    southLike.add(like);
 	    southLike.add(Box.createHorizontalStrut(20));
 	    southLike.add(dislike);
