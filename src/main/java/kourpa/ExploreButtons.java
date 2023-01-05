@@ -32,7 +32,7 @@ public class ExploreButtons {
 		    String s8 = "Education";
 		    return s8;
 		} else if (n == 8) {
-			String s9 = "Environment";
+			String s9 = "Nature";
 			return s9;
 		} else {
 			String s10 = "Food";

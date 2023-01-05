@@ -1,6 +1,7 @@
 package kourpa;
 
 import javax.swing.JFrame;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -36,8 +37,8 @@ public class HomePage {
 	private final JPanel feed = new JPanel();
 	private final JPanel east = new JPanel();
 	private final JPanel west = new JPanel();
-	private final JPanel center = new JPanel();
 	private final JPanel south = new JPanel();
+	private final JPanel center = new JPanel();
 	JTextArea postScreen = new JTextArea();
 	Icon logo = new ImageIcon("src\\main\\resources\\music2.png");
 	/// *private final JRadioButton colorPick;
@@ -136,9 +137,11 @@ public class HomePage {
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {
 				JPanel post = new JPanel(new BorderLayout(1, 1));
+				JPanel eastern = new JPanel();
 				post.setBackground(Color.black);
 				post.add(getNorthLabel(rs.getString("username"), rs.getString("uploaddate"), rs.getString("Category")),
 						BorderLayout.NORTH);
+				post.add(eastern, BorderLayout.EAST);
 				post.add(getMessageText(rs.getString("text")), BorderLayout.CENTER);
 				post.add(getSouthLike(rs.getString("text"), center, post), BorderLayout.SOUTH);
 
@@ -161,7 +164,7 @@ public class HomePage {
 
 		// create a scroll bar for the central panel which includes the messages
 
-		feed.add(getScroll(), BorderLayout.CENTER);
+		feed.add(getScroll(center), BorderLayout.CENTER);
 		frame.setVisible(true);
 	}
 
@@ -171,8 +174,8 @@ public class HomePage {
 		return frame;
 	}
 
-	public JScrollPane getScroll() {
-		JScrollPane scr = new JScrollPane(center, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+	public JScrollPane getScroll(JPanel central) {
+		JScrollPane scr = new JScrollPane(central, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scr.getVerticalScrollBar().setUnitIncrement(12);
 		scr.getVerticalScrollBar().setBackground(Color.BLACK);
@@ -185,7 +188,9 @@ public class HomePage {
 
 		// User's message modification and data passing to the textarea
 		JTextArea postMessage = new JTextArea();
-		postMessage.setText(" " + text + "\n" + "\n");
+		postMessage.setText(" " + text );
+		postMessage.setLineWrap(true);
+		postMessage.setWrapStyleWord(true);
 		postMessage.setBackground(new Color(246, 246, 246));
 		postMessage.setBorder(BorderFactory.createRaisedBevelBorder());
 		postMessage.setEditable(false);
@@ -348,7 +353,7 @@ public class HomePage {
 		} else if (categ.equals("Education")) {
 			ImageIcon iconEdu = new ImageIcon("src\\main\\resources\\academic2.png");
 			return iconEdu;
-		} else if (categ.equals("Environment")) {
+		} else if (categ.equals("Nature")) {
 			ImageIcon iconEnvironment = new ImageIcon("src\\main\\resources\\environment2.png");
 			return iconEnvironment;
 		} else if (categ.equals("Fashion")) {
@@ -403,22 +408,7 @@ public class HomePage {
 		}
 	}
 
-<<<<<<< HEAD
     private static class RoundedBorder implements Border {
-        
-        private int radius;
-        
-        RoundedBorder(int radius) { 
-            this.radius = radius;
-        }
-        @Override
-        public Insets getBorderInsets(Component c) {
-            return new Insets(this.radius+1, this.radius+1, this.radius+2, this.radius);
-        }
-=======
-	private static class RoundedBorder implements Border {
->>>>>>> 667506494471a84ef77b91403285c3d0aa9dac66
-
 		private int radius;
 
 		RoundedBorder(int radius) {
