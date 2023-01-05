@@ -1,33 +1,34 @@
 package kourpa;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JButton;
-import javax.swing.JColorChooser;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.WindowConstants;
+import javax.swing.border.Border;
+import javax.swing.BorderFactory;
 import javax.swing.Box;
-import javax.swing.ButtonGroup;
-import javax.swing.event.InternalFrameListener;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import org.apache.maven.settings.Settings;
-import org.w3c.dom.events.MouseEvent;
-import net.sf.saxon.trans.SymbolicName.F;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Cursor;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 
-
-public class HomePage implements ActionListener {
+public class HomePage  {
     User user = new User();
     private final JFrame frame = new JFrame();
     private final JPanel feed = new JPanel();
@@ -35,160 +36,85 @@ public class HomePage implements ActionListener {
     private final JPanel west = new JPanel();
     private final JPanel center = new JPanel();
     private final JPanel south = new JPanel();
-    private final JRadioButton colorPick;
-    private final JRadioButton darkMode;
-    private final JRadioButton lightMode;
-    private final ButtonGroup radioGroup;
-    private final JRadioButton plainMode;
-    Icon logo = new ImageIcon("src\\main\\resources\\logo.png"); 
-    JLabel logo2 =  new JLabel(logo);
-    JLabel slogan = new JLabel("Give me just the tip!");
+    JTextArea postScreen = new JTextArea();
+    Icon logo = new ImageIcon("src\\main\\resources\\music2.png"); 
+    ///*private final JRadioButton colorPick;
+    //private final JRadioButton darkMode;
+    //private final JRadioButton lightMode;
+    //private final ButtonGroup radioGroup;
+    //private final JRadioButton plainMode;
+    //Icon logo = new ImageIcon("src\\main\\resources\\logo.png"); 
+    //JLabel logo2 =  new JLabel(logo);
+    //JLabel slogan = new JLabel("Give me just the tip!");
 
-
+    HomePage() {}
+    
     HomePage(User u) {
 		//Adjust the feed frame properly
+    	frame.setResizable(false);
         frame.setTitle("GetTip");
-		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
-		frame.setBounds(20, 20, 1200, 1000);
+		frame.setBounds(260, 60, 1000, 750);
 		
         frame.setBackground(Color.BLACK);
 
-		feed.setLayout(new BorderLayout(0, 1));
+		feed.setLayout(new BorderLayout(2, 2));
         feed.setBackground(Color.BLACK);
+        feed.setBorder(new RoundedBorder(10));
 
-		//Get Message count
-		int count = 0;
-		String url = "jdbc:sqlite:socialmedia.db";
-		try {
-			// New Connection
-			Connection conn = DriverManager.getConnection(url);
-			Statement statement = conn.createStatement();
-
-			// Get posts from the database
-
-			String query = "SELECT Text FROM Post, User WHERE Post.userId = User.userId AND (Post.Category = "
-					+ "'" + u.getInterest1() + "'" + "COLLATE NOCASE  OR Post.Category = " + "'" + u.getInterest2()
-					+ "'" + "COLLATE NOCASE OR Post.Category = " + "'" + u.getInterest3() + "'"
-					+ " COLLATE NOCASE);";
-
-			ResultSet rs = statement.executeQuery(query);
-
-			while (rs.next()) {
-				count++; //count the number of posts
-			}
-			
-			conn.close();
-		
-		} catch (SQLException s) {
-			System.out.println("Error");
-			s.printStackTrace();
-		}
 		
         //Layouts for each panel
         Menu MenuBar = new Menu();
-        east.setLayout(new GridLayout(9, 1, 0, 0));
+        east.setLayout(new GridLayout(5, 1, 0, 0));
         west.setLayout(new GridLayout(5, 1, 10, 10));
-        center.setLayout(new GridLayout(count, 1, 5, 3));
+        center.setLayout(new GridLayout(getMessageCount(), 1, 7, 3));
+       
         
 
 		//Colors for each panel
-		south.setBackground(new Color(255, 102, 0));
+        south.setBackground(new Color(255, 102, 0));
 		east.setBackground(new Color(255, 102, 0));
 		west.setBackground(new Color(255, 102, 0));
         center.setBackground(Color.BLACK);
 
         //Sizes for each panel and logo placement
 		MenuBar.setPreferredSize(new Dimension(200, 50));
-		south.setPreferredSize(new Dimension(200, 60 ));
-		east.setPreferredSize(new Dimension(100, 200));
-		west.setPreferredSize(new Dimension(100, 200));
-        logo2.setBounds(0, 0, 150, 50);
+		south.setPreferredSize(new Dimension(200, 5));
+		east.setPreferredSize(new Dimension(135, 200));
+		west.setPreferredSize(new Dimension(135, 200));
         
         //Image decorations in western panel of BorderLayout
-        ImageIcon iconSports = new ImageIcon("src\\main\\resources\\sports.png");
+        ImageIcon iconSports = new ImageIcon("src\\main\\resources\\sports3.png");
         JLabel sports = new JLabel(iconSports);
-        ImageIcon iconFashion = new ImageIcon("src\\main\\resources\\fashion.png");
+        ImageIcon iconFashion = new ImageIcon("src\\main\\resources\\dress.png");
         JLabel fashion = new JLabel(iconFashion);
-        ImageIcon iconScience = new ImageIcon("src\\main\\resources\\science.png");
+        ImageIcon iconScience = new ImageIcon("src\\main\\resources\\molecule.png");
         JLabel science = new JLabel(iconScience);
         ImageIcon iconMusic = new ImageIcon("src\\main\\resources\\music.png");
         JLabel music = new JLabel(iconMusic);
-        ImageIcon iconArt = new ImageIcon("src\\main\\resources\\art.png");
+        ImageIcon iconArt = new ImageIcon("src\\main\\resources\\paint.png");
         JLabel art = new JLabel(iconArt);
-        ImageIcon iconTravel = new ImageIcon("src\\main\\resources\\travel.png");
+        ImageIcon iconTravel = new ImageIcon("src\\main\\resources\\airplane.png");
         JLabel travel = new JLabel(iconTravel);
-        ImageIcon iconEdu = new ImageIcon("src\\main\\resources\\academic.png");
+        ImageIcon iconEdu = new ImageIcon("src\\main\\resources\\education.png");
         JLabel academic = new JLabel(iconEdu);
-        ImageIcon iconFit = new ImageIcon("src\\main\\resources\\fitness.png");
+        ImageIcon iconFit = new ImageIcon("src\\main\\resources\\armmuscle.png");
         JLabel fitness = new JLabel(iconFit);
-        ImageIcon iconEnvironment = new ImageIcon("src\\main\\resources\\environment.png");
+        ImageIcon iconEnvironment = new ImageIcon("src\\main\\resources\\envir.png");
         JLabel environment = new JLabel(iconEnvironment);
-        ImageIcon iconFood = new ImageIcon("src\\main\\resources\\food.png");
+        ImageIcon iconFood = new ImageIcon("src\\main\\resources\\restaurant.png");
         JLabel food = new JLabel(iconFood);
         west.add(sports);
         west.add(environment);
         west.add(academic);
         west.add(science);
         west.add(fashion);
-        west.add(art);
-        west.add(music);
-        west.add(travel);
-        west.add(fitness);
-        west.add(food);
-        
-        
-
-        //RadioButton modifications
-        ImageIcon iconColorChooser = new ImageIcon("src\\main\\resources\\colors.png");
-        darkMode = new JRadioButton("Dark Mode", false);
-        lightMode = new JRadioButton("Light Mode", false);
-        plainMode = new JRadioButton("Plain Mode", true);
-        colorPick = new JRadioButton("Other", iconColorChooser, false);
-        
-
-        darkMode.setBackground(Color.DARK_GRAY);
-        lightMode.setBackground(Color.WHITE);
-        plainMode.setBackground(new Color(255, 102, 0));
-        colorPick.setBackground(Color.LIGHT_GRAY);
-        darkMode.setForeground(Color.WHITE);
-        plainMode.setForeground(Color.WHITE);
-
-        east.add(plainMode);
-        east.add(darkMode);
-        east.add(lightMode);
-        east.add(colorPick);
-        
         east.add(art);
         east.add(music);
         east.add(travel);
         east.add(fitness);
         east.add(food);
-
-        radioGroup = new ButtonGroup();
-        radioGroup.add(darkMode);
-        radioGroup.add(lightMode);
-        radioGroup.add(plainMode);
-        radioGroup.add(colorPick);
-        darkMode.addActionListener(this);
-        lightMode.addActionListener(this);
-        plainMode.addActionListener(this);
-        colorPick.addActionListener(this);
-
-        //Color chooser buttons modifications
-        /*ImageIcon iconColorChooser = new ImageIcon("src\\main\\resources\\colors.png");
-        colorPick = new JButton("Pick a color", iconColorChooser);
-        colorPick.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        colorPick.setSize(80, 30);
-        colorPick.addActionListener(this);
-        east.add(colorPick);*/
-
-        //Slogan in the southern panel of the feed
-        south.setLayout(new FlowLayout(FlowLayout.CENTER));
-        Font fontSlogan = new Font("Serif", Font.BOLD, 25);
-        slogan.setForeground(Color.WHITE);
-        slogan.setFont(fontSlogan);
-        south.add(slogan);
         
         // SQLite connection URL
 		String jdbcUrl = "jdbc:sqlite:socialmedia.db";
@@ -202,74 +128,26 @@ public class HomePage implements ActionListener {
 
 		    // Get the right posts from the database
 			
-		    String query = "SELECT User.username, Post.text, Post.uploaddate, Post.likes, Post.Category FROM Post, User WHERE Post.userId = User.userId AND (Post.Category = " + "'" + u.getInterest1() + "'" + "COLLATE NOCASE  OR Post.Category = " + "'" + u.getInterest2() + "'" + "COLLATE NOCASE OR Post.Category = " + "'" + u.getInterest3() + "'" + "COLLATE NOCASE) ORDER BY uploadDate DESC;";
+		    String query = "SELECT Post.PostId, User.username, Post.text, Post.uploaddate, Post.likes, Post.Category FROM Post, User WHERE Post.userId = User.userId AND (Post.Category = " + "'" + u.getInterest1() + "'" + "COLLATE NOCASE  OR Post.Category = " + "'" + u.getInterest2() + "'" + "COLLATE NOCASE OR Post.Category = " + "'" + u.getInterest3() + "'" + "COLLATE NOCASE) ORDER BY uploadDate DESC;";
 
 		    ResultSet rs = statement.executeQuery(query);
-
 		    while (rs.next()) {
-                /*Panel creation in order to separate the User information (username, date, category), the actual message 
-                 and the like button through BorderLayout */
-			    JPanel post = new JPanel(new BorderLayout(1, 1));
-			    Font font = new Font("Serif", Font.PLAIN, 20);
-                Font fontLike = new Font("Serif", Font.BOLD, 15);
-                Color labelBackground;
-
-                //User's Information modifications and data passing to the 1st textarea
-                JTextArea postUserInfo = new JTextArea();
-			    postUserInfo.setText(rs.getString("username") + "            " + rs.getString("uploaddate"));
-			    postUserInfo.setBackground(getCategoryColor(rs.getString("Category")));
-			    postUserInfo.setEditable(false);
-			    postUserInfo.setFont(font);
-			    postUserInfo.setForeground(Color.BLACK);
-
-                //User's message modification and data passing to the 2nd textarea
-			    JTextArea postMessage = new JTextArea();
-			    postMessage.setText(rs.getString("text") + "\n");
-			    postMessage.setBackground(Color.WHITE);
-			    postMessage.setEditable(false);
-			    postMessage.setFont(font);
-			    postMessage.setForeground(Color.BLACK);
-			
-			
-                //showcase the like button
-			    ImageIcon icon = new ImageIcon("src\\main\\resources\\like.png");
-			    JButton like = new JButton("1233", icon);
-			    like.setFont(fontLike);
-			    like.setPreferredSize(new Dimension(100, 30 ));
-                like.setBackground(Color.white);
-			    like.setForeground(Color.WHITE);
-                like.setFocusable(false);
-                
-                //Category Label
-                JLabel categ = new JLabel(rs.getString("Category"));
-                categ.setFont(font);
-              
-                //Place it in the southern panel of the BorderLayout 
-                JPanel southLike = new JPanel(new FlowLayout(FlowLayout.LEFT));
-                southLike.setSize(900, 30);
-                southLike.setBackground(Color.white);
-                southLike.add(like);
-                southLike.add(Box.createHorizontalStrut(20));
-                southLike.add(categ);
-                southLike.add(Box.createHorizontalStrut(10));
-                southLike.add(getIcon(rs.getString("Category")));                
-
-                //final adding
-			    post.add(postUserInfo, BorderLayout.NORTH);
-			    post.add(postMessage, BorderLayout.CENTER);
-			    post.add(southLike, BorderLayout.SOUTH);
-			    center.add(post);
-		    }   
-		
-		    
-		
+		    	JPanel post = new JPanel(new BorderLayout(1, 1));		     
+			    post.setBackground(Color.black);
+		    	post.add(getNorthLabel(rs.getString("username"), rs.getString("uploaddate"), 
+		    	rs.getString("Category")), BorderLayout.NORTH);
+		    	post.add(getMessageText(rs.getString("text")), BorderLayout.CENTER);
+		    	post.add(getSouthLike(rs.getString("text"), center, post), BorderLayout.SOUTH);
+		    	
+		    	center.add(post);
+		    }	    
 		} catch (SQLException s) {
 			System.out.println("Error");
 			s.printStackTrace();
 		}
-		
+		 
+		 
         //add all the necessary components to the frame container
-        frame.add(logo2);
 		frame.add(feed);
 		feed.add(MenuBar, BorderLayout.NORTH);
         feed.add(south, BorderLayout.SOUTH);
@@ -278,105 +156,227 @@ public class HomePage implements ActionListener {
         feed.add(east, BorderLayout.EAST);
 
         //create a scroll bar for the central panel which includes the messages
-		JScrollPane scr = new JScrollPane(center, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		feed.add(scr, BorderLayout.CENTER);
-		scr.getVerticalScrollBar().setUnitIncrement(12);
 		
+		feed.add(getScroll(), BorderLayout.CENTER);
 		frame.setVisible(true);
+    } 
 
-        
-    }
-
-    //Utilizing the RadioButtons and JColorChooser for changing the background color
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == darkMode) {
-            east.setBackground(Color.DARK_GRAY);
-            west.setBackground(Color.DARK_GRAY);
-            south.setBackground(Color.DARK_GRAY);
-            
-            slogan.setForeground(Color.WHITE);
-
-        } else if (e.getSource() == lightMode) {   
-            east.setBackground(Color.white);
-            west.setBackground(Color.WHITE);
-            south.setBackground(Color.WHITE);
-            
-            slogan.setForeground(Color.BLACK);
-
-        } else if (e.getSource() == plainMode){
-            south.setBackground(new Color(255, 102, 0));
-            east.setBackground(new Color(255, 102, 0));
-            west.setBackground(new Color(255, 102, 0));
-            
-            slogan.setForeground(Color.WHITE);
-
-        } else if (e.getSource() == colorPick) {
-            JColorChooser colorChoose = new JColorChooser();
-            Color col = JColorChooser.showDialog(null, "Pick a color!", Color.LIGHT_GRAY);
-            south.setBackground(col);
-            east.setBackground(col);
-            west.setBackground(col);
-        } 
-    }
 
     //necessary method in order to dispose the correct frame when clicking on the menu buttons
     public final JFrame getMainFrame(){
         return frame;
     }
     
-    public JLabel getIcon(String categ) {
+    public JScrollPane getScroll() {
+    	JScrollPane scr = new JScrollPane(center, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+    			JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);	
+		scr.getVerticalScrollBar().setUnitIncrement(12);
+		scr.getVerticalScrollBar().setBackground(Color.BLACK);
+		scr.getVerticalScrollBar().setPreferredSize(new Dimension(8, 695));
+		return scr;
+    }
+     
+    
+    public JTextArea getMessageText(String text) {
+	    Font fontMessage = new Font("KodchiangUPC", Font.BOLD, 18);
+	    
+       //User's message modification and data passing to the textarea
+	    JTextArea postMessage = new JTextArea();
+	    postMessage.setText(" " + text + "\n" +"\n");
+	    postMessage.setBackground(new Color(246, 246, 246));
+	    postMessage.setBorder(BorderFactory.createRaisedBevelBorder());
+	    postMessage.setEditable(false);
+	    postMessage.setFont(fontMessage);
+	    postMessage.setForeground(Color.BLACK);
+	    
+	    return postMessage;
+	    
+   }   
+   public JPanel getSouthLike(String text, JPanel center, JPanel post) {
+	   	Font fontLike = new Font("Calibri", Font.PLAIN, 5);
+	    JPanel southLike = new JPanel(new FlowLayout(FlowLayout.LEFT));	    
+	    
+	    //  int postid = rs.getInt("PostId");
+        
+	    //showcase the like button
+	    
+	    //Post p = new Post();
+	    //p.getLikeButton(postid);
+	    
+	    ImageIcon likeB = new ImageIcon("src\\main\\resources\\like.png");
+	    JButton like = new JButton(likeB);
+	    like.setFont(fontLike);			    
+	    like.setBorder(BorderFactory.createLineBorder(Color.black));
+	    like.setPreferredSize(new Dimension(80, 30 ));
+	    like.setBackground(new Color(246, 246, 246));
+	    like.setForeground(Color.WHITE); 
+	    like.setFocusable(false);
+
+	    ImageIcon dislikeB = new ImageIcon("src\\main\\resources\\dislike.png");
+	    JButton dislike = new JButton(dislikeB);
+	    dislike.setFont(fontLike);			    
+	    dislike.setBorder(BorderFactory.createLineBorder(Color.black));
+	    dislike.setPreferredSize(new Dimension(80, 30 ));
+	    dislike.setBackground(new Color(246, 246, 246));
+	    dislike.setForeground(Color.WHITE); 
+	    dislike.setFocusable(false);
+      
+	    ImageIcon copyIcon = new ImageIcon("src\\main\\resources\\copy.png");
+	    JButton dots = new JButton(copyIcon);
+	    dots.setPreferredSize(new Dimension(30, 30 ));
+	    dots.setBackground(new Color(246, 246, 246));
+	    dots.addActionListener(new ActionListener() {
+	    	@Override
+	    	public void actionPerformed(ActionEvent e) {	
+	    		if (e.getSource() == dots) {
+	    			Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+	    			StringSelection copyPost = new StringSelection(getMessageText(text).getText());
+	    			clipboard.setContents(copyPost, copyPost);
+	    			JOptionPane.showMessageDialog(null, "TEXTS ARE COPIED!");				
+	    		}
+	    	}
+	    }); 
+      
+	    ImageIcon deleteB = new ImageIcon("src\\main\\resources\\delete.png");
+	    JButton delete = new JButton(deleteB);
+	    delete.setPreferredSize(new Dimension(30, 30 ));
+	    delete.setBackground(new Color(246, 246, 246));
+	    delete.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {	
+				if (e.getSource() == delete) {
+					delete.setBackground(Color.RED);
+					int input = JOptionPane.showOptionDialog(null, "Are you sure you want to delete?", null, 
+					JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, null, null);
+					if(input == JOptionPane.OK_OPTION) {
+						delete.setBackground(new Color(246, 246, 246));
+						center.remove(post);			
+					}		
+				}
+			}
+         });  
+	    southLike.setBackground(new Color(243, 243, 243));
+	    southLike.setPreferredSize(new Dimension(700, 40));
+	    southLike.setBorder(BorderFactory.createRaisedBevelBorder());               
+	    
+	    //southLike.add( p.getLikeButton(postid));
+	    southLike.add(like);
+	    southLike.add(Box.createHorizontalStrut(20));
+	    southLike.add(dislike);
+	    southLike.add(Box.createHorizontalStrut(405));	
+	    southLike.add(dots);	
+	    southLike.add(delete);
+	   
+	    return southLike;
+   }
+    
+   public JPanel getNorthLabel(String usernm, String upldate, String category) {
+	   Font fontUsername = new Font("KodchiangUPC", Font.BOLD, 18);
+	   Font fontDate = new Font("KodchiangUPC", Font.BOLD, 15);
+	   Font fontCateg = new Font("KodchiangUPC", Font.BOLD, 18);
+	   JPanel northLabel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+       
+       JLabel username = new JLabel(usernm);
+       username.setFont(fontUsername);
+       username.setForeground(Color.white); 
+       
+       JLabel uploaddate = new JLabel(upldate);
+       uploaddate.setFont(fontDate);
+       uploaddate.setForeground(Color.white); 
+
+       JLabel categ = new JLabel(category);
+       categ.setFont(fontCateg);
+       categ.setForeground(Color.white);
+       
+       JLabel iconic = new JLabel(getIcon(category));
+       
+       northLabel.setPreferredSize(new Dimension(700, 35));
+       northLabel.setBackground(getCategoryColor(category));             
+       northLabel.setBorder(BorderFactory.createLineBorder(Color.black));
+       
+       northLabel.add(username);
+       northLabel.add(Box.createHorizontalStrut(30));
+       northLabel.add(uploaddate);
+       northLabel.add(Box.createHorizontalStrut(30));
+       northLabel.add(categ);  
+       northLabel.add(Box.createHorizontalStrut(30));
+       northLabel.add(iconic);  
+       return northLabel;
+	   
+   }
+    
+  
+    public int getMessageCount() {
+  		int count = 0;
+  		String url = "jdbc:sqlite:socialmedia.db";
+  		try {
+  			// New Connection
+  			Connection conn = DriverManager.getConnection(url);
+  			Statement statement = conn.createStatement();
+
+  			// Get posts from the database
+
+  			String query = "SELECT Text FROM Post, User WHERE Post.userId = User.userId AND (Post.Category = "
+  					+ "'" + user.getInterest1() + "'" + "COLLATE NOCASE  OR Post.Category = " + "'" + user.getInterest2()
+  					+ "'" + "COLLATE NOCASE OR Post.Category = " + "'" + user.getInterest3() + "'"
+  					+ " COLLATE NOCASE);";
+
+  			ResultSet rs = statement.executeQuery(query);
+
+  			while (rs.next()) {
+  				count++; //count the number of posts
+  			}
+  			
+  			conn.close();
+  		
+  		} catch (SQLException s) {
+  			System.out.println("Error");
+  			s.printStackTrace();
+  		}
+  		
+  		return count;
+    }
+    
+
+    public Icon getIcon(String categ) {
     	if (categ.equals("Sports")) {
     		ImageIcon iconSports = new ImageIcon("src\\main\\resources\\sports2.png");
-    		JLabel sports = new JLabel(iconSports);
-    		return sports;
+    		return iconSports;
     	} else if (categ.equals("Education")) {
     		ImageIcon iconEdu = new ImageIcon("src\\main\\resources\\academic2.png");
-            JLabel academic = new JLabel(iconEdu);
-            return academic;
+            return iconEdu;
     	} else if (categ.equals("Environment")) {
     		ImageIcon iconEnvironment = new ImageIcon("src\\main\\resources\\environment2.png");
-            JLabel environment = new JLabel(iconEnvironment);
-            return environment;
+            return iconEnvironment;
     	} else if (categ.equals("Fashion")) {
     		ImageIcon iconFashion = new ImageIcon("src\\main\\resources\\fashion2.png");
-            JLabel fashion = new JLabel(iconFashion);
-            return fashion;
+            return iconFashion;
 		} else if (categ.equals("Science")) {
 			ImageIcon iconScience = new ImageIcon("src\\main\\resources\\science2.png");
-	        JLabel science = new JLabel(iconScience);
-	        return science;
+	        return iconScience;
 		} else if (categ.equals("Art")) {
 	        ImageIcon iconArt = new ImageIcon("src\\main\\resources\\art2.png");
-	        JLabel art = new JLabel(iconArt);
-	        return art;
+	        return iconArt;
 		} else if (categ.equals("Food")) {
 			ImageIcon iconFood = new ImageIcon("src\\main\\resources\\food2.png");
-    	    JLabel food = new JLabel(iconFood);
-    	    return food;			
+    	    return iconFood;			
 		} else if (categ.equals("Travel")) {
 			ImageIcon iconTravel = new ImageIcon("src\\main\\resources\\travel2.png");
-	        JLabel travel = new JLabel(iconTravel);
-	        return travel;
+	        return iconTravel;
     	} else if (categ.equals("Fitness")) {
     		ImageIcon iconFit = new ImageIcon("src\\main\\resources\\fitness2.png");
-            JLabel fitness = new JLabel(iconFit);
-            return fitness;
+            return iconFit;
     	} else if (categ.equals("Music")) {
     	    ImageIcon iconMusic = new ImageIcon("src\\main\\resources\\music2.png");
-	        JLabel music = new JLabel(iconMusic);
-	        return music;
+	        return iconMusic;
     	} else { 
-    		JLabel general = new JLabel ("  "); 
-    		return general;
+    		return logo;
     	}
 	}
-
     
-    
-     
     public  Color getCategoryColor(String categ) {
     	if (categ.equals("Sports")) {
-    		return new Color(0, 102, 255);		
+    		return new Color(0, 102, 204);		
     	} else if (categ.equals("Education")) {
     		return new Color(255, 204, 0);
     	} else if (categ.equals("Environment")) {
@@ -396,8 +396,40 @@ public class HomePage implements ActionListener {
     	} else if (categ.equals("Music")) {
     		return new Color(240, 131, 189);
     	} else {
-    		return Color.LIGHT_GRAY;
+    		return new Color(220, 131, 189);
     	}
-	}
+	}  
+    
 
+    private static class RoundedBorder implements Border {
+        
+        private int radius;
+        
+        RoundedBorder(int radius) {
+            this.radius = radius;
+        }
+        @Override
+        public Insets getBorderInsets(Component c) {
+            return new Insets(this.radius+1, this.radius+1, this.radius+2, this.radius);
+        }
+
+        @Override
+        public boolean isBorderOpaque() {
+            return true;
+        }
+
+        @Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+            g.drawOval(x,y,width-1,height-1);
+        }
+    }
+    
+  
+    
 }
+
+
+    
+   
+
+
