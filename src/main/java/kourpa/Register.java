@@ -8,7 +8,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -133,7 +132,7 @@ public class Register {
 
 		// Interest options
 		String[] categories = { "SCIENCE", "SPORTS", "MUSIC", "FASHION", "TRAVEL", "FITNESS", "ART", "EDUCATION",
-				"ENVIROMENT", "FOOD" }; //10 categories of different topics from which the user can choose his favorites based on his interests
+				"NATURE", "FOOD" }; //10 categories of different topics from which the user can choose his favorites based on his interests
 
 		// First Interest options menu
 		JComboBox<Object> cat1 = new JComboBox<Object>(categories);
