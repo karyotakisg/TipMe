@@ -33,7 +33,7 @@ public class ExploreKourpaTest extends JFrame implements ActionListener {
     public 	ExploreKourpaTest() {
 
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.setBounds(180, 50, 1200, 750);
+			frame.setBounds(180, 50, 1100, 750);
 			frame.setResizable(false);
 			frame.setBackground(Color.BLACK);		 
 		   
@@ -89,7 +89,7 @@ public class ExploreKourpaTest extends JFrame implements ActionListener {
 		 				center.add(buttons[count]);
 		 				buttons[count].addActionListener(this);
 		 				buttons[count].setHorizontalAlignment(SwingConstants.LEFT);
-		 				buttons[count].setFont(new Font("Calibri", Font.BOLD, 30));
+		 				buttons[count].setFont(new Font("Calibri", Font.BOLD, 25));
 		 			}
 		 	       
                     panel.add(MenuBar, BorderLayout.NORTH);

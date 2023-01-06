@@ -43,5 +43,7 @@ public class CustomizeMessageKourpa2 {
 			s.printStackTrace();
 		}
 	}
+	
+	
 
 }

@@ -31,18 +31,18 @@ public class ExplorePanel {
         east.setPreferredSize(new Dimension(135, 200));
 		west.setPreferredSize(new Dimension(135, 200));
 		if(x == 0) {
-			p1 = new JPanel();
-			p1.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
-			p1.setBackground(Color.BLACK);
+			p0 = new JPanel();
 			category = "Science";
+			p0.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
+			p0.setBackground(Color.BLACK);
 			CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p0);
 			jf.add(p0, BorderLayout.CENTER);
 			jf.add(hp.getScroll(p0), BorderLayout.CENTER);
 		} else if(x == 1) {
 			p1 = new JPanel();
-			p1.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
-			p1.setBackground(Color.BLACK);
 			category = "Sports";
+			p1.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
+			p1.setBackground(Color.BLACK);
 			CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p1);
 			jf.add(p1, BorderLayout.CENTER);
 			jf.add(hp.getScroll(p1), BorderLayout.CENTER);
@@ -50,69 +50,99 @@ public class ExplorePanel {
 
 		} else if(x == 2) {
 			p2 = new JPanel();
-			p2.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
-			p2.setBackground(Color.BLACK);
 			category = "Music";
+			p2.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
+			p2.setBackground(Color.BLACK);
 			CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p2);
 			jf.add(p2, BorderLayout.CENTER);
 			jf.add(hp.getScroll(p2), BorderLayout.CENTER);
 
 		} else if(x == 3) {
 			p3 = new JPanel();
-			p3.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
-			p3.setBackground(Color.BLACK);
 			category = "Fashion";
+			p3.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
+			p3.setBackground(Color.BLACK);
 			CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p3);
 			jf.add(p3, BorderLayout.CENTER);
 			jf.add(hp.getScroll(p3), BorderLayout.CENTER);
 		} else if(x == 4) {
 			p4 = new JPanel();
-			p4.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
-			p4.setBackground(Color.BLACK);
 			category = "Travel";
+			p4.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
+			p4.setBackground(Color.BLACK);
 			CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p4);
 			jf.add(p1, BorderLayout.CENTER);
 		} else if(x == 5) {
 			p5 = new JPanel();
-			p5.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
+			category = "Fitness";
+			p5.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 			p5.setBackground(Color.BLACK);
-			category = "Travel";
 			CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p5);
 			jf.add(p5, BorderLayout.CENTER);
 		} else if (x == 6) {
 			p6 = new JPanel();
-			p6.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
-			p6.setBackground(Color.BLACK);
 			category = "Art";
+			p6.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
+			p6.setBackground(Color.BLACK);
 			CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p6);
 			jf.add(p6, BorderLayout.CENTER);
 			jf.add(hp.getScroll(p6), BorderLayout.CENTER);
 	   } else if (x == 7) {
 		   	p7 = new JPanel();
-			p7.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
-			p7.setBackground(Color.BLACK);
-			category = "Education";
+		   	category = "Education";
+			p7.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
+			p7.setBackground(Color.BLACK);			
 			CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p7);
 			jf.add(p7, BorderLayout.CENTER);
 			jf.add(hp.getScroll(p7), BorderLayout.CENTER);
 		} else if ( x == 8) {
 			p8 = new JPanel();
+			category = "Environment";
+			p8.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 			p8.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
 			p8.setBackground(Color.BLACK);
-			category = "Nature";
 			CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p8);
 			jf.add(p8, BorderLayout.CENTER);
 			jf.add(hp.getScroll(p8), BorderLayout.CENTER);
 		} else {
 			p9 = new JPanel();
+			category = "Food";
+			p9.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 			p9.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
 			p9.setBackground(Color.BLACK);
-			category = "Food";
 			CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p9);
 			jf.add(p1, BorderLayout.CENTER);
 			jf.add(hp.getScroll(p9), BorderLayout.CENTER);
 		}
 
+	}
+	
+	public int getMessageCount(String category) {
+		int count = 0;
+		String url = "jdbc:sqlite:socialmedia.db";
+		try {
+			// New Connection
+			Connection conn = DriverManager.getConnection(url);
+			Statement statement = conn.createStatement();
+
+			// Get posts from the database
+
+			String query = "SELECT User.username, Post.text, Post.uploaddate, Post.likes, Post.Category FROM Post, User WHERE Post.userId AND Post.Category = '" + category + "'";
+
+			ResultSet rs = statement.executeQuery(query);
+
+			while (rs.next()) {
+				count++; // count the number of posts
+			}
+
+			conn.close();
+
+		} catch (SQLException s) {
+			System.out.println("Error");
+			s.printStackTrace();
+		}
+
+		return count;
 	}
 
 	public static void hidepanel() {
