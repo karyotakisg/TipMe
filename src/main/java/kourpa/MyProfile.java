@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import javax.swing.*;
 public class MyProfile extends JFrame implements ActionListener, MouseListener { // creation of the necesery components for MyProfile GUI//
 	User user1 = new User();
+	HomePage hp = new HomePage();
 	JPanel panel = new JPanel();
 	JLabel userLabel = new JLabel("User");
 	public JTextField userText = new JTextField(25);
@@ -35,7 +36,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 	JLabel labelForPosts = new JLabel(
 			"<html><font size = '22' color = 'black'><strong>My Posts</strong><text-align: center></font><</html> ");
 	Icon diary = new ImageIcon("src/main/resources/diaryIcon.png");
-	JPanel p = new JPanel( new GridLayout(20, 50, 0, 10));//
+	JPanel p = new JPanel( new GridLayout(getMessageCount(), 1, 0, 10));//
 	Menu menu = new Menu();
 	JButton changeButton = new JButton();
 	JButton sumbitButton = new JButton();
@@ -59,7 +60,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		Image ic = Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\logo.png");
 		this.setIconImage(ic);
 		user1 = user;
-		setSize(1000, 1000);
+		setBounds(180, 50, 1000, 750);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		userLabel.setBounds(310, 100, 165, 25);
 		userText.setBounds(400, 100, 165, 25);
@@ -179,10 +180,15 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			p.setVisible(true);
         }
         if(e.getSource()==logoutButton) {
-			new LoginPage();
-			dispose();
+        	int input = JOptionPane.showOptionDialog(null, "Are you sure you want to logout?", null,
+					JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, null, null);
+			if (input == JOptionPane.OK_OPTION) {
+				new LoginPage();
+				dispose();
+			}
 		}
 	}
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == sumbitButton) {
@@ -274,13 +280,13 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			String query = "SELECT User.username, Post.text, Post.uploaddate, Post.likes, Post.Category FROM Post, User WHERE User.username = '" + user1.getUsername() + "' AND Post.UserId = User.UserId"; //Post.userId = User.userId AND (Post.Category = "
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {
-				JTextArea post = new JTextArea();
-				post.setText(rs.getString("username") + "         Likes: " + rs.getString("likes") + "            "
-						+ rs.getString("uploaddate") + "\n" + "\n \"" + rs.getString("text") + "\"\n" + "\n"
-						+ "Category:  " + rs.getString("Category"));
-				post.setEditable(false);
-				post.setForeground(Color.WHITE);
+				JPanel post = new JPanel();
+				post.setLayout(new BorderLayout(2, 2));
 				post.setBackground(Color.black);
+				post.add(hp.getNorthLabel(rs.getString("username"), rs.getString("uploaddate"), rs.getString("Category")),
+					BorderLayout.NORTH);
+				post.add(hp.getMessageText(rs.getString("text")), BorderLayout.CENTER);
+				post.add(hp.getSouthLike2(rs.getString("text"), p, post), BorderLayout.SOUTH);			
 				p.add(post);
 			}			
 		} catch (SQLException s) {
@@ -296,6 +302,9 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		JScrollPane scrollbar = new JScrollPane(p, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scrollbar.setBounds(100, 600, 800, 300);
+		scrollbar.getVerticalScrollBar().setUnitIncrement(12);
+		scrollbar.getVerticalScrollBar().setBackground(Color.BLACK);
+		scrollbar.getVerticalScrollBar().setPreferredSize(new Dimension(8, 695));
 		this.add(scrollbar);
 	}
 	public void panelSetup(){
@@ -371,6 +380,34 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
        
 		
     }
+    
+    public int getMessageCount() {
+		int count = 0;
+		String url = "jdbc:sqlite:socialmedia.db";
+		try {
+			// New Connection
+			Connection conn = DriverManager.getConnection(url);
+			Statement statement = conn.createStatement();
+
+			// Get posts from the database
+
+			String query = "SELECT User.username, Post.text, Post.uploaddate, Post.likes, Post.Category FROM Post, User WHERE User.username = '" + user1.getUsername() + "' AND Post.UserId = User.UserId"; 
+
+			ResultSet rs = statement.executeQuery(query);
+
+			while (rs.next()) {
+				count++; // count the number of posts
+			}
+
+			conn.close();
+
+		} catch (SQLException s) {
+			System.out.println("Error");
+			s.printStackTrace();
+		}
+
+		return count;
+	}
 	public Color getColor(){ // returns the color of the panel so other sections of the app can use it
 		return panel.getBackground();
 	}
