@@ -170,32 +170,27 @@ public class Post {
 		like.setBackground(Color.white);
 		like.setForeground(Color.WHITE);
 		like.setFocusable(false);
+		
 
 		// likeButton.setBounds(250, 20, 60, 30);
 		like.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
-				String query = "UPDATE Post SET Likes = Likes+1 WHERE PostId =" + postid;
-
-				String jdbcUrl = "jdbc:sqlite:socialmedia.db";
-
-				try {
-					Connection conn = DriverManager.getConnection(jdbcUrl);
-					Statement statement = conn.createStatement();
-
-					statement.executeUpdate(query);
-
-					conn.close();
-
-				} catch (SQLException s) {
-					// TODO Auto-generated catch block
-					System.out.println("Failed to connect and get the number of likes");
-					s.printStackTrace();
+				if(e.getSource() == like) {// TODO Auto-generated method stub
+					String query = "UPDATE Post SET Likes = Likes+1 WHERE PostId =" + postid;
+					String jdbcUrl = "jdbc:sqlite:socialmedia.db";
+					try {
+						Connection conn = DriverManager.getConnection(jdbcUrl);
+						Statement statement = conn.createStatement();
+						statement.executeUpdate(query);
+						conn.close();
+					} catch (SQLException s) {
+						// TODO Auto-generated catch block
+						System.out.println("Failed to connect and get the number of likes");
+						s.printStackTrace();
+					}
 				}
-
 			}
 		});
 
@@ -208,36 +203,30 @@ public class Post {
 		JButton dislike = new JButton(iconD);
 		dislike.setFont(fontLike);			    
 		dislike.setBorder(BorderFactory.createLineBorder(Color.black));
-		dislike.setPreferredSize(new Dimension(80, 30 ));
+		dislike.setPreferredSize(new Dimension(100, 30 ));
 		dislike.setBackground(new Color(246, 246, 246));
 		dislike.setForeground(Color.WHITE); 
 		dislike.setFocusable(false);
-
+		int count = 0;
 		// likeButton.setBounds(250, 20, 60, 30);
 		dislike.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
-				String query = "UPDATE Post SET dislikes = dislikes + 1 WHERE PostId =" + postid;
-
-				String jdbcUrl = "jdbc:sqlite:socialmedia.db";
-
-				try {
-					Connection conn = DriverManager.getConnection(jdbcUrl);
-					Statement statement = conn.createStatement();
-
-					statement.executeUpdate(query);
-
-					conn.close();
-
-				} catch (SQLException s) {
-					// TODO Auto-generated catch block
-					System.out.println("Failed to connect and get the number of dislikes");
-					s.printStackTrace();
+				if(e.getSource() == dislike) {// TODO Auto-generated method stub
+					String query = "UPDATE Post SET dislikes = dislikes+1 WHERE PostId =" + postid;
+					String jdbcUrl = "jdbc:sqlite:socialmedia.db";
+					try {
+						Connection conn = DriverManager.getConnection(jdbcUrl);
+						Statement statement = conn.createStatement();
+						statement.executeUpdate(query);
+						conn.close();
+					} catch (SQLException s) {
+						// TODO Auto-generated catch block
+						System.out.println("Failed to connect and get the number of dislikes");
+						s.printStackTrace();
+					}
 				}
-
 			}
 		});
 

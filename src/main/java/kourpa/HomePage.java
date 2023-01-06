@@ -224,32 +224,8 @@ public class HomePage {
 	//this is where we get the southern panel of the post which contains the buttons
 	public JPanel getSouthLike(String text, JPanel center, JPanel post) {
 		Font fontLike = new Font("Calibri", Font.PLAIN, 5);
-		JPanel southLike = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		
-		// showcase the like button
-
-		//Post p = new Post();
-		//p.getLikeButton(postid);
-		//p.getDislikeButton(postid);
-		
-		
-		ImageIcon likeB = new ImageIcon("src\\main\\resources\\like.png");
-		JButton like = new JButton(likeB);
-		like.setFont(fontLike);
-		like.setBorder(BorderFactory.createLineBorder(Color.black));
-		like.setPreferredSize(new Dimension(80, 30));
-		like.setBackground(new Color(246, 246, 246));
-		like.setForeground(Color.WHITE);
-		like.setFocusable(false);
-
-		ImageIcon dislikeB = new ImageIcon("src\\main\\resources\\dislike.png");
-		JButton dislike = new JButton(dislikeB);
-		dislike.setFont(fontLike);
-		dislike.setBorder(BorderFactory.createLineBorder(Color.black));
-		dislike.setPreferredSize(new Dimension(80, 30));
-		dislike.setBackground(new Color(246, 246, 246));
-		dislike.setForeground(Color.WHITE);
-		dislike.setFocusable(false);
+		JPanel southLike = new JPanel(new FlowLayout(FlowLayout.LEFT));		
+		Post p = new Post();
 		
 		ImageIcon copyIcon = new ImageIcon("src\\main\\resources\\copy.png");
 		JButton dots = new JButton(copyIcon);
@@ -290,10 +266,10 @@ public class HomePage {
 		southLike.setBorder(BorderFactory.createRaisedBevelBorder());
 
 		//southLike.add( p.getLikeButton(postid));
-		southLike.add(like);
+		southLike.add(p.getLikeButton(postid));
 		southLike.add(Box.createHorizontalStrut(20));
 		//southLike.add( p.getDislikeButton(postid));
-		southLike.add(dislike);
+		southLike.add(p.getDislikeButton(postid));
 		southLike.add(Box.createHorizontalStrut(405));
 		southLike.add(dots);
 		southLike.add(delete);
