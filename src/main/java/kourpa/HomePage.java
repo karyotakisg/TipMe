@@ -228,6 +228,9 @@ public class HomePage {
 		Font fontLike = new Font("Calibri", Font.PLAIN, 5);
 		JPanel southLike = new JPanel(new FlowLayout(FlowLayout.LEFT));		
 		Post p = new Post();
+		p.getLikeButton(postid);
+		p.getDislikeButton(postid);
+				
 		
 		ImageIcon copyIcon = new ImageIcon("src\\main\\resources\\copy.png");
 		JButton dots = new JButton(copyIcon);
@@ -267,10 +270,10 @@ public class HomePage {
 		southLike.setPreferredSize(new Dimension(700, 40));
 		southLike.setBorder(BorderFactory.createRaisedBevelBorder());
 
-		//southLike.add( p.getLikeButton(postid));
+		//southLike.add(like);
 		southLike.add(p.getLikeButton(postid));
 		southLike.add(Box.createHorizontalStrut(20));
-		//southLike.add( p.getDislikeButton(postid));
+		//southLike.add(dislike));
 		southLike.add(p.getDislikeButton(postid));
 		southLike.add(Box.createHorizontalStrut(405));
 		southLike.add(dots);
