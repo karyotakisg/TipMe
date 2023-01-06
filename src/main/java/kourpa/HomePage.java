@@ -31,6 +31,7 @@ import java.awt.datatransfer.StringSelection;
 public class HomePage {
 	private final User user = new User();
 	private int postid;
+	private int likes;
 	private final JFrame frame = new JFrame();
 	private final JPanel feed = new JPanel();
 	private final JPanel east = new JPanel();
@@ -123,6 +124,7 @@ public class HomePage {
 				post.add(getMessageText(rs.getString("text")), BorderLayout.CENTER);
 				post.add(getSouthLike(rs.getString("text"), center, post), BorderLayout.SOUTH);
 				postid = rs.getInt("PostId");
+				likes = rs.getInt("likes");
 				center.add(post);
 			}
 		} catch (SQLException s) {
