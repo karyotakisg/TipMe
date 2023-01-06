@@ -7,7 +7,7 @@ public class ExploreButtons {
 	
 	public static String titles(int n) {
 		if (n == 0) {
-			String s1 = "Science";
+			String s1 = "Science";			
 			return s1;
 		} else if (n == 1) {
 			String s2 = "Sports";
@@ -76,25 +76,25 @@ public class ExploreButtons {
 	
 	   public static ImageIcon getIcon(int n) {
 	    	if (n == 0) {
-	    		return new ImageIcon("src\\main\\resources\\science2.png");
+	    		return new ImageIcon("src\\main\\resources\\atom.png");
 	    	} else if (n == 1) {
-	    		return new ImageIcon("src\\main\\resources\\sports2.png");
+	    		return new ImageIcon("src\\main\\resources\\sports.png");
 	    	} else if (n == 2) {
-	    		return new ImageIcon("src\\main\\resources\\music2.png");
+	    		return new ImageIcon("src\\main\\resources\\notes.png");
 	    	} else if (n == 3) {
-	    		return new ImageIcon("src\\main\\resources\\fashion2.png");
+	    		return new ImageIcon("src\\main\\resources\\fashion3.png");
 			} else if (n == 4) {
-				return new ImageIcon("src\\main\\resources\\travel2.png");
+				return new ImageIcon("src\\main\\resources\\luggage.png");
 			} else if (n == 5) {
-				return new ImageIcon("src\\main\\resources\\fitness2.png");
+				return new ImageIcon("src\\main\\resources\\dumbbell.png");
 			} else if (n == 6) {
-				return new ImageIcon("src\\main\\resources\\art2.png");		
+				return new ImageIcon("src\\main\\resources\\creativity.png");		
 			} else if (n == 7) {
-				return new ImageIcon("src\\main\\resources\\academic2.png");
+				return new ImageIcon("src\\main\\resources\\educations.png");
 	    	} else if (n == 8) {
-	    		return new ImageIcon("src\\main\\resources\\environment2.png");
+	    		return new ImageIcon("src\\main\\resources\\planet.png");
 	    	} else if (n == 9) {
-	    		return new ImageIcon("src\\main\\resources\\food2.png");
+	    		return new ImageIcon("src\\main\\resources\\fast-food.png");
 	    	} else {
 	    		return null;
 	    	}
