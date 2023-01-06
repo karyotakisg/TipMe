@@ -1,6 +1,5 @@
 package kourpa;
 import javax.swing.JFrame;
-import java.awt.Window;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -29,33 +28,31 @@ import java.sql.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 
-public class HomePage implements ActionListener {
-	Color textColor = Color.decode("#ffffff");
-	Color backgroundColor = Color.decode("#000000");
+public class HomePage {
 	private final User user = new User();
 	private int postid;
+	private int likes;
 	private final JFrame frame = new JFrame();
 	private final JPanel feed = new JPanel();
 	private final JPanel east = new JPanel();
 	private final JPanel west = new JPanel();
 	private final JPanel south = new JPanel();
 	private final JPanel center = new JPanel();
-	private final JButton logoutButton = new JButton();
 	
 	HomePage() {}
 
-	HomePage(User u, Color col) {
+	HomePage(User u) {
 		frame.setResizable(false);
 		frame.setTitle("GetTip");
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
-		frame.setBounds(180, 50, 1050, 750);
+		frame.setBounds(180, 50, 1100, 750);
 
 		frame.setBackground(Color.BLACK);
 
 		feed.setLayout(new BorderLayout(2, 2));
 		feed.setBackground(Color.BLACK);
-		//feed.setBorder(new RoundedBorder(10));
+		feed.setBorder(new RoundedBorder(10));
 
 		Menu MenuBar = new Menu();
 		east.setLayout(new GridLayout(5, 1, 0, 0));
@@ -63,9 +60,9 @@ public class HomePage implements ActionListener {
 		center.setLayout(new GridLayout(getMessageCount(), 1, 7, 3));
 
 
-		south.setBackground(col);
-		east.setBackground(col);
-		west.setBackground(col);
+		south.setBackground(new Color(255, 102, 0));
+		east.setBackground(new Color(255, 102, 0));
+		west.setBackground(new Color(255, 102, 0));
 		center.setBackground(Color.BLACK);
 
 		MenuBar.setPreferredSize(new Dimension(200, 50));
@@ -76,7 +73,6 @@ public class HomePage implements ActionListener {
 
 		getDecorations();
 		getDataBasePosts(u);
-		logoutButtonSetup();
 		frame.add(feed);
 		feed.add(MenuBar, BorderLayout.NORTH);
 		feed.add(south, BorderLayout.SOUTH);
@@ -87,11 +83,11 @@ public class HomePage implements ActionListener {
 		
 		frame.setVisible(true);
 	}
-	
+
 	// necessary method in order to dispose the correct frame when clicking on the menu buttons
-		public final JFrame getFrame() {
-			return frame;
-		}
+	public final JFrame getMainFrame() {
+		return frame;
+	}
 	
 	//ScrollPane generator
 	public JScrollPane getScroll(JPanel central) {
@@ -128,12 +124,14 @@ public class HomePage implements ActionListener {
 				post.add(getMessageText(rs.getString("text")), BorderLayout.CENTER);
 				post.add(getSouthLike(rs.getString("text"), center, post), BorderLayout.SOUTH);
 				postid = rs.getInt("PostId");
+				likes = rs.getInt("likes");
 				center.add(post);
 			}
 		} catch (SQLException s) {
 			System.out.println("Error");
 			s.printStackTrace();
-		}	
+		}
+	
 	}
 	
 	//places the decorating images in the eastern and the western panel
@@ -206,6 +204,7 @@ public class HomePage implements ActionListener {
 		northLabel.add(Box.createHorizontalStrut(30));
 		northLabel.add(iconic);
 		return northLabel;
+
 	}
 	
 	//This is the main part of the post, the general text (also uses SQL similarly)
@@ -226,46 +225,21 @@ public class HomePage implements ActionListener {
 	
 	//this is where we get the southern panel of the post which contains the buttons
 	public JPanel getSouthLike(String text, JPanel center, JPanel post) {
+		Font fontLike = new Font("Calibri", Font.PLAIN, 5);
 		JPanel southLike = new JPanel(new FlowLayout(FlowLayout.LEFT));		
 		Post p = new Post();
+		p.getLikeButton(postid);
+		p.getDislikeButton(postid);
+				
 		
-		southLike.setBackground(new Color(243, 243, 243));
-		southLike.setPreferredSize(new Dimension(700, 40));
-		southLike.setBorder(BorderFactory.createRaisedBevelBorder());
-		
-		southLike.add(p.getLikeButton(postid));
-		southLike.add(Box.createHorizontalStrut(20));
-		southLike.add(p.getDislikeButton(postid));
-		southLike.add(Box.createHorizontalStrut(405));
-		southLike.add(getCopyButton(text, post));
-		southLike.add(getDeleteButton(post));
-		return southLike;
-	}
-	public JPanel getSouthLike2(String text, JPanel center, JPanel post) {
-		JPanel southLike = new JPanel(new FlowLayout(FlowLayout.LEFT));		
-		Post p = new Post();
-		
-		southLike.setBackground(new Color(243, 243, 243));
-		southLike.setPreferredSize(new Dimension(700, 40));
-		southLike.setBorder(BorderFactory.createRaisedBevelBorder());
-		
-		southLike.add(p.getLikeButton(postid));
-		southLike.add(Box.createHorizontalStrut(20));
-		southLike.add(p.getDislikeButton(postid));
-		southLike.add(Box.createHorizontalStrut(405));
-		southLike.add(getCopyButton(text, post));
-		return southLike;
-	}
-	
-	public JButton getCopyButton(String text, JPanel post) {
 		ImageIcon copyIcon = new ImageIcon("src\\main\\resources\\copy.png");
-		JButton copy = new JButton(copyIcon);
-		copy.setPreferredSize(new Dimension(30, 30));
-		copy.setBackground(new Color(246, 246, 246));
-		copy.addActionListener(new ActionListener() {
+		JButton dots = new JButton(copyIcon);
+		dots.setPreferredSize(new Dimension(30, 30));
+		dots.setBackground(new Color(246, 246, 246));
+		dots.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == copy) {
+				if (e.getSource() == dots) {
 					Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 					StringSelection copyPost = new StringSelection(getMessageText(text).getText());
 					clipboard.setContents(copyPost, copyPost);
@@ -273,11 +247,7 @@ public class HomePage implements ActionListener {
 				}
 			}
 		});
-		return copy;
 		
-	}
-	
-	public JButton getDeleteButton(JPanel post) {
 		ImageIcon deleteB = new ImageIcon("src\\main\\resources\\delete.png");
 		JButton delete = new JButton(deleteB);
 		delete.setPreferredSize(new Dimension(30, 30));
@@ -296,9 +266,23 @@ public class HomePage implements ActionListener {
 				}
 			}
 		});
-		return delete;
+		southLike.setBackground(new Color(243, 243, 243));
+		southLike.setPreferredSize(new Dimension(700, 40));
+		southLike.setBorder(BorderFactory.createRaisedBevelBorder());
+
+		//southLike.add(like);
+		southLike.add(p.getLikeButton(postid));
+		southLike.add(Box.createHorizontalStrut(20));
+		//southLike.add(dislike));
+		southLike.add(p.getDislikeButton(postid));
+		southLike.add(Box.createHorizontalStrut(405));
+		southLike.add(dots);
+		southLike.add(delete);
+
+		return southLike;
 	}
-	
+
+
 	public int getMessageCount() {
 		int count = 0;
 		String url = "jdbc:sqlite:socialmedia.db";
@@ -308,46 +292,26 @@ public class HomePage implements ActionListener {
 			Statement statement = conn.createStatement();
 
 			// Get posts from the database
+
 			String query = "SELECT Text FROM Post, User WHERE Post.userId = User.userId AND (Post.Category = " + "'"
 					+ user.getInterest1() + "'" + "COLLATE NOCASE  OR Post.Category = " + "'" + user.getInterest2()
 					+ "'" + "COLLATE NOCASE OR Post.Category = " + "'" + user.getInterest3() + "'"
 					+ " COLLATE NOCASE);";
 
 			ResultSet rs = statement.executeQuery(query);
+
 			while (rs.next()) {
 				count++; // count the number of posts
 			}
+
 			conn.close();
+
 		} catch (SQLException s) {
 			System.out.println("Error");
 			s.printStackTrace();
 		}
+
 		return count;
-	}
-	
-	public void logoutButtonSetup(){
-		logoutButton.setBounds(900, 15, 100, 25);
-		logoutButton.setText("Log out");
-		logoutButton.addActionListener(this);
-		logoutButton.setFocusable(false);
-		logoutButton.setHorizontalTextPosition(JButton.CENTER);
-        logoutButton.setBackground(backgroundColor);
-		logoutButton.setForeground(Color.white);
-        logoutButton.setOpaque(true);
-        feed.add(logoutButton, BorderLayout.NORTH);          
-    }
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == logoutButton) {
-			int input = JOptionPane.showOptionDialog(null, "Are you sure you want to logout?", null,
-					JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, null, null);
-			if (input == JOptionPane.OK_OPTION) {
-				new LoginPage();
-				frame.dispose();
-			}
-		}
-		
 	}
 	
 	public Icon getIcon(String categ) {

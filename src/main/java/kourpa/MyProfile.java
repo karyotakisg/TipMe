@@ -287,7 +287,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 				post.add(hp.getNorthLabel(rs.getString("username"), rs.getString("uploaddate"), rs.getString("Category")),
 					BorderLayout.NORTH);
 				post.add(hp.getMessageText(rs.getString("text")), BorderLayout.CENTER);
-				post.add(hp.getSouthLike2(rs.getString("text"), p, post), BorderLayout.SOUTH);			
+				post.add(hp.getSouthLike(rs.getString("text"), p, post), BorderLayout.SOUTH);			
 				p.add(post);
 			}			
 		} catch (SQLException s) {
