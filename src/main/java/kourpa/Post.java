@@ -26,7 +26,7 @@ public class Post {
 	// String jdbcUrl = "jdbc:sqlite:socialmedia.db" ;
 
 	private int likes;
-
+	private int dislikes;
 	// SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
 	Date now = new Date();
@@ -164,11 +164,12 @@ public class Post {
 
 		Font fontLike = new Font("Serif", Font.BOLD, 15);
 		ImageIcon icon = new ImageIcon("src\\main\\resources\\like.png");
-		JButton like = new JButton(icon);
+		String totalLikes = String.valueOf(likes);
+		JButton like = new JButton(totalLikes, icon);
 		like.setFont(fontLike);
 		like.setPreferredSize(new Dimension(100, 30));
 		like.setBackground(Color.white);
-		like.setForeground(Color.WHITE);
+		like.setForeground(Color.black);
 		like.setFocusable(false);
 		
 
@@ -200,14 +201,14 @@ public class Post {
 	public JButton getDislikeButton(int postid) {
 		Font fontLike = new Font("Serif", Font.BOLD, 15);		
 		ImageIcon iconD = new ImageIcon("src\\main\\resources\\dislike.png");
-		JButton dislike = new JButton(iconD);
+		String totalDislikes = String.valueOf(dislikes);
+		JButton dislike = new JButton(totalDislikes, iconD);
 		dislike.setFont(fontLike);			    
 		dislike.setBorder(BorderFactory.createLineBorder(Color.black));
-		dislike.setPreferredSize(new Dimension(100, 30 ));
+		dislike.setPreferredSize(new Dimension(100, 30));
 		dislike.setBackground(new Color(246, 246, 246));
-		dislike.setForeground(Color.WHITE); 
+		dislike.setForeground(Color.black); 
 		dislike.setFocusable(false);
-		int count = 0;
 		// likeButton.setBounds(250, 20, 60, 30);
 		dislike.addActionListener(new ActionListener() {
 

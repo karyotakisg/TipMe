@@ -78,8 +78,6 @@ public class Menu  extends JPanel implements ActionListener, KeyListener, MouseL
         }
 
         if(e.getSource() == b3Icon ){
-            HomePage hp = new HomePage(user);
-            hp.getMainFrame().dispose();
 
         }
         if(e.getSource() == b4Icon ){
@@ -142,4 +140,3 @@ public class Menu  extends JPanel implements ActionListener, KeyListener, MouseL
     @Override
     public void keyReleased(KeyEvent e) {}
 }
-

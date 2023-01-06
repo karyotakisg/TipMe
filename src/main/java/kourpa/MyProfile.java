@@ -1,5 +1,6 @@
 package kourpa;
 import java.awt.*;
+
 import java.awt.event.*;
 import java.sql.Statement;
 import java.sql.Connection;
@@ -60,7 +61,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		Image ic = Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\logo.png");
 		this.setIconImage(ic);
 		user1 = user;
-		setBounds(260, 60, 1000, 750);
+		setBounds(180, 50, 1000, 750);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		userLabel.setBounds(310, 100, 165, 25);
 		userText.setBounds(400, 100, 165, 25);
@@ -180,10 +181,15 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			p.setVisible(true);
         }
         if(e.getSource()==logoutButton) {
-			new LoginPage();
-			dispose();
+        	int input = JOptionPane.showOptionDialog(null, "Are you sure you want to logout?", null,
+					JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, null, null);
+			if (input == JOptionPane.OK_OPTION) {
+				new LoginPage();
+				dispose();
+			}
 		}
 	}
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == sumbitButton) {
@@ -281,7 +287,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 				post.add(hp.getNorthLabel(rs.getString("username"), rs.getString("uploaddate"), rs.getString("Category")),
 					BorderLayout.NORTH);
 				post.add(hp.getMessageText(rs.getString("text")), BorderLayout.CENTER);
-				post.add(hp.getSouthLike(rs.getString("text"), p, post), BorderLayout.SOUTH);			
+				post.add(hp.getSouthLike2(rs.getString("text"), p, post), BorderLayout.SOUTH);			
 				p.add(post);
 			}			
 		} catch (SQLException s) {

@@ -24,8 +24,9 @@ public class Main {
 		user.setInterest2("Sports");
 		user.setInterest3("Cooking");
 		Color col = new Color(255, 102, 0);
-		//MyProfile obj = new MyProfile(user, col); 
-		HomePage h = new HomePage(user);
+		MyProfile obj = new MyProfile(user, col); 
+		HomePage h = new HomePage(user, col);
+		ExploreKourpaTest k = new ExploreKourpaTest();
 		
 		//Register.register();
 	

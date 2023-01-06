@@ -33,7 +33,7 @@ public class ExploreKourpaTest extends JFrame implements ActionListener {
     public 	ExploreKourpaTest() {
 
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.setBounds(180, 50, 1100, 750);
+			frame.setBounds(180, 50, 1050, 750);
 			frame.setResizable(false);
 			frame.setBackground(Color.BLACK);		 
 		   
@@ -47,7 +47,7 @@ public class ExploreKourpaTest extends JFrame implements ActionListener {
 		 	        south = new JPanel();
 		 	        north = new JPanel();
 		 		    panel = new JPanel();
-		 		   panel.setBorder(new RoundedBorder(10));
+		 		   //panel.setBorder(new RoundedBorder(10));
 		 		    
 
 		 		    // panel.setLayout(bl);
@@ -89,7 +89,7 @@ public class ExploreKourpaTest extends JFrame implements ActionListener {
 		 				center.add(buttons[count]);
 		 				buttons[count].addActionListener(this);
 		 				buttons[count].setHorizontalAlignment(SwingConstants.LEFT);
-		 				buttons[count].setFont(new Font("Calibri", Font.BOLD, 25));
+		 				buttons[count].setFont(new Font("Calibri", Font.BOLD, 22));
 		 			}
 		 	       
                     panel.add(MenuBar, BorderLayout.NORTH);
@@ -161,9 +161,7 @@ public class ExploreKourpaTest extends JFrame implements ActionListener {
   		}
 
   		@Override
-  		public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-  			g.drawOval(x, y, width - 1, height - 1);
-  		}
+  		public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {}
   	}
 
 
