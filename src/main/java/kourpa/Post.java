@@ -184,6 +184,7 @@ public class Post {
 						jdbcUrl = "jdbc:sqlite:socialmedia.db";						
 						col1 = Color.green;
 						like.setBackground(Color.green);
+						likes = getLikeCount(postid);
 						likes++;
 						like.setText(String.valueOf(likes));
 						getDislikeButton(postid).setBackground(Color.white);
@@ -193,10 +194,18 @@ public class Post {
 						jdbcUrl = "jdbc:sqlite:socialmedia.db";							
 						col1 = Color.white;
 						like.setBackground(col1);
-						likes--;
+						likes = getLikeCount(postid);
+						if (likes > 0) {
+							likes--;
+						} else {
+							likes = 0;
+						}
 						like.setText(String.valueOf(likes));
 						flag = false;
-				} 
+				} else  {
+					int input = JOptionPane.showOptionDialog(null, "Remove your dislike first (click again on the dislike button)", 
+							"Help message", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+				}
 			           	 
 				try {
 						Connection conn = DriverManager.getConnection(jdbcUrl);
@@ -241,6 +250,7 @@ public class Post {
 						query = "UPDATE Post SET dislikes = dislikes + 1 WHERE PostId =" + postid;
 						jdbcUrl = "jdbc:sqlite:socialmedia.db";						
 						dislike.setBackground(Color.red);
+						dislikes = getDislikeCount(postid);
 						dislikes++;
 						dislike.setText(String.valueOf(dislikes));
 						flag = true;
@@ -249,10 +259,19 @@ public class Post {
 						jdbcUrl = "jdbc:sqlite:socialmedia.db";							
 						col1 = Color.white;
 						dislike.setBackground(col1);
-						dislikes--;
-						dislike.setText(String.valueOf(likes));	
+						dislikes = getDislikeCount(postid);
+						if (dislikes > 0) {
+							dislikes--;
+						} else {
+							dislikes = 0;
+						}
+						dislike.setText(String.valueOf(dislikes));	
 						flag = false;
-				} 
+				} else  {
+					int input = JOptionPane.showOptionDialog(null, "Remove your like first (click again on the like button)", 
+							"Help message", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+				
+				}
 			           	 
 				try {
 						Connection conn = DriverManager.getConnection(jdbcUrl);
