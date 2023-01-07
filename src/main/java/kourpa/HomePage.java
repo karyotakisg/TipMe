@@ -123,6 +123,9 @@ public class HomePage /*implements ActionListener*/ {
 				post.add(getMessageText(rs.getString("text")), BorderLayout.CENTER);
 				post.add(getSouthLike(rs.getString("text"), center, post), BorderLayout.SOUTH);
 				postid = rs.getInt("PostId");
+				Post p = new Post();
+				p.getLikeCount(postid);
+				p.getDislikeCount(postid);
 				center.add(post);
 			}
 		} catch (SQLException s) {

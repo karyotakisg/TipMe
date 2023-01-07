@@ -238,14 +238,14 @@ public class Post {
 			public void actionPerformed(ActionEvent e) {
 
 				if(e.getSource() == dislike && dislike.getBackground() == Color.white && flag == false) {// TODO Auto-generated method stub
-						query = "UPDATE Post SET dislikes = dislikes+1 WHERE PostId =" + postid;
+						query = "UPDATE Post SET dislikes = dislikes + 1 WHERE PostId =" + postid;
 						jdbcUrl = "jdbc:sqlite:socialmedia.db";						
 						dislike.setBackground(Color.red);
 						dislikes++;
 						dislike.setText(String.valueOf(dislikes));
 						flag = true;
 				} else if (e.getSource() == dislike && dislike.getBackground() == Color.red) {
-						query = "UPDATE Post SET Likes = Likes-1 WHERE PostId =" + postid;
+						query = "UPDATE Post SET dislikes = dislikes - 1 WHERE PostId =" + postid;
 						jdbcUrl = "jdbc:sqlite:socialmedia.db";							
 						col1 = Color.white;
 						dislike.setBackground(col1);
@@ -275,6 +275,52 @@ public class Post {
 
 		return dislike;
 	
+	}
+	
+	public int getLikeCount(int postid) {
+		int count = 0;
+		String url = "jdbc:sqlite:socialmedia.db";
+		try {
+			// New Connection
+			Connection conn = DriverManager.getConnection(url);
+			Statement statement = conn.createStatement();
+
+			// Get posts from the database
+			String query = "SELECT Likes FROM Post WHERE PostId =" + postid;
+
+			ResultSet rs = statement.executeQuery(query);
+			while (rs.next()) {
+				count = rs.getInt("Likes");
+			}
+			conn.close();
+		} catch (SQLException s) {
+			System.out.println("Error");
+			s.printStackTrace();
+		}
+		return count;
+	}
+	
+	public int getDislikeCount(int postid) {
+		int count = 0;
+		String url = "jdbc:sqlite:socialmedia.db";
+		try {
+			// New Connection
+			Connection conn = DriverManager.getConnection(url);
+			Statement statement = conn.createStatement();
+
+			// Get posts from the database
+			String query = "SELECT Dislikes FROM Post WHERE PostId =" + postid;
+
+			ResultSet rs = statement.executeQuery(query);
+			while (rs.next()) {
+				count = rs.getInt("Dislikes");
+			}
+			conn.close();
+		} catch (SQLException s) {
+			System.out.println("Error");
+			s.printStackTrace();
+		}
+		return count;
 	}
 }	
 	
