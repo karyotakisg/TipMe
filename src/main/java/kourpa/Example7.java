@@ -6,6 +6,7 @@ import javax.swing.*;
 public class Example7 extends JFrame{
 	public static void main(String [] args) {
 		//ExplorePanel p1 = new ExplorePanel(0);
+		User u = new User();
 		ExploreKourpaTest k = new ExploreKourpaTest();
 
 	}

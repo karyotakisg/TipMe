@@ -90,9 +90,9 @@ public class HomePage /*implements ActionListener*/ {
 	
 	//ScrollPane generator
 	public JScrollPane getScroll(JPanel central) {
-		JScrollPane scr = new JScrollPane(central, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+		JScrollPane scr = new JScrollPane(central, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		scr.getVerticalScrollBar().setUnitIncrement(12);
+		scr.getVerticalScrollBar().setUnitIncrement(10);
 		scr.getVerticalScrollBar().setBackground(Color.BLACK);
 		scr.getVerticalScrollBar().setPreferredSize(new Dimension(8, 695));
 		return scr;
@@ -236,7 +236,7 @@ public class HomePage /*implements ActionListener*/ {
 		southLike.add(p.getDislikeButton(postid));
 		southLike.add(Box.createHorizontalStrut(405));
 		southLike.add(getCopyButton(text, post));
-		southLike.add(getDeleteButton(post));
+		southLike.add(getTemporaryDeleteButton(post, center));
 		return southLike;
 	}
 	public JPanel getSouthLike2(String text, JPanel center, JPanel post) {
@@ -252,6 +252,7 @@ public class HomePage /*implements ActionListener*/ {
 		southLike.add(p.getDislikeButton(postid));
 		southLike.add(Box.createHorizontalStrut(475));
 		southLike.add(getCopyButton(text, post));
+		southLike.add(getTemporaryDeleteButton(post, center));
 		return southLike;
 	}
 	
@@ -275,7 +276,7 @@ public class HomePage /*implements ActionListener*/ {
 		
 	}
 	
-	public JButton getDeleteButton(JPanel post) {
+	public JButton getTemporaryDeleteButton(JPanel post, JPanel center) {
 		ImageIcon deleteB = new ImageIcon("src\\main\\resources\\delete.png");
 		JButton delete = new JButton(deleteB);
 		delete.setPreferredSize(new Dimension(30, 30));

@@ -172,7 +172,7 @@ public class Post {
 		// likeButton.setBounds(250, 20, 60, 30);
 
 		JButton like = new JButton("0", icon);
-		like.setBackground(Color.white);
+		like.setBackground(new Color(246, 246, 246));
 		
 		like.addActionListener(new ActionListener() {
 			String query;
@@ -184,7 +184,6 @@ public class Post {
 						jdbcUrl = "jdbc:sqlite:socialmedia.db";						
 						col1 = Color.green;
 						like.setBackground(Color.green);
-						likes = getLikeCount(postid);
 						likes++;
 						like.setText(String.valueOf(likes));
 						getDislikeButton(postid).setBackground(Color.white);
@@ -194,7 +193,6 @@ public class Post {
 						jdbcUrl = "jdbc:sqlite:socialmedia.db";							
 						col1 = Color.white;
 						like.setBackground(col1);
-						likes = getLikeCount(postid);
 						if (likes > 0) {
 							likes--;
 						} else {
@@ -202,10 +200,7 @@ public class Post {
 						}
 						like.setText(String.valueOf(likes));
 						flag = false;
-				} else  {
-					int input = JOptionPane.showOptionDialog(null, "Remove your dislike first (click again on the dislike button)", 
-							"Help message", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
-				}
+				} 
 			           	 
 				try {
 						Connection conn = DriverManager.getConnection(jdbcUrl);
@@ -238,7 +233,7 @@ public class Post {
 		// likeButton.setBounds(250, 20, 60, 30);
 
 		JButton dislike = new JButton("0", icon);
-		dislike.setBackground(Color.white);
+		dislike.setBackground(new Color(246, 246, 246));
 		
 		dislike.addActionListener(new ActionListener() {
 			String query;
@@ -248,18 +243,16 @@ public class Post {
 
 				if(e.getSource() == dislike && dislike.getBackground() == Color.white && flag == false) {// TODO Auto-generated method stub
 						query = "UPDATE Post SET dislikes = dislikes + 1 WHERE PostId =" + postid;
-						jdbcUrl = "jdbc:sqlite:socialmedia.db";						
+											
 						dislike.setBackground(Color.red);
-						dislikes = getDislikeCount(postid);
 						dislikes++;
 						dislike.setText(String.valueOf(dislikes));
 						flag = true;
 				} else if (e.getSource() == dislike && dislike.getBackground() == Color.red) {
 						query = "UPDATE Post SET dislikes = dislikes - 1 WHERE PostId =" + postid;
-						jdbcUrl = "jdbc:sqlite:socialmedia.db";							
+												
 						col1 = Color.white;
 						dislike.setBackground(col1);
-						dislikes = getDislikeCount(postid);
 						if (dislikes > 0) {
 							dislikes--;
 						} else {
@@ -267,12 +260,8 @@ public class Post {
 						}
 						dislike.setText(String.valueOf(dislikes));	
 						flag = false;
-				} else  {
-					int input = JOptionPane.showOptionDialog(null, "Remove your like first (click again on the like button)", 
-							"Help message", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
-				
-				}
-			           	 
+				} 
+				jdbcUrl = "jdbc:sqlite:socialmedia.db";	      	 
 				try {
 						Connection conn = DriverManager.getConnection(jdbcUrl);
 						Statement statement = conn.createStatement();

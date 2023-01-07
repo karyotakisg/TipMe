@@ -7,8 +7,8 @@ import java.awt.event.*;
 import java.sql.*;
 
 public class CustomizeMessageKourpa2 {
-	
-	CustomizeMessageKourpa2(String u, String category, JPanel explore) {	
+	private int postid = 0;
+	CustomizeMessageKourpa2(User u, String category, JPanel explore) {	
 		String jdbcUrl = "jdbc:sqlite:socialmedia.db";
 		try {
 			// Creating a new Connection
@@ -19,7 +19,7 @@ public class CustomizeMessageKourpa2 {
 
 			// Get the right posts from the database
 
-			String query = "SELECT User.username, Post.text, Post.uploaddate, Post.likes, Post.Category FROM Post, User WHERE Post.userId AND Post.Category = '" + category + "'";
+			String query = "SELECT User.username, Post.text, Post.uploaddate, Post.likes, Post.PostId, Post.Category FROM Post, User WHERE Post.userId AND Post.Category = '" + category + "'";
 
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {
@@ -33,6 +33,10 @@ public class CustomizeMessageKourpa2 {
 				post.add(eastern, BorderLayout.EAST);
 				post.add(hp.getMessageText(rs.getString("text")), BorderLayout.CENTER);
 				post.add(hp.getSouthLike(rs.getString("text"), explore, post), BorderLayout.SOUTH);
+				postid = rs.getInt("PostId");
+				Post p = new Post();
+				p.getLikeCount(postid);
+				p.getDislikeCount(postid);
 
 				//postid = rs.getInt("PostId");
 
