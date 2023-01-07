@@ -1,6 +1,5 @@
 package kourpa;
 import javax.swing.JFrame;
-import java.awt.Window;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -8,20 +7,16 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
-import javax.swing.border.Border;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,7 +24,7 @@ import java.sql.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 
-public class HomePage implements ActionListener {
+public class HomePage /*implements ActionListener*/ {
 	Color textColor = Color.decode("#ffffff");
 	Color backgroundColor = Color.decode("#000000");
 	private final User user = new User();
@@ -40,7 +35,7 @@ public class HomePage implements ActionListener {
 	private final JPanel west = new JPanel();
 	private final JPanel south = new JPanel();
 	private final JPanel center = new JPanel();
-	private final JButton logoutButton = new JButton();
+	//private final JButton logoutButton = new JButton();
 	
 	HomePage() {}
 
@@ -76,7 +71,7 @@ public class HomePage implements ActionListener {
 
 		getDecorations();
 		getDataBasePosts(u);
-		logoutButtonSetup();
+		//logoutButtonSetup();
 		frame.add(feed);
 		feed.add(MenuBar, BorderLayout.NORTH);
 		feed.add(south, BorderLayout.SOUTH);
@@ -252,7 +247,7 @@ public class HomePage implements ActionListener {
 		southLike.add(p.getLikeButton(postid));
 		southLike.add(Box.createHorizontalStrut(20));
 		southLike.add(p.getDislikeButton(postid));
-		southLike.add(Box.createHorizontalStrut(405));
+		southLike.add(Box.createHorizontalStrut(475));
 		southLike.add(getCopyButton(text, post));
 		return southLike;
 	}
@@ -325,7 +320,7 @@ public class HomePage implements ActionListener {
 		return count;
 	}
 	
-	public void logoutButtonSetup(){
+	/*public void logoutButtonSetup(){
 		logoutButton.setBounds(900, 15, 100, 25);
 		logoutButton.setText("Log out");
 		logoutButton.addActionListener(this);
@@ -348,7 +343,7 @@ public class HomePage implements ActionListener {
 			}
 		}
 		
-	}
+	}*/
 	
 	public Icon getIcon(String categ) {
 		if (categ.equals("Sports")) {
@@ -412,23 +407,4 @@ public class HomePage implements ActionListener {
 		}
 	}
 
-    private static class RoundedBorder implements Border {
-		private int radius;
-		RoundedBorder(int radius) {
-			this.radius = radius;
-		}
-
-		@Override
-		public Insets getBorderInsets(Component c) {
-			return new Insets(this.radius + 1, this.radius + 1, this.radius + 2, this.radius);
-		}
-
-		@Override
-		public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {}
-
-		@Override
-		public boolean isBorderOpaque() {
-			return true;
-		}
-	}
 }

@@ -89,7 +89,6 @@ public class ExploreKourpaTest extends JFrame implements ActionListener {
 		 				center.add(buttons[count]);
 		 				buttons[count].addActionListener(this);
 		 				buttons[count].setVerticalTextPosition(SwingConstants.BOTTOM);
-		 				buttons[count].add(Box.createVerticalStrut(20));
 		 			    buttons[count].setHorizontalTextPosition(SwingConstants.CENTER);
 		 				buttons[count].setHorizontalAlignment(SwingConstants.LEFT);
 		 				buttons[count].setFont(new Font("Calibri", Font.BOLD, 22));

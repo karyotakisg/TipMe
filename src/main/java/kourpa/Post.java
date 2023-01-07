@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Date;
+import javax.swing.Timer;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -24,10 +25,11 @@ import java.text.SimpleDateFormat;
 
 public class Post {
 	// String jdbcUrl = "jdbc:sqlite:socialmedia.db" ;
-
+	private Color col1 = Color.white;
+	private Color col2 = Color.white;
+	private boolean flag = false;
 	private int likes;
-	private int dislikes;
-	// SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private int dislikes;	// SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
 	Date now = new Date();
 	String strDate = sdfDate.format(now);
@@ -164,76 +166,120 @@ public class Post {
 
 		Font fontLike = new Font("Serif", Font.BOLD, 15);
 		ImageIcon icon = new ImageIcon("src\\main\\resources\\like.png");
-		String totalLikes = String.valueOf(likes);
-		JButton like = new JButton(totalLikes, icon);
-		like.setFont(fontLike);
-		like.setPreferredSize(new Dimension(100, 30));
-		like.setBackground(Color.white);
-		like.setForeground(Color.black);
-		like.setFocusable(false);
+		
 		
 
 		// likeButton.setBounds(250, 20, 60, 30);
-		like.addActionListener(new ActionListener() {
 
+		JButton like = new JButton("0", icon);
+		like.setBackground(Color.white);
+		
+		like.addActionListener(new ActionListener() {
+			String query;
+			String jdbcUrl;
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(e.getSource() == like) {// TODO Auto-generated method stub
-					String query = "UPDATE Post SET Likes = Likes+1 WHERE PostId =" + postid;
-					String jdbcUrl = "jdbc:sqlite:socialmedia.db";
-					try {
+				if(e.getSource() == like && like.getBackground() == Color.white && flag == false) {// TODO Auto-generated method stub
+						query = "UPDATE Post SET Likes = Likes+1 WHERE PostId =" + postid;
+						jdbcUrl = "jdbc:sqlite:socialmedia.db";						
+						col1 = Color.green;
+						like.setBackground(Color.green);
+						likes++;
+						like.setText(String.valueOf(likes));
+						getDislikeButton(postid).setBackground(Color.white);
+						flag = true;
+				} else if (e.getSource() == like && like.getBackground() == Color.green) {
+						query = "UPDATE Post SET Likes = Likes-1 WHERE PostId =" + postid;
+						jdbcUrl = "jdbc:sqlite:socialmedia.db";							
+						col1 = Color.white;
+						like.setBackground(col1);
+						likes--;
+						like.setText(String.valueOf(likes));
+						flag = false;
+				} 
+			           	 
+				try {
 						Connection conn = DriverManager.getConnection(jdbcUrl);
 						Statement statement = conn.createStatement();
 						statement.executeUpdate(query);
+						
 						conn.close();
-					} catch (SQLException s) {
+				} catch (SQLException s) {
 						// TODO Auto-generated catch block
 						System.out.println("Failed to connect and get the number of likes");
 						s.printStackTrace();
-					}
 				}
-			}
+				
+				}
 		});
+
+		like.setFont(fontLike);
+		like.setPreferredSize(new Dimension(100, 30));
+		like.setFocusable(false);
 
 		return like;
 	}
 	
 	public JButton getDislikeButton(int postid) {
-		Font fontLike = new Font("Serif", Font.BOLD, 15);		
-		ImageIcon iconD = new ImageIcon("src\\main\\resources\\dislike.png");
-		String totalDislikes = String.valueOf(dislikes);
-		JButton dislike = new JButton(totalDislikes, iconD);
-		dislike.setFont(fontLike);			    
-		dislike.setBorder(BorderFactory.createLineBorder(Color.black));
-		dislike.setPreferredSize(new Dimension(100, 30));
-		dislike.setBackground(new Color(246, 246, 246));
-		dislike.setForeground(Color.black); 
-		dislike.setFocusable(false);
-		// likeButton.setBounds(250, 20, 60, 30);
-		dislike.addActionListener(new ActionListener() {
+		Font fontdisLike = new Font("Serif", Font.BOLD, 15);
+		ImageIcon icon = new ImageIcon("src\\main\\resources\\dislike.png");
+		
+		
 
+		// likeButton.setBounds(250, 20, 60, 30);
+
+		JButton dislike = new JButton("0", icon);
+		dislike.setBackground(Color.white);
+		
+		dislike.addActionListener(new ActionListener() {
+			String query;
+			String jdbcUrl;
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(e.getSource() == dislike) {// TODO Auto-generated method stub
-					String query = "UPDATE Post SET dislikes = dislikes+1 WHERE PostId =" + postid;
-					String jdbcUrl = "jdbc:sqlite:socialmedia.db";
-					try {
+
+				if(e.getSource() == dislike && dislike.getBackground() == Color.white && flag == false) {// TODO Auto-generated method stub
+						query = "UPDATE Post SET dislikes = dislikes+1 WHERE PostId =" + postid;
+						jdbcUrl = "jdbc:sqlite:socialmedia.db";						
+						dislike.setBackground(Color.red);
+						dislikes++;
+						dislike.setText(String.valueOf(dislikes));
+						flag = true;
+				} else if (e.getSource() == dislike && dislike.getBackground() == Color.red) {
+						query = "UPDATE Post SET Likes = Likes-1 WHERE PostId =" + postid;
+						jdbcUrl = "jdbc:sqlite:socialmedia.db";							
+						col1 = Color.white;
+						dislike.setBackground(col1);
+						dislikes--;
+						dislike.setText(String.valueOf(likes));	
+						flag = false;
+				} 
+			           	 
+				try {
 						Connection conn = DriverManager.getConnection(jdbcUrl);
 						Statement statement = conn.createStatement();
 						statement.executeUpdate(query);
+						
 						conn.close();
-					} catch (SQLException s) {
+				} catch (SQLException s) {
 						// TODO Auto-generated catch block
-						System.out.println("Failed to connect and get the number of dislikes");
+						System.out.println("Failed to connect and get the number of likes");
 						s.printStackTrace();
-					}
+					
 				}
 			}
-		});
+			
+			});
+		dislike.setFont(fontdisLike);
+		dislike.setPreferredSize(new Dimension(100, 30));
+		dislike.setFocusable(false);
 
 		return dislike;
+	
 	}
-}
+}	
+	
+
+
 
 /*
  * JButton button = new JButton("Like"); button.setBounds(250, 20, 60, 30);
