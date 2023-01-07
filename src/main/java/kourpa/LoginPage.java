@@ -102,8 +102,10 @@ public class LoginPage implements ActionListener {
 				Connection conn = DriverManager.getConnection(jdbcUrl);
 				Statement st = conn.createStatement();
 
-				String query = "SELECT username, password FROM User;";
-
+				String query = "SELECT username, password, email, PhoneNumber, Sex,"
+						+ " Interest1, Interest2, Interest3 FROM User;";
+				//String query2 = " SELECT username, password FROM User;";
+						
 				ResultSet rs = st.executeQuery(query);
 
 				boolean loggedIn = false;
@@ -116,6 +118,15 @@ public class LoginPage implements ActionListener {
 						messageLabel.setForeground(Color.green);
 						messageLabel.setText("Login successful!");
 						frame.dispose();
+						User u = new User();
+						u.setUsername("username");
+						u.setEmail("email");
+						u.setPhoneNumber("PhoneNumber");
+						u.setSex("Sex");
+						u.setInterest1("Interest1");
+						u.setInterest2("Interest2");
+						u.setInterest3("Interest3");
+						
 						new WelcomePage();
 
 						loggedIn = true;
