@@ -20,9 +20,9 @@ public class Main {
 
 		User user = new User();
 		user.setUsername("v.talos");
-		user.setInterest1("Programming");
+		user.setInterest1("Education");
 		user.setInterest2("Sports");
-		user.setInterest3("Cooking");
+		user.setInterest3("Food");
 		Color col = new Color(255, 102, 0);
 		//MyProfile obj = new MyProfile(user, col); 
 		HomePage h = new HomePage(user, col);

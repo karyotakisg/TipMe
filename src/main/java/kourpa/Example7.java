@@ -8,7 +8,6 @@ public class Example7 extends JFrame{
 		//ExplorePanel p1 = new ExplorePanel(0);
 		User u = new User();
 		ExploreKourpaTest k = new ExploreKourpaTest();
-
 	}
 
 }

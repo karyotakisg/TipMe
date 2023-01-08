@@ -414,7 +414,7 @@ public class ExplorePanel implements ActionListener {
 
 			// Get posts from the database
 
-			String query = "SELECT User.username, Post.text, Post.uploaddate, Post.likes, Post.Category FROM Post, User WHERE Post.userId AND Post.Category = '" + category + "'";
+			String query = "SELECT User.username, Post.text, Post.uploaddate, Post.likes, Post.Category FROM Post, User WHERE Post.userId = User.userId AND Post.Category = '" + category + "'";
 
 			ResultSet rs = statement.executeQuery(query);
 
