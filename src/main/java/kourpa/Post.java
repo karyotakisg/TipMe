@@ -25,8 +25,8 @@ import java.text.SimpleDateFormat;
 
 public class Post {
 	// String jdbcUrl = "jdbc:sqlite:socialmedia.db" ;
-	private Color col1 = Color.white;
-	private Color col2 = Color.white;
+	private Color col1 = new Color(246, 246, 246);
+	private Color col2 = new Color(246, 246, 246);
 	private boolean flag = false;
 	private int likes;
 	private int dislikes; // SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -82,7 +82,7 @@ public class Post {
 		// likeButton.setBounds(250, 20, 60, 30);
 
 		JButton like = new JButton("0", icon);
-		like.setBackground(Color.white);
+		like.setBackground(col1);
 
 		like.addActionListener(new ActionListener() {
 			String query;
@@ -90,11 +90,11 @@ public class Post {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == like && like.getBackground() == Color.white && flag == false) {
+				if (e.getSource() == like && like.getBackground() == col1 && getDislikeButton(postid).getBackground() == col2 && flag == false) {
 					// TODO Auto-generated method stub
 					query = "UPDATE Post SET Likes = Likes+1 WHERE PostId =" + postid;
 					col1 = Color.green;
-					like.setBackground(Color.green);
+					like.setBackground(col1);
 					likes = getLikeCount(postid);
 					likes++;
 					like.setText(String.valueOf(likes));
@@ -102,7 +102,7 @@ public class Post {
 					flag = true;
 				} else if (e.getSource() == like && like.getBackground() == Color.green) {
 					query = "UPDATE Post SET Likes = Likes-1 WHERE PostId =" + postid;
-					col1 = Color.white;
+					col1 = new Color(246, 246, 246);
 					like.setBackground(col1);
 					likes = getLikeCount(postid);
 					if (likes > 0) {
@@ -148,8 +148,8 @@ public class Post {
 		// likeButton.setBounds(250, 20, 60, 30);
 
 		JButton dislike = new JButton("0", icon);
-		dislike.setBackground(Color.white);
-
+		dislike.setBackground(col2);
+	
 		dislike.addActionListener(new ActionListener() {
 			String query;
 			String jdbcUrl = "jdbc:sqlite:socialmedia.db";
@@ -157,18 +157,19 @@ public class Post {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				if (e.getSource() == dislike && dislike.getBackground() == Color.white && flag == false) {
+				if (e.getSource() == dislike && dislike.getBackground() == col2 && getLikeButton(postid).getBackground() == col1 && flag == false) {
 					// TODO Auto-generated method stub
 					query = "UPDATE Post SET dislikes = dislikes + 1 WHERE PostId =" + postid;
-					dislike.setBackground(Color.red);
+					col2 = Color.red;
+					dislike.setBackground(col2);
 					dislikes = getDislikeCount(postid);
 					dislikes++;
 					dislike.setText(String.valueOf(dislikes));
 					flag = true;
 				} else if (e.getSource() == dislike && dislike.getBackground() == Color.red) {
 					query = "UPDATE Post SET dislikes = dislikes - 1 WHERE PostId =" + postid;
-					col1 = Color.white;
-					dislike.setBackground(col1);
+					col2 = new Color(246, 246, 246);
+					dislike.setBackground(col2);
 					dislikes = getDislikeCount(postid);
 					if (dislikes > 0) {
 						dislikes--;
