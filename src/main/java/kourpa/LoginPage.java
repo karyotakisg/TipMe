@@ -119,13 +119,13 @@ public class LoginPage implements ActionListener {
 						messageLabel.setText("Login successful!");
 						frame.dispose();
 						User u = new User();
-						u.setUsername("username");
-						u.setEmail("email");
-						u.setPhoneNumber("PhoneNumber");
-						u.setSex("Sex");
-						u.setInterest1("Interest1");
-						u.setInterest2("Interest2");
-						u.setInterest3("Interest3");
+						u.setUsername(rs.getString("username"));
+						u.setEmail(rs.getString("email"));
+						u.setPhoneNumber(rs.getString("PhoneNumber"));
+						u.setSex(rs.getString("Sex"));
+						u.setInterest1(rs.getString("Interest1"));
+						u.setInterest2(rs.getString("Interest2"));
+						u.setInterest3(rs.getString("Interest3"));
 						
 						new WelcomePage();
 
