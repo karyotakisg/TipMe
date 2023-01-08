@@ -176,12 +176,11 @@ public class Post {
 		
 		like.addActionListener(new ActionListener() {
 			String query;
-			String jdbcUrl;
+			String jdbcUrl = "jdbc:sqlite:socialmedia.db";
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource() == like && like.getBackground() == Color.white && flag == false) {// TODO Auto-generated method stub
-						query = "UPDATE Post SET Likes = Likes+1 WHERE PostId =" + postid;
-						jdbcUrl = "jdbc:sqlite:socialmedia.db";						
+						query = "UPDATE Post SET Likes = Likes+1 WHERE PostId =" + postid;					
 						col1 = Color.green;
 						like.setBackground(Color.green);
 						likes++;
@@ -189,8 +188,7 @@ public class Post {
 						getDislikeButton(postid).setBackground(Color.white);
 						flag = true;
 				} else if (e.getSource() == like && like.getBackground() == Color.green) {
-						query = "UPDATE Post SET Likes = Likes-1 WHERE PostId =" + postid;
-						jdbcUrl = "jdbc:sqlite:socialmedia.db";							
+						query = "UPDATE Post SET Likes = Likes-1 WHERE PostId =" + postid;						
 						col1 = Color.white;
 						like.setBackground(col1);
 						if (likes > 0) {
@@ -237,7 +235,7 @@ public class Post {
 		
 		dislike.addActionListener(new ActionListener() {
 			String query;
-			String jdbcUrl;
+			String jdbcUrl = "jdbc:sqlite:socialmedia.db";
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
@@ -249,8 +247,7 @@ public class Post {
 						dislike.setText(String.valueOf(dislikes));
 						flag = true;
 				} else if (e.getSource() == dislike && dislike.getBackground() == Color.red) {
-						query = "UPDATE Post SET dislikes = dislikes - 1 WHERE PostId =" + postid;
-												
+						query = "UPDATE Post SET dislikes = dislikes - 1 WHERE PostId =" + postid;					
 						col1 = Color.white;
 						dislike.setBackground(col1);
 						if (dislikes > 0) {
@@ -260,8 +257,7 @@ public class Post {
 						}
 						dislike.setText(String.valueOf(dislikes));	
 						flag = false;
-				} 
-				jdbcUrl = "jdbc:sqlite:socialmedia.db";	      	 
+				} 	      	 
 				try {
 						Connection conn = DriverManager.getConnection(jdbcUrl);
 						Statement statement = conn.createStatement();
@@ -270,7 +266,7 @@ public class Post {
 						conn.close();
 				} catch (SQLException s) {
 						// TODO Auto-generated catch block
-						System.out.println("Failed to connect and get the number of likes");
+						System.out.println("Failed to connect and get the number of dislikes");
 						s.printStackTrace();
 					
 				}
