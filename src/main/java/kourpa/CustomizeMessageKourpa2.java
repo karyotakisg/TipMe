@@ -7,9 +7,6 @@ import java.awt.event.*;
 import java.sql.*;
 
 public class CustomizeMessageKourpa2 {
-	
-	
-	
 	CustomizeMessageKourpa2(User u, String category, JPanel explore) {	
 		String jdbcUrl = "jdbc:sqlite:socialmedia.db";
 		try {
@@ -26,9 +23,7 @@ public class CustomizeMessageKourpa2 {
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {
 				HomePage hp = new HomePage();
-				ExploreKourpaTest ex = new ExploreKourpaTest();
 				JPanel post = new JPanel(new BorderLayout(1, 1));
-			
 				JPanel eastern = new JPanel();
 				eastern.setBackground(new Color(245, 245, 245));
 				post.setBackground(Color.black);
@@ -37,7 +32,6 @@ public class CustomizeMessageKourpa2 {
 				post.add(eastern, BorderLayout.EAST);
 				post.add(hp.getMessageText(rs.getString("text")), BorderLayout.CENTER);
 				post.add(hp.getSouthLike2(rs.getString("text"), explore, post, rs.getInt("PostId")), BorderLayout.SOUTH);
-			
 				Post p = new Post();
 				p.getLikeCount(rs.getInt("PostId"));
 				p.getDislikeCount(rs.getInt("PostId"));
