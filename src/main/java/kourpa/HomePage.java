@@ -392,31 +392,31 @@ public class HomePage extends Dimension /*implements ActionListener*/ {
 	
 	public Icon getIcon(String categ) {
 		if (categ.equals("Sports")) {
-			ImageIcon iconSports = new ImageIcon("src\\main\\resources\\sports2.png");
+			ImageIcon iconSports = new ImageIcon("src\\main\\resources\\sports3.png");
 			return iconSports;
 		} else if (categ.equals("Education")) {
-			ImageIcon iconEdu = new ImageIcon("src\\main\\resources\\academic2.png");
+			ImageIcon iconEdu = new ImageIcon("src\\main\\resources\\scholarship.png");
 			return iconEdu;
 		} else if (categ.equals("Environment")) {
 			ImageIcon iconEnvironment = new ImageIcon("src\\main\\resources\\environment2.png");
 			return iconEnvironment;
 		} else if (categ.equals("Fashion")) {
-			ImageIcon iconFashion = new ImageIcon("src\\main\\resources\\fashion2.png");
+			ImageIcon iconFashion = new ImageIcon("src\\main\\resources\\search.png");
 			return iconFashion;
 		} else if (categ.equals("Science")) {
-			ImageIcon iconScience = new ImageIcon("src\\main\\resources\\science2.png");
+			ImageIcon iconScience = new ImageIcon("src\\main\\resources\\science.png");
 			return iconScience;
 		} else if (categ.equals("Art")) {
 			ImageIcon iconArt = new ImageIcon("src\\main\\resources\\art2.png");
 			return iconArt;
 		} else if (categ.equals("Food")) {
-			ImageIcon iconFood = new ImageIcon("src\\main\\resources\\food2.png");
+			ImageIcon iconFood = new ImageIcon("src\\main\\resources\\burger.png");
 			return iconFood;
 		} else if (categ.equals("Travel")) {
-			ImageIcon iconTravel = new ImageIcon("src\\main\\resources\\travel2.png");
+			ImageIcon iconTravel = new ImageIcon("src\\main\\resources\\passport.png");
 			return iconTravel;
 		} else if (categ.equals("Fitness")) {
-			ImageIcon iconFit = new ImageIcon("src\\main\\resources\\fitness2.png");
+			ImageIcon iconFit = new ImageIcon("src\\main\\resources\\barbell.png");
 			return iconFit;
 		} else if (categ.equals("Music")) {
 			ImageIcon iconMusic = new ImageIcon("src\\main\\resources\\music2.png");
