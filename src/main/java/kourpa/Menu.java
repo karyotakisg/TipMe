@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JLabel;
 
 public class Menu  extends JPanel implements ActionListener, KeyListener, MouseListener { //creates the menu at the top of the screen for each section of the app
@@ -25,7 +26,7 @@ public class Menu  extends JPanel implements ActionListener, KeyListener, MouseL
     Icon myProfile = new ImageIcon("src/main/resources/MyProfile.png");
     Icon homepage = new ImageIcon("src/main/resources/Homepage.png");
     Icon explore = new ImageIcon("src/main/resources/Explore.png");
-    JButton b1Icon = new JButton(upload);
+    JRadioButton b1Icon = new JRadioButton(upload);
     JButton b2Icon = new JButton(myProfile);
     JButton b3Icon = new JButton(homepage);
     JButton b4Icon = new JButton(explore);
@@ -139,4 +140,7 @@ public class Menu  extends JPanel implements ActionListener, KeyListener, MouseL
     public void keyPressed(KeyEvent e) {}
     @Override
     public void keyReleased(KeyEvent e) {}
+
+
+	
 }

@@ -32,8 +32,10 @@ public class ExploreKourpaTest extends JFrame implements ActionListener {
     //User user = new User();
     User u = new User();
     private JButton goback;
+    
+    public ExploreKourpaTest() {}
 
-    public 	ExploreKourpaTest() {
+    public 	ExploreKourpaTest(User u) {
 
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(180, 50, 1050, 750);
@@ -56,8 +58,8 @@ public class ExploreKourpaTest extends JFrame implements ActionListener {
 	 	Menu MenuBar = new Menu();
 		MenuBar.setPreferredSize(new Dimension(200, 50));
 		south.setPreferredSize(new Dimension(200, 50));
-		east.setPreferredSize(new Dimension(100, 200));
-		west.setPreferredSize(new Dimension(100, 200));
+		east.setPreferredSize(new Dimension(100, 680));
+		west.setPreferredSize(new Dimension(100, 680));
 		north.setPreferredSize(new Dimension(800, 100));
 
 
@@ -119,6 +121,10 @@ public class ExploreKourpaTest extends JFrame implements ActionListener {
 		 	buttons[count].setHorizontalAlignment(SwingConstants.LEFT);
 		 	buttons[count].setFont(new Font("Calibri", Font.BOLD, 22));
 		}
+	}
+	
+	public final JFrame getFrame() {
+		return frame;
 	}
 
 

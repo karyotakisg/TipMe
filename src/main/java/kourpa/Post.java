@@ -81,7 +81,7 @@ public class Post {
 
 		// likeButton.setBounds(250, 20, 60, 30);
 
-		JButton like = new JButton("0", icon);
+		JButton like = new JButton("" + getLikeCount(postid) + "", icon);
 		like.setBackground(col1);
 
 		like.addActionListener(new ActionListener() {
@@ -147,7 +147,7 @@ public class Post {
 
 		// likeButton.setBounds(250, 20, 60, 30);
 
-		JButton dislike = new JButton("0", icon);
+		JButton dislike = new JButton("" + getDislikeCount(postid) + "", icon);
 		dislike.setBackground(col2);
 	
 		dislike.addActionListener(new ActionListener() {
