@@ -90,7 +90,8 @@ public class Post {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == like && like.getBackground() == col1 && getDislikeButton(postid).getBackground() == col2 && flag == false) {
+				if (e.getSource() == like && like.getBackground() == col1
+						&& getDislikeButton(postid).getBackground() == col2 && flag == false) {
 					// TODO Auto-generated method stub
 					query = "UPDATE Post SET Likes = Likes+1 WHERE PostId =" + postid;
 					col1 = Color.green;
@@ -149,7 +150,7 @@ public class Post {
 
 		JButton dislike = new JButton("" + getDislikeCount(postid) + "", icon);
 		dislike.setBackground(col2);
-	
+
 		dislike.addActionListener(new ActionListener() {
 			String query;
 			String jdbcUrl = "jdbc:sqlite:socialmedia.db";
@@ -157,7 +158,8 @@ public class Post {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				if (e.getSource() == dislike && dislike.getBackground() == col2 && getLikeButton(postid).getBackground() == col1 && flag == false) {
+				if (e.getSource() == dislike && dislike.getBackground() == col2
+						&& getLikeButton(postid).getBackground() == col1 && flag == false) {
 					// TODO Auto-generated method stub
 					query = "UPDATE Post SET dislikes = dislikes + 1 WHERE PostId =" + postid;
 					col2 = Color.red;

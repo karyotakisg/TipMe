@@ -1,6 +1,5 @@
 package kourpa;
 import static org.junit.Assert.assertTrue;
-
 import java.awt.Color;
 import javax.swing.JFrame;
 import org.junit.Before;
@@ -26,8 +25,7 @@ public class MenuTest implements Runnable{
     }
     }
     @Test
-
-    public void testMenu(){
+    public void testMenuGraphics(){
     run();
     assertTrue("error", menu.isVisible());
     }
