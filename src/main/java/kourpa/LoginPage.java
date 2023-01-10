@@ -34,9 +34,12 @@ public class LoginPage implements ActionListener {
 
 	// HashMap<String, String> logininfo = new HashMap<String, String>();
 
+	Color c;
+	
 	LoginPage() {
 
-		frame.getContentPane().setBackground(new Color(51, 153, 255));
+		c = new Color(51, 153, 255);
+		frame.getContentPane().setBackground(c);
 
 		userIDLabel.setBounds(50, 100, 75, 25);
 		userPasswordLabel.setBounds(50, 150, 75, 25);
@@ -127,7 +130,7 @@ public class LoginPage implements ActionListener {
 						u.setInterest2(rs.getString("Interest2"));
 						u.setInterest3(rs.getString("Interest3"));
 
-						new WelcomePage();
+						new HomePage(u, c);
 
 						loggedIn = true;
 						break;

@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: kourpa.MainTest
+-------------------------------------------------------------------------------
+<<<<<<< HEAD:target/surefire-reports/kourpa.MainTest.txt
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.049 s - in kourpa.MainTest
+=======
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.027 s - in kourpa.AppTest
+>>>>>>> b11f9f0f70b66bce87fa4df2e72aeff5c4888909:target/surefire-reports/kourpa.AppTest.txt
