@@ -40,6 +40,14 @@ public class ExplorePanel implements ActionListener {
         east.setPreferredSize(new Dimension(100, 200));
 		west.setPreferredSize(new Dimension(100, 200));
 		if(x == 0) {
+			p0 = new JPanel();
+			category = "Science";
+			p0.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
+			p0.setBackground(Color.BLACK);
+			CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p0);
+			jf.add(p0, BorderLayout.CENTER);
+			scr = hp.getScroll(p1);
+			jf.add(scr, BorderLayout.CENTER);
 			if (flag [0] == false) {
 				for (int w = 0 ; w < 10 ; w++) {
 					if ( w == x) {
@@ -49,23 +57,9 @@ public class ExplorePanel implements ActionListener {
 						west.remove(goback[w]);
 					}
 				}
-				p0 = new JPanel();
-				category = "Science";
-				p0.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
-				p0.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p0);
-				jf.add(p0, BorderLayout.CENTER);
-				scr = hp.getScroll(p1);
-				jf.add(scr, BorderLayout.CENTER);
+				
 			} else {
-				p0 = new JPanel();
-				category = "Science";
-				p0.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
-				p0.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p0);
-				jf.add(p0, BorderLayout.CENTER);
-				scr = hp.getScroll(p0);
-				jf.add(scr, BorderLayout.CENTER);
+				p0.setVisible(true);
 				for (int w = 0 ; w < 10 ; w++) {
 					if ( w == x) {
 						west.add(goback[w]);
@@ -76,6 +70,14 @@ public class ExplorePanel implements ActionListener {
 				}
 			}
 		} else if(x == 1) {
+			p1 = new JPanel();
+			category = "Sports";
+			p1.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
+			p1.setBackground(Color.BLACK);
+			CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p1);
+			jf.add(p1, BorderLayout.CENTER);
+			scr = hp.getScroll(p1);
+			jf.add(scr, BorderLayout.CENTER);
 			if (flag [1] == false) {
 				for (int w = 0 ; w < 10 ; w++) {
 					if ( w == x) {
@@ -85,23 +87,9 @@ public class ExplorePanel implements ActionListener {
 						west.remove(goback[w]);
 					}
 				}
-				p1 = new JPanel();
-				category = "Sports";
-				p1.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
-				p1.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p1);
-				jf.add(p1, BorderLayout.CENTER);
-				scr = hp.getScroll(p1);
-				jf.add(scr, BorderLayout.CENTER);
+				
 			} else {
-				p1 = new JPanel();
-				category = "Sports";
-				p1.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
-				p1.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p1);
-				jf.add(p1, BorderLayout.CENTER);
-				scr = hp.getScroll(p1);
-				jf.add(scr, BorderLayout.CENTER);
+				p1.setVisible(true);
 				for (int w = 0 ; w < 10 ; w++) {
 					if ( w == x) {
 						west.add(goback[w]);
@@ -113,6 +101,14 @@ public class ExplorePanel implements ActionListener {
 			}	            
 
 		} else if(x == 2) {
+			p2 = new JPanel();
+			category = "Music";
+			p2.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
+			p2.setBackground(Color.BLACK);
+			CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p2);
+			jf.add(p2, BorderLayout.CENTER);
+			scr = hp.getScroll(p2);
+			jf.add(scr, BorderLayout.CENTER);
 			if (flag [2] == false) {
 				for (int w = 0 ; w < 10 ; w++) {
 					if ( w == x) {
@@ -123,23 +119,9 @@ public class ExplorePanel implements ActionListener {
 					}
 				}
 			
-				p2 = new JPanel();
-				category = "Music";
-				p2.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
-				p2.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p2);
-				jf.add(p2, BorderLayout.CENTER);
-				scr = hp.getScroll(p2);
-				jf.add(scr, BorderLayout.CENTER);
+				
 			} else {
-				p2 = new JPanel();
-				category = "Music";
-				p2.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
-				p2.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p2);
-				jf.add(p2, BorderLayout.CENTER);
-				scr = hp.getScroll(p2);
-				jf.add(scr, BorderLayout.CENTER);
+				p2.setVisible(true);
 				for (int w = 0 ; w < 10 ; w++) {
 					if ( w == x) {
 						west.add(goback[w]);
@@ -150,6 +132,14 @@ public class ExplorePanel implements ActionListener {
 				}
 			}
 		} else if(x == 3) {
+			p3 = new JPanel();
+			category = "Fashion";
+			p3.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
+			p3.setBackground(Color.BLACK);
+			CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p3);
+			jf.add(p3, BorderLayout.CENTER);
+			scr = hp.getScroll(p3);
+			jf.add(scr, BorderLayout.CENTER);
 			if (flag [3] == false) {
 				for (int w = 0 ; w < 10 ; w++) {
 					if ( w == x) {
@@ -159,23 +149,9 @@ public class ExplorePanel implements ActionListener {
 						west.remove(goback[w]);
 					}
 				}
-				p3 = new JPanel();
-				category = "Fashion";
-				p3.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
-				p3.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p3);
-				jf.add(p3, BorderLayout.CENTER);
-				scr = hp.getScroll(p3);
-				jf.add(scr, BorderLayout.CENTER);
+				
 			} else {
-				p3 = new JPanel();
-				category = "Fashion";
-				p3.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
-				p3.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p3);
-				jf.add(p3, BorderLayout.CENTER);
-				scr = hp.getScroll(p3);
-				jf.add(scr, BorderLayout.CENTER);
+				p3.setVisible(true);
 				for (int w = 0 ; w < 10 ; w++) {
 					if ( w == x) {
 						west.add(goback[w]);
@@ -186,6 +162,13 @@ public class ExplorePanel implements ActionListener {
 				}
 			}
 		} else if(x == 4) {
+			p4 = new JPanel();
+			category = "Travel";
+			p4.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
+			p4.setBackground(Color.BLACK);
+			CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p4);
+			scr = hp.getScroll(p4);
+			jf.add(scr, BorderLayout.CENTER);
 			if (flag [4] == false) {
 				for (int w = 0 ; w < 10 ; w++) {
 					if ( w == x) {
@@ -195,20 +178,9 @@ public class ExplorePanel implements ActionListener {
 						west.remove(goback[w]);
 					}
 				}
-				p4 = new JPanel();
-				category = "Travel";
-				p4.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
-				p4.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p4);
-				scr = hp.getScroll(p4);
-				jf.add(scr, BorderLayout.CENTER);
+				
 			} else {
-				p4 = new JPanel();
-				category = "Travel";
-				p4.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
-				p4.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p4);
-				scr = hp.getScroll(p4);
+				p4.setVisible(true);
 				jf.add(scr, BorderLayout.CENTER);
 				for (int w = 0 ; w < 10 ; w++) {
 					if ( w == x) {
@@ -220,6 +192,13 @@ public class ExplorePanel implements ActionListener {
 				}
 			}
 		} else if(x == 5) {
+			p5 = new JPanel();
+			category = "Fitness";
+			p5.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
+			p5.setBackground(Color.BLACK);
+			CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p5);
+			scr = hp.getScroll(p5);
+			jf.add(scr, BorderLayout.CENTER);
 			if (flag [5] == false) {
 				for (int w = 0 ; w < 10 ; w++) {
 					if ( w == x) {
@@ -229,21 +208,9 @@ public class ExplorePanel implements ActionListener {
 						west.remove(goback[w]);
 					}
 				}
-				p5 = new JPanel();
-				category = "Fitness";
-				p5.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
-				p5.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p5);
-				scr = hp.getScroll(p5);
-				jf.add(scr, BorderLayout.CENTER);
+				
 			} else {
-				p5 = new JPanel();
-				category = "Fitness";
-				p5.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
-				p5.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p5);
-				scr = hp.getScroll(p5);
-				jf.add(scr, BorderLayout.CENTER);
+				p5.setVisible(true);
 				for (int w = 0 ; w < 10 ; w++) {
 					if ( w == x) {
 						west.add(goback[w]);
@@ -254,6 +221,14 @@ public class ExplorePanel implements ActionListener {
 				}
 			}
 		} else if (x == 6) {
+			p6 = new JPanel();
+			category = "Art";
+			p6.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
+			p6.setBackground(Color.BLACK);
+			CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p6);
+			jf.add(p6, BorderLayout.CENTER);
+			scr = hp.getScroll(p6);
+			jf.add(scr, BorderLayout.CENTER);
 			if (flag [6] == false) {
 				for (int w = 0 ; w < 10 ; w++) {
 					if ( w == x) {
@@ -263,23 +238,8 @@ public class ExplorePanel implements ActionListener {
 						west.remove(goback[w]);
 					}
 				}
-				p6 = new JPanel();
-				category = "Art";
-				p6.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
-				p6.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p6);
-				jf.add(p6, BorderLayout.CENTER);
-				scr = hp.getScroll(p6);
-				jf.add(scr, BorderLayout.CENTER);
 			} else {
-				p6 = new JPanel();
-				category = "Art";
-				p6.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
-				p6.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p6);
-				jf.add(p6, BorderLayout.CENTER);
-				scr = hp.getScroll(p6);
-				jf.add(scr, BorderLayout.CENTER);
+				p6.setVisible(true);
 				for (int w = 0 ; w < 10 ; w++) {
 					if ( w == x) {
 						west.add(goback[w]);
@@ -290,6 +250,14 @@ public class ExplorePanel implements ActionListener {
 				}
 			}
 	   } else if (x == 7) {
+		   p7 = new JPanel();
+		   	category = "Education";
+			p7.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
+			p7.setBackground(Color.BLACK);			
+			CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p7);
+			jf.add(p7, BorderLayout.CENTER);
+			scr = hp.getScroll(p7);
+			jf.add(scr, BorderLayout.CENTER);
 		   if (flag [7] == false) {
 				for (int w = 0 ; w < 10 ; w++) {
 					if ( w == x) {
@@ -299,23 +267,8 @@ public class ExplorePanel implements ActionListener {
 						west.remove(goback[w]);
 					}
 				}
-			   	p7 = new JPanel();
-			   	category = "Education";
-				p7.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
-				p7.setBackground(Color.BLACK);			
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p7);
-				jf.add(p7, BorderLayout.CENTER);
-				scr = hp.getScroll(p7);
-				jf.add(scr, BorderLayout.CENTER);
 		   } else {
-			   p7 = new JPanel();
-			   	category = "Education";
-				p7.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
-				p7.setBackground(Color.BLACK);			
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p7);
-				jf.add(p7, BorderLayout.CENTER);
-				scr = hp.getScroll(p7);
-				jf.add(scr, BorderLayout.CENTER);
+			   p7.setVisible(true);
 				for (int w = 0 ; w < 10 ; w++) {
 					if ( w == x) {
 						west.add(goback[w]);
@@ -327,6 +280,15 @@ public class ExplorePanel implements ActionListener {
 			}
 		} else if ( x == 8) {
 			if (flag [8] == false) {
+				p8 = new JPanel();
+				category = "Environment";
+				p8.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
+				p8.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
+				p8.setBackground(Color.BLACK);
+				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p8);
+				jf.add(p8, BorderLayout.CENTER);
+				scr = hp.getScroll(p8);
+				jf.add(scr, BorderLayout.CENTER);
 				for (int w = 0 ; w < 10 ; w++) {
 					if ( w == x) {
 						west.add(goback[w]);	
@@ -334,26 +296,10 @@ public class ExplorePanel implements ActionListener {
 					} else {
 						west.remove(goback[w]);
 					}
-			}
-				p8 = new JPanel();
-				category = "Environment";
-				p8.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
-				p8.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
-				p8.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p8);
-				jf.add(p8, BorderLayout.CENTER);
-				scr = hp.getScroll(p8);
-				jf.add(scr, BorderLayout.CENTER);
+				}
+				
 			} else {
-				p8 = new JPanel();
-				category = "Environment";
-				p8.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
-				p8.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
-				p8.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p8);
-				jf.add(p8, BorderLayout.CENTER);
-				scr = hp.getScroll(p8);
-				jf.add(scr, BorderLayout.CENTER);
+				p8.setVisible(true);
 				for (int w = 0 ; w < 10 ; w++) {
 					if ( w == x) {
 						west.add(goback[w]);
@@ -364,6 +310,15 @@ public class ExplorePanel implements ActionListener {
 				}
 			}
 		} else {
+			p9 = new JPanel();
+			category = "Food";
+			p9.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
+			p9.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
+			p9.setBackground(Color.BLACK);
+			CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p9);
+			jf.add(p9, BorderLayout.CENTER);
+			scr = hp.getScroll(p9);
+			jf.add(scr, BorderLayout.CENTER);
 			if (flag [9] == false) {
 				for (int w = 0 ; w < 10 ; w++) {
 					if ( w == x) {
@@ -373,25 +328,8 @@ public class ExplorePanel implements ActionListener {
 						west.remove(goback[w]);
 					}
 				}
-				p9 = new JPanel();
-				category = "Food";
-				p9.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
-				p9.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
-				p9.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p9);
-				jf.add(p9, BorderLayout.CENTER);
-				scr = hp.getScroll(p9);
-				jf.add(scr, BorderLayout.CENTER);
 			} else {
-				p9 = new JPanel();
-				category = "Food";
-				p9.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
-				p9.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
-				p9.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p9);
-				jf.add(p9, BorderLayout.CENTER);
-				scr = hp.getScroll(p9);
-				jf.add(scr, BorderLayout.CENTER);
+				p9.setVisible(true);
 				for (int w = 0 ; w < 10 ; w++) {
 					if ( w == x) {
 						west.add(goback[w]);
