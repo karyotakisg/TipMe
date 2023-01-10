@@ -39,20 +39,18 @@ public class HomePage extends Dimension /*implements ActionListener*/ {
 	private  JPanel west = new JPanel();
 	private  JPanel south = new JPanel();
 	private  JPanel center = new JPanel();
-	private static  JPanel center2 = new JPanel();
 	//private final JButton logoutButton = new JButton();
 	
 	HomePage() {}
 
 	HomePage(User u, Color col) {
-		frame.setResizable(false);
 		frame.setTitle("GetTip");
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
 		frame.setBounds(180, 50, 1050, 750);
 
 		frame.setBackground(Color.BLACK);
-
+		
 		feed.setLayout(new BorderLayout(2, 2));
 		feed.setBackground(Color.BLACK);
 		//feed.setBorder(new RoundedBorder(10));
@@ -88,9 +86,10 @@ public class HomePage extends Dimension /*implements ActionListener*/ {
 		
 		frame.add(feed);
 		frame.setVisible(true);
+		this.feed = feed;
 	}
 	
-	// necessary method in order to dispose the correct frame when clicking on the menu buttons
+	// necessary method in order to dispose the correct panel when clicking on the menu buttons
 	
 	
 	
@@ -234,7 +233,7 @@ public class HomePage extends Dimension /*implements ActionListener*/ {
 	public JButton getCopyButton(String text, JPanel post) {
 		ImageIcon copyIcon = new ImageIcon("src\\main\\resources\\copy.png");
 		JButton copy = new JButton(copyIcon);
-		copy.setPreferredSize(new Dimension(30, 30));
+		copy.setBounds(495, 345, 30, 30);
 		copy.setBackground(new Color(246, 246, 246));
 		copy.addActionListener(new ActionListener() {
 			@Override
@@ -453,5 +452,11 @@ public class HomePage extends Dimension /*implements ActionListener*/ {
 			return null;
 		}
 	}
+	public void setPanel(JPanel panel) {
+		this.feed = panel;
+	}
 	
+	public JPanel getPanel() {
+		return feed;
+	}
 }

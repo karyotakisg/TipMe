@@ -39,10 +39,11 @@ public class Upload {
 	JButton jbinfo = new JButton("Info");
 
 	public Upload() {
-		
-		jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		jf.setTitle("Upload");
+		jf.setResizable(false);
+		jf.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		jf.setLayout(new BorderLayout(1,1));
-		jf.setBounds(500, 200, 500, 300);
+		jf.setBounds(455, 225, 500, 300);
 		
 		jp.setBackground(new Color(255, 102, 0));
 		jp.setLayout(new BorderLayout(1, 1));

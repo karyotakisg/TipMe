@@ -7,10 +7,21 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.*;
+import javax.swing.border.Border;
 public class MyProfile extends JFrame implements ActionListener, MouseListener { // creation of the necesery components for MyProfile GUI//
 	User user1 = new User();
 	HomePage hp = new HomePage();
-	JPanel panel = new JPanel();
+	private JPanel panel;
+	private JPanel center;
+	private JPanel south;
+	private JPanel west;
+	JPanel center2;
+	JPanel south2;
+	JPanel east2;
+	JPanel west2;
+	JPanel southEast;
+	JPanel southWest;
+	JPanel southCenter;
 	JLabel userLabel = new JLabel("User");
 	public JTextField userText = new JTextField(25);
 	JLabel passwordLabel = new JLabel("Password");
@@ -33,10 +44,10 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 	JLabel phoneNumberLabel = new JLabel("Phone Number");
 	public JTextField birthdayText = new JTextField(25);
 	JLabel birthdayLabel = new JLabel("Birthday");
-	JLabel labelForPosts = new JLabel(
-			"<html><font size = '22' color = 'black'><strong>My Posts</strong><text-align: center></font><</html> ");
+	JLabel labelForPosts = new JLabel("My Posts");
 	Icon diary = new ImageIcon("src/main/resources/diaryIcon.png");
-	JPanel p = new JPanel( new GridLayout(getMessageCount(), 1, 0, 10));//
+	Icon diary2 = new ImageIcon("src/main/resources/diary2.png");
+	private JPanel p = new JPanel( new GridLayout(getMessageCount(), 1, 0, 10));//
 	Menu menu = new Menu();
 	JButton changeButton = new JButton();
 	JButton sumbitButton = new JButton();
@@ -44,6 +55,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 	Color textColor = Color.decode("#ffffff");
 	Color backgroundColor = Color.decode("#000000");
 	Color hoverColor = Color.decode("#00aced");
+	private final Color col = new Color(255, 102, 0);
 	String s = "submit";
 	JDialog dial = new JDialog(this, "Dialog Box");
 	JButton dialBut = new JButton("OK");
@@ -55,37 +67,21 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
     private JRadioButton plainMode;
 	ImageIcon iconColorChooser = new ImageIcon("src\\main\\resources\\colors.png");
     JButton logoutButton = new JButton();
-	MyProfile(User user, Color col) { // constructor of the MyProfile GUI
-		super("GetTip()-MyProfile");
+    
+    MyProfile() {}
+    
+	MyProfile(User user, Color col) { 
+		super("Get tip-My profile");// constructor of the MyProfile GUI
 		Image ic = Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\logo.png");
+		
 		this.setIconImage(ic);
 		user1 = user;
-		setBounds(180, 50, 1000, 750);
+		
+		this.setBounds(180, 50, 1050, 750);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		userLabel.setBounds(310, 100, 165, 25);
-		userText.setBounds(400, 100, 165, 25);
-		passwordLabel.setBounds(310, 130, 165, 25);
-		passwordText.setBounds(400, 130, 165, 25);
-		emailLabel.setBounds(310, 160, 165, 25);
-		emailText.setBounds(400, 160, 165, 25);
-		p1Label.setBounds(310, 190, 165, 25);
-		p1Text.setBounds(400, 190, 165, 25);
-		p2Label.setBounds(310, 220, 165, 25);
-		p2Text.setBounds(400, 220, 165, 25);
-		p3Label.setBounds(310, 250, 165, 25);
-		p3Text.setBounds(400, 250, 165, 25);	
-		firstNameText.setBounds(400, 280, 165, 25);
-		firstNameLabel.setBounds(310, 280, 165, 25);
-		lastNameText.setBounds(400, 310, 165, 25);
-		lastNameLabel.setBounds(310, 310, 165, 25);
-		sexText.setBounds(400, 340, 165, 25);
-		sexLabel.setBounds(310, 340, 165, 25);
-		birthdayText.setBounds(400, 370, 165, 25);
-		birthdayLabel.setBounds(310, 370, 165, 25);
-		phoneNumberText.setBounds(400, 400, 165, 25);
-		phoneNumberLabel.setBounds(310, 400, 165, 25);
+		
 		setValuesInTextAreas();
-		changeButton.setBounds(600, 260, 150, 50);
+		changeButton.setSize(150, 50);
 		changeButton.setText("Change");
 		changeButton.addActionListener(this);
 		Font defaultFont = new Font("Gill Sans MT", Font.BOLD, 16);
@@ -94,19 +90,19 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		changeButton.setFont(defaultFont);
 		changeButton.setBackground(backgroundColor);
 		changeButton.setForeground(textColor);
-		labelForPosts.setBounds(400, 420, 200, 150);
+		Font font = new Font("Calibri", Font.BOLD, 22);
+		labelForPosts.setFont(font);
 		labelForPosts.setIcon(diary);
 		panelSetup();
 		setFieldsUneditable();
-		textAreaSetup();
+		southSetup();
 		setTextinPostArea();
 		scrollbarSetup();
         logoutButtonSetup();
 		this.add(panel);
 		panel.add(menu, BorderLayout.NORTH);
 		eastPanelSetup();
-		this.setLocationRelativeTo(null);
-		this.setResizable(false);
+		this.setResizable(true);
 		this.setVisible(true);
 	}
 	public void sumbit(User user) {
@@ -142,42 +138,117 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		if (e.getSource() == changeButton) {
 			changeButton.setVisible(false);
 			s = s.toUpperCase();
-			sumbitButton.setFocusPainted(false);
+			sumbitButton.setFocusPainted(true);
 			sumbitButton.setText(s);
-			sumbitButton.setBorder(null);
 			sumbitButton.setBackground(backgroundColor);
 			sumbitButton.setForeground(textColor);
 			sumbitButton.setFont(defaultFont);
+			sumbitButton.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 			sumbitButton.setOpaque(true);
-			sumbitButton.setBounds(600, 260, 150, 50);
+			sumbitButton.setSize(160, 60);
 			sumbitButton.addMouseListener(this);
-			panel.add(sumbitButton);
-			this.add(panel);
-			changeButton.setVisible(false);
+			east2.add(sumbitButton);
+			
 			setFieldsEditable();
 		}
 		if (e.getSource() == darkMode) {
-			p.setVisible(false);
-			p.setVisible(true);
             east.setBackground(Color.DARK_GRAY);
             panel.setBackground(Color.DARK_GRAY);
+            west.setBackground(Color.DARK_GRAY);
+            south.setBackground(Color.DARK_GRAY);
+            center2.setBackground(Color.DARK_GRAY);
+            south2.setBackground(Color.DARK_GRAY);
+            east2.setBackground(Color.DARK_GRAY);
+            west2.setBackground(Color.DARK_GRAY);
+            southCenter.setBackground(Color.DARK_GRAY);
+            southWest.setBackground(Color.DARK_GRAY);
+            southEast.setBackground(Color.DARK_GRAY);
+            
+            userLabel.setForeground(Color.white);
+            passwordLabel.setForeground(Color.white);
+            emailLabel.setForeground(Color.white);
+            p1Label.setForeground(Color.white);
+            p2Label.setForeground(Color.white);
+            p3Label.setForeground(Color.white);
+            sexLabel.setForeground(Color.white);
+            birthdayLabel.setForeground(Color.white);
+            firstNameLabel.setForeground(Color.white);
+            lastNameLabel.setForeground(Color.white);
+            phoneNumberLabel.setForeground(Color.white);
+            labelForPosts.setForeground(Color.white);
+            
+            labelForPosts.setIcon(diary2);
+            
         } else if (e.getSource() == lightMode) {
-			p.setVisible(false);
-			p.setVisible(true);
             east.setBackground(Color.white);
             panel.setBackground(Color.WHITE);
+            west.setBackground(Color.white);
+            south.setBackground(Color.white);
+            center2.setBackground(Color.white);
+            south2.setBackground(Color.white);
+            east2.setBackground(Color.white);
+            west2.setBackground(Color.white);
+            southCenter.setBackground(Color.white);
+            southWest.setBackground(Color.white);
+            southEast.setBackground(Color.white);
+            
+            userLabel.setForeground(Color.black);
+            passwordLabel.setForeground(Color.black);
+            emailLabel.setForeground(Color.black);
+            p1Label.setForeground(Color.black);
+            p2Label.setForeground(Color.black);
+            p3Label.setForeground(Color.black);
+            sexLabel.setForeground(Color.black);
+            birthdayLabel.setForeground(Color.black);
+            firstNameLabel.setForeground(Color.black);
+            lastNameLabel.setForeground(Color.black);
+            phoneNumberLabel.setForeground(Color.black);
+            labelForPosts.setForeground(Color.black);
+            
+            labelForPosts.setIcon(diary);
+            
         } else if (e.getSource() == plainMode){
-			p.setVisible(false);
-			p.setVisible(true);
-            panel.setBackground(new Color(255, 102, 0));
-            east.setBackground(new Color(255, 102, 0));
+            panel.setBackground(col);
+            east.setBackground(col);
+            west.setBackground(col);
+            south.setBackground(col);
+            center2.setBackground(col);
+            south2.setBackground(col);
+            east2.setBackground(col);
+            west2.setBackground(col);
+            southCenter.setBackground(col);
+            southWest.setBackground(col);
+            southEast.setBackground(col);
+            
+            userLabel.setForeground(Color.black);
+            passwordLabel.setForeground(Color.black);
+            emailLabel.setForeground(Color.black);
+            p1Label.setForeground(Color.black);
+            p2Label.setForeground(Color.black);
+            p3Label.setForeground(Color.black);
+            sexLabel.setForeground(Color.black);
+            birthdayLabel.setForeground(Color.black);
+            firstNameLabel.setForeground(Color.black);
+            lastNameLabel.setForeground(Color.black);
+            phoneNumberLabel.setForeground(Color.black);
+            labelForPosts.setForeground(Color.black);
+            
+            labelForPosts.setIcon(diary);
         } else if (e.getSource() == colorPick) {
-            JColorChooser colorChoose = new JColorChooser();
             Color col = JColorChooser.showDialog(null, "Pick a color!", Color.LIGHT_GRAY);
             panel.setBackground(col);
             east.setBackground(col);
-			p.setVisible(false);
-			p.setVisible(true);
+            west.setBackground(col);
+            south.setBackground(col);
+            center2.setBackground(col);
+            south2.setBackground(col);
+            east2.setBackground(col);
+            west2.setBackground(col);
+            southCenter.setBackground(col);
+            southWest.setBackground(col);
+            southEast.setBackground(col);
+            
+            labelForPosts.setIcon(diary);
         }
         if(e.getSource()==logoutButton) {
         	int input = JOptionPane.showOptionDialog(null, "Are you sure you want to logout?", null,
@@ -194,7 +265,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		if (e.getSource() == sumbitButton) {
 			this.sumbit(user1);
 			setValuesInTextAreas();
-			dial.setSize(500, 500);
+			dial.setSize(300, 300);
 			dial.setLocationRelativeTo(null);
 			JLabel dialLabel = new JLabel("You have submitted your changes with success", SwingConstants.CENTER);
 			dialLabel.setSize(100, 50);
@@ -211,7 +282,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		if (e.getSource() == dialBut) {
 			dial.dispose();
 			this.dispose();
-			MyProfile obj = new MyProfile(user1,this.getColor());
+			new MyProfile(user1,this.getColor());
 		}
 	}
 	@Override
@@ -277,7 +348,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			Connection conn = DriverManager.getConnection(jdbcUrl);
 			Statement statement = conn.createStatement();
 			// Get user's posts from the database
-			String query = "SELECT User.username, Post.text, Post.uploaddate, Post.likes, Post.Category FROM Post, User WHERE User.username = '" + user1.getUsername() + "' AND Post.UserId = User.UserId"; //Post.userId = User.userId AND (Post.Category = "
+			String query = "SELECT User.username, Post.text, Post.uploaddate, Post.PostId, Post.likes, Post.Category FROM Post, User WHERE User.username = '" + user1.getUsername() + "' AND Post.UserId = User.UserId"; //Post.userId = User.userId AND (Post.Category = "
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {
 				JPanel post = new JPanel();
@@ -286,7 +357,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 				post.add(hp.getNorthLabel(rs.getString("username"), rs.getString("uploaddate"), rs.getString("Category")),
 					BorderLayout.NORTH);
 				post.add(hp.getMessageText(rs.getString("text")), BorderLayout.CENTER);
-				post.add(hp.getSouthLike2(rs.getString("text"), p, post), BorderLayout.SOUTH);			
+				post.add(hp.getSouthLike2(rs.getString("text"), p, post, rs.getInt("PostId")), BorderLayout.SOUTH);			
 				p.add(post);
 			}			
 		} catch (SQLException s) {
@@ -294,54 +365,100 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			s.printStackTrace();
 		}
 	}
-	public void textAreaSetup() {
+	public void southSetup() {
 		p.setBorder(BorderFactory.createLineBorder(Color.black));
-		panel.add(p,BorderLayout.SOUTH);
+		south = new JPanel(new BorderLayout(0, 3));
+		south.setPreferredSize(new Dimension(780, 250));
+		southCenter = new JPanel();
+		southEast = new JPanel();
+		southWest = new JPanel();
+		//JPanel southSouth = new JPanel();
+		//southSouth.setPreferredSize(new Dimension(1050, 5));
+		southEast.setPreferredSize(new Dimension(135, 680));
+		southWest.setPreferredSize(new Dimension(135, 680));
+		southWest.setBackground(col);
+		southEast.setBackground(col);
+		//southSouth.setBackground(col);
+		southCenter.add(p);
+		southEast.setBorder(BorderFactory.createLineBorder(Color.black));
+		southWest.setBorder(BorderFactory.createLineBorder(Color.black));
+		south.add(southCenter, BorderLayout.CENTER);
+		south.add(southEast, BorderLayout.EAST);
+		south.add(southWest, BorderLayout.WEST);
+		//south.add(southSouth, BorderLayout.SOUTH);\
+		south.setBackground(Color.black);
+		panel.add(south, BorderLayout.SOUTH);
 	}
 	public void scrollbarSetup() {
 		JScrollPane scrollbar = new JScrollPane(p, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		scrollbar.setBounds(100, 600, 800, 300);
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollbar.getVerticalScrollBar().setUnitIncrement(12);
 		scrollbar.getVerticalScrollBar().setBackground(Color.BLACK);
 		scrollbar.getVerticalScrollBar().setPreferredSize(new Dimension(8, 695));
-		this.add(scrollbar);
+		south.add(scrollbar);
 	}
+	
+	
 	public void panelSetup(){
-	panel.setLayout(new BorderLayout());
-	Color col = new Color(255, 102, 0);
-	panel.setBackground(col);
-	panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
-	panel.setLayout(null);
-	panel.add(userLabel);
-	panel.add(userText);
-	panel.add(passwordLabel);
-	panel.add(passwordText);
-	panel.add(emailLabel);
-	panel.add(emailText);
-	panel.add(p1Label);
-	panel.add(p1Text);
-	panel.add(p2Label);
-	panel.add(p2Text);
-	panel.add(p3Label);
-	panel.add(p3Text);
-	panel.add(firstNameText);
-	panel.add(firstNameLabel);
-	panel.add(lastNameText);
-	panel.add(lastNameLabel);
-	panel.add(sexText);
-	panel.add(sexLabel);
-	panel.add(birthdayText);
-	panel.add(birthdayLabel);
-	panel.add(phoneNumberText);
-	panel.add(phoneNumberLabel);
-	panel.add(changeButton);
-	panel.add(labelForPosts);
+	
+	panel = new JPanel(new BorderLayout());
+	panel.setBackground(Color.black);
+	panel.setPreferredSize(hp);
+	center = new JPanel(new BorderLayout());
+	center.setBackground(Color.black);
+	center2 = new JPanel(new GridLayout(11 , 2, 2, 2));
+	center2.setPreferredSize(new Dimension(380, 380));
+	south2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+	east2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+	west2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+	west2.setPreferredSize(new Dimension(230, 470));
+	west2.setBackground(col);
+	south2.setPreferredSize(new Dimension(840, 100));
+	south2.setBackground(col);
+	east2.setBackground(col);
+	east2.setPreferredSize(new Dimension(250, 470));
+	west = new JPanel();
+	west.setPreferredSize(new Dimension(160, 680));
+	west.setBackground(col);
+	
+	center2.setBackground(new Color(255, 102, 0));
+	center2.add(userLabel);
+	center2.add(userText);
+	center2.add(passwordLabel);
+	center2.add(passwordText);
+	center2.add(emailLabel);
+	center2.add(emailText);
+	center2.add(p1Label);
+	center2.add(p1Text);
+	center2.add(p2Label);
+	center2.add(p2Text);
+	center2.add(p3Label);
+	center2.add(p3Text);
+	center2.add(firstNameLabel);
+	center2.add(firstNameText);
+	center2.add(lastNameLabel);
+	center2.add(lastNameText);
+	center2.add(sexLabel);
+	center2.add(sexText);
+	center2.add(birthdayLabel);
+	center2.add(birthdayText);
+	center2.add(phoneNumberLabel);
+	center2.add(phoneNumberText);
+	east2.add(Box.createVerticalStrut(380));
+	east2.add(changeButton);
+	south2.add(labelForPosts);
+	center.add(center2, BorderLayout.CENTER);
+	center.add(south2, BorderLayout.SOUTH);
+	center.add(east2, BorderLayout.EAST);
+	center.add(west2, BorderLayout.WEST);
+	panel.add(west, BorderLayout.WEST);
+	panel.add(center, BorderLayout.CENTER);
+	
 	}
 	public void eastPanelSetup(){
-		east.setLayout(new GridLayout(4,1));
+		east.setLayout(new GridLayout(10,1));
 		east.setBackground(new Color(255, 102, 0));
-		east.setBounds(850,100,150,200);
+		east.setPreferredSize(new Dimension(160, 680));
 		darkMode = new JRadioButton("Dark Mode", false);
         lightMode = new JRadioButton("Light Mode", false);
         plainMode = new JRadioButton("Plain Mode", true);		
@@ -365,10 +482,10 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
         lightMode.addActionListener(this);
         plainMode.addActionListener(this);
         colorPick.addActionListener(this);
-		panel.add(east);
+		panel.add(east, BorderLayout.EAST);
 	}
     public void logoutButtonSetup(){
-		logoutButton.setBounds(850, 15, 100, 25);
+		logoutButton.setBounds(900, 25, 100, 25);
 		logoutButton.setText("Log out");
 		logoutButton.addActionListener(this);
 		logoutButton.setFocusable(false);
@@ -376,7 +493,8 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
         logoutButton.setBackground(backgroundColor);
 		logoutButton.setForeground(textColor);
         logoutButton.setOpaque(true);
-        panel.add(logoutButton);
+        //west.add(Box.createVerticalStrut(380));
+        west.add(logoutButton, BorderLayout.NORTH);
        
 		
     }
@@ -413,6 +531,9 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 	}
 	public  JPanel getPanel(){ // The following methods are created for testing purposes
 		return panel;
+	}
+	public void setPanel(JPanel panel) {
+		this.panel = panel;
 	}
 	public JButton getChangeButton() {
 		return changeButton;

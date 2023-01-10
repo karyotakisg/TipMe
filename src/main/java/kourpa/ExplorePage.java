@@ -11,7 +11,7 @@ import javax.xml.stream.Location;
 
 import java.sql.*;
 
-public class ExploreKourpaTest extends JFrame implements ActionListener {
+public class ExplorePage implements ActionListener {
 
 	private JButton [] buttons;
 	private JButton postFeed;
@@ -27,20 +27,17 @@ public class ExploreKourpaTest extends JFrame implements ActionListener {
     private JPanel panel;
     static JPanel center2;
     static boolean [] flag = new boolean[10];
-    // private JPanel panel2;
     private final JFrame frame = new JFrame();
-    //User user = new User();
     User u = new User();
     private JButton goback;
     
-    public ExploreKourpaTest() {}
+    public ExplorePage() {}
 
-    public 	ExploreKourpaTest(User u) {
+    public 	ExplorePage(User u, Color col) {
 
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(180, 50, 1050, 750);
-		frame.setResizable(false);
-		frame.setBackground(Color.BLACK);		 
+		frame.setBackground(Color.BLACK);
 		   
 		center = new JPanel();	  			
 		center.setBackground(Color.black);
@@ -62,7 +59,6 @@ public class ExploreKourpaTest extends JFrame implements ActionListener {
 		west.setPreferredSize(new Dimension(100, 680));
 		north.setPreferredSize(new Dimension(800, 100));
 
-
 		south.setBackground(new Color(255, 102, 0));
 		east.setBackground(new Color(255, 102, 0));
 		west.setBackground(new Color(255, 102, 0));
@@ -74,23 +70,28 @@ public class ExploreKourpaTest extends JFrame implements ActionListener {
 		panel.add(east, BorderLayout.EAST);
 		panel.add(west, BorderLayout.WEST);
 		panel.add(south, BorderLayout.SOUTH);
-		panel.add(north, BorderLayout.NORTH);
 		// tabs.addTab( "<html><h1 style='padding:5px 100px;font-size:10px;display:inline-block;text-align:center;margin:4px 0px;border:none'>Explore</h1></html>", null, panel, "Explore page");
 		 	       
 		buttons = new JButton[10];
 		Color c = new Color(255, 102, 102);
 		Color c1 = new Color(255, 255, 255);
-		JButtonCreator(buttons, center);
-		 	        
-		
-		
+		JButtonCreator(buttons, center);		 	        
+
 		center2 = center;
 		
 		panel.add(MenuBar, BorderLayout.NORTH);
 		
 		frame.add(panel);
 		frame.setVisible(true);
+		this.panel = panel;
     }
+    
+    public  JPanel getPanel(){ // The following methods are created for testing purposes
+		return panel;
+	}
+	public void setPanel(JPanel panel) {
+		this.panel = panel;
+	}
 
     public void actionPerformed(ActionEvent e) {	
     	for(int counter = 0; counter < buttons.length; counter++) {
@@ -123,9 +124,11 @@ public class ExploreKourpaTest extends JFrame implements ActionListener {
 		}
 	}
 	
+	
 	public final JFrame getFrame() {
 		return frame;
 	}
-
+	
+	
 
  }

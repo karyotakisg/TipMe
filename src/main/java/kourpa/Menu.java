@@ -1,6 +1,7 @@
 package kourpa;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -24,22 +25,26 @@ public class Menu extends JPanel implements ActionListener, KeyListener, MouseLi
                                                                                          // section of the app
 
     User user = new User();
-
+    Color col = new Color(255, 102, 0);
     Icon upload = new ImageIcon("src/main/resources/Upload.png");
     Icon myProfile = new ImageIcon("src/main/resources/MyProfile.png");
     Icon homepage = new ImageIcon("src/main/resources/Homepage.png");
     Icon explore = new ImageIcon("src/main/resources/Explore.png");
-    JRadioButton b1Icon = new JRadioButton(upload);
-    JButton b2Icon = new JButton(myProfile);
-    JButton b3Icon = new JButton(homepage);
-    JButton b4Icon = new JButton(explore);
+    JButton b1Icon = new JButton(homepage);
+    JButton b2Icon = new JButton(explore);
+    JButton b3Icon = new JButton(myProfile);
+    JButton b4Icon = new JButton(upload);
+    MyProfile mp;
+    HomePage hp;
+    ExploreKourpaTest ex;
 
     public Menu() {
+        this.add(b1Icon);
+        this.add(b2Icon);
         this.add(b3Icon);
         this.add(b4Icon);
-        this.add(b2Icon);
-        this.add(b1Icon);
 
+        //this.frame = frame;
         b1Icon.setPreferredSize(new Dimension(100, 50));
         b2Icon.setPreferredSize(new Dimension(100, 50));
         b3Icon.setPreferredSize(new Dimension(100, 50));
@@ -57,7 +62,7 @@ public class Menu extends JPanel implements ActionListener, KeyListener, MouseLi
         javax.swing.border.Border br = BorderFactory.createLineBorder(Color.BLACK);
         this.setBorder(br);
         this.setBackground(Color.BLACK);
-        this.setBounds(0, 0, 1000, 50);
+        this.setBounds(0, 0, 1050, 70);
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
         b1Icon.setBackground(new Color(240, 240, 240));
         b2Icon.setBackground(new Color(240, 240, 240));
@@ -68,19 +73,27 @@ public class Menu extends JPanel implements ActionListener, KeyListener, MouseLi
     @Override
     public void actionPerformed(ActionEvent e) { // go to another section of the app when user press a button.
         if (e.getSource() == b1Icon) {
-
+        	hp.setPanel(hp.getPanel());
+        	new MainFrame(hp.getPanel());
         }
 
         if (e.getSource() == b2Icon) {
+        	new ExploreKourpaTest(user, col);
 
         }
 
         if (e.getSource() == b3Icon) {
-
+        	
+        	mp = new MyProfile(user, col);
+        	
+        	
+        			
         }
         if (e.getSource() == b4Icon) {
-
+        	new Upload();
+        
         }
+            
     }
 
     @Override
@@ -102,6 +115,7 @@ public class Menu extends JPanel implements ActionListener, KeyListener, MouseLi
         if (e.getSource() == b4Icon) {
             b4Icon.setBackground(Color.CYAN);
         }
+        
     }
 
     @Override
@@ -137,8 +151,9 @@ public class Menu extends JPanel implements ActionListener, KeyListener, MouseLi
         }
         if (e.getSource() == b4Icon) {
             b4Icon.setBackground(new Color(240, 240, 240));
-            ;
+            
         }
+        
     }
 
     @Override
