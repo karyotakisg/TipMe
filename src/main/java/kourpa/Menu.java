@@ -72,7 +72,8 @@ public class Menu extends JPanel implements ActionListener, KeyListener, MouseLi
     @Override
     public void actionPerformed(ActionEvent e) { // go to another section of the app when user press a button.
         if (e.getSource() == b1Icon) {
-        	hp.setPanel(hp.getPanel());
+        	//hp.setPanel(hp.getPanel());
+        	new HomePage(user,col);
         }
 
         if (e.getSource() == b2Icon) {
