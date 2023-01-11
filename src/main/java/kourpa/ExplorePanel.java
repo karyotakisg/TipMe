@@ -469,7 +469,7 @@ public class ExplorePanel implements ActionListener {
 		            p9.setVisible(false);
 				}
 				goback[q].setVisible(false);
-				ExploreKourpaTest.visibility(q);
+				ExplorePage.visibility(q);
 				scr.setVisible(false);	        	    
 			}
 		}

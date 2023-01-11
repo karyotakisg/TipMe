@@ -36,7 +36,7 @@ public class Menu extends JPanel implements ActionListener, KeyListener, MouseLi
     JButton b4Icon = new JButton(upload);
     MyProfile mp;
     HomePage hp;
-    ExploreKourpaTest ex;
+    ExplorePage ex;
 
     public Menu() {
         this.add(b1Icon);
@@ -74,11 +74,10 @@ public class Menu extends JPanel implements ActionListener, KeyListener, MouseLi
     public void actionPerformed(ActionEvent e) { // go to another section of the app when user press a button.
         if (e.getSource() == b1Icon) {
         	hp.setPanel(hp.getPanel());
-        	new MainFrame(hp.getPanel());
         }
 
         if (e.getSource() == b2Icon) {
-        	new ExploreKourpaTest(user, col);
+        	new ExplorePage(user, col);
 
         }
 
