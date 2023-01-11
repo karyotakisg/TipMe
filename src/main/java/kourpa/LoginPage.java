@@ -105,7 +105,7 @@ public class LoginPage implements ActionListener {
 				Statement st = conn.createStatement();
 
 				String query = "SELECT username, password, email, PhoneNumber, Sex,"
-						+ " Interest1, Interest2, Interest3 FROM User;";
+						+ " Interest1, Interest2, Interest3, FirstName, LastName FROM User;";
 				// String query2 = " SELECT username, password FROM User;";
 
 				ResultSet rs = st.executeQuery(query);
