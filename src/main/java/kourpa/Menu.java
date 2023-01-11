@@ -1,7 +1,7 @@
 package kourpa;
 
 import java.awt.Color;
-import java.awt.Container;
+
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -15,10 +15,9 @@ import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
+
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JLabel;
+
 
 public class Menu extends JPanel implements ActionListener, KeyListener, MouseListener { // creates the menu at the top
                                                                                          // of the screen for each

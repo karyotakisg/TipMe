@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.*;
-import javax.swing.border.Border;
+
 public class MyProfile extends JFrame implements ActionListener, MouseListener { // creation of the necesery components for MyProfile GUI//
 	User user1 = new User();
 	HomePage hp = new HomePage();
