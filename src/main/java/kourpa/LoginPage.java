@@ -128,6 +128,8 @@ public class LoginPage implements ActionListener {
 						u.setInterest1(rs.getString("Interest1"));
 						u.setInterest2(rs.getString("Interest2"));
 						u.setInterest3(rs.getString("Interest3"));
+						u.setFirstName(rs.getString("FirstName"));
+						u.setLastName(rs.getString("LastName"));
 
 						new HomePage(u, c);
 
@@ -162,7 +164,7 @@ public class LoginPage implements ActionListener {
 			userPasswordField.setText("");
 			messageLabel.setText("");
 			frame.dispose();
-			// Register.register();
+			Register.register();
 		}
 
 	}
