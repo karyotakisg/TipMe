@@ -40,7 +40,7 @@ public class Upload {
 
 	public Upload() {
 		
-		jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		jf.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		jf.setLayout(new BorderLayout(1,1));
 		jf.setBounds(500, 200, 500, 300);
 		
@@ -74,7 +74,9 @@ public class Upload {
 		JLabel jlc = new JLabel("Choose Category");
 		jpgridright.add(jlc);
 
-		String[] categories = { "General", "Sport", "Science", "Cook", "Video Games", "Nature" };
+		String[] categories = { "SCIENCE", "SPORTS", "MUSIC",
+				"FASHION", "TRAVEL", "FITNESS", "ART", 
+				"EDUCATION", "NATURE", "FOOD" };
 		JComboBox<Object> cb = new JComboBox<Object>(categories);
 		jpgridright.add(cb);
 		
