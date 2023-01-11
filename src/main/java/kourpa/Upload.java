@@ -22,7 +22,7 @@ import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
 
 public class Upload {
-
+	private int number = 0;
 	private String tip;
 	private String categ;
 	/* Set graphics of upload */
@@ -114,7 +114,7 @@ public class Upload {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				int number = textarea.getText().length() - (int)textarea.getText().lines().count();
+			//	int number = textarea.getText().length() - (int)textarea.getText().lines().count();
 				JOptionPane.showMessageDialog(null,
 						"The number of character: " + number);	
 			}
@@ -124,7 +124,7 @@ public class Upload {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				int number = textarea.getText().length() - (int)textarea.getText().lines().count();
+	//			int number = textarea.getText().length() - (int)textarea.getText().count();
 				if (number < 1) {
 					JOptionPane.showMessageDialog(null, "There is no tip to upload " + "("
 				+ number + " / 200 character)");
