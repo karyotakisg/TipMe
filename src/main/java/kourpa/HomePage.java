@@ -82,16 +82,14 @@ public class HomePage extends JFrame /*implements ActionListener*/ {
 		feed.add(east, BorderLayout.EAST);
 		feed.add(getScroll(center), BorderLayout.CENTER);
 		Menu menu = new Menu();
-		feed.add(menu.menuBar(u), BorderLayout.NORTH);
+		feed.add(menu.menuBar(u, this), BorderLayout.NORTH);
 		
 		this.add(feed);
 		return this;
 	}
 	
 	// necessary method in order to dispose the correct panel when clicking on the menu buttons
-	public JFrame getFrame() {
-		return this;
-	}
+
 	
 	
 	//ScrollPane generator
@@ -215,6 +213,7 @@ public class HomePage extends JFrame /*implements ActionListener*/ {
 		southLike.add(getTemporaryDeleteButton(post, center, frame, postid));
 		return southLike;
 	}
+	
 	public JPanel getSouthLike2(String text, JPanel center, JPanel post, int postid) {
 		JPanel southLike = new JPanel(new FlowLayout(FlowLayout.LEFT));		
 		Post p = new Post();

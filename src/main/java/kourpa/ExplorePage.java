@@ -78,7 +78,7 @@ public class ExplorePage implements ActionListener {
 
 		center2 = center;
 		
-		panel.add(menu.menuBar(u), BorderLayout.NORTH);
+		panel.add(menu.menuBar(u, frame), BorderLayout.NORTH);
 		
 		frame.add(panel);
 		return frame;

@@ -101,7 +101,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		
 		eastPanelSetup();
 		Menu menu = new Menu();
-		panel.add(menu.menuBar(user), BorderLayout.NORTH);
+		panel.add(menu.menuBar(user, this), BorderLayout.NORTH);
 		return this;
 	}
 	

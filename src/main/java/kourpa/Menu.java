@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -30,22 +31,24 @@ public class Menu extends JPanel implements  KeyListener, MouseListener { // cre
     Icon myProfile = new ImageIcon("src/main/resources/MyProfile.png");
     Icon homepage = new ImageIcon("src/main/resources/Homepage.png");
     Icon explore = new ImageIcon("src/main/resources/Explore.png");
+    Icon refresh = new ImageIcon("src/main/resources/refresh.png");
     JButton b1Icon = new JButton(homepage);
     JButton b2Icon = new JButton(explore);
     JButton b3Icon = new JButton(myProfile);
     JButton b4Icon = new JButton(upload);
-    ButtonGroup radioGroup = new ButtonGroup();
+    JButton b5Icon = new JButton(refresh);
     MyProfile mp;
     HomePage hp;
     ExplorePage ex;
     static JFrame  myProf;
     static JFrame  expl;
     static JFrame  home;
+    
     static int countPr = 1;
     static int countEx = 1;
     static int countH = 1;
-
-    public JPanel menuBar(User u)  {
+    static int current = 0;
+    public JPanel menuBar(User u, JFrame frame)  {
         this.add(b1Icon);
         this.add(b2Icon);
         this.add(b3Icon);
@@ -63,12 +66,26 @@ public class Menu extends JPanel implements  KeyListener, MouseListener { // cre
         b2Icon.setPreferredSize(new Dimension(100, 50));
         b3Icon.setPreferredSize(new Dimension(100, 50));
         b4Icon.setPreferredSize(new Dimension(100, 50));
-
+        b5Icon.setPreferredSize(new Dimension(35, 35));
+        
         b1Icon.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(countH == 1) {
+				current = 1;
+				if(countH != 0 && countEx != 0  & countPr != 0) {
+					countH = 0;
+					home = hp.homePage(u);
+					home.setVisible(true);
+				} else if(countH != 0 && countEx == 0  & countPr != 0) {
+					countH = 0;
+					home = hp.homePage(u);
+					home.setVisible(true);
+				} else if(countH != 0 && countEx != 0  & countPr == 0) {
+					countH = 0;
+					home = hp.homePage(u);
+					home.setVisible(true);
+				} else if(countH != 0 && countEx == 0  & countPr == 0) {
 					countH = 0;
 					home = hp.homePage(u);
 					home.setVisible(true);
@@ -91,11 +108,25 @@ public class Menu extends JPanel implements  KeyListener, MouseListener { // cre
 			}
         	
         });
+        
         b2Icon.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (countEx == 1) {
+				current = 2;
+				if (countH != 0 && countEx != 0  & countPr != 0) {
+					countEx = 0;
+					expl = ex.explorePage(u, col);
+					expl.setVisible(true);
+				} else if(countH == 0 && countEx != 0  & countPr != 0) {
+					countEx = 0;
+					expl = ex.explorePage(u, col);
+					expl.setVisible(true);
+				} else if(countH != 0 && countEx != 0  & countPr == 0) {
+					countEx = 0;
+					expl = ex.explorePage(u, col);
+					expl.setVisible(true);
+				} else if(countH != 0 && countEx == 0  & countPr == 0) {
 					countEx = 0;
 					expl = ex.explorePage(u, col);
 					expl.setVisible(true);
@@ -117,11 +148,25 @@ public class Menu extends JPanel implements  KeyListener, MouseListener { // cre
 			}
         	
         });
+        
         b3Icon.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e) {	
-				if (countPr == 1) {
+			public void actionPerformed(ActionEvent e) {
+				current = 3;
+				if (countH != 0 && countEx != 0  & countPr != 0) {
+					countPr = 0;
+					myProf = mp.myProfile(u);
+					myProf.setVisible(true);
+				} else if(countH == 0 && countEx != 0  & countPr != 0) {
+					countPr = 0;
+					myProf = mp.myProfile(u);
+					myProf.setVisible(true);
+				} else if(countH != 0 && countEx == 0  & countPr != 0) {
+					countPr = 0;
+					myProf = mp.myProfile(u);
+					myProf.setVisible(true);
+				} else if(countH == 0 && countEx == 0  & countPr != 0) {
 					countPr = 0;
 					myProf = mp.myProfile(u);
 					myProf.setVisible(true);
@@ -154,10 +199,32 @@ public class Menu extends JPanel implements  KeyListener, MouseListener { // cre
 			}
         	
         });
+        
+        if (current == 1 || current == 3) {
+        	
+        	this.add(b5Icon);
+	        b5Icon.addActionListener(new ActionListener() {
+	
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if (current == 1) {
+						home.dispose();
+						home = hp.homePage(u);
+						home.setVisible(true);					
+					}  else {
+						myProf.dispose();
+						myProf = mp.myProfile(u);
+						myProf.setVisible(true);
+					}
+				}
+	        	
+	        });
+    	}
         b1Icon.addMouseListener(this);
         b2Icon.addMouseListener(this);
         b3Icon.addMouseListener(this);
         b4Icon.addMouseListener(this);
+        b5Icon.addMouseListener(this);
 
         javax.swing.border.Border br = BorderFactory.createLineBorder(Color.BLACK);
         this.setBorder(br);
@@ -168,6 +235,7 @@ public class Menu extends JPanel implements  KeyListener, MouseListener { // cre
         b2Icon.setBackground(new Color(240, 240, 240));
         b3Icon.setBackground(new Color(240, 240, 240));
         b4Icon.setBackground(new Color(240, 240, 240));
+        b5Icon.setBackground(Color.BLACK);
         
         return this;
         
