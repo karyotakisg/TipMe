@@ -131,7 +131,11 @@ public class LoginPage implements ActionListener {
 						u.setFirstName(rs.getString("FirstName"));
 						u.setLastName(rs.getString("LastName"));
 
-						new HomePage(u, c);
+						HomePage hp = new HomePage();
+						hp.homePage(u).setVisible(true);
+						
+						
+						
 
 						loggedIn = true;
 						break;

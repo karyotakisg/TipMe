@@ -47,8 +47,8 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 	JLabel labelForPosts = new JLabel("My Posts");
 	Icon diary = new ImageIcon("src/main/resources/diaryIcon.png");
 	Icon diary2 = new ImageIcon("src/main/resources/diary2.png");
-	private JPanel p = new JPanel( new GridLayout(getMessageCount(), 1, 0, 10));//
-	Menu menu = new Menu();
+	private JPanel p;//
+	
 	JButton changeButton = new JButton();
 	JButton sumbitButton = new JButton();
 	Font defaultFont = new Font("Gill Sans MT", Font.BOLD, 16);
@@ -68,10 +68,8 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 	ImageIcon iconColorChooser = new ImageIcon("src\\main\\resources\\colors.png");
     JButton logoutButton = new JButton();
     
-    MyProfile() {}
-    
-	MyProfile(User user, Color col) { 
-		super("Get tip-My profile");// constructor of the MyProfile GUI
+	public JFrame myProfile(User user) { 
+		//super("Get tip-My profile");// constructor of the MyProfile GUI
 		Image ic = Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\logo.png");
 		
 		this.setIconImage(ic);
@@ -79,7 +77,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		
 		this.setBounds(180, 50, 1050, 750);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		p = new JPanel( new GridLayout(getMessageCount(user), 1, 0, 10));
 		setValuesInTextAreas();
 		changeButton.setSize(150, 50);
 		changeButton.setText("Change");
@@ -96,15 +94,18 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		panelSetup();
 		setFieldsUneditable();
 		southSetup();
-		setTextinPostArea();
+		setTextinPostArea(user);
 		scrollbarSetup();
         logoutButtonSetup();
 		this.add(panel);
-		panel.add(menu, BorderLayout.NORTH);
+		
 		eastPanelSetup();
-		this.setResizable(true);
-		this.setVisible(true);
+		Menu menu = new Menu();
+		panel.add(menu.menuBar(user), BorderLayout.NORTH);
+		return this;
 	}
+	
+	
 	public void sumbit(User user) {
 		user.setPassword(String.valueOf(passwordText.getPassword()));
 		user.setEmail(emailText.getText());
@@ -282,7 +283,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		if (e.getSource() == dialBut) {
 			dial.dispose();
 			this.dispose();
-			new MyProfile(user1,this.getColor());
+			this.show();
 		}
 	}
 	@Override
@@ -341,7 +342,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		birthdayText.setText(user1.getBirthDate());
 		phoneNumberText.setText(user1.getPhoneNumber());
 	}
-	public void setTextinPostArea() {
+	public void setTextinPostArea(User user1) {
 		String jdbcUrl = "jdbc:sqlite:socialmedia.db"; // Database URL
 		try {
 			// New Connection
@@ -403,7 +404,6 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 	
 	panel = new JPanel(new BorderLayout());
 	panel.setBackground(Color.black);
-	panel.setPreferredSize(hp);
 	center = new JPanel(new BorderLayout());
 	center.setBackground(Color.black);
 	center2 = new JPanel(new GridLayout(11 , 2, 2, 2));
@@ -499,7 +499,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		
     }
     
-    public int getMessageCount() {
+    public int getMessageCount(User user1) {
 		int count = 0;
 		String url = "jdbc:sqlite:socialmedia.db";
 		try {
@@ -523,7 +523,6 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			System.out.println("Error");
 			s.printStackTrace();
 		}
-
 		return count;
 	}
 	public Color getColor(){ // returns the color of the panel so other sections of the app can use it

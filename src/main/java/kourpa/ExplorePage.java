@@ -33,7 +33,7 @@ public class ExplorePage implements ActionListener {
     
     public ExplorePage() {}
 
-    public 	ExplorePage(User u, Color col) {
+    public JFrame explorePage(User u, Color col) {
 
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(180, 50, 1050, 750);
@@ -52,8 +52,7 @@ public class ExplorePage implements ActionListener {
 		// panel.setLayout(bl);
 	 	panel.setLayout(new BorderLayout(2, 2));
 	 	//center.setPreferredSize(new Dimension(600,600));
-	 	Menu MenuBar = new Menu();
-		MenuBar.setPreferredSize(new Dimension(200, 50));
+	 	Menu menu = new Menu();
 		south.setPreferredSize(new Dimension(200, 50));
 		east.setPreferredSize(new Dimension(100, 680));
 		west.setPreferredSize(new Dimension(100, 680));
@@ -79,11 +78,10 @@ public class ExplorePage implements ActionListener {
 
 		center2 = center;
 		
-		panel.add(MenuBar, BorderLayout.NORTH);
+		panel.add(menu.menuBar(u), BorderLayout.NORTH);
 		
 		frame.add(panel);
-		frame.setVisible(true);
-		this.panel = panel;
+		return frame;
     }
     
     public  JPanel getPanel(){ // The following methods are created for testing purposes
@@ -125,9 +123,6 @@ public class ExplorePage implements ActionListener {
 	}
 	
 	
-	public final JFrame getFrame() {
-		return frame;
-	}
 	
 	
 

@@ -24,15 +24,15 @@ import java.sql.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 
-public class HomePage extends Dimension /*implements ActionListener*/ {
+public class HomePage extends JFrame /*implements ActionListener*/ {
 	Color textColor = Color.decode("#ffffff");
 	Color backgroundColor = Color.decode("#000000");
 	private final User user = new User();
 	private int deletedMessagesCount = 0;
-	private int postid;
+	
 	private int count = 0;
 	private int width;
-	public JFrame frame = new JFrame();
+	//private static final JFrame frame = new JFrame();
 	private  JPanel feed = new JPanel();
 	private  JPanel east = new JPanel();
 	private  JPanel west = new JPanel();
@@ -42,54 +42,56 @@ public class HomePage extends Dimension /*implements ActionListener*/ {
 	
 	HomePage() {}
 
-	HomePage(User u, Color col) {
-		frame.setTitle("GetTip");
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		frame.setLayout(new BorderLayout());
-		frame.setBounds(180, 50, 1050, 750);
+	public JFrame homePage(User u) {
+		int loginCase = 0;
+		this.setTitle("GetTip");
+		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		this.setBounds(180, 50, 1050, 750);
 
-		frame.setBackground(Color.BLACK);
+		this.setBackground(Color.BLACK);
 		
 		feed.setLayout(new BorderLayout(2, 2));
 		feed.setBackground(Color.BLACK);
 		//feed.setBorder(new RoundedBorder(10));
 
-		Menu menuBar = new Menu();
+		
 		east.setLayout(new GridLayout(5, 1, 0, 0));
 		west.setLayout(new GridLayout(5, 1, 10, 10));
 		center.setLayout(new GridLayout(getMessageCount(), 1, 7, 3));
 		
 
 
-		south.setBackground(col);
-		east.setBackground(col);
-		west.setBackground(col);
+		south.setBackground(new Color(255, 102, 0));
+		east.setBackground(new Color(255, 102, 0));
+		west.setBackground(new Color(255, 102, 0));
 		center.setBackground(Color.BLACK);
 
-		menuBar.setPreferredSize(new Dimension(1050, 50));
 		south.setPreferredSize(new Dimension(1050, 20));
 		east.setPreferredSize(new Dimension(135, 680));
 		west.setPreferredSize(new Dimension(135, 680));
 
 
 		getDecorations();
-		getDataBasePosts(u, center, frame);
+		getDataBasePosts(u, center, this);
 		//logoutButtonSetup();
 		
-		feed.add(menuBar, BorderLayout.NORTH);
+		
 		feed.add(south, BorderLayout.SOUTH);
 		feed.add(center, BorderLayout.CENTER);
 		feed.add(west, BorderLayout.WEST);
 		feed.add(east, BorderLayout.EAST);
 		feed.add(getScroll(center), BorderLayout.CENTER);
+		Menu menu = new Menu();
+		feed.add(menu.menuBar(u), BorderLayout.NORTH);
 		
-		frame.add(feed);
-		frame.setVisible(true);
-		this.feed = feed;
+		this.add(feed);
+		return this;
 	}
 	
 	// necessary method in order to dispose the correct panel when clicking on the menu buttons
-	
+	public JFrame getFrame() {
+		return this;
+	}
 	
 	
 	//ScrollPane generator

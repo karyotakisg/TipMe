@@ -12,17 +12,18 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 
-public class Menu extends JPanel implements ActionListener, KeyListener, MouseListener { // creates the menu at the top
+public class Menu extends JPanel implements  KeyListener, MouseListener { // creates the menu at the top
                                                                                          // of the screen for each
-                                                                                         // section of the app
-
+                      
     User user = new User();
     Color col = new Color(255, 102, 0);
     Icon upload = new ImageIcon("src/main/resources/Upload.png");
@@ -33,26 +34,126 @@ public class Menu extends JPanel implements ActionListener, KeyListener, MouseLi
     JButton b2Icon = new JButton(explore);
     JButton b3Icon = new JButton(myProfile);
     JButton b4Icon = new JButton(upload);
+    ButtonGroup radioGroup = new ButtonGroup();
     MyProfile mp;
     HomePage hp;
     ExplorePage ex;
+    static JFrame  myProf;
+    static JFrame  expl;
+    static JFrame  home;
+    static int countPr = 1;
+    static int countEx = 1;
+    static int countH = 1;
 
-    public Menu() {
+    public JPanel menuBar(User u)  {
         this.add(b1Icon);
         this.add(b2Icon);
         this.add(b3Icon);
         this.add(b4Icon);
-
+        
+        
+        
+        hp = new HomePage();
+        mp = new MyProfile();
+        ex = new ExplorePage();
+        
+        
         //this.frame = frame;
         b1Icon.setPreferredSize(new Dimension(100, 50));
         b2Icon.setPreferredSize(new Dimension(100, 50));
         b3Icon.setPreferredSize(new Dimension(100, 50));
         b4Icon.setPreferredSize(new Dimension(100, 50));
 
-        b1Icon.addActionListener(this);
-        b2Icon.addActionListener(this);
-        b3Icon.addActionListener(this);
-        b4Icon.addActionListener(this);
+        b1Icon.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(countH == 1) {
+					countH = 0;
+					home = hp.homePage(u);
+					home.setVisible(true);
+				} else if (countEx != 0 && countPr != 0 && countH == 0) {
+					home.setVisible(true);
+				} else if (countH == 0 && countPr != 0 && countEx == 0) {
+					home.setVisible(true);
+					expl.setVisible(false);
+					
+				} else if (countEx == 0 && countPr == 0 && countEx != 0) {
+					home.setVisible(true);
+					myProf.setVisible(false);
+					
+				} else {
+					home.setVisible(true);
+					myProf.setVisible(false);				
+					expl.setVisible(false);
+					
+				}
+			}
+        	
+        });
+        b2Icon.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (countEx == 1) {
+					countEx = 0;
+					expl = ex.explorePage(u, col);
+					expl.setVisible(true);
+				} else if (countEx == 0 && countPr != 0 && countH != 0) {
+					expl.setVisible(true);
+				} else if (countEx == 0 && countPr != 0 && countH == 0) {
+					expl.setVisible(true);
+					home.setVisible(false);			
+				} else if (countEx == 0 && countPr == 0 && countH != 0) {
+					expl.setVisible(true);
+					myProf.setVisible(false);
+					
+				} else {
+					expl.setVisible(true);
+					myProf.setVisible(false);
+					home.setVisible(false);
+					
+				}
+			}
+        	
+        });
+        b3Icon.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {	
+				if (countPr == 1) {
+					countPr = 0;
+					myProf = mp.myProfile(u);
+					myProf.setVisible(true);
+				} else if (countEx != 0 && countPr == 0 && countH != 0) {
+					myProf.setVisible(true);
+				} else if (countEx == 0 && countPr == 0 && countH != 0) {
+					myProf.setVisible(true);
+					expl.setVisible(false);
+					
+				} else if (countEx != 0 && countPr == 0 && countH == 0) {
+					myProf.setVisible(true);
+					home.setVisible(false);
+					
+				} else {
+					myProf.setVisible(true);
+					home.setVisible(false);
+					expl.setVisible(false);
+					
+				}
+				
+			}
+        	
+        });
+        b4Icon.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new Upload();
+			}
+        	
+        });
         b1Icon.addMouseListener(this);
         b2Icon.addMouseListener(this);
         b3Icon.addMouseListener(this);
@@ -67,33 +168,12 @@ public class Menu extends JPanel implements ActionListener, KeyListener, MouseLi
         b2Icon.setBackground(new Color(240, 240, 240));
         b3Icon.setBackground(new Color(240, 240, 240));
         b4Icon.setBackground(new Color(240, 240, 240));
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) { // go to another section of the app when user press a button.
-        if (e.getSource() == b1Icon) {
-        	//hp.setPanel(hp.getPanel());
-        	new HomePage(user,col);
-        }
-
-        if (e.getSource() == b2Icon) {
-        	new ExplorePage(user, col);
-
-        }
-
-        if (e.getSource() == b3Icon) {
-        	
-        	mp = new MyProfile(user, col);
-        	
-        	
-        			
-        }
-        if (e.getSource() == b4Icon) {
-        	new Upload();
         
-        }
-            
+        return this;
+        
     }
+
+    
 
     @Override
     public void mouseClicked(MouseEvent e) {
