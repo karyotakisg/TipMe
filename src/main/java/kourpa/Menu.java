@@ -40,6 +40,7 @@ public class Menu extends JPanel implements  KeyListener, MouseListener { // cre
     MyProfile mp;
     HomePage hp;
     ExplorePage ex;
+    LoginPage lp = new LoginPage();
     static JFrame  myProf;
     static JFrame  expl;
     static JFrame  home;
@@ -75,22 +76,26 @@ public class Menu extends JPanel implements  KeyListener, MouseListener { // cre
 				current = 1;
 				if(countH != 0 && countEx != 0  & countPr != 0) {
 					countH = 0;
-					home = hp.homePage(u);
-					home.setVisible(true);
+					home = lp.getHome();
+					//home.setVisible(true);
 				} else if(countH != 0 && countEx == 0  & countPr != 0) {
 					countH = 0;
-					home = hp.homePage(u);
+					home = lp.getHome();
 					home.setVisible(true);
+					expl.setVisible(false);
 				} else if(countH != 0 && countEx != 0  & countPr == 0) {
 					countH = 0;
-					home = hp.homePage(u);
+					home = lp.getHome();
 					home.setVisible(true);
+					myProf.setVisible(false);
 				} else if(countH != 0 && countEx == 0  & countPr == 0) {
 					countH = 0;
-					home = hp.homePage(u);
+					home = lp.getHome();
 					home.setVisible(true);
+					expl.setVisible(false);
+					myProf.setVisible(false);
 				} else if (countEx != 0 && countPr != 0 && countH == 0) {
-					home.setVisible(true);
+					
 				} else if (countH == 0 && countPr != 0 && countEx == 0) {
 					home.setVisible(true);
 					expl.setVisible(false);
@@ -116,28 +121,40 @@ public class Menu extends JPanel implements  KeyListener, MouseListener { // cre
 				current = 2;
 				if (countH != 0 && countEx != 0  & countPr != 0) {
 					countEx = 0;
-					expl = ex.explorePage(u, col);
+					expl = lp.getExplore();
 					expl.setVisible(true);
+					lp.getHome().setVisible(false);
 				} else if(countH == 0 && countEx != 0  & countPr != 0) {
 					countEx = 0;
-					expl = ex.explorePage(u, col);
+					expl = lp.getExplore();
 					expl.setVisible(true);
+					home.setVisible(false);
 				} else if(countH != 0 && countEx != 0  & countPr == 0) {
 					countEx = 0;
-					expl = ex.explorePage(u, col);
+					expl = lp.getExplore();
 					expl.setVisible(true);
+					myProf.setVisible(false);
+				}  else if(countH == 0 && countEx != 0  & countPr == 0) {
+					countEx = 0;
+					expl = lp.getExplore();
+					expl.setVisible(true);
+					home.setVisible(false);
+					myProf.setVisible(false);
 				} else if(countH != 0 && countEx == 0  & countPr == 0) {
 					countEx = 0;
 					expl = ex.explorePage(u, col);
 					expl.setVisible(true);
+					myProf.setVisible(false);
 				} else if (countEx == 0 && countPr != 0 && countH != 0) {
 					expl.setVisible(true);
+					home.setVisible(false);
 				} else if (countEx == 0 && countPr != 0 && countH == 0) {
 					expl.setVisible(true);
 					home.setVisible(false);			
 				} else if (countEx == 0 && countPr == 0 && countH != 0) {
 					expl.setVisible(true);
 					myProf.setVisible(false);
+					home.setVisible(false);
 					
 				} else {
 					expl.setVisible(true);
@@ -156,26 +173,33 @@ public class Menu extends JPanel implements  KeyListener, MouseListener { // cre
 				current = 3;
 				if (countH != 0 && countEx != 0  & countPr != 0) {
 					countPr = 0;
-					myProf = mp.myProfile(u);
+					myProf = lp.getMyProf();
 					myProf.setVisible(true);
+					lp.getHome().setVisible(false);
 				} else if(countH == 0 && countEx != 0  & countPr != 0) {
 					countPr = 0;
-					myProf = mp.myProfile(u);
+					myProf = lp.getMyProf();
 					myProf.setVisible(true);
+					home.setVisible(false);
 				} else if(countH != 0 && countEx == 0  & countPr != 0) {
 					countPr = 0;
-					myProf = mp.myProfile(u);
+					myProf = lp.getMyProf();
 					myProf.setVisible(true);
+					expl.setVisible(false);
+					lp.getHome().setVisible(false);
 				} else if(countH == 0 && countEx == 0  & countPr != 0) {
 					countPr = 0;
 					myProf = mp.myProfile(u);
 					myProf.setVisible(true);
+					expl.setVisible(false);
+					home.setVisible(false);
 				} else if (countEx != 0 && countPr == 0 && countH != 0) {
 					myProf.setVisible(true);
+					home.setVisible(false);
 				} else if (countEx == 0 && countPr == 0 && countH != 0) {
 					myProf.setVisible(true);
 					expl.setVisible(false);
-					
+					home.setVisible(false);
 				} else if (countEx != 0 && countPr == 0 && countH == 0) {
 					myProf.setVisible(true);
 					home.setVisible(false);
@@ -200,26 +224,29 @@ public class Menu extends JPanel implements  KeyListener, MouseListener { // cre
         	
         });
         
-        if (current == 1 || current == 3) {
         	
         	this.add(b5Icon);
 	        b5Icon.addActionListener(new ActionListener() {
 	
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					if (current == 1) {
+					if (current == 1 || current == 0) {
 						home.dispose();
 						home = hp.homePage(u);
-						home.setVisible(true);					
-					}  else {
+						home.setVisible(true);
+					}  else if(current == 3) {
 						myProf.dispose();
 						myProf = mp.myProfile(u);
 						myProf.setVisible(true);
+					} else {
+						expl.dispose();
+						expl = ex.explorePage(u, col);
+						expl.setVisible(true);
 					}
 				}
 	        	
 	        });
-    	}
+        
         b1Icon.addMouseListener(this);
         b2Icon.addMouseListener(this);
         b3Icon.addMouseListener(this);

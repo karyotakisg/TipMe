@@ -30,12 +30,15 @@ public class LoginPage implements ActionListener {
 	JLabel userPasswordLabel = new JLabel("Password:");
 	JLabel messageLabel = new JLabel();
 	JLabel tryAgainLabel = new JLabel();
+	static JFrame expl;
+	static JFrame myPr;
+	static JFrame home;
 
 	// HashMap<String, String> logininfo = new HashMap<String, String>();
 
 	Color c;
 	
-	LoginPage() {
+	public JFrame loginPage() {
 
 		c = new Color(51, 153, 255);
 		frame.getContentPane().setBackground(c);
@@ -79,6 +82,7 @@ public class LoginPage implements ActionListener {
 		frame.setResizable(false);
 		frame.setLayout(null);
 		frame.setVisible(true);
+		return frame;
 
 	}
 
@@ -132,7 +136,17 @@ public class LoginPage implements ActionListener {
 						u.setLastName(rs.getString("LastName"));
 
 						HomePage hp = new HomePage();
-						hp.homePage(u).setVisible(true);
+						MyProfile mp = new MyProfile();
+						ExplorePage ex = new ExplorePage();
+						expl = ex.explorePage(u, new Color(255, 102, 0));
+						expl.setVisible(false);
+						setExplore(expl);
+						myPr = mp.myProfile(u);
+						myPr.setVisible(false);
+						setMyProf(myPr);
+						home = hp.homePage(u);
+						setHome(home);
+						home.setVisible(true);
 						
 						
 						
@@ -171,5 +185,33 @@ public class LoginPage implements ActionListener {
 			Register.register();
 		}
 
+	}
+	public void setExplore(JFrame frame) {
+		
+		expl = frame;
+	}
+	
+	public JFrame getExplore() {
+		expl.setVisible(false);
+		return expl;
+	}
+	
+	public void setHome(JFrame frame) {
+		home.setVisible(true);
+		home = frame;
+	}
+	
+	public JFrame getHome() {
+		return home;
+	}
+	
+	public void setMyProf(JFrame frame) {
+		
+		myPr = frame;
+	}
+	
+	public JFrame getMyProf() {
+		myPr.setVisible(false);
+		return myPr;
 	}
 }

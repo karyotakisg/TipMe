@@ -38,6 +38,8 @@ public class ExplorePage implements ActionListener {
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(180, 50, 1050, 750);
 		frame.setBackground(Color.BLACK);
+		Image i = Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\logo.png");
+		frame.setIconImage(i);
 		   
 		center = new JPanel();	  			
 		center.setBackground(Color.black);

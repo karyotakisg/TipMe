@@ -17,6 +17,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,6 +30,7 @@ public class HomePage extends JFrame /*implements ActionListener*/ {
 	Color backgroundColor = Color.decode("#000000");
 	private final User user = new User();
 	private int deletedMessagesCount = 0;
+	ImageIcon logo = new ImageIcon("src\\main\\resources\\logo.png");
 	
 	private int count = 0;
 	private int width;
@@ -47,6 +49,8 @@ public class HomePage extends JFrame /*implements ActionListener*/ {
 		this.setTitle("GetTip");
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setBounds(180, 50, 1050, 750);
+		Image i = Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\logo.png");
+		this.setIconImage(i);
 
 		this.setBackground(Color.BLACK);
 		
@@ -208,7 +212,7 @@ public class HomePage extends JFrame /*implements ActionListener*/ {
 		southLike.add(p.getLikeButton(postid));
 		southLike.add(Box.createHorizontalStrut(20));
 		southLike.add(p.getDislikeButton(postid));
-		southLike.add(Box.createHorizontalStrut(405));
+		southLike.add(Box.createHorizontalStrut(25));
 		southLike.add(getCopyButton(text, post));
 		southLike.add(getTemporaryDeleteButton(post, center, frame, postid));
 		return southLike;

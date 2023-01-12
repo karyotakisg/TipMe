@@ -354,7 +354,8 @@ public class Register {
 			public void actionPerformed(ActionEvent e) {
 
 				frame.dispose();
-				new LoginPage();
+				LoginPage lp = new LoginPage();
+				lp.loginPage();
 
 			}
 
