@@ -148,6 +148,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			sumbitButton.setOpaque(true);
 			sumbitButton.setSize(160, 60);
 			sumbitButton.addMouseListener(this);
+			sumbitButton.setVisible(true);
 			east2.add(sumbitButton);
 			
 			setFieldsEditable();
@@ -255,8 +256,8 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
         	int input = JOptionPane.showOptionDialog(null, "Are you sure you want to logout?", null,
 					JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, null, null);
 			if (input == JOptionPane.OK_OPTION) {
-				new LoginPage();
-				dispose();
+				LoginPage lp = new LoginPage();
+				lp.loginPage().dispose();
 			}
 		}
 	}
@@ -266,7 +267,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		if (e.getSource() == sumbitButton) {
 			this.sumbit(user1);
 			setValuesInTextAreas();
-			dial.setSize(300, 300);
+			dial.setSize(480, 370);
 			dial.setLocationRelativeTo(null);
 			JLabel dialLabel = new JLabel("You have submitted your changes with success", SwingConstants.CENTER);
 			dialLabel.setSize(100, 50);
@@ -279,10 +280,17 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			dialBut.setVisible(true);
 			dial.setVisible(true);
 			dialBut.addMouseListener(this);
+			sumbitButton.setVisible(false);
+			
+			
 		}
 		if (e.getSource() == dialBut) {
 			dial.dispose();
+			changeButton.setVisible(true);
+			setFieldsUneditable();
 			this.dispose();
+			
+			
 			this.show();
 		}
 	}

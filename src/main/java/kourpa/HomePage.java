@@ -229,7 +229,7 @@ public class HomePage extends JFrame /*implements ActionListener*/ {
 		southLike.add(p.getLikeButton(postid));
 		southLike.add(Box.createHorizontalStrut(20));
 		southLike.add(p.getDislikeButton(postid));
-		southLike.add(Box.createHorizontalStrut(475));
+		southLike.add(Box.createHorizontalStrut(425));
 		southLike.add(getCopyButton(text, post));
 		return southLike;
 	}
