@@ -194,7 +194,10 @@ public class Menu extends JPanel implements  KeyListener, MouseListener { // cre
 	    b5Icon.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (current == 1 || current == 0) {
+				
+				if (current == 0) {
+					home = lp.getHome();
+				} else if (current == 1) {
 					home.dispose();
 					home = hp.homePage(u);
 					home.setVisible(true);
@@ -206,6 +209,8 @@ public class Menu extends JPanel implements  KeyListener, MouseListener { // cre
 					expl.dispose();
 					expl = ex.explorePage(u, col);
 					expl.setVisible(true);
+				
+					
 				}
 			}
 	    });
