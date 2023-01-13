@@ -1,4 +1,5 @@
 package kourpa;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -7,33 +8,37 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Date;
-import javax.swing.Timer;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-//import java.util.HashMap;
+
+
 public class Post {
-	// String jdbcUrl = "jdbc:sqlite:socialmedia.db" ;
+	
 	private Color col1 = new Color(246, 246, 246);
 	private Color col2 = new Color(246, 246, 246);
-	private boolean flag = false;
 	private int likes;
-	private int dislikes; // SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private boolean liked = false;
+	private boolean disliked = false;
+	private int dislikes; 
+	// SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
 	Date now = new Date();
 	String strDate = sdfDate.format(now);
 	User user = new User();
+
 	// αποθήκευση ποστ στην βαση με στοιχεια όνομα, κατηγορία, κείμενο -- void
-	public Post () {}
+	public Post() {
+	}
+
 	public Post(User user) {
 		this.user = user;
 	}
+
 	public void storePost(String tip, String categ) {
 		String jdbcUrl = "jdbc:sqlite:socialmedia.db";
 		try {
@@ -47,8 +52,8 @@ public class Post {
 			 * 
 			 */
 			String query = "INSERT INTO Post(Text, " + "Category, " + "UploadDate, " + "Likes, " + "UserId)"
-				+ " VALUES(" + "'" + tip + "'" + "," + "'" + categ + "'" + "," + "'" + strDate + "'" + "," + "'" + 0
-				+ "'" + "," + "'" + 5 + "'" + ");";
+					+ " VALUES(" + "'" + tip + "'" + "," + "'" + categ + "'" + "," + "'" + strDate + "'" + "," + "'" + 0
+					+ "'" + "," + "'" + 5 + "'" + ");";
 			statement.executeUpdate(query);
 			conn.close();
 		} catch (SQLException s) {
@@ -58,154 +63,167 @@ public class Post {
 			System.out.println("NullPointerException");
 		}
 	}
-	public void setLikes(int likes) {
-		this.likes = likes;
-	}
-	public int getLikes() {
-		return likes;
-	}
+
 	public JButton getLikeButton(int postid) {
 		Font fontLike = new Font("Serif", Font.BOLD, 15);
 		ImageIcon icon = new ImageIcon("src\\main\\resources\\like.png");
-		// likeButton.setBounds(250, 20, 60, 30);
 		JButton like = new JButton("" + getLikeCount(postid) + "", icon);
+		String jdbcUrl = "jdbc:sqlite:socialmedia.db";
+
+		try {
+			String qLikes = "SELECT userid FROM Likes WHERE PostId = " + postid;
+			Connection conn = DriverManager.getConnection(jdbcUrl);
+			Statement statement = conn.createStatement();
+			ResultSet rs = statement.executeQuery(qLikes);
+			//System.out.println(user.getUserId());
+			while (rs.next()) {
+				if (rs.getInt("userid") == user.getUserId()) {
+					liked = true;
+					col1 = Color.green;
+					break;
+				}
+			}
+			like.setBackground(col1);
+			conn.close();
+		} catch (SQLException s) {
+			System.out.println("Failed to connect and get the number of likes");
+			s.printStackTrace();
+		}
+
 		like.addActionListener(new ActionListener() {
-			String query;
-			String jdbcUrl = "jdbc:sqlite:socialmedia.db";
-			boolean liked = false;
-			boolean disliked = false;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				/*
-				 * if (e.getSource() == like && like.getBackground() == col1 &&
-				 * getDislikeButton(postid).getBackground() == col2 && flag == false) { // TODO
-				 * Auto-generated method stub query =
-				 * "UPDATE Post SET Likes = Likes+1 WHERE PostId =" + postid; col1 =
-				 * Color.green; like.setBackground(col1); likes = getLikeCount(postid); likes++;
-				 * like.setText(String.valueOf(likes));
-				 * getLikeButton(postid).setBackground(Color.white); flag = true; } else if
-				 * (e.getSource() == like && like.getBackground() == Color.green) { query =
-				 * "UPDATE Post SET Likes = Likes-1 WHERE PostId =" + postid; col1 = new
-				 * Color(246, 246, 246); like.setBackground(col1); likes = getLikeCount(postid);
-				 * if (likes > 0) { likes--; } else { likes = 0; }
-				 * like.setText(String.valueOf(likes)); flag = false; } else { int input =
-				 * JOptionPane.showOptionDialog(null,
-				 * "Remove your dislike first (click again on the dislike button)",
-				 * "Help message", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-				 * null, null, null); query = "SELECT Likes FROM Post"; }
-				 */
+				
+				String query = "SELECT Likes FROM Post";
+				String qLikes = "SELECT userid FROM Dislikes WHERE PostId = " + postid;
+				if (e.getSource() == like && !liked && !disliked) 
+				{
+					// TODO Auto-generated method stub
+					query = "UPDATE Post SET Likes = Likes + 1 WHERE PostId = " + postid;
+					qLikes = "INSERT INTO Likes(userid, postid) VALUES(" + user.getUserId() + ", " + postid + ")";
+					col1 = Color.green;
+					like.setBackground(col1);
+					likes = getLikeCount(postid);
+					liked = true;
+					likes++;
+					like.setText(String.valueOf(likes));
+					getLikeButton(postid).setBackground(Color.green);
+				} else if (e.getSource() == like && liked && !disliked) {
+					query = "UPDATE Post SET Likes = Likes-1 WHERE PostId =" + postid;
+					qLikes = "DELETE FROM Likes WHERE postid = " + postid + "  " + "AND userid = " + user.getUserId();
+					col1 = new Color(246, 246, 246);
+					like.setBackground(col1);
+					likes = getLikeCount(postid);
+					liked = false;
+					if (likes < 0) {
+						likes = 0;
+					} else {
+						--likes;
+					}
+					like.setText(String.valueOf(likes));
+				} else if (e.getSource() == like && disliked) {
+					int input = JOptionPane.showOptionDialog(null,
+							"Remove your dislike first (click again on the dislike button)", "Help message",
+							JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+					// query = "SELECT Likes FROM Post";
+				}
 				try {
-					String qLikes = "SELECT userid FROM Likes WHERE PostId = " + postid;
-					String qDislikes = "SELECT userid FROM Dislikes WHERE PostId = " + postid;
 					Connection conn = DriverManager.getConnection(jdbcUrl);
 					Statement statement = conn.createStatement();
-					ResultSet rs = statement.executeQuery(qLikes);
-					System.out.println(user.getUserId());
-					while (rs.next()) {
-						if (rs.getInt("userid") == user.getUserId()) {
-							liked = true;
-							col1 = Color.green;
-							break;
-						}
-					}
-					like.setBackground(col1);
-					rs = statement.executeQuery(qDislikes);
-					while (rs.next()) {
-						if (rs.getInt("userid") == user.getUserId())
-							disliked = true;
-					}
-					if (e.getSource() == like && !liked) //&& like.getBackground() == col1
-							//&& getDislikeButton(postid).getBackground() == col2 && flag == false) 
-					{
-						// TODO Auto-generated method stub
-						query = "UPDATE Post SET Likes = Likes + 1 WHERE PostId = " + postid;
-						qLikes = "INSERT INTO Likes(userid, postid) VALUES(" + user.getUserId() + ", " + postid + ")";
-						col1 = Color.green;
-						like.setBackground(col1);
-						likes = getLikeCount(postid);
-						liked = true;
-						likes++;
-						like.setText(String.valueOf(likes));
-						getLikeButton(postid).setBackground(Color.white);
-						flag = true;
-					} else if (e.getSource() == like && liked) {
-						query = "UPDATE Post SET Likes = Likes-1 WHERE PostId =" + postid;
-						qLikes = "DELETE FROM Likes WHERE postid = " + postid + "AND userid = " + user.getUserId();
-						col1 = new Color(246, 246, 246);
-						like.setBackground(col1);
-						likes = getLikeCount(postid);
-						liked = false;
-						if (likes < 0) {
-							likes = 0; } else {--likes;}
-						like.setText(String.valueOf(likes));
-						flag = false;
-					} else {
-						int input = JOptionPane.showOptionDialog(null,
-					"Remove your dislike first (click again on the dislike button)", "Help message",
-							JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
-						//query = "SELECT Likes FROM Post";
-					}
 					statement.executeUpdate(query);
 					statement.executeUpdate(qLikes);
 					conn.close();
+
 				} catch (SQLException s) {
 					System.out.println("Failed to connect and get the number of likes");
 					s.printStackTrace();
 				}
+
 			}
 		});
+
 		like.setFont(fontLike);
 		like.setPreferredSize(new Dimension(100, 30));
 		like.setFocusable(false);
 		return like;
 	}
+
 	public JButton getDislikeButton(int postid) {
 		Font fontdisLike = new Font("Serif", Font.BOLD, 15);
 		ImageIcon icon = new ImageIcon("src\\main\\resources\\dislike.png");
-		// likeButton.setBounds(250, 20, 60, 30);
 		JButton dislike = new JButton("" + getDislikeCount(postid) + "", icon);
-		dislike.setBackground(col2);
+
+		String jdbcUrl = "jdbc:sqlite:socialmedia.db";
+
+		try {
+			String qDislikes = "SELECT userid FROM Dislikes WHERE PostId = " + postid;
+			Connection conn = DriverManager.getConnection(jdbcUrl);
+			Statement statement = conn.createStatement();
+			ResultSet rs = statement.executeQuery(qDislikes);
+			// System.out.println(user.getUserId());
+			while (rs.next()) {
+				if (rs.getInt("userid") == user.getUserId()) {
+					disliked = true;
+					col2 = Color.red;
+					break;
+				}
+			}
+			dislike.setBackground(col2);
+			conn.close();
+		} catch (SQLException s) {
+			System.out.println("Failed to connect and get the number of likes");
+			s.printStackTrace();
+		}
+
 		dislike.addActionListener(new ActionListener() {
-			String query;
-			String jdbcUrl = "jdbc:sqlite:socialmedia.db";
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == dislike && dislike.getBackground() == col2
-						&& getLikeButton(postid).getBackground() == col1 && flag == false) {
-					query = "UPDATE Post SET dislikes = dislikes + 1 WHERE PostId =" + postid;
+				String query = "SELECT Dislikes FROM Post";
+				String qDislikes = "SELECT userid FROM Dislikes WHERE PostId = " + postid;
+				if (e.getSource() == dislike && !disliked && !liked) {
+					// TODO Auto-generated method stub
+					query = "UPDATE Post SET Dislikes = Dislikes + 1 WHERE PostId = " + postid;
+					qDislikes = "INSERT INTO Dislikes(userid, postid) VALUES(" + user.getUserId() + ", " + postid + ")";
 					col2 = Color.red;
 					dislike.setBackground(col2);
 					dislikes = getDislikeCount(postid);
+					disliked = true;
 					dislikes++;
 					dislike.setText(String.valueOf(dislikes));
-					flag = true;
-				} else if (e.getSource() == dislike && dislike.getBackground() == Color.red) {
-					query = "UPDATE Post SET dislikes = dislikes - 1 WHERE PostId =" + postid;
+					getDislikeButton(postid).setBackground(Color.red);
+				} else if (e.getSource() == dislike && disliked && !liked) {
+					query = "UPDATE Post SET Dislikes = Dislikes - 1 WHERE PostId =" + postid;
+					//qDislikes = "DELETE FROM Dislikes WHERE postid = " + postid + "AND userid = " + user.getUserId();
+					qDislikes = "DELETE FROM Dislikes WHERE UserId = " + user.getUserId() + "  " + "AND PostId = " + postid + ";";
 					col2 = new Color(246, 246, 246);
 					dislike.setBackground(col2);
 					dislikes = getDislikeCount(postid);
-					if (dislikes > 0) {
-						dislikes--;
-					} else {
+					disliked = false;
+					if (dislikes < 0) {
 						dislikes = 0;
+					} else {
+						--dislikes;
 					}
 					dislike.setText(String.valueOf(dislikes));
-					flag = false;
-				} else {
+				} else if (e.getSource() == dislike && liked) {
 					int input = JOptionPane.showOptionDialog(null,
-						"Remove your like first (click again on the like button)", "Help message",
-						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
-					query = "SELECT Dislikes FROM Post";
+							"Remove your like first (click again on the like button)", "Help message",
+							JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+					// query = "SELECT Likes FROM Post";
 				}
 				try {
 					Connection conn = DriverManager.getConnection(jdbcUrl);
 					Statement statement = conn.createStatement();
 					statement.executeUpdate(query);
+					statement.executeUpdate(qDislikes);
 					conn.close();
+
 				} catch (SQLException s) {
-					System.out.println("Failed to connect and get the number of likes");
+					System.out.println("Failed to connect and get the number of dislikes");
 					s.printStackTrace();
 				}
+
 			}
 		});
 		dislike.setFont(fontdisLike);
@@ -213,6 +231,7 @@ public class Post {
 		dislike.setFocusable(false);
 		return dislike;
 	}
+
 	public int getLikeCount(int postid) {
 		int count = 0;
 		String url = "jdbc:sqlite:socialmedia.db";
@@ -233,6 +252,7 @@ public class Post {
 		}
 		return count;
 	}
+
 	public int getDislikeCount(int postid) {
 		int count = 0;
 		String url = "jdbc:sqlite:socialmedia.db";
