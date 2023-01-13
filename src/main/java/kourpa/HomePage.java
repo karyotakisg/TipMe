@@ -28,7 +28,7 @@ import java.awt.datatransfer.StringSelection;
 public class HomePage extends JFrame /*implements ActionListener*/ {
 	Color textColor = Color.decode("#ffffff");
 	Color backgroundColor = Color.decode("#000000");
-	private final User user = new User();
+	private User user = new User();
 	private int deletedMessagesCount = 0;
 	ImageIcon logo = new ImageIcon("src\\main\\resources\\logo.png");
 	
@@ -43,6 +43,10 @@ public class HomePage extends JFrame /*implements ActionListener*/ {
 	//private final JButton logoutButton = new JButton();
 	
 	HomePage() {}
+	
+	HomePage(User u) {
+		user = u; //
+	}
 
 	public JFrame homePage(User u) {
 		int loginCase = 0;
@@ -132,7 +136,7 @@ public class HomePage extends JFrame /*implements ActionListener*/ {
 				post.add(getMessageText(rs.getString("text")), BorderLayout.CENTER);
 				post.add(getSouthLike(rs.getString("text"), center, post, frame, rs.getInt("PostId")), BorderLayout.SOUTH);
 				
-				Post p = new Post();
+				Post p = new Post(user);
 				p.getLikeCount(rs.getInt("PostId"));
 				p.getDislikeCount(rs.getInt("PostId"));	
 				center.add(post);
@@ -203,7 +207,7 @@ public class HomePage extends JFrame /*implements ActionListener*/ {
 	//this is where we get the southern panel of the post which contains the buttons
 	public JPanel getSouthLike(String text, JPanel center, JPanel post, JFrame frame, int postid) {
 		JPanel southLike = new JPanel(new FlowLayout(FlowLayout.LEFT));		
-		Post p = new Post();
+		Post p = new Post(user);
 		
 		southLike.setBackground(new Color(243, 243, 243));
 		southLike.setPreferredSize(new Dimension(700, 40));
@@ -220,7 +224,7 @@ public class HomePage extends JFrame /*implements ActionListener*/ {
 	
 	public JPanel getSouthLike2(String text, JPanel center, JPanel post, int postid) {
 		JPanel southLike = new JPanel(new FlowLayout(FlowLayout.LEFT));		
-		Post p = new Post();
+		Post p = new Post(user);
 		
 		southLike.setBackground(new Color(243, 243, 243));
 		southLike.setPreferredSize(new Dimension(700, 40));

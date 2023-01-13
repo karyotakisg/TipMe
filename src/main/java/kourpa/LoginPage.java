@@ -108,7 +108,7 @@ public class LoginPage implements ActionListener {
 				Connection conn = DriverManager.getConnection(jdbcUrl);
 				Statement st = conn.createStatement();
 
-				String query = "SELECT username, password, email, PhoneNumber, Sex,"
+				String query = "SELECT userid, username, password, email, PhoneNumber, Sex,"
 						+ " Interest1, Interest2, Interest3, FirstName, LastName FROM User;";
 				// String query2 = " SELECT username, password FROM User;";
 
@@ -126,6 +126,7 @@ public class LoginPage implements ActionListener {
 						frame.dispose();
 						User u = new User();
 						u.setUsername(rs.getString("username"));
+						u.setPassword(rs.getString("password"));
 						u.setEmail(rs.getString("email"));
 						u.setPhoneNumber(rs.getString("PhoneNumber"));
 						u.setSex(rs.getString("Sex"));
@@ -134,8 +135,10 @@ public class LoginPage implements ActionListener {
 						u.setInterest3(rs.getString("Interest3"));
 						u.setFirstName(rs.getString("FirstName"));
 						u.setLastName(rs.getString("LastName"));
+						u.setUserId(rs.getInt("userid"));
+						System.out.println(rs.getInt("Userid"));//
 
-						HomePage hp = new HomePage();
+						HomePage hp = new HomePage(u);
 						MyProfile mp = new MyProfile();
 						ExplorePage ex = new ExplorePage();
 						expl = ex.explorePage(u, new Color(255, 102, 0));

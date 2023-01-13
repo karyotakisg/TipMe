@@ -37,8 +37,13 @@ public class Upload {
 	
 	JButton jb = new JButton("Upload");
 	JButton jbinfo = new JButton("Info");
+	
+	User user = new User();
 
-	public Upload() {
+	public Upload(User u) {
+		
+		user = u;
+		
 		jf.setTitle("Upload");
 		jf.setResizable(false);
 		jf.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -75,7 +80,8 @@ public class Upload {
 		JLabel jlc = new JLabel("Choose Category");
 		jpgridright.add(jlc);
 
-		String[] categories = { "General", "Sport", "Science", "Cook", "Video Games", "Nature" };
+		String[] categories = { "SCIENCE", "SPORTS", "MUSIC", "FASHION", "TRAVEL", "FITNESS", "ART", "EDUCATION",
+				"NATURE", "FOOD" };
 		JComboBox<Object> cb = new JComboBox<Object>(categories);
 		jpgridright.add(cb);
 		
@@ -124,7 +130,7 @@ public class Upload {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-	//			int number = textarea.getText().length() - (int)textarea.getText().count();
+	        //int number = textarea.getText().length() - (int)textarea.getText().count();
 				if (number < 1) {
 					JOptionPane.showMessageDialog(null, "There is no tip to upload " + "("
 				+ number + " / 200 character)");
@@ -134,7 +140,7 @@ public class Upload {
 				} else {
 					jf.dispose();
 					setTip(textarea.getText());
-					Post post = new Post();
+					Post post = new Post(user); 
 					post.storePost(tip, categ);
 					JOptionPane.showMessageDialog(null,
 							"Your tip is uploaded " +

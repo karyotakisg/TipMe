@@ -57,7 +57,7 @@ public class Menu extends JPanel implements  KeyListener, MouseListener { // cre
         
         
         
-        hp = new HomePage();
+        hp = new HomePage(u);
         mp = new MyProfile();
         ex = new ExplorePage();
         
@@ -219,7 +219,7 @@ public class Menu extends JPanel implements  KeyListener, MouseListener { // cre
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new Upload();
+				new Upload(user);
 			}
         	
         });
