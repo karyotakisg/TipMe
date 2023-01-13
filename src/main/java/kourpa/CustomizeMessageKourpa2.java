@@ -1,11 +1,8 @@
 package kourpa;
-//package kourpa.kourpatestclasses;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
-
 public class CustomizeMessageKourpa2 {
 	CustomizeMessageKourpa2(User u, String category, JPanel explore) {	
 		String jdbcUrl = "jdbc:sqlite:socialmedia.db";
@@ -13,13 +10,9 @@ public class CustomizeMessageKourpa2 {
 			// Creating a new Connection
 			Connection conn = DriverManager.getConnection(jdbcUrl);
 			Statement statement = conn.createStatement();
-
 			// System.out.println("Connected");
-
 			// Get the right posts from the database
-
 			String query = "SELECT User.username, Post.text, Post.uploaddate, Post.likes, Post.PostId, Post.Category FROM Post, User WHERE Post.userId = User.userId AND Post.Category = '" + category + "'";
-
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {
 				HomePage hp = new HomePage();
@@ -35,9 +28,7 @@ public class CustomizeMessageKourpa2 {
 				Post p = new Post();
 				p.getLikeCount(rs.getInt("PostId"));
 				p.getDislikeCount(rs.getInt("PostId"));
-
 				//postid = rs.getInt("PostId");
-
 				explore.add(post);
 			}
 		} catch (SQLException s) {
@@ -45,7 +36,4 @@ public class CustomizeMessageKourpa2 {
 			s.printStackTrace();
 		}
 	}
-	
-	
-
 }

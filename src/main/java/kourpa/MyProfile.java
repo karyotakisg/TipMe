@@ -1,5 +1,4 @@
 package kourpa;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.Statement;
@@ -8,9 +7,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.*;
-
-public class MyProfile extends JFrame implements ActionListener, MouseListener { // creation of the necesery components
-																					// for MyProfile GUI//
+public class MyProfile extends JFrame implements ActionListener, MouseListener { // creation of the necesery components																					
 	User user1 = new User();
 	HomePage hp = new HomePage();
 	private JPanel panel;
@@ -45,12 +42,10 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 	public JTextField phoneNumberText = new JTextField(25);
 	JLabel phoneNumberLabel = new JLabel("Phone Number");
 	public JTextField birthdayText = new JTextField(25);
-	JLabel birthdayLabel = new JLabel("Birthday");
 	JLabel labelForPosts = new JLabel("My Posts");
 	Icon diary = new ImageIcon("src/main/resources/diaryIcon.png");
 	Icon diary2 = new ImageIcon("src/main/resources/diary2.png");
-	private JPanel p;//
-
+	private JPanel p;
 	JButton changeButton = new JButton();
 	JButton sumbitButton = new JButton();
 	Font defaultFont = new Font("Gill Sans MT", Font.BOLD, 16);
@@ -69,14 +64,11 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 	private JRadioButton plainMode;
 	ImageIcon iconColorChooser = new ImageIcon("src\\main\\resources\\colors.png");
 	JButton logoutButton = new JButton();
-
 	public JFrame myProfile(User user) {
 		// super("Get tip-My profile");// constructor of the MyProfile GUI
 		Image ic = Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\logo.png");
-
 		this.setIconImage(ic);
 		user1 = user;
-
 		this.setBounds(180, 50, 1050, 750);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		p = new JPanel(new GridLayout(getMessageCount(user), 1, 0, 10));
@@ -100,13 +92,11 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		scrollbarSetup();
 		logoutButtonSetup();
 		this.add(panel);
-
 		eastPanelSetup();
 		Menu menu = new Menu();
 		panel.add(menu.menuBar(user, this), BorderLayout.NORTH);
 		return this;
 	}
-
 	public void sumbit(User user) {
 		user.setPassword(String.valueOf(passwordText.getPassword()));
 		user.setEmail(emailText.getText());
@@ -126,18 +116,15 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 					+ "', Interest3= '" + user.getInterest3() + "', Email= '" + user.getEmail() + "', PhoneNumber= '"
 					+ user.getPhoneNumber() + "', FirstName= '" + user.getFirstName() + "', LastName= '"
 					+ user.getLastName() + " WHERE Username = '" + user.getUsername() + "'";
-
 			statement.executeUpdate(query);
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// make TextArea editable and create submit button
-		if (e.getSource() == changeButton) {
+		if (e.getSource() == changeButton) { //make TextArea editable and create submit button
 			changeButton.setVisible(false);
 			s = s.toUpperCase();
 			sumbitButton.setFocusPainted(true);
@@ -151,7 +138,6 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			sumbitButton.addMouseListener(this);
 			sumbitButton.setVisible(true);
 			east2.add(sumbitButton);
-
 			setFieldsEditable();
 		}
 		if (e.getSource() == darkMode) {
@@ -166,7 +152,6 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			southCenter.setBackground(Color.DARK_GRAY);
 			southWest.setBackground(Color.DARK_GRAY);
 			southEast.setBackground(Color.DARK_GRAY);
-
 			userLabel.setForeground(Color.white);
 			passwordLabel.setForeground(Color.white);
 			emailLabel.setForeground(Color.white);
@@ -174,14 +159,11 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			p2Label.setForeground(Color.white);
 			p3Label.setForeground(Color.white);
 			sexLabel.setForeground(Color.white);
-			birthdayLabel.setForeground(Color.white);
 			firstNameLabel.setForeground(Color.white);
 			lastNameLabel.setForeground(Color.white);
 			phoneNumberLabel.setForeground(Color.white);
 			labelForPosts.setForeground(Color.white);
-
 			labelForPosts.setIcon(diary2);
-
 		} else if (e.getSource() == lightMode) {
 			east.setBackground(Color.white);
 			panel.setBackground(Color.WHITE);
@@ -194,7 +176,6 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			southCenter.setBackground(Color.white);
 			southWest.setBackground(Color.white);
 			southEast.setBackground(Color.white);
-
 			userLabel.setForeground(Color.black);
 			passwordLabel.setForeground(Color.black);
 			emailLabel.setForeground(Color.black);
@@ -202,14 +183,11 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			p2Label.setForeground(Color.black);
 			p3Label.setForeground(Color.black);
 			sexLabel.setForeground(Color.black);
-			birthdayLabel.setForeground(Color.black);
 			firstNameLabel.setForeground(Color.black);
 			lastNameLabel.setForeground(Color.black);
 			phoneNumberLabel.setForeground(Color.black);
 			labelForPosts.setForeground(Color.black);
-
 			labelForPosts.setIcon(diary);
-
 		} else if (e.getSource() == plainMode) {
 			panel.setBackground(col);
 			east.setBackground(col);
@@ -222,7 +200,6 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			southCenter.setBackground(col);
 			southWest.setBackground(col);
 			southEast.setBackground(col);
-
 			userLabel.setForeground(Color.black);
 			passwordLabel.setForeground(Color.black);
 			emailLabel.setForeground(Color.black);
@@ -230,12 +207,10 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			p2Label.setForeground(Color.black);
 			p3Label.setForeground(Color.black);
 			sexLabel.setForeground(Color.black);
-			birthdayLabel.setForeground(Color.black);
 			firstNameLabel.setForeground(Color.black);
 			lastNameLabel.setForeground(Color.black);
 			phoneNumberLabel.setForeground(Color.black);
 			labelForPosts.setForeground(Color.black);
-
 			labelForPosts.setIcon(diary);
 		} else if (e.getSource() == colorPick) {
 			Color col = JColorChooser.showDialog(null, "Pick a color!", Color.LIGHT_GRAY);
@@ -250,7 +225,6 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			southCenter.setBackground(col);
 			southWest.setBackground(col);
 			southEast.setBackground(col);
-
 			labelForPosts.setIcon(diary);
 		}
 		if (e.getSource() == logoutButton) {
@@ -262,7 +236,6 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			}
 		}
 	}
-
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == sumbitButton) {
@@ -282,40 +255,33 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			dial.setVisible(true);
 			dialBut.addMouseListener(this);
 			sumbitButton.setVisible(false);
-
 		}
 		if (e.getSource() == dialBut) {
 			dial.dispose();
 			changeButton.setVisible(true);
 			setFieldsUneditable();
 			this.dispose();
-
 			this.show();
 		}
 	}
-
 	@Override
 	public void mousePressed(MouseEvent e) {
 	}
-
 	@Override
 	public void mouseReleased(MouseEvent e) {
 	}
-
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		if (e.getSource() == sumbitButton) {
 			sumbitButton.setBackground(hoverColor);
 		}
 	}
-
 	@Override
 	public void mouseExited(MouseEvent e) {
 		if (e.getSource() == sumbitButton) {
 			sumbitButton.setBackground(backgroundColor);
 		}
 	}
-
 	public void setFieldsEditable() {
 		passwordText.setEditable(true);
 		emailText.setEditable(true);
@@ -328,7 +294,6 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		lastNameText.setEditable(true);
 		phoneNumberText.setEditable(true);
 	}
-
 	public void setFieldsUneditable() {
 		userText.setEditable(false);
 		passwordText.setEditable(false);
@@ -342,7 +307,6 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		lastNameText.setEditable(false);
 		phoneNumberText.setEditable(false);
 	}
-
 	public void setValuesInTextAreas() {
 		userText.setText(user1.getUsername());
 		passwordText.setText(user1.getPassword());
@@ -356,7 +320,6 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		birthdayText.setText(user1.getBirthDate());
 		phoneNumberText.setText(user1.getPhoneNumber());
 	}
-
 	public void setTextinPostArea(User user1) {
 		String jdbcUrl = "jdbc:sqlite:socialmedia.db"; // Database URL
 		try {
@@ -383,7 +346,6 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			s.printStackTrace();
 		}
 	}
-
 	public void southSetup() {
 		p.setBorder(BorderFactory.createLineBorder(Color.black));
 		south = new JPanel(new BorderLayout(0, 3));
@@ -408,7 +370,6 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		south.setBackground(Color.black);
 		panel.add(south, BorderLayout.SOUTH);
 	}
-
 	public void scrollbarSetup() {
 		JScrollPane scrollbar = new JScrollPane(p, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -417,9 +378,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		scrollbar.getVerticalScrollBar().setPreferredSize(new Dimension(8, 695));
 		south.add(scrollbar);
 	}
-
 	public void panelSetup() {
-
 		panel = new JPanel(new BorderLayout());
 		panel.setBackground(Color.black);
 		center = new JPanel(new BorderLayout());
@@ -438,7 +397,6 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		west = new JPanel();
 		west.setPreferredSize(new Dimension(160, 680));
 		west.setBackground(col);
-
 		center2.setBackground(new Color(255, 102, 0));
 		center2.add(userLabel);
 		center2.add(userText);
@@ -458,7 +416,6 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		center2.add(lastNameText);
 		center2.add(sexLabel);
 		center2.add(sexText);
-		center2.add(birthdayLabel);
 		center2.add(birthdayText);
 		center2.add(phoneNumberLabel);
 		center2.add(phoneNumberText);
@@ -471,9 +428,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		center.add(west2, BorderLayout.WEST);
 		panel.add(west, BorderLayout.WEST);
 		panel.add(center, BorderLayout.CENTER);
-
 	}
-
 	public void eastPanelSetup() {
 		east.setLayout(new GridLayout(10, 1));
 		east.setBackground(new Color(255, 102, 0));
@@ -503,7 +458,6 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		colorPick.addActionListener(this);
 		panel.add(east, BorderLayout.EAST);
 	}
-
 	public void logoutButtonSetup() {
 		logoutButton.setBounds(900, 25, 100, 25);
 		logoutButton.setText("Log out");
@@ -515,9 +469,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		logoutButton.setOpaque(true);
 		// west.add(Box.createVerticalStrut(380));
 		west.add(logoutButton, BorderLayout.NORTH);
-
 	}
-
 	public int getMessageCount(User user1) {
 		int count = 0;
 		String url = "jdbc:sqlite:socialmedia.db";
@@ -525,43 +477,32 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			// New Connection
 			Connection conn = DriverManager.getConnection(url);
 			Statement statement = conn.createStatement();
-
 			// Get posts from the database
-
 			String query = "SELECT User.username, Post.text, Post.uploaddate, Post.likes, Post.Category FROM Post, User WHERE User.username = '"
 					+ user1.getUsername() + "' AND Post.UserId = User.UserId";
-
 			ResultSet rs = statement.executeQuery(query);
-
 			while (rs.next()) {
 				count++; // count the number of posts
 			}
-
 			conn.close();
-
 		} catch (SQLException s) {
 			System.out.println("Error");
 			s.printStackTrace();
 		}
 		return count;
 	}
-
 	public Color getColor() { // returns the color of the panel so other sections of the app can use it
 		return panel.getBackground();
 	}
-
 	public JPanel getPanel() { // The following methods are created for testing purposes
 		return panel;
 	}
-
 	public void setPanel(JPanel panel) {
 		this.panel = panel;
 	}
-
 	public JButton getChangeButton() {
 		return changeButton;
 	}
-
 	public JLabel getSexLabel() {
 		return sexLabel;
 	}

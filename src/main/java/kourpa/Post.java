@@ -1,5 +1,4 @@
 package kourpa;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -9,20 +8,16 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Date;
 import javax.swing.Timer;
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-
 //import java.util.HashMap;
-
 public class Post {
 	// String jdbcUrl = "jdbc:sqlite:socialmedia.db" ;
 	private Color col1 = new Color(246, 246, 246);
@@ -34,24 +29,17 @@ public class Post {
 	Date now = new Date();
 	String strDate = sdfDate.format(now);
 	User user = new User();
-
 	// αποθήκευση ποστ στην βαση με στοιχεια όνομα, κατηγορία, κείμενο -- void
-
 	public Post () {}
-	
 	public Post(User user) {
-		
 		this.user = user;
 	}
-	
 	public void storePost(String tip, String categ) {
 		String jdbcUrl = "jdbc:sqlite:socialmedia.db";
 		try {
 			Connection conn = DriverManager.getConnection(jdbcUrl);
 			Statement statement = conn.createStatement();
-
 			System.out.println("Connected");
-
 			/*
 			 * String query = "INSERT INTO Post(Text, " + "Category, " + "UploadDate)" +
 			 * " VALUES(" + "'" + up.getTip() + "'" + "," + "'" + up.getCateg() + "'" + ","
@@ -59,11 +47,9 @@ public class Post {
 			 * 
 			 */
 			String query = "INSERT INTO Post(Text, " + "Category, " + "UploadDate, " + "Likes, " + "UserId)"
-					+ " VALUES(" + "'" + tip + "'" + "," + "'" + categ + "'" + "," + "'" + strDate + "'" + "," + "'" + 0
-					+ "'" + "," + "'" + 5 + "'" + ");";
-
+				+ " VALUES(" + "'" + tip + "'" + "," + "'" + categ + "'" + "," + "'" + strDate + "'" + "," + "'" + 0
+				+ "'" + "," + "'" + 5 + "'" + ");";
 			statement.executeUpdate(query);
-
 			conn.close();
 		} catch (SQLException s) {
 			System.out.println("Failed to connect and save post");
@@ -72,31 +58,22 @@ public class Post {
 			System.out.println("NullPointerException");
 		}
 	}
-
 	public void setLikes(int likes) {
 		this.likes = likes;
 	}
-
 	public int getLikes() {
 		return likes;
 	}
-
 	public JButton getLikeButton(int postid) {
-
 		Font fontLike = new Font("Serif", Font.BOLD, 15);
 		ImageIcon icon = new ImageIcon("src\\main\\resources\\like.png");
-
 		// likeButton.setBounds(250, 20, 60, 30);
-
 		JButton like = new JButton("" + getLikeCount(postid) + "", icon);
-
 		like.addActionListener(new ActionListener() {
 			String query;
 			String jdbcUrl = "jdbc:sqlite:socialmedia.db";
-
 			boolean liked = false;
 			boolean disliked = false;
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				/*
@@ -117,35 +94,26 @@ public class Post {
 				 * "Help message", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
 				 * null, null, null); query = "SELECT Likes FROM Post"; }
 				 */
-
 				try {
 					String qLikes = "SELECT userid FROM Likes WHERE PostId = " + postid;
 					String qDislikes = "SELECT userid FROM Dislikes WHERE PostId = " + postid;
-					
 					Connection conn = DriverManager.getConnection(jdbcUrl);
 					Statement statement = conn.createStatement();
 					ResultSet rs = statement.executeQuery(qLikes);
-
 					System.out.println(user.getUserId());
 					while (rs.next()) {
-
 						if (rs.getInt("userid") == user.getUserId()) {
 							liked = true;
 							col1 = Color.green;
 							break;
 						}
 					}
-					
 					like.setBackground(col1);
-					
 					rs = statement.executeQuery(qDislikes);
-					
 					while (rs.next()) {
-						
 						if (rs.getInt("userid") == user.getUserId())
 							disliked = true;
 					}
-
 					if (e.getSource() == like && !liked) //&& like.getBackground() == col1
 							//&& getDislikeButton(postid).getBackground() == col2 && flag == false) 
 					{
@@ -160,7 +128,6 @@ public class Post {
 						like.setText(String.valueOf(likes));
 						getLikeButton(postid).setBackground(Color.white);
 						flag = true;
-					
 					} else if (e.getSource() == like && liked) {
 						query = "UPDATE Post SET Likes = Likes-1 WHERE PostId =" + postid;
 						qLikes = "DELETE FROM Likes WHERE postid = " + postid + "AND userid = " + user.getUserId();
@@ -170,55 +137,41 @@ public class Post {
 						liked = false;
 						if (likes < 0) {
 							likes = 0; } else {--likes;}
-						
 						like.setText(String.valueOf(likes));
 						flag = false;
 					} else {
 						int input = JOptionPane.showOptionDialog(null,
-								"Remove your dislike first (click again on the dislike button)", "Help message",
-								JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+					"Remove your dislike first (click again on the dislike button)", "Help message",
+							JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
 						//query = "SELECT Likes FROM Post";
 					}
-					
 					statement.executeUpdate(query);
 					statement.executeUpdate(qLikes);
-
 					conn.close();
 				} catch (SQLException s) {
-					// TODO Auto-generated catch block
 					System.out.println("Failed to connect and get the number of likes");
 					s.printStackTrace();
 				}
-
 			}
 		});
-
 		like.setFont(fontLike);
 		like.setPreferredSize(new Dimension(100, 30));
 		like.setFocusable(false);
-
 		return like;
 	}
-
 	public JButton getDislikeButton(int postid) {
 		Font fontdisLike = new Font("Serif", Font.BOLD, 15);
 		ImageIcon icon = new ImageIcon("src\\main\\resources\\dislike.png");
-
 		// likeButton.setBounds(250, 20, 60, 30);
-
 		JButton dislike = new JButton("" + getDislikeCount(postid) + "", icon);
 		dislike.setBackground(col2);
-
 		dislike.addActionListener(new ActionListener() {
 			String query;
 			String jdbcUrl = "jdbc:sqlite:socialmedia.db";
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				if (e.getSource() == dislike && dislike.getBackground() == col2
 						&& getLikeButton(postid).getBackground() == col1 && flag == false) {
-					// TODO Auto-generated method stub
 					query = "UPDATE Post SET dislikes = dislikes + 1 WHERE PostId =" + postid;
 					col2 = Color.red;
 					dislike.setBackground(col2);
@@ -240,34 +193,26 @@ public class Post {
 					flag = false;
 				} else {
 					int input = JOptionPane.showOptionDialog(null,
-							"Remove your like first (click again on the like button)", "Help message",
-							JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+						"Remove your like first (click again on the like button)", "Help message",
+						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
 					query = "SELECT Dislikes FROM Post";
 				}
-
 				try {
 					Connection conn = DriverManager.getConnection(jdbcUrl);
 					Statement statement = conn.createStatement();
 					statement.executeUpdate(query);
-
 					conn.close();
 				} catch (SQLException s) {
-					// TODO Auto-generated catch block
 					System.out.println("Failed to connect and get the number of likes");
 					s.printStackTrace();
-
 				}
 			}
-
 		});
 		dislike.setFont(fontdisLike);
 		dislike.setPreferredSize(new Dimension(100, 30));
 		dislike.setFocusable(false);
-
 		return dislike;
-
 	}
-
 	public int getLikeCount(int postid) {
 		int count = 0;
 		String url = "jdbc:sqlite:socialmedia.db";
@@ -275,10 +220,8 @@ public class Post {
 			// New Connection
 			Connection conn = DriverManager.getConnection(url);
 			Statement statement = conn.createStatement();
-
 			// Get posts from the database
 			String query = "SELECT Likes FROM Post WHERE PostId =" + postid;
-
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {
 				count = rs.getInt("Likes");
@@ -290,7 +233,6 @@ public class Post {
 		}
 		return count;
 	}
-
 	public int getDislikeCount(int postid) {
 		int count = 0;
 		String url = "jdbc:sqlite:socialmedia.db";
@@ -298,10 +240,8 @@ public class Post {
 			// New Connection
 			Connection conn = DriverManager.getConnection(url);
 			Statement statement = conn.createStatement();
-
 			// Get posts from the database
 			String query = "SELECT Dislikes FROM Post WHERE PostId =" + postid;
-
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {
 				count = rs.getInt("Dislikes");

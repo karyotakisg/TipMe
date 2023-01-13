@@ -1,18 +1,11 @@
 package kourpa;
-//package kourpa.kourpatestclasses;
-
 import javax.swing.*;
-
 import javax.swing.border.Border;
-
 import java.awt.event.*;
 import java.awt.*;
 import javax.xml.stream.Location;
-
 import java.sql.*;
-
 public class ExplorePage implements ActionListener {
-
 	private JButton [] buttons;
 	private JButton postFeed;
 	private JPanel center;
@@ -30,17 +23,13 @@ public class ExplorePage implements ActionListener {
     private final JFrame frame = new JFrame();
     User u = new User();
     private JButton goback;
-    
     public ExplorePage() {}
-
     public JFrame explorePage(User u, Color col) {
-
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(180, 50, 1050, 750);
 		frame.setBackground(Color.BLACK);
 		Image i = Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\logo.png");
 		frame.setIconImage(i);
-		   
 		center = new JPanel();	  			
 		center.setBackground(Color.black);
 	 	center.setLayout(new GridLayout(2, 5, 10, 10));
@@ -59,57 +48,45 @@ public class ExplorePage implements ActionListener {
 		east.setPreferredSize(new Dimension(100, 680));
 		west.setPreferredSize(new Dimension(100, 680));
 		north.setPreferredSize(new Dimension(800, 100));
-
 		south.setBackground(new Color(255, 102, 0));
 		east.setBackground(new Color(255, 102, 0));
 		west.setBackground(new Color(255, 102, 0));
 		center.setBackground(Color.BLACK);
 		panel.setBackground(Color.BLACK);
-
 		// panel.add(...);
 		panel.add(center, BorderLayout.CENTER);
 		panel.add(east, BorderLayout.EAST);
 		panel.add(west, BorderLayout.WEST);
 		panel.add(south, BorderLayout.SOUTH);
-		// tabs.addTab( "<html><h1 style='padding:5px 100px;font-size:10px;display:inline-block;text-align:center;margin:4px 0px;border:none'>Explore</h1></html>", null, panel, "Explore page");
-		 	       
+		// tabs.addTab( "<html><h1 style='padding:5px 100px;font-size:10px;display:inline-block;text-align:center;margin:4px 0px;border:none'>Explore</h1></html>", null, panel, "Explore page");	       
 		buttons = new JButton[10];
 		Color c = new Color(255, 102, 102);
 		Color c1 = new Color(255, 255, 255);
 		JButtonCreator(buttons, center);		 	        
-
 		center2 = center;
-		
 		panel.add(menu.menuBar(u, frame), BorderLayout.NORTH);
-		
 		frame.add(panel);
 		return frame;
     }
-    
     public  JPanel getPanel(){ // The following methods are created for testing purposes
 		return panel;
 	}
 	public void setPanel(JPanel panel) {
 		this.panel = panel;
 	}
-
     public void actionPerformed(ActionEvent e) {	
     	for(int counter = 0; counter < buttons.length; counter++) {
-			   if(e.getSource() == buttons[counter]) {
-				   center.setVisible(false);                 //panel
-				   center2.setVisible(false);
-				   e3 = new ExplorePanel(counter,  panel, south, east, west, u, flag);				 
-			   }
+		   if(e.getSource() == buttons[counter]) {
+			   center.setVisible(false);  //panel
+			   center2.setVisible(false);
+			   e3 = new ExplorePanel(counter,  panel, south, east, west, u, flag);				 
+		   }
 		}
-     }
-	
-
+    }	
 	public static void visibility(int q) {
 		center2.setVisible(true);
 		flag[q] = true;
 	}
-	
-	
 	public void JButtonCreator(JButton[] buttons, JPanel center) {
 		for (int count = 0; count < buttons.length; count++ ) {
 		 	buttons[count] = new JButton(ExploreButtons.titles(count), ExploreButtons.getIcon(count));
@@ -122,10 +99,5 @@ public class ExplorePage implements ActionListener {
 		 	buttons[count].setHorizontalAlignment(SwingConstants.LEFT);
 		 	buttons[count].setFont(new Font("Calibri", Font.BOLD, 22));
 		}
-	}
-	
-	
-	
-	
-
+	}				
  }

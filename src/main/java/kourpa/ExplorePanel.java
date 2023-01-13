@@ -1,13 +1,9 @@
 package kourpa;
-//package kourpa.kourpatestclasses;
-
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 import java.sql.*;
-
 public class ExplorePanel implements ActionListener {
-
     String category;
     private Timer timer;
     private static JPanel p0;
@@ -25,16 +21,15 @@ public class ExplorePanel implements ActionListener {
     JPanel jp;
     Icon back = new ImageIcon("src\\main\\resources\\goback.png");
     private JButton [] goback;
-
 	public ExplorePanel(int x, JPanel jf, JPanel south, JPanel east, JPanel west, User u, boolean[] flag) {
         //jf.setLayout(new BorderLayout(5, 5));
           //jf.setLayout(new GridLayout(3, 2, 10, 10));
 		goback = new JButton[10];
         for (int d = 0 ; d < goback.length ; d++) {
-			    goback [d] = new JButton();
-		  		goback[d].setIcon(back);
-		  		goback[d].setBackground(Color.black);
-	     }
+			goback [d] = new JButton();
+		  	goback[d].setIcon(back);
+		  	goback[d].setBackground(Color.black);
+	    }
         HomePage hp = new HomePage();
         south.setPreferredSize(new Dimension(200, 50));
         east.setPreferredSize(new Dimension(100, 200));
@@ -111,7 +106,6 @@ public class ExplorePanel implements ActionListener {
 					}
 				}
 			}	            
-
 		} else if(x == 2) {
 			if (flag [2] == false) {
 				for (int w = 0 ; w < 10 ; w++) {
@@ -122,7 +116,6 @@ public class ExplorePanel implements ActionListener {
 						west.remove(goback[w]);
 					}
 				}
-			
 				p2 = new JPanel();
 				category = "Music";
 				p2.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
@@ -334,7 +327,7 @@ public class ExplorePanel implements ActionListener {
 					} else {
 						west.remove(goback[w]);
 					}
-			}
+				}
 				p8 = new JPanel();
 				category = "Environment";
 				p8.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
@@ -403,7 +396,6 @@ public class ExplorePanel implements ActionListener {
 			}
 		}
 	}
-	
 	public int getMessageCount(String category) {
 		int count = 0;
 		String url = "jdbc:sqlite:socialmedia.db";
@@ -411,27 +403,19 @@ public class ExplorePanel implements ActionListener {
 			// New Connection
 			Connection conn = DriverManager.getConnection(url);
 			Statement statement = conn.createStatement();
-
 			// Get posts from the database
-
 			String query = "SELECT User.username, Post.text, Post.uploaddate, Post.likes, Post.Category FROM Post, User WHERE Post.userId = User.userId AND Post.Category = '" + category + "'";
-
 			ResultSet rs = statement.executeQuery(query);
-
 			while (rs.next()) {
 				count++; // count the number of posts
 			}
-
 			conn.close();
-
 		} catch (SQLException s) {
 			System.out.println("Error");
 			s.printStackTrace();
 		}
-
 		return count;
 	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		for (int q = 0 ; q < goback.length ; q++) {
@@ -440,9 +424,7 @@ public class ExplorePanel implements ActionListener {
 	            	p0.setVisible(false);
 	            }
 	            if (p1 != null) {
-	            	p1.setVisible(false);            	
-	            	
-
+	            	p1.setVisible(false);            	          	
 	            }
 	            if (p2 != null) {
 		            p2.setVisible(false);
@@ -473,10 +455,5 @@ public class ExplorePanel implements ActionListener {
 				scr.setVisible(false);	        	    
 			}
 		}
-
 	}
 }
-
-
-
-

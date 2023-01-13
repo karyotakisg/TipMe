@@ -12,9 +12,7 @@ public class User {
 	String interest2;
 	String interest3;
 	int userId;
-	
 	public User() {}
-	
 	public User(String u, String p, String f, String l, String s, String e, String ph, String b, String i1, String i2, String i3) {
 		this.username = u;
 		this.password = p;
@@ -94,11 +92,9 @@ public class User {
 	public void setBirthDate(String birthDate) {
 		this.birthDate = birthDate;
 	}
-	
 	public int getUserId() {
 		return userId;
 	}
-	
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}

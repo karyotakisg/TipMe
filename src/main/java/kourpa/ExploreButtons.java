@@ -2,9 +2,7 @@ package kourpa;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
 public class ExploreButtons {
-	
 	public static String titles(int n) {
 		if (n == 0) {
 			String s1 = "Science";			
@@ -24,7 +22,6 @@ public class ExploreButtons {
 		} else if (n == 5)  {
 			String s6 = "Fitness";
 			return s6;
-
 		} else if (n == 6) {
 			String s7 = "Art";
 			return s7;
@@ -39,7 +36,6 @@ public class ExploreButtons {
 			return s10;
 		}
 	}
-
 	public static Color colors(int n) {
 		if (n == 0) {
 			Color c1 = new Color(30, 25, 98);
@@ -73,7 +69,6 @@ public class ExploreButtons {
 			return c10;
 		}
 	}
-	
 	   public static ImageIcon getIcon(int n) {
 	    	if (n == 0) {
 	    		return new ImageIcon("src\\main\\resources\\atom.png");
@@ -99,8 +94,4 @@ public class ExploreButtons {
 	    		return null;
 	    	}
 		}
-
-	
-	
-
 }
