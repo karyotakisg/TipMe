@@ -123,6 +123,7 @@ public class Post {
 					}
 					like.setText(String.valueOf(likes));
 				} else if (e.getSource() == like && disliked) {
+					@SuppressWarnings("unused")
 					int input = JOptionPane.showOptionDialog(null,
 							"Remove your dislike first (click again on the dislike button)", "Help message",
 							JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
@@ -207,6 +208,7 @@ public class Post {
 					}
 					dislike.setText(String.valueOf(dislikes));
 				} else if (e.getSource() == dislike && liked) {
+					@SuppressWarnings("unused")
 					int input = JOptionPane.showOptionDialog(null,
 							"Remove your like first (click again on the like button)", "Help message",
 							JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);

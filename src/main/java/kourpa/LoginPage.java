@@ -28,6 +28,10 @@ public class LoginPage implements ActionListener {
 	static JFrame expl;
 	static JFrame myPr;
 	static JFrame home;
+	static ExplorePage ex;
+	static HomePage hp;
+	final Color col = new Color(255, 102, 0);
+	
 	// HashMap<String, String> logininfo = new HashMap<String, String>();
 	Color c;
 	public JFrame loginPage() {
@@ -106,16 +110,16 @@ public class LoginPage implements ActionListener {
 						u.setLastName(rs.getString("LastName"));
 						u.setUserId(rs.getInt("userid"));
 						System.out.println(rs.getInt("Userid"));//
-						HomePage hp = new HomePage(u);
+						hp = new HomePage();
 						MyProfile mp = new MyProfile();
-						ExplorePage ex = new ExplorePage();
-						expl = ex.explorePage(u, new Color(255, 102, 0));
+						ex = new ExplorePage();
+						expl = ex.explorePage(u, col);
 						expl.setVisible(false);
 						setExplore(expl);
-						myPr = mp.myProfile(u);
+						myPr = mp.myProfile(u, col);
 						myPr.setVisible(false);
 						setMyProf(myPr);
-						home = hp.homePage(u);
+						home = hp.homePage(u, col);
 						setHome(home);
 						home.setVisible(true);
 						loggedIn = true;
@@ -146,11 +150,9 @@ public class LoginPage implements ActionListener {
 		expl = frame;
 	}
 	public JFrame getExplore() {
-		expl.setVisible(false);
 		return expl;
 	}
 	public void setHome(JFrame frame) {
-		home.setVisible(true);
 		home = frame;
 	}
 	public JFrame getHome() {
@@ -160,7 +162,6 @@ public class LoginPage implements ActionListener {
 		myPr = frame;
 	}
 	public JFrame getMyProf() {
-		myPr.setVisible(false);
 		return myPr;
 	}
 }

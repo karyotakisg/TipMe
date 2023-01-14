@@ -1,5 +1,10 @@
 package kourpa;
 import javax.swing.JFrame;
+import java.sql.Statement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -21,51 +26,53 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
-public class HomePage extends JFrame /*implements ActionListener*/ {
+public class HomePage  /*implements ActionListener*/ {
 	Color textColor = Color.decode("#ffffff");
 	Color backgroundColor = Color.decode("#000000");
 	private User user = new User();
 	private int deletedMessagesCount = 0;
 	ImageIcon logo = new ImageIcon("src\\main\\resources\\logo.png");
 	private int count = 0;
-	private int width;
 	//private static final JFrame frame = new JFrame();
-	private  JPanel feed = new JPanel();
-	private  JPanel east = new JPanel();
-	private  JPanel west = new JPanel();
-	private  JPanel south = new JPanel();
-	private  JPanel center = new JPanel();
+	private JFrame frame = new JFrame();
+	private static JPanel  feed = new JPanel();
+	private JPanel east;
+	private JPanel west;
+	private JPanel south;
+	private JPanel center;
 	//private final JButton logoutButton = new JButton();
 	HomePage() {}
 	HomePage(User u) {
 		user = u; //
 	}
-	public JFrame homePage(User u) {
-		int loginCase = 0;
-		this.setTitle("GetTip");
-		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		this.setBounds(180, 50, 1050, 750);
+	public JFrame homePage(User u, Color col) {
+		frame.setTitle("GetTip");
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frame.setBounds(180, 50, 1050, 750);
 		Image i = Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\logo.png");
-		this.setIconImage(i);
-		this.setBackground(Color.BLACK);
+		frame.setIconImage(i);
+		frame.setBackground(Color.BLACK);
 		feed.setLayout(new BorderLayout(2, 2));
 		feed.setBackground(Color.BLACK);
 		//feed.setBorder(new RoundedBorder(10));
+		center = new JPanel();
+		east = new JPanel();
+		west = new JPanel();
+		south = new JPanel();
 		east.setLayout(new GridLayout(5, 1, 0, 0));
 		west.setLayout(new GridLayout(5, 1, 10, 10));
 		center.setLayout(new GridLayout(getMessageCount(), 1, 7, 3));		
-		south.setBackground(new Color(255, 102, 0));
-		east.setBackground(new Color(255, 102, 0));
-		west.setBackground(new Color(255, 102, 0));
+		south.setBackground(col);
+		east.setBackground(col);
+		west.setBackground(col);
 		center.setBackground(Color.BLACK);
 		south.setPreferredSize(new Dimension(1050, 20));
 		east.setPreferredSize(new Dimension(135, 680));
 		west.setPreferredSize(new Dimension(135, 680));
 		getDecorations();
-		getDataBasePosts(u, center, this);
+		getDataBasePosts(u, center, frame);
 		//logoutButtonSetup();
 		feed.add(south, BorderLayout.SOUTH);
 		feed.add(center, BorderLayout.CENTER);
@@ -73,9 +80,9 @@ public class HomePage extends JFrame /*implements ActionListener*/ {
 		feed.add(east, BorderLayout.EAST);
 		feed.add(getScroll(center), BorderLayout.CENTER);
 		Menu menu = new Menu();
-		feed.add(menu.menuBar(u, this), BorderLayout.NORTH);
-		this.add(feed);
-		return this;
+		feed.add(menu.menuBar(u, col), BorderLayout.NORTH);
+		frame.add(feed);
+		return frame;
 	}
 	// necessary method in order to dispose the correct panel when clicking on the menu buttons
 	//ScrollPane generator
@@ -177,7 +184,7 @@ public class HomePage extends JFrame /*implements ActionListener*/ {
 		southLike.add(p.getLikeButton(postid));
 		southLike.add(Box.createHorizontalStrut(20));
 		southLike.add(p.getDislikeButton(postid));
-		southLike.add(Box.createHorizontalStrut(25));
+		southLike.add(Box.createHorizontalStrut(395));
 		southLike.add(getCopyButton(text, post));
 		southLike.add(getTemporaryDeleteButton(post, center, frame, postid));
 		return southLike;
@@ -230,7 +237,6 @@ public class HomePage extends JFrame /*implements ActionListener*/ {
 		delete.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int i = -1;
 				if (e.getSource() == delete) {
 					delete.setBackground(Color.yellow);
 					int input = JOptionPane.showOptionDialog(null, "Are you sure you want to hide it?", null,
@@ -270,7 +276,7 @@ public class HomePage extends JFrame /*implements ActionListener*/ {
 					+ " COLLATE NOCASE);";
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {
-				count++;// count the number of posts	
+				count++;// count the number of posts
 			}
 			conn.close();
 		} catch (SQLException s) {
@@ -279,127 +285,148 @@ public class HomePage extends JFrame /*implements ActionListener*/ {
 		}
 		return count;
 	}
-	/*public void logoutButtonSetup(){
-		logoutButton.setBounds(900, 15, 100, 25);
-		logoutButton.setText("Log out");
-		logoutButton.addActionListener(this);
-		logoutButton.setFocusable(false);
-		logoutButton.setHorizontalTextPosition(JButton.CENTER);
-        logoutButton.setBackground(backgroundColor);
-		logoutButton.setForeground(Color.white);
-        logoutButton.setOpaque(true);
-        feed.add(logoutButton, BorderLayout.NORTH);          
-    }
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == logoutButton) {
-			int input = JOptionPane.showOptionDialog(null, "Are you sure you want to logout?", null,
-					JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, null, null);
-			if (input == JOptionPane.OK_OPTION) {
-				new LoginPage();
-				frame.dispose();
-			}
-		}
-		
-	}*/
 	//places the decorating images in the eastern and the western panel
-	public void getDecorations() {
-		ImageIcon iconSports = new ImageIcon("src\\main\\resources\\balls-sports.png");
+	public final void  getDecorations() {
+		ImageIcon iconSports =
+			new ImageIcon("src\\main\\resources\\balls-sports.png");
 		JLabel sports = new JLabel(iconSports);
 		west.add(sports);
-		ImageIcon iconFashion = new ImageIcon("src\\main\\resources\\dress.png");
+		ImageIcon iconFashion =
+			new ImageIcon("src\\main\\resources\\dress.png");
 		JLabel fashion = new JLabel(iconFashion);
 		west.add(fashion);
-		ImageIcon iconScience = new ImageIcon("src\\main\\resources\\molecule.png");	
+		ImageIcon iconScience =
+			new ImageIcon("src\\main\\resources\\molecule.png");
 		JLabel science = new JLabel(iconScience);
 		west.add(science);
-		ImageIcon iconMusic = new ImageIcon("src\\main\\resources\\music.png");
+		ImageIcon iconMusic =
+			new ImageIcon("src\\main\\resources\\music.png");
 		JLabel music = new JLabel(iconMusic);
 		east.add(music);
-		ImageIcon iconArt = new ImageIcon("src\\main\\resources\\paint.png");
+		ImageIcon iconArt =
+			new ImageIcon("src\\main\\resources\\paint.png");
 		JLabel art = new JLabel(iconArt);
 		east.add(art);
-		ImageIcon iconTravel = new ImageIcon("src\\main\\resources\\airplane.png");
+		ImageIcon iconTravel =
+			new ImageIcon("src\\main\\resources\\airplane.png");
 		JLabel travel = new JLabel(iconTravel);
 		east.add(travel);
-		ImageIcon iconEdu = new ImageIcon("src\\main\\resources\\education.png");
+		ImageIcon iconEdu =
+			new ImageIcon("src\\main\\resources\\education.png");
 		JLabel academic = new JLabel(iconEdu);
 		west.add(academic);
-		ImageIcon iconFit = new ImageIcon("src\\main\\resources\\armmuscle.png");
+		ImageIcon iconFit =
+			new ImageIcon("src\\main\\resources\\armmuscle.png");
 		JLabel fitness = new JLabel(iconFit);
 		east.add(fitness);
-		ImageIcon iconEnvironment = new ImageIcon("src\\main\\resources\\envir.png");
+		ImageIcon iconEnvironment =
+			new ImageIcon("src\\main\\resources\\envir.png");
 		JLabel environment = new JLabel(iconEnvironment);
 		west.add(environment);
-		ImageIcon iconFood = new ImageIcon("src\\main\\resources\\restaurant.png");		
+		ImageIcon iconFood =
+			new ImageIcon("src\\main\\resources\\restaurant.png");		
 		JLabel food = new JLabel(iconFood);
 		east.add(food);
 	}
-	public Icon getIcon(String categ) {
+	public static Icon getIcon(String categ) {
 		if (categ.equals("Sports")) {
-			ImageIcon iconSports = new ImageIcon("src\\main\\resources\\sports3.png");
+			ImageIcon iconSports =
+				new ImageIcon("src\\main\\resources\\sports3.png");
 			return iconSports;
 		} else if (categ.equals("Education")) {
-			ImageIcon iconEdu = new ImageIcon("src\\main\\resources\\scholarship.png");
+			ImageIcon iconEdu =
+				new ImageIcon("src\\main\\resources\\scholarship.png");
 			return iconEdu;
 		} else if (categ.equals("Environment")) {
-			ImageIcon iconEnvironment = new ImageIcon("src\\main\\resources\\environment2.png");
+			ImageIcon iconEnvironment = 
+				new ImageIcon("src\\main\\resources\\environment2.png");
 			return iconEnvironment;
 		} else if (categ.equals("Fashion")) {
-			ImageIcon iconFashion = new ImageIcon("src\\main\\resources\\search.png");
+			ImageIcon iconFashion =
+				new ImageIcon("src\\main\\resources\\search.png");
 			return iconFashion;
 		} else if (categ.equals("Science")) {
-			ImageIcon iconScience = new ImageIcon("src\\main\\resources\\science.png");
+			ImageIcon iconScience =
+				new ImageIcon("src\\main\\resources\\science.png");
 			return iconScience;
 		} else if (categ.equals("Art")) {
-			ImageIcon iconArt = new ImageIcon("src\\main\\resources\\art2.png");
+			ImageIcon iconArt =
+				new ImageIcon("src\\main\\resources\\art2.png");
 			return iconArt;
 		} else if (categ.equals("Food")) {
-			ImageIcon iconFood = new ImageIcon("src\\main\\resources\\burger.png");
+			ImageIcon iconFood =
+				new ImageIcon("src\\main\\resources\\burger.png");
 			return iconFood;
 		} else if (categ.equals("Travel")) {
-			ImageIcon iconTravel = new ImageIcon("src\\main\\resources\\passport.png");
+			ImageIcon iconTravel =
+				new ImageIcon("src\\main\\resources\\passport.png");
 			return iconTravel;
 		} else if (categ.equals("Fitness")) {
-			ImageIcon iconFit = new ImageIcon("src\\main\\resources\\barbell.png");
+			ImageIcon iconFit =
+				new ImageIcon("src\\main\\resources\\barbell.png");
 			return iconFit;
 		} else if (categ.equals("Music")) {
-			ImageIcon iconMusic = new ImageIcon("src\\main\\resources\\music2.png");
+			ImageIcon iconMusic =
+				new ImageIcon("src\\main\\resources\\music2.png");
 			return iconMusic;
 		} else {
 			return null;
 		}
 	}
-	public Color getCategoryColor(String categ) {
+	public static Color getCategoryColor(String categ) {
+		Color c;
 		if (categ.equals("Sports")) {
-			return new Color(0, 102, 204);
+			c = new Color(0, 102, 204);
+			return c;
 		} else if (categ.equals("Education")) {
-			return new Color(255, 204, 0);
+			c = new Color(255, 204, 0);
+			return c;
 		} else if (categ.equals("Environment")) {
-			return new Color(0, 153, 51);
+			c = new Color(0, 153, 51);
+			return c;
 		} else if (categ.equals("Fashion")) {
-			return new Color(198, 78, 126);
+			c = new Color(198, 78, 126);
+			return c;
 		} else if (categ.equals("Science")) {
-			return new Color(30, 25, 98);
+			c = new Color(30, 25, 98);
+			return c;
 		} else if (categ.equals("Art")) {
-			return new Color(204, 0, 51);
+			c = new Color(204, 0, 51);
+			return c;
 		} else if (categ.equals("Food")) {
-			return new Color(153, 51, 0);
+			c = new Color(153, 51, 0);
+			return c;
 		} else if (categ.equals("Travel")) {
-			return new Color(235, 250, 255);
+			c = new Color(235, 250, 255);
+			return c;
 		} else if (categ.equals("Fitness")) {
-			return new Color(101, 253, 208);
+			c = new Color(101, 253, 208);
+			return c;
 		} else if (categ.equals("Music")) {
-			return new Color(240, 131, 189);
+			c = new Color(240, 131, 189);
+			return c;
 		} else {
 			return null;
 		}
 	}
-	public void setPanel(JPanel panel) {
-		this.feed = panel;
-	}
-	public JPanel getPanel() {
-		return feed;
+
+	public final void applyColors(int c) {
+		if (c == 0) {
+			east.setBackground(Color.DARK_GRAY);
+			west.setBackground(Color.DARK_GRAY);
+			south.setBackground(Color.DARK_GRAY);
+		} else if (c == 1) {
+			east.setBackground(Color.white);
+			west.setBackground(Color.white);
+			south.setBackground(Color.white);
+		} else if (c == 2) {
+			east.setBackground(MyProfile.col);
+			west.setBackground(MyProfile.col);
+			south.setBackground(MyProfile.col);
+		} else {
+			east.setBackground(MyProfile.col2);
+			west.setBackground(MyProfile.col2);
+			south.setBackground(MyProfile.col2);
+		}
 	}
 }
