@@ -1,4 +1,5 @@
 package kourpa;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -13,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
 public class LoginPage implements ActionListener {
 	// Log in graphics
 	JFrame frame = new JFrame("Log In");
@@ -31,9 +33,10 @@ public class LoginPage implements ActionListener {
 	static ExplorePage ex;
 	static HomePage hp;
 	final Color col = new Color(255, 102, 0);
-	
+
 	// HashMap<String, String> logininfo = new HashMap<String, String>();
 	Color c;
+
 	public JFrame loginPage() {
 		c = new Color(51, 153, 255);
 		frame.getContentPane().setBackground(c);
@@ -71,6 +74,7 @@ public class LoginPage implements ActionListener {
 		frame.setVisible(true);
 		return frame;
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == resetButton) {
@@ -87,7 +91,7 @@ public class LoginPage implements ActionListener {
 				Connection conn = DriverManager.getConnection(jdbcUrl);
 				Statement st = conn.createStatement();
 				String query = "SELECT userid, username, password, email, PhoneNumber, Sex,"
-					+ " Interest1, Interest2, Interest3, FirstName, LastName FROM User;";
+						+ " Interest1, Interest2, Interest3, FirstName, LastName FROM User;";
 				// String query2 = " SELECT username, password FROM User;";
 				ResultSet rs = st.executeQuery(query);
 				boolean loggedIn = false;
@@ -146,21 +150,27 @@ public class LoginPage implements ActionListener {
 			Register.register();
 		}
 	}
+
 	public void setExplore(JFrame frame) {
 		expl = frame;
 	}
+
 	public JFrame getExplore() {
 		return expl;
 	}
+
 	public void setHome(JFrame frame) {
 		home = frame;
 	}
+
 	public JFrame getHome() {
 		return home;
 	}
-	public void setMyProf(JFrame frame) {	
+
+	public void setMyProf(JFrame frame) {
 		myPr = frame;
 	}
+
 	public JFrame getMyProf() {
 		return myPr;
 	}

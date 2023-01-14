@@ -1,4 +1,5 @@
 package kourpa;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
@@ -21,19 +22,20 @@ import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
 
 /**
- * An interface of upload, which contains a
- * text area to write, a checkbox to select
- * a category of the context. The context and
- * the category are able to be stored in a
- * database and it informs of the length of the contex
+ * An interface of upload, which contains a text area to write, a checkbox to
+ * select a category of the context. The context and the category are able to be
+ * stored in a database and it informs of the length of the contex
  **/
 public class Upload {
-	/*@tip The context of upload
-	* from text area*/
+	/*
+	 * @tip The context of upload from text area
+	 */
 	private String tip;
-	/*categ The category of the context*/
+	/* categ The category of the context */
 	private String categ;
-	
+
+	User user = new User();
+
 	JFrame jf = new JFrame();
 	JPanel jp = new JPanel();
 	JPanel jpsouth = new JPanel();
@@ -42,21 +44,24 @@ public class Upload {
 	JPanel jpeast = new JPanel();
 	JPanel jpgridleft = new JPanel();
 	JPanel jpgridright = new JPanel();
-	
+
 	JButton jb = new JButton("Upload");
 	JButton jbinfo = new JButton("Info");
-	public Upload() {
+
+	public Upload(User u) {
+
+		user = u;
+
 		jf.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		jf.setLayout(new BorderLayout(1, 1));
 		jf.setBounds(500, 200, 500, 300);
 		jf.setResizable(false);
-		
+
 		jp.setBackground(new Color(255, 102, 0));
 		jp.setLayout(new BorderLayout(1, 1));
-		
+
 		jpnorth.setLayout(new GridLayout(2, 1));
-		jpnorth.setComponentOrientation
-		(ComponentOrientation.RIGHT_TO_LEFT);
+		jpnorth.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		jpgridleft.setLayout(new FlowLayout(FlowLayout.LEFT));
 		jpgridright.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		jpsouth.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -66,7 +71,7 @@ public class Upload {
 		jpnorth.setBackground(MyProfile.currentColor);
 		jpeast.setBackground(MyProfile.currentColor);
 		jpwest.setBackground(MyProfile.currentColor);
-		
+
 		JTextArea textarea = new JTextArea();
 		textarea.setLineWrap(true);
 		textarea.setWrapStyleWord(true);
@@ -74,105 +79,105 @@ public class Upload {
 		textarea.setBorder(line);
 		Font f = new Font("Calibri", Font.PLAIN, 15);
 		textarea.setFont(f);
-		
+
 		jpsouth.add(jb);
 		jpsouth.add(jbinfo);
-		
+
 		JLabel jlc = new JLabel("Choose Category");
 		jpgridright.add(jlc);
-		
-		String[] categories = { "", "SCIENCE", "SPORTS", "MUSIC",
-		"FASHION", "TRAVEL", "FITNESS", "ART",
-		"EDUCATION", "NATURE", "FOOD" };
+
+		String[] categories = { "", "SCIENCE", "SPORTS", "MUSIC", "FASHION", "TRAVEL", "FITNESS", "ART", "EDUCATION",
+				"NATURE", "FOOD" };
 		JComboBox<Object> cb = new JComboBox<Object>(categories);
 		jpgridright.add(cb);
-		
+
 		JLabel jl5 = new JLabel("Text your tip");
 		jpgridleft.add(jl5);
-		
+
 		jpnorth.add(jpgridright);
 		jpnorth.add(jpgridleft);
-		
-		cb.addItemListener(new ItemListener() {
-		/* saves selected category */
-		@Override
-		public void itemStateChanged(ItemEvent e) {
-			if (e.getStateChange() == ItemEvent.SELECTED) {
-				setCateg(cb.getSelectedItem().toString());
-			}
-		}
-	});
 
-	jf.add(jp);
-	jp.add(jpsouth, BorderLayout.SOUTH);
-	jp.add(jpnorth, BorderLayout.NORTH);
-	jp.add(textarea, BorderLayout.CENTER);
-	jp.add(jpeast, BorderLayout.EAST);
-	jp.add(jpwest, BorderLayout.WEST);
-	
-	JScrollPane scrollPane = new JScrollPane(textarea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-	JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-	jp.add(scrollPane, BorderLayout.CENTER);
-	jf.setVisible(true);
-	jbinfo.addActionListener(new ActionListener() {
-	/* informs for the length of context */
-	@Override
-	public void actionPerformed(ActionEvent e) {
-	int number = textarea.getText().length() - (int) textarea.getText().lines().count();
-	if (textarea.getText().lines().count() >= 1 ) {
-	number++;
-	}
-	JOptionPane.showMessageDialog(null, "The number of character: " + number);
-	}
-	});
-	
-	jb.addActionListener(new ActionListener() {
-	/*
-	* saves the context when it covers the prerequisites of the number of
-	* characters and displays a message for any condition
-	*/
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		int number =  textarea.getText().length() - (int) textarea.getText().lines().count();
-		if (textarea.getText().lines().count() >= 1 ) {
-			number++;
-		}
-		String tempcateg = cb.getSelectedItem().toString();
-		if (number < 1) {
-			JOptionPane.showMessageDialog(null,
-					"There is no tip to upload " + "(" + number + " / 200 character)");
-		} else if (number > 200) {
-			JOptionPane.showMessageDialog(null,
-			"Your it is" + "too large " + "(" + number + " / 200 character)");
-		} else {
-			if (tempcateg != "") {
-				jf.dispose();
-				setTip(textarea.getText());
-				Post post = new Post();
-				post.storePost(tip, categ);
-				JOptionPane.showMessageDialog(null,
-						"Your tip is uploaded " + "(" + number + " / 200 character)");
-			} else {
-				JOptionPane.showMessageDialog(null, "Select one category");
+		cb.addItemListener(new ItemListener() {
+			/* saves selected category */
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					setCateg(cb.getSelectedItem().toString());
+				}
 			}
-		}
+		});
+
+		jf.add(jp);
+		jp.add(jpsouth, BorderLayout.SOUTH);
+		jp.add(jpnorth, BorderLayout.NORTH);
+		jp.add(textarea, BorderLayout.CENTER);
+		jp.add(jpeast, BorderLayout.EAST);
+		jp.add(jpwest, BorderLayout.WEST);
+
+		JScrollPane scrollPane = new JScrollPane(textarea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		jp.add(scrollPane, BorderLayout.CENTER);
+		jf.setVisible(true);
+		jbinfo.addActionListener(new ActionListener() {
+			/* informs for the length of context */
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int number = textarea.getText().length(); // - (int) textarea.getText().lines().count();
+				// if (textarea.getText().lines().count() >= 1) {
+				number++;
+				// }
+				JOptionPane.showMessageDialog(null, "The number of character: " + number);
+			}
+		});
+
+		jb.addActionListener(new ActionListener() {
+			/*
+			 * saves the context when it covers the prerequisites of the number of
+			 * characters and displays a message for any condition
+			 */
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int number = textarea.getText().length() -1 ; // - (int) textarea.getText().lines().count();
+				// if (textarea.getText().lines().count() >= 1) {
+				number++;
+				// }
+				String tempcateg = cb.getSelectedItem().toString();
+				if (number < 1) {
+					JOptionPane.showMessageDialog(null,
+							"There is no tip to upload " + "(" + number + " / 200 character)");
+				} else if (number > 200) {
+					JOptionPane.showMessageDialog(null,
+							"Your it is" + "too large " + "(" + number + " / 200 character)");
+				} else {
+					if (tempcateg != "") {
+						jf.dispose();
+						setTip(textarea.getText());
+						Post post = new Post(u);
+						post.storePost(tip, categ);
+						JOptionPane.showMessageDialog(null,
+								"Your tip is uploaded " + "(" + number + " / 200 character)");
+					} else {
+						JOptionPane.showMessageDialog(null, "Select one category");
+					}
+				}
+			}
+		});
+
 	}
-	});
-	
-	}
-	
+
 	public String getTip() {
 		return tip;
 	}
-	
+
 	public void setTip(String tip) {
 		this.tip = tip;
 	}
-	
+
 	public String getCateg() {
 		return categ;
 	}
-	public void setCateg(String categ) {	
-	this.categ = categ;
+
+	public void setCateg(String categ) {
+		this.categ = categ;
 	}
 }

@@ -1,4 +1,5 @@
 package kourpa;
+
 import java.sql.Statement;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -34,6 +35,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 public class MyProfile implements ActionListener, MouseListener { // creation of the necessary components
 	private static User user1 = new User();
 	private JFrame frame = new JFrame();
@@ -98,8 +100,13 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 	private JButton logoutButton = new JButton();
 	static Color col2;
 	static Color currentColor = new Color(255, 102, 0);
+
 	public JFrame myProfile(User user, Color col) {
 		// super("Get tip-My profile");// constructor of the MyProfile GUI
+		pCombo1.setSelectedItem(user.getInterest1());
+		pCombo2.setSelectedItem(user.getInterest2());
+		pCombo3.setSelectedItem(user.getInterest3());
+		sexType.setSelectedItem(user.getSex());
 		Image ic = Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\logo.png");
 		frame.setIconImage(ic);
 		user1 = user;
@@ -131,11 +138,12 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 		panel.add(menu.menuBar(user, col), BorderLayout.NORTH);
 		u = user;
 		return frame;
-		
+
 	}
+
 	public void sumbit(User user) {
 		user.setPassword(String.valueOf(passwordText.getPassword()));
-		user.setEmail(emailText.getText());	
+		user.setEmail(emailText.getText());
 		user.setInterest1(categories[pCombo1.getSelectedIndex()]);
 		user.setInterest2(categories[pCombo2.getSelectedIndex()]);
 		user.setInterest3(categories[pCombo3.getSelectedIndex()]);
@@ -147,20 +155,22 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 			// Creating a new Connection
 			Connection conn = DriverManager.getConnection(jdbcUrl);
 			Statement statement = conn.createStatement();
-			String query = "UPDATE User SET password = " + "'" + user.getPassword() + "', Sex= '" + user.getSex()
+			String query = "UPDATE User SET password = '" + user.getPassword() + "', Sex= '" + user.getSex()
 					+ "', Interest1= '" + user.getInterest1() + "', Interest2= '" + user.getInterest2()
 					+ "', Interest3= '" + user.getInterest3() + "', Email= '" + user.getEmail() + "', PhoneNumber= '"
 					+ user.getPhoneNumber() + "', FirstName= '" + user.getFirstName() + "', LastName= '"
-					+ user.getLastName() + " WHERE Username = '" + user.getUsername() + "'";
+					+ user.getLastName() + "' WHERE Username = '" + user.getUsername() + "'";
+
 			statement.executeUpdate(query);
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == changeButton) { //make TextArea editable and create submit button
+		if (e.getSource() == changeButton) { // make TextArea editable and create submit button
 			changeButton.setVisible(false);
 			s = s.toUpperCase();
 			sumbitButton.setFocusPainted(true);
@@ -300,8 +310,9 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 				lp.getMyProf().dispose();
 			}
 		}
-		
+
 	}
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -331,24 +342,29 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 			frame.show();
 		}
 	}
+
 	@Override
 	public void mousePressed(MouseEvent e) {
 	}
+
 	@Override
 	public void mouseReleased(MouseEvent e) {
 	}
+
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		if (e.getSource() == sumbitButton) {
 			sumbitButton.setBackground(hoverColor);
 		}
 	}
+
 	@Override
 	public void mouseExited(MouseEvent e) {
 		if (e.getSource() == sumbitButton) {
 			sumbitButton.setBackground(backgroundColor);
 		}
 	}
+
 	public void setFieldsEditable() {
 		passwordText.setEditable(true);
 		emailText.setEditable(true);
@@ -360,6 +376,7 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 		lastNameText.setEditable(true);
 		phoneNumberText.setEditable(true);
 	}
+
 	public void setFieldsUneditable() {
 		userText.setEditable(false);
 		passwordText.setEditable(false);
@@ -372,6 +389,7 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 		lastNameText.setEditable(false);
 		phoneNumberText.setEditable(false);
 	}
+
 	public void setValuesInTextAreas() {
 		userText.setText(user1.getUsername());
 		passwordText.setText(user1.getPassword());
@@ -393,7 +411,7 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 				user1.setInterest3(categories[i]);
 				break;
 			}
-		}		
+		}
 		firstNameText.setText(user1.getFirstName());
 		lastNameText.setText(user1.getLastName());
 		for (int i = 0; i < sexTypes.length; i++) {
@@ -404,6 +422,7 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 		}
 		phoneNumberText.setText(user1.getPhoneNumber());
 	}
+
 	public void setTextinPostArea(User user1) {
 		String jdbcUrl = "jdbc:sqlite:socialmedia.db"; // Database URL
 		try {
@@ -412,7 +431,8 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 			Statement statement = conn.createStatement();
 			// Get user's posts from the database
 			String query = "SELECT User.username, Post.text, Post.uploaddate, Post.PostId, Post.likes, Post.Category FROM Post, User WHERE User.username = '"
-					+ user1.getUsername() + "' AND Post.UserId = User.UserId"; // Post.userId = User.userId AND (Post.Category = "
+					+ user1.getUsername() + "' AND Post.UserId = User.UserId"; // Post.userId = User.userId AND
+																				// (Post.Category = "
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {
 				JPanel post = new JPanel();
@@ -429,6 +449,7 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 			s.printStackTrace();
 		}
 	}
+
 	public void southSetup(Color col) {
 		p.setBorder(BorderFactory.createLineBorder(Color.black));
 		south = new JPanel(new BorderLayout(0, 5));
@@ -452,15 +473,16 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 		south.setBackground(Color.black);
 		panel.add(south, BorderLayout.SOUTH);
 	}
+
 	public void scrollbarSetup() {
-		JScrollPane scrollbar = 
-			new JScrollPane(p, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-			JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		JScrollPane scrollbar = new JScrollPane(p, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollbar.getVerticalScrollBar().setUnitIncrement(12);
 		scrollbar.getVerticalScrollBar().setBackground(Color.BLACK);
 		scrollbar.getVerticalScrollBar().setPreferredSize(new Dimension(8, 695));
 		south.add(scrollbar);
 	}
+
 	public void panelSetup(Color col) {
 		panel = new JPanel(new BorderLayout(0, 3));
 		panel.setBackground(Color.black);
@@ -510,6 +532,7 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 		panel.add(west, BorderLayout.WEST);
 		panel.add(center, BorderLayout.CENTER);
 	}
+
 	public void eastPanelSetup(Color col) {
 		east.setLayout(new GridLayout(10, 1));
 		east.setBackground(col);
@@ -539,6 +562,7 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 		colorPick.addActionListener(this);
 		panel.add(east, BorderLayout.EAST);
 	}
+
 	public void logoutButtonSetup() {
 		logoutButton.setBounds(900, 25, 100, 25);
 		logoutButton.setText("Log out");
@@ -551,6 +575,7 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 		// west.add(Box.createVerticalStrut(380));
 		west.add(logoutButton, BorderLayout.NORTH);
 	}
+
 	public int getMessageCount(User user1) {
 		int count = 0;
 		String url = "jdbc:sqlite:socialmedia.db";
@@ -572,6 +597,7 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 		}
 		return count;
 	}
+
 	public void setColor(Color c) {
 		currentColor = c;
 	}
