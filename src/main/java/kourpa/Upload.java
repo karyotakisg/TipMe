@@ -144,10 +144,10 @@ public class Upload {
 				String tempcateg = cb.getSelectedItem().toString();
 				if (number < 1) {
 					JOptionPane.showMessageDialog(null,
-							"There is no tip to upload " + "(" + number + " / 200 character)");
-				} else if (number > 200) {
+							"There is no tip to upload " + "(" + number + " / 300 character)");
+				} else if (number > 300) {
 					JOptionPane.showMessageDialog(null,
-							"Your it is" + "too large " + "(" + number + " / 200 character)");
+							"Your it is" + "too large " + "(" + number + " / 300 character)");
 				} else {
 					if (tempcateg != "") {
 						jf.dispose();
@@ -155,7 +155,7 @@ public class Upload {
 						Post post = new Post(u);
 						post.storePost(tip, categ);
 						JOptionPane.showMessageDialog(null,
-								"Your tip is uploaded " + "(" + number + " / 200 character)");
+								"Your tip is uploaded " + "(" + number + " / 300 character)");
 					} else {
 						JOptionPane.showMessageDialog(null, "Select one category");
 					}

@@ -48,7 +48,6 @@ public class HomePage {
 		frame.setTitle("GetTip");
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setBounds(180, 50, 1050, 750);
-		frame.setLocationRelativeTo(null);
 		Image i = Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\logo.png");
 		frame.setIconImage(i);
 		frame.setBackground(Color.BLACK);
@@ -333,34 +332,34 @@ public class HomePage {
 	}
 
 	public static Icon getIcon(String categ) {
-		if (categ.equals("Sports")) {
+		if (categ.equalsIgnoreCase("Sports")) {
 			ImageIcon iconSports = new ImageIcon("src\\main\\resources\\sports3.png");
 			return iconSports;
-		} else if (categ.equals("Education")) {
+		} else if (categ.equalsIgnoreCase("Education")) {
 			ImageIcon iconEdu = new ImageIcon("src\\main\\resources\\scholarship.png");
 			return iconEdu;
-		} else if (categ.equals("Environment")) {
+		} else if (categ.equalsIgnoreCase("Nature")) {
 			ImageIcon iconEnvironment = new ImageIcon("src\\main\\resources\\environment2.png");
 			return iconEnvironment;
-		} else if (categ.equals("Fashion")) {
+		} else if (categ.equalsIgnoreCase("Fashion")) {
 			ImageIcon iconFashion = new ImageIcon("src\\main\\resources\\search.png");
 			return iconFashion;
-		} else if (categ.equals("Science")) {
+		} else if (categ.equalsIgnoreCase("Science")) {
 			ImageIcon iconScience = new ImageIcon("src\\main\\resources\\science.png");
 			return iconScience;
-		} else if (categ.equals("Art")) {
+		} else if (categ.equalsIgnoreCase("ART")) {
 			ImageIcon iconArt = new ImageIcon("src\\main\\resources\\art2.png");
 			return iconArt;
-		} else if (categ.equals("Food")) {
+		} else if (categ.equalsIgnoreCase("Food")) {
 			ImageIcon iconFood = new ImageIcon("src\\main\\resources\\burger.png");
 			return iconFood;
-		} else if (categ.equals("Travel")) {
+		} else if (categ.equalsIgnoreCase("Travel")) {
 			ImageIcon iconTravel = new ImageIcon("src\\main\\resources\\passport.png");
 			return iconTravel;
-		} else if (categ.equals("Fitness")) {
+		} else if (categ.equalsIgnoreCase("Fitness")) {
 			ImageIcon iconFit = new ImageIcon("src\\main\\resources\\barbell.png");
 			return iconFit;
-		} else if (categ.equals("Music")) {
+		} else if (categ.equalsIgnoreCase("Music")) {
 			ImageIcon iconMusic = new ImageIcon("src\\main\\resources\\music2.png");
 			return iconMusic;
 		} else {
@@ -369,34 +368,34 @@ public class HomePage {
 	}
 
 	public static Color getCategoryColor(String categ) {
-		if (categ.equals("Sports")) {
+		if (categ.equalsIgnoreCase("Sports")) {
 			final Color c1 = new Color(0, 102, 204);
 			return c1;
-		} else if (categ.equals("Education")) {
+		} else if (categ.equalsIgnoreCase("Education")) {
 			final Color c2 = new Color(255, 204, 0);
 			return c2;
-		} else if (categ.equals("Environment")) {
+		} else if (categ.equalsIgnoreCase("Nature")) {
 			final Color c3 = new Color(0, 153, 51);
 			return c3;
-		} else if (categ.equals("Fashion")) {
+		} else if (categ.equalsIgnoreCase("Fashion")) {
 			final Color c4 = new Color(198, 78, 126);
 			return c4;
-		} else if (categ.equals("Science")) {
+		} else if (categ.equalsIgnoreCase("Science")) {
 			final Color c5 = new Color(30, 25, 98);
 			return c5;
-		} else if (categ.equals("Art")) {
+		} else if (categ.equalsIgnoreCase("Art")) {
 			final Color c6 = new Color(204, 0, 51);
 			return c6;
-		} else if (categ.equals("Food")) {
+		} else if (categ.equalsIgnoreCase("Food")) {
 			final Color c7 = new Color(153, 51, 0);
 			return c7;
-		} else if (categ.equals("Travel")) {
-			final Color c8 = new Color(235, 250, 255);
+		} else if (categ.equalsIgnoreCase("Travel")) {
+			final Color c8 = new Color(0, 204, 153);
 			return c8;
-		} else if (categ.equals("Fitness")) {
+		} else if (categ.equalsIgnoreCase("Fitness")) {
 			final Color c9 = new Color(101, 253, 208);
 			return c9;
-		} else if (categ.equals("Music")) {
+		} else if (categ.equalsIgnoreCase("Music")) {
 			final Color c10 = new Color(240, 131, 189);
 			return c10;
 		} else {

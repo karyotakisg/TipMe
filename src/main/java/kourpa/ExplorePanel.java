@@ -30,6 +30,7 @@ public class ExplorePanel implements ActionListener {
     private static JPanel p9;
     Icon back = new ImageIcon("src\\main\\resources\\goback.png");
     private JButton [] goback;
+    private HomePage hp = new HomePage();
 	public ExplorePanel(int x, JPanel jf, JPanel south, JPanel east, JPanel west, User u, boolean[] flag) {
         //jf.setLayout(new BorderLayout(5, 5));
           //jf.setLayout(new GridLayout(3, 2, 10, 10));
@@ -39,7 +40,7 @@ public class ExplorePanel implements ActionListener {
 		  	goback[d].setIcon(back);
 		  	goback[d].setBackground(Color.black);
 	    }
-        HomePage hp = new HomePage();
+        
         south.setPreferredSize(new Dimension(200, 50));
         east.setPreferredSize(new Dimension(100, 200));
 		west.setPreferredSize(new Dimension(100, 200));
@@ -54,7 +55,7 @@ public class ExplorePanel implements ActionListener {
 					}
 				}
 				p0 = new JPanel();
-				category = "Science";
+				category = "SCIENCE";
 				p0.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p0.setBackground(Color.BLACK);
 				customizeMessage(u, category, p0);
@@ -63,7 +64,7 @@ public class ExplorePanel implements ActionListener {
 				jf.add(scr, BorderLayout.CENTER);
 			} else {
 				p0 = new JPanel();
-				category = "Science";
+				category = "SCIENCE";
 				p0.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p0.setBackground(Color.BLACK);
 				customizeMessage(u, category, p0);
@@ -126,7 +127,7 @@ public class ExplorePanel implements ActionListener {
 					}
 				}
 				p2 = new JPanel();
-				category = "Music";
+				category = "MUSIC";
 				p2.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p2.setBackground(Color.BLACK);
 				customizeMessage(u, category, p2);
@@ -135,7 +136,7 @@ public class ExplorePanel implements ActionListener {
 				jf.add(scr, BorderLayout.CENTER);
 			} else {
 				p2 = new JPanel();
-				category = "Music";
+				category = "MUSIC";
 				p2.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p2.setBackground(Color.BLACK);
 				customizeMessage(u, category, p2);
@@ -162,7 +163,7 @@ public class ExplorePanel implements ActionListener {
 					}
 				}
 				p3 = new JPanel();
-				category = "Fashion";
+				category = "FASHION";
 				p3.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p3.setBackground(Color.BLACK);
 				customizeMessage(u, category, p3);
@@ -171,7 +172,7 @@ public class ExplorePanel implements ActionListener {
 				jf.add(scr, BorderLayout.CENTER);
 			} else {
 				p3 = new JPanel();
-				category = "Fashion";
+				category = "FASHION";
 				p3.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p3.setBackground(Color.BLACK);
 				customizeMessage(u, category, p3);
@@ -198,7 +199,7 @@ public class ExplorePanel implements ActionListener {
 					}
 				}
 				p4 = new JPanel();
-				category = "Travel";
+				category = "TRAVEL";
 				p4.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p4.setBackground(Color.BLACK);
 				customizeMessage(u, category, p4);
@@ -206,7 +207,7 @@ public class ExplorePanel implements ActionListener {
 				jf.add(scr, BorderLayout.CENTER);
 			} else {
 				p4 = new JPanel();
-				category = "Travel";
+				category = "TRAVEL";
 				p4.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p4.setBackground(Color.BLACK);
 				customizeMessage(u, category, p4);
@@ -232,7 +233,7 @@ public class ExplorePanel implements ActionListener {
 					}
 				}
 				p5 = new JPanel();
-				category = "Fitness";
+				category = "FITNESS";
 				p5.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p5.setBackground(Color.BLACK);
 				customizeMessage(u, category, p5);
@@ -240,7 +241,7 @@ public class ExplorePanel implements ActionListener {
 				jf.add(scr, BorderLayout.CENTER);
 			} else {
 				p5 = new JPanel();
-				category = "Fitness";
+				category = "FITNESS";
 				p5.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p5.setBackground(Color.BLACK);
 				customizeMessage(u, category, p5);
@@ -266,7 +267,7 @@ public class ExplorePanel implements ActionListener {
 					}
 				}
 				p6 = new JPanel();
-				category = "Art";
+				category = "ART";
 				p6.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p6.setBackground(Color.BLACK);
 				customizeMessage(u, category, p6);
@@ -275,7 +276,7 @@ public class ExplorePanel implements ActionListener {
 				jf.add(scr, BorderLayout.CENTER);
 			} else {
 				p6 = new JPanel();
-				category = "Art";
+				category = "ART";
 				p6.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p6.setBackground(Color.BLACK);
 				customizeMessage(u, category, p6);
@@ -338,7 +339,7 @@ public class ExplorePanel implements ActionListener {
 					}
 				}
 				p8 = new JPanel();
-				category = "Environment";
+				category = "NATURE";
 				p8.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p8.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
 				p8.setBackground(Color.BLACK);
@@ -348,7 +349,7 @@ public class ExplorePanel implements ActionListener {
 				jf.add(scr, BorderLayout.CENTER);
 			} else {
 				p8 = new JPanel();
-				category = "Environment";
+				category = "NATURE";
 				p8.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p8.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
 				p8.setBackground(Color.BLACK);
@@ -376,7 +377,7 @@ public class ExplorePanel implements ActionListener {
 					}
 				}
 				p9 = new JPanel();
-				category = "Food";
+				category = "FOOD";
 				p9.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p9.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
 				p9.setBackground(Color.BLACK);
@@ -386,7 +387,7 @@ public class ExplorePanel implements ActionListener {
 				jf.add(scr, BorderLayout.CENTER);
 			} else {
 				p9 = new JPanel();
-				category = "Food";
+				category = "FOOD";
 				p9.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p9.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
 				p9.setBackground(Color.BLACK);
@@ -473,7 +474,8 @@ public class ExplorePanel implements ActionListener {
 			Statement statement = conn.createStatement();
 			// System.out.println("Connected");
 			// Get the right posts from the database
-			String query = "SELECT User.username, Post.text, Post.uploaddate, Post.likes, Post.PostId, Post.Category FROM Post, User WHERE Post.userId = User.userId AND Post.Category = '" + category + "'";
+			String query = "SELECT User.username, Post.text, Post.uploaddate, Post.likes, Post.PostId, "
+					+ "Post.Category FROM Post, User WHERE Post.userId = User.userId AND Post.Category = '" + category + "'";
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {
 				HomePage hp = new HomePage();
