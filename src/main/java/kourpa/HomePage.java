@@ -28,9 +28,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
-public class HomePage  /*implements ActionListener*/ {
-	Color textColor = Color.decode("#ffffff");
-	Color backgroundColor = Color.decode("#000000");
+public class HomePage {
+	
 	private User user = new User();
 	private int deletedMessagesCount = 0;
 	ImageIcon logo = new ImageIcon("src\\main\\resources\\logo.png");
@@ -42,11 +41,7 @@ public class HomePage  /*implements ActionListener*/ {
 	private JPanel west;
 	private JPanel south;
 	private JPanel center;
-	//private final JButton logoutButton = new JButton();
-	HomePage() {}
-	HomePage(User u) {
-		user = u; //
-	}
+	
 	public JFrame homePage(User u, Color col) {
 		frame.setTitle("GetTip");
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -119,7 +114,7 @@ public class HomePage  /*implements ActionListener*/ {
 				post.add(eastern, BorderLayout.EAST);
 				post.add(getMessageText(rs.getString("text")), BorderLayout.CENTER);
 				post.add(getSouthLike(rs.getString("text"), center, post, frame, rs.getInt("PostId")), BorderLayout.SOUTH);
-				Post p = new Post(user);
+				Post p = new Post(u);
 				p.getLikeCount(rs.getInt("PostId"));
 				p.getDislikeCount(rs.getInt("PostId"));	
 				center.add(post);	
@@ -374,37 +369,46 @@ public class HomePage  /*implements ActionListener*/ {
 		}
 	}
 	public static Color getCategoryColor(String categ) {
-		Color c;
 		if (categ.equals("Sports")) {
-			c = new Color(0, 102, 204);
-			return c;
+			final Color c1 =
+				new Color(0, 102, 204);
+			return c1;
 		} else if (categ.equals("Education")) {
-			c = new Color(255, 204, 0);
-			return c;
+			final Color c2 =
+				new Color(255, 204, 0);
+			return c2;
 		} else if (categ.equals("Environment")) {
-			c = new Color(0, 153, 51);
-			return c;
+			final Color c3 =
+				new Color(0, 153, 51);
+			return c3;
 		} else if (categ.equals("Fashion")) {
-			c = new Color(198, 78, 126);
-			return c;
+			final Color c4 =
+				new Color(198, 78, 126);
+			return c4;
 		} else if (categ.equals("Science")) {
-			c = new Color(30, 25, 98);
-			return c;
+			final Color c5 =
+				new Color(30, 25, 98);
+			return c5;
 		} else if (categ.equals("Art")) {
-			c = new Color(204, 0, 51);
-			return c;
+			final Color c6 =
+				new Color(204, 0, 51);
+			return c6;
 		} else if (categ.equals("Food")) {
-			c = new Color(153, 51, 0);
-			return c;
+			final Color c7 =
+				new Color(153, 51, 0);
+			return c7;
 		} else if (categ.equals("Travel")) {
-			c = new Color(235, 250, 255);
-			return c;
+			final Color c8 =
+				new Color(235, 250, 255);
+			return c8;
 		} else if (categ.equals("Fitness")) {
-			c = new Color(101, 253, 208);
-			return c;
+			final Color c9 =
+				new Color(101, 253, 208);
+			return c9;
 		} else if (categ.equals("Music")) {
-			c = new Color(240, 131, 189);
-			return c;
+			final Color c10 =
+				new Color(240, 131, 189);
+			return c10;
 		} else {
 			return null;
 		}
