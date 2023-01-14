@@ -32,8 +32,12 @@
     <version>3.40.0.0</version>
   </dependency>
 
-
-
+    <dependency>
+      <groupId>com.github.hazendaz.spotbugs</groupId>
+      <artifactId>spotbugs-maven-plugin</artifactId>
+      <version>3.1.0-RC4</version>
+      <type>maven-plugin</type>
+    </dependency>
     
     <dependency>
       <groupId>net.sourceforge.pmd</groupId>
@@ -47,11 +51,18 @@
       <artifactId>checkstyle</artifactId>
       <version>10.4</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-javadoc-plugin</artifactId>
+      <version>3.4.1</version>
+      <type>maven-plugin</type>
+    </dependency>
 
   </dependencies>
   
 
   <build>
+    
     <resources>
       <resource>
         <directory>./src/main/resources</directory>
@@ -69,20 +80,6 @@
           <artifactId>maven-resources-plugin</artifactId>
           <version>3.0.2</version>
         </plugin>
-        <plugin>
-          <groupId>com.github.spotbugs</groupId>
-          <artifactId>spotbugs-maven-plugin</artifactId>
-          <version>3.1.11</version>
-          <executions>
-              <execution>
-                  <id>check</id>
-                  <phase>verify</phase>
-                  <goals>
-                      <goal>check</goal>
-                  </goals>
-              </execution>
-          </executions>
-      </plugin>
         
     <plugin>
           <artifactId>maven-surefire-plugin</artifactId>

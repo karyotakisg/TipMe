@@ -1,5 +1,4 @@
 package kourpa;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -15,9 +14,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
-
 import java.awt.Component;
-
 public class Menu implements MouseListener { // creates the menu at the top of the screen
 	User user = new User();
 	JPanel menu = new JPanel();
@@ -44,7 +41,6 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 	static int countH = 1;
 	static int current = 0;
 	static boolean flagColor;
-
 	public JPanel menuBar(User u, Color col) {
 		menu.add(b1Icon);
 		menu.add(b2Icon);
@@ -54,13 +50,11 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 		mp = new MyProfile();
 		ex = new ExplorePage();
 		flagColor = false;
-
 		b1Icon.setPreferredSize(new Dimension(100, 50));
 		b2Icon.setPreferredSize(new Dimension(100, 50));
 		b3Icon.setPreferredSize(new Dimension(100, 50));
 		b4Icon.setPreferredSize(new Dimension(100, 50));
 		b5Icon.setPreferredSize(new Dimension(35, 35));
-
 		b1Icon.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -188,7 +182,6 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new Upload(u);
-
 			}
 		});
 		menu.add(b5Icon);
@@ -230,11 +223,9 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 		b5Icon.setBackground(Color.BLACK);
 		return menu;
 	}
-
 	@Override
 	public void mouseClicked(MouseEvent e) {
 	}
-
 	@Override
 	public void mousePressed(MouseEvent e) { // The menu button (top button) change color to cyan when the user presses
 												// them
@@ -251,11 +242,9 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 			b4Icon.setBackground(Color.CYAN);
 		}
 	}
-
 	@Override
 	public void mouseReleased(MouseEvent e) {
 	}
-
 	@Override
 	public void mouseEntered(MouseEvent e) { // hovering a menu button changes its color.
 		if (e.getSource() == b1Icon) {
@@ -271,7 +260,6 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 			b4Icon.setBackground(Color.YELLOW);
 		}
 	}
-
 	@Override
 	public void mouseExited(MouseEvent e) {
 		if (e.getSource() == b1Icon) {
@@ -287,11 +275,9 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 			b4Icon.setBackground(new Color(240, 240, 240));
 		}
 	}
-
 	public void applyColors(int c) {
 		java.awt.Component[] compsF = home.getComponents();
 		java.awt.Component[] compsE = expl.getComponents();
-
 		if (c == 0) {
 			for (Component comp : compsF) {
 				if (comp instanceof JComponent) {

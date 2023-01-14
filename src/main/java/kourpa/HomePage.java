@@ -48,6 +48,7 @@ public class HomePage {
 		frame.setTitle("GetTip");
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setBounds(180, 50, 1050, 750);
+		frame.setLocationRelativeTo(null);
 		Image i = Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\logo.png");
 		frame.setIconImage(i);
 		frame.setBackground(Color.BLACK);

@@ -56,7 +56,7 @@ public class Upload {
 		jf.setLayout(new BorderLayout(1, 1));
 		jf.setBounds(500, 200, 500, 300);
 		jf.setResizable(false);
-
+		jf.setLocationRelativeTo(null);
 		jp.setBackground(new Color(255, 102, 0));
 		jp.setLayout(new BorderLayout(1, 1));
 

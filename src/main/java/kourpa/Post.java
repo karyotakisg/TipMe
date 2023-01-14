@@ -97,7 +97,6 @@ public class Post {
 				String query = "SELECT Likes FROM Post";
 				String qLikes = "SELECT userid FROM Dislikes WHERE PostId = " + postid;
 				if (e.getSource() == like && !liked && !disliked) {
-					// TODO Auto-generated method stub
 					query = "UPDATE Post SET Likes = Likes + 1 WHERE PostId = " + postid;
 					qLikes = "INSERT INTO Likes(userid, postid) VALUES(" + user.getUserId() + ", " + postid + ")";
 					col1 = Color.green;
@@ -181,7 +180,6 @@ public class Post {
 				String query = "SELECT Dislikes FROM Post";
 				String qDislikes = "SELECT userid FROM Dislikes WHERE PostId = " + postid;
 				if (e.getSource() == dislike && !disliked && !liked) {
-					// TODO Auto-generated method stub
 					query = "UPDATE Post SET Dislikes = Dislikes + 1 WHERE PostId = " + postid;
 					qDislikes = "INSERT INTO Dislikes(userid, postid) VALUES(" + user.getUserId() + ", " + postid + ")";
 					col2 = Color.red;

@@ -16,7 +16,6 @@ public class MenuTest implements Runnable{
     }
     @Before
     public void run() {
-    //frame.add(menu);
     frame.setVisible(true);
     try {
         Thread.sleep(2000);

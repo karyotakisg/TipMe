@@ -1,5 +1,4 @@
 package kourpa;
-
 import java.sql.Statement;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -35,7 +34,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 public class MyProfile implements ActionListener, MouseListener { // creation of the necessary components
 	private static User user1 = new User();
 	private JFrame frame = new JFrame();
@@ -70,7 +68,7 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 	private JLabel phoneNumberLabel = new JLabel("Phone Number");
 	private JLabel labelForPosts = new JLabel("My Posts");
 	private String[] categories = { "SCIENCE", "SPORTS", "MUSIC", "FASHION", "TRAVEL", "FITNESS", "ART", "EDUCATION",
-			"NATURE", "FOOD" };
+		"NATURE", "FOOD" };
 	private JComboBox<Object> pCombo1 = new JComboBox<Object>(categories);
 	private JComboBox<Object> pCombo2 = new JComboBox<Object>(categories);
 	private JComboBox<Object> pCombo3 = new JComboBox<Object>(categories);
@@ -100,7 +98,6 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 	private JButton logoutButton = new JButton();
 	static Color col2;
 	static Color currentColor = new Color(255, 102, 0);
-
 	public JFrame myProfile(User user, Color col) {
 		// super("Get tip-My profile");// constructor of the MyProfile GUI
 		pCombo1.setSelectedItem(user.getInterest1());
@@ -112,6 +109,7 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 		user1 = user;
 		frame.setBounds(180, 50, 1050, 750);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
 		p = new JPanel(new GridLayout(getMessageCount(user), 1, 0, 10));
 		setValuesInTextAreas();
 		changeButton.setSize(150, 50);
@@ -138,7 +136,6 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 		panel.add(menu.menuBar(user, col), BorderLayout.NORTH);
 		u = user;
 		return frame;
-
 	}
 
 	public void sumbit(User user) {
@@ -160,14 +157,12 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 					+ "', Interest3= '" + user.getInterest3() + "', Email= '" + user.getEmail() + "', PhoneNumber= '"
 					+ user.getPhoneNumber() + "', FirstName= '" + user.getFirstName() + "', LastName= '"
 					+ user.getLastName() + "' WHERE Username = '" + user.getUsername() + "'";
-
 			statement.executeUpdate(query);
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == changeButton) { // make TextArea editable and create submit button
@@ -449,7 +444,6 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 			s.printStackTrace();
 		}
 	}
-
 	public void southSetup(Color col) {
 		p.setBorder(BorderFactory.createLineBorder(Color.black));
 		south = new JPanel(new BorderLayout(0, 5));
