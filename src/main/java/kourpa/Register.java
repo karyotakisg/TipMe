@@ -1,4 +1,5 @@
 package kourpa;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -17,33 +18,39 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 public class Register {
 	// Creating a new user object in order to set User's preferences
 	static User user = new User(); // A new User signs up
 	static JFrame frame; // classe's frame
+
 	public static void register() { // Create classe's frame and panel
 		JPanel panel = createPanel();
 		frame = createFrame(panel);
 		createLabelsAndFields(frame, panel);
 	}
-	private static JPanel createPanel() {
+
+	public static JPanel createPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBackground(new Color(51, 153, 255));
 		return panel;
 	}
-	private static JFrame createFrame(JPanel panel) {
+
+	public static JFrame createFrame(JPanel panel) {
 		JFrame frame = new JFrame("Welcome to GetTip()");
 		frame.setSize(500, 650);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(panel);
 		return frame;
 	}
+
 	private static void createLabelsAndFields(JFrame frame, JPanel panel) {
 		// code for creating JLabels and JTextFields
 		ImageIcon icon = new ImageIcon("src\\main\\resources\\GetTip.png");
 		Image image = icon.getImage();
-		Image scaledImage = image.getScaledInstance(300, 300, Image.SCALE_SMOOTH); // image appears when full screen is opened																			
+		Image scaledImage = image.getScaledInstance(300, 300, Image.SCALE_SMOOTH); // image appears when full screen is
+																					// opened
 		ImageIcon scaledIcon = new ImageIcon(scaledImage);
 		JLabel tips = new JLabel(scaledIcon);
 		tips.setBounds(600, 100, 300, 300);
@@ -106,8 +113,8 @@ public class Register {
 		passwordText.setBounds(100, 255, 150, 25);
 		passwordText.setForeground(Color.black);
 		panel.add(passwordText);
-		// If the user already owns an account, he/she is able to directly log in									
-		JButton loginButton = new JButton("Already have an Account? Login!"); 
+		// If the user already owns an account, he/she is able to directly log in
+		JButton loginButton = new JButton("Already have an Account? Login!");
 		loginButton.setBounds(30, 500, 250, 30);
 		panel.add(loginButton);
 		JLabel sexLabel = new JLabel("Sex");
@@ -118,11 +125,12 @@ public class Register {
 		JComboBox<Object> cb = new JComboBox<Object>(sexTypes);
 		cb.setBounds(100, 285, 100, 25);
 		panel.add(cb);
-		/* Interest options
-		10 categories of different topics from which the user can choose his favorites based on his interests
-		First Interest options menu*/
+		/*
+		 * Interest options 10 categories of different topics from which the user can
+		 * choose his favorites based on his interests First Interest options menu
+		 */
 		String[] categories = { "SCIENCE", "SPORTS", "MUSIC", "FASHION", "TRAVEL", "FITNESS", "ART", "EDUCATION",
-				"NATURE", "FOOD" }; 
+				"NATURE", "FOOD" };
 		JComboBox<Object> cat1 = new JComboBox<Object>(categories);
 		cat1.setBounds(100, 320, 100, 25);
 		panel.add(cat1);
@@ -252,14 +260,20 @@ public class Register {
 					if (String.valueOf(passwordText.getPassword()).length() > 30) // password should be shorter than 30
 																					// characters
 						emptyOrLongPasswordText.setText("Password too long. Try another one!");
-					if ((phoneNumberText.getText().length() != 10) && !(phoneNumberText.getText().isEmpty())) // Phone Number should contain 10 digits only
-						incorrectPhoneNumber.setText("Not a Phone Number"); 
+					if ((phoneNumberText.getText().length() != 10) && !(phoneNumberText.getText().isEmpty())) // Phone
+																												// Number
+																												// should
+																												// contain
+																												// 10
+																												// digits
+																												// only
+						incorrectPhoneNumber.setText("Not a Phone Number");
 					if (firstNameText.getText().length() > 30) // First Name should be shorter than 30 characters
 						longFirstName.setText("First Name too long. Try again!");
 					if (lastNameText.getText().length() > 30) // Last Name should be shorter than 30 characters
 						longLastName.setText("Last Name too long. Try again!");
 				} else {
-					insertUser(); // If everything is valid, insert the new User into the database
+					insertUser(user); // If everything is valid, insert the new User into the database
 					LoginPage lg = new LoginPage();
 					lg.loginPage(); // Open new Log In page
 				}
@@ -276,6 +290,7 @@ public class Register {
 			}
 		});
 	}
+
 	// Checks if the chosen username already exists
 	public static boolean checkSameUserName() {
 		boolean sameUserName = false;
@@ -300,8 +315,9 @@ public class Register {
 		}
 		return sameUserName;
 	}
+
 	// Insert new User's elements in the database
-	public static void insertUser() {
+	public static void insertUser(User u) {
 		// SQLite connection URL
 		String jdbcUrl = "jdbc:sqlite:socialmedia.db";
 		try {
@@ -309,12 +325,12 @@ public class Register {
 			Statement statement = conn.createStatement();
 			// Save preferences in the database
 			String query = "INSERT INTO User"
-				+ "(username, password, email, PhoneNumber, Sex, Interest1, Interest2, Interest3, FirstName, LastName)"
-				+ " VALUES(" + "'" + user.getUsername() + "'" + "," + "'" + user.getPassword() + "'" + "," + "'"
-				+ user.getEmail() + "'" + "," + "'" + user.getPhoneNumber() + "'" + "," + "'" + user.getSex() + "'"
-				+ "," + "'" + user.getInterest1() + "'" + "," + "'" + user.getInterest2() + "'" + "," + "'"
-				+ user.getInterest3() + "'" + "," + "'" + user.getFirstName() + "'" + "," + "'" + user.getLastName()
-				+ "'" + ");";
+					+ "(username, password, email, PhoneNumber, Sex, Interest1, Interest2, Interest3, FirstName, LastName)"
+					+ " VALUES(" + "'" + u.getUsername() + "'" + "," + "'" + u.getPassword() + "'" + "," + "'"
+					+ u.getEmail() + "'" + "," + "'" + u.getPhoneNumber() + "'" + "," + "'" + u.getSex() + "'"
+					+ "," + "'" + u.getInterest1() + "'" + "," + "'" + u.getInterest2() + "'" + "," + "'"
+					+ u.getInterest3() + "'" + "," + "'" + u.getFirstName() + "'" + "," + "'" + u.getLastName()
+					+ "'" + ");";
 			statement.executeUpdate(query);
 			conn.close();
 			// After signing up, opening the "Log in" page

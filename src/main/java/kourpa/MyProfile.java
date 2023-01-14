@@ -1,76 +1,117 @@
 package kourpa;
-import java.awt.*;
-import java.awt.event.*;
+
 import java.sql.Statement;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.ButtonGroup;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JColorChooser;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.*;
-public class MyProfile extends JFrame implements ActionListener, MouseListener { // creation of the necesery components																					
-	User user1 = new User();
+
+public class MyProfile implements ActionListener, MouseListener { // creation of the necessary components
+	private static User user1 = new User();
+	private JFrame frame = new JFrame();
+	private User u = new User();
 	HomePage hp = new HomePage();
 	private JPanel panel;
 	private JPanel center;
 	private JPanel south;
 	private JPanel west;
-	JPanel center2;
-	JPanel south2;
-	JPanel east2;
-	JPanel west2;
-	JPanel southEast;
-	JPanel southWest;
-	JPanel southCenter;
-	JLabel userLabel = new JLabel("User");
-	public JTextField userText = new JTextField(25);
-	JLabel passwordLabel = new JLabel("Password");
-	public JPasswordField passwordText = new JPasswordField(25);
-	JLabel emailLabel = new JLabel("Email");
-	public JTextField emailText = new JTextField(25);
-	JLabel p1Label = new JLabel("Preference 1");
-	public JTextField p1Text = new JTextField(25);
-	JLabel p2Label = new JLabel("Preference 2");
-	public JTextField p2Text = new JTextField(25);
-	JLabel p3Label = new JLabel("Preference 3");
-	public JTextField p3Text = new JTextField(25);
-	public JTextField firstNameText = new JTextField(25);
-	JLabel firstNameLabel = new JLabel("First Name");
-	public JTextField lastNameText = new JTextField(25);
-	JLabel lastNameLabel = new JLabel("Last Name");
-	public JTextField sexText = new JTextField(25);
-	JLabel sexLabel = new JLabel("Sex");
-	public JTextField phoneNumberText = new JTextField(25);
-	JLabel phoneNumberLabel = new JLabel("Phone Number");
-	public JTextField birthdayText = new JTextField(25);
-	JLabel labelForPosts = new JLabel("My Posts");
-	Icon diary = new ImageIcon("src/main/resources/diaryIcon.png");
-	Icon diary2 = new ImageIcon("src/main/resources/diary2.png");
+	private JPanel center2;
+	private JPanel south2;
+	private JPanel east2;
+	private JPanel west2;
+	private JPanel southEast;
+	private JPanel southWest;
+	private JPanel southCenter;
+	private JLabel userLabel = new JLabel("User");
+	private JTextField userText = new JTextField(25);
+	private JLabel passwordLabel = new JLabel("Password");
+	private JPasswordField passwordText = new JPasswordField(25);
+	private JLabel emailLabel = new JLabel("Email");
+	private JTextField emailText = new JTextField(25);
+	private JLabel p1Label = new JLabel("Preference 1");
+	private JLabel p2Label = new JLabel("Preference 2");
+	private JLabel p3Label = new JLabel("Preference 3");
+	private JTextField firstNameText = new JTextField(25);
+	private JLabel firstNameLabel = new JLabel("First Name");
+	private JTextField lastNameText = new JTextField(25);
+	private JLabel lastNameLabel = new JLabel("Last Name");
+	private JLabel sexLabel = new JLabel("Sex");
+	private JTextField phoneNumberText = new JTextField(25);
+	private JLabel phoneNumberLabel = new JLabel("Phone Number");
+	private JLabel labelForPosts = new JLabel("My Posts");
+	private String[] categories = { "SCIENCE", "SPORTS", "MUSIC", "FASHION", "TRAVEL", "FITNESS", "ART", "EDUCATION",
+			"NATURE", "FOOD" };
+	private JComboBox<Object> pCombo1 = new JComboBox<Object>(categories);
+	private JComboBox<Object> pCombo2 = new JComboBox<Object>(categories);
+	private JComboBox<Object> pCombo3 = new JComboBox<Object>(categories);
+	private String[] sexTypes = { "Male", "Female" };
+	private JComboBox<Object> sexType = new JComboBox<Object>(sexTypes);
+	private Icon diary = new ImageIcon("src/main/resources/diaryIcon.png");
+	private Icon diary2 = new ImageIcon("src/main/resources/diary2.png");
 	private JPanel p;
-	JButton changeButton = new JButton();
-	JButton sumbitButton = new JButton();
-	Font defaultFont = new Font("Gill Sans MT", Font.BOLD, 16);
-	Color textColor = Color.decode("#ffffff");
-	Color backgroundColor = Color.decode("#000000");
-	Color hoverColor = Color.decode("#00aced");
-	private final Color col = new Color(255, 102, 0);
+	private JButton changeButton = new JButton();
+	private JButton sumbitButton = new JButton();
+	private Font defaultFont = new Font("Gill Sans MT", Font.BOLD, 16);
+	private final Color textColor = Color.decode("#ffffff");
+	private final Color backgroundColor = Color.decode("#000000");
+	private final Color hoverColor = Color.decode("#00aced");
+	static final Color col = new Color(255, 102, 0);
 	String s = "submit";
-	JDialog dial = new JDialog(this, "Dialog Box");
-	JButton dialBut = new JButton("OK");
-	JPanel east = new JPanel();
+	private JDialog dial = new JDialog(frame, "Dialog Box");
+	private JButton dialBut = new JButton("OK");
+	private JPanel east = new JPanel();
 	private JRadioButton colorPick;
 	private JRadioButton darkMode;
 	private JRadioButton lightMode;
 	private ButtonGroup radioGroup;
 	private JRadioButton plainMode;
-	ImageIcon iconColorChooser = new ImageIcon("src\\main\\resources\\colors.png");
-	JButton logoutButton = new JButton();
-	public JFrame myProfile(User user) {
+	Menu menu;
+	private ImageIcon iconColorChooser = new ImageIcon("src\\main\\resources\\colors.png");
+	private JButton logoutButton = new JButton();
+	static Color col2;
+	static Color currentColor = new Color(255, 102, 0);
+
+	public JFrame myProfile(User user, Color col) {
 		// super("Get tip-My profile");// constructor of the MyProfile GUI
+		pCombo1.setSelectedItem(user.getInterest1());
+		pCombo2.setSelectedItem(user.getInterest2());
+		pCombo3.setSelectedItem(user.getInterest3());
+		sexType.setSelectedItem(user.getSex());
 		Image ic = Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\logo.png");
-		this.setIconImage(ic);
+		frame.setIconImage(ic);
 		user1 = user;
-		this.setBounds(180, 50, 1050, 750);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(180, 50, 1050, 750);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		p = new JPanel(new GridLayout(getMessageCount(user), 1, 0, 10));
 		setValuesInTextAreas();
 		changeButton.setSize(150, 50);
@@ -85,24 +126,27 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		Font font = new Font("Calibri", Font.BOLD, 22);
 		labelForPosts.setFont(font);
 		labelForPosts.setIcon(diary);
-		panelSetup();
+		panelSetup(col);
 		setFieldsUneditable();
-		southSetup();
+		southSetup(col);
 		setTextinPostArea(user);
 		scrollbarSetup();
 		logoutButtonSetup();
-		this.add(panel);
-		eastPanelSetup();
-		Menu menu = new Menu();
-		panel.add(menu.menuBar(user, this), BorderLayout.NORTH);
-		return this;
+		frame.add(panel);
+		eastPanelSetup(col);
+		menu = new Menu();
+		panel.add(menu.menuBar(user, col), BorderLayout.NORTH);
+		u = user;
+		return frame;
+
 	}
+
 	public void sumbit(User user) {
 		user.setPassword(String.valueOf(passwordText.getPassword()));
 		user.setEmail(emailText.getText());
-		user.setInterest1(p1Text.getText());
-		user.setInterest2(p2Text.getText());
-		user.setInterest3(p3Text.getText());
+		user.setInterest1(categories[pCombo1.getSelectedIndex()]);
+		user.setInterest2(categories[pCombo2.getSelectedIndex()]);
+		user.setInterest3(categories[pCombo3.getSelectedIndex()]);
 		user.setPhoneNumber(phoneNumberText.getText());
 		user.setFirstName(firstNameText.getText());
 		user.setLastName(lastNameText.getText());
@@ -111,20 +155,22 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			// Creating a new Connection
 			Connection conn = DriverManager.getConnection(jdbcUrl);
 			Statement statement = conn.createStatement();
-			String query = "UPDATE User SET password = " + "'" + user.getPassword() + "', Sex= '" + user.getSex()
+			String query = "UPDATE User SET password = '" + user.getPassword() + "', Sex= '" + user.getSex()
 					+ "', Interest1= '" + user.getInterest1() + "', Interest2= '" + user.getInterest2()
 					+ "', Interest3= '" + user.getInterest3() + "', Email= '" + user.getEmail() + "', PhoneNumber= '"
 					+ user.getPhoneNumber() + "', FirstName= '" + user.getFirstName() + "', LastName= '"
-					+ user.getLastName() + " WHERE Username = '" + user.getUsername() + "'";
+					+ user.getLastName() + "' WHERE Username = '" + user.getUsername() + "'";
+
 			statement.executeUpdate(query);
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == changeButton) { //make TextArea editable and create submit button
+		if (e.getSource() == changeButton) { // make TextArea editable and create submit button
 			changeButton.setVisible(false);
 			s = s.toUpperCase();
 			sumbitButton.setFocusPainted(true);
@@ -164,6 +210,13 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			phoneNumberLabel.setForeground(Color.white);
 			labelForPosts.setForeground(Color.white);
 			labelForPosts.setIcon(diary2);
+			setColor(Color.DARK_GRAY);
+			if (Menu.flagColor == false) {
+				LoginPage.ex.applyColors(0);
+				LoginPage.hp.applyColors(0);
+			} else {
+				menu.applyColors(0);
+			}
 		} else if (e.getSource() == lightMode) {
 			east.setBackground(Color.white);
 			panel.setBackground(Color.WHITE);
@@ -188,6 +241,13 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			phoneNumberLabel.setForeground(Color.black);
 			labelForPosts.setForeground(Color.black);
 			labelForPosts.setIcon(diary);
+			setColor(Color.white);
+			if (Menu.flagColor == false) {
+				LoginPage.ex.applyColors(1);
+				LoginPage.hp.applyColors(1);
+			} else {
+				menu.applyColors(1);
+			}
 		} else if (e.getSource() == plainMode) {
 			panel.setBackground(col);
 			east.setBackground(col);
@@ -212,34 +272,52 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			phoneNumberLabel.setForeground(Color.black);
 			labelForPosts.setForeground(Color.black);
 			labelForPosts.setIcon(diary);
+			setColor(col);
+			if (Menu.flagColor == false) {
+				LoginPage.ex.applyColors(2);
+				LoginPage.hp.applyColors(2);
+			} else {
+				menu.applyColors(2);
+			}
 		} else if (e.getSource() == colorPick) {
-			Color col = JColorChooser.showDialog(null, "Pick a color!", Color.LIGHT_GRAY);
-			panel.setBackground(col);
-			east.setBackground(col);
-			west.setBackground(col);
-			south.setBackground(col);
-			center2.setBackground(col);
-			south2.setBackground(col);
-			east2.setBackground(col);
-			west2.setBackground(col);
-			southCenter.setBackground(col);
-			southWest.setBackground(col);
-			southEast.setBackground(col);
+			col2 = JColorChooser.showDialog(frame, "Pick a color!", col2);
+			panel.setBackground(col2);
+			east.setBackground(col2);
+			west.setBackground(col2);
+			south.setBackground(col2);
+			center2.setBackground(col2);
+			south2.setBackground(col2);
+			east2.setBackground(col2);
+			west2.setBackground(col2);
+			southCenter.setBackground(col2);
+			southWest.setBackground(col2);
+			southEast.setBackground(col2);
 			labelForPosts.setIcon(diary);
+			setColor(col2);
+			if (Menu.flagColor == false) {
+				LoginPage.ex.applyColors(3);
+				LoginPage.hp.applyColors(3);
+			} else {
+				menu.applyColors(3);
+			}
 		}
 		if (e.getSource() == logoutButton) {
 			int input = JOptionPane.showOptionDialog(null, "Are you sure you want to logout?", null,
 					JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, null, null);
 			if (input == JOptionPane.OK_OPTION) {
 				LoginPage lp = new LoginPage();
-				lp.loginPage().dispose();
+				lp.loginPage();
+				lp.getMyProf().dispose();
 			}
 		}
+
 	}
+
+	@SuppressWarnings("deprecation")
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == sumbitButton) {
-			this.sumbit(user1);
+			this.sumbit(u);
 			setValuesInTextAreas();
 			dial.setSize(480, 370);
 			dial.setLocationRelativeTo(null);
@@ -260,66 +338,91 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			dial.dispose();
 			changeButton.setVisible(true);
 			setFieldsUneditable();
-			this.dispose();
-			this.show();
+			frame.dispose();
+			frame.show();
 		}
 	}
+
 	@Override
 	public void mousePressed(MouseEvent e) {
 	}
+
 	@Override
 	public void mouseReleased(MouseEvent e) {
 	}
+
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		if (e.getSource() == sumbitButton) {
 			sumbitButton.setBackground(hoverColor);
 		}
 	}
+
 	@Override
 	public void mouseExited(MouseEvent e) {
 		if (e.getSource() == sumbitButton) {
 			sumbitButton.setBackground(backgroundColor);
 		}
 	}
+
 	public void setFieldsEditable() {
 		passwordText.setEditable(true);
 		emailText.setEditable(true);
-		p1Text.setEditable(true);
-		p2Text.setEditable(true);
-		p3Text.setEditable(true);
-		birthdayText.setEditable(true);
-		sexText.setEditable(true);
+		pCombo1.setEnabled(true);
+		pCombo2.setEnabled(true);
+		pCombo3.setEnabled(true);
+		sexType.setEnabled(true);
 		firstNameText.setEditable(true);
 		lastNameText.setEditable(true);
 		phoneNumberText.setEditable(true);
 	}
+
 	public void setFieldsUneditable() {
 		userText.setEditable(false);
 		passwordText.setEditable(false);
 		emailText.setEditable(false);
-		p1Text.setEditable(false);
-		p2Text.setEditable(false);
-		p3Text.setEditable(false);
-		birthdayText.setEditable(false);
-		sexText.setEditable(false);
+		pCombo1.setEnabled(false);
+		pCombo2.setEnabled(false);
+		pCombo3.setEnabled(false);
+		sexType.setEnabled(false);
 		firstNameText.setEditable(false);
 		lastNameText.setEditable(false);
 		phoneNumberText.setEditable(false);
 	}
+
 	public void setValuesInTextAreas() {
 		userText.setText(user1.getUsername());
 		passwordText.setText(user1.getPassword());
 		emailText.setText(user1.getEmail());
-		p1Text.setText(user1.getInterest1());
-		p2Text.setText(user1.getInterest2());
-		p3Text.setText(user1.getInterest3());
+		for (int i = 0; i < categories.length; i++) {
+			if (pCombo1.getSelectedItem().equals(categories[i])) {
+				user1.setInterest1(categories[i]);
+				break;
+			}
+		}
+		for (int i = 0; i < categories.length; i++) {
+			if (pCombo2.getSelectedItem().equals(categories[i])) {
+				user1.setInterest2(categories[i]);
+				break;
+			}
+		}
+		for (int i = 0; i < categories.length; i++) {
+			if (pCombo3.getSelectedItem().equals(categories[i])) {
+				user1.setInterest3(categories[i]);
+				break;
+			}
+		}
 		firstNameText.setText(user1.getFirstName());
 		lastNameText.setText(user1.getLastName());
-		sexText.setText(user1.getSex());
-		birthdayText.setText(user1.getBirthDate());
+		for (int i = 0; i < sexTypes.length; i++) {
+			if (sexType.getSelectedItem().equals(categories[i])) {
+				user1.setSex(categories[i]);
+				break;
+			}
+		}
 		phoneNumberText.setText(user1.getPhoneNumber());
 	}
+
 	public void setTextinPostArea(User user1) {
 		String jdbcUrl = "jdbc:sqlite:socialmedia.db"; // Database URL
 		try {
@@ -346,9 +449,10 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 			s.printStackTrace();
 		}
 	}
-	public void southSetup() {
+
+	public void southSetup(Color col) {
 		p.setBorder(BorderFactory.createLineBorder(Color.black));
-		south = new JPanel(new BorderLayout(0, 3));
+		south = new JPanel(new BorderLayout(0, 5));
 		south.setPreferredSize(new Dimension(780, 250));
 		southCenter = new JPanel();
 		southEast = new JPanel();
@@ -366,10 +470,10 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		south.add(southCenter, BorderLayout.CENTER);
 		south.add(southEast, BorderLayout.EAST);
 		south.add(southWest, BorderLayout.WEST);
-		// south.add(southSouth, BorderLayout.SOUTH);\
 		south.setBackground(Color.black);
 		panel.add(south, BorderLayout.SOUTH);
 	}
+
 	public void scrollbarSetup() {
 		JScrollPane scrollbar = new JScrollPane(p, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -378,11 +482,11 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		scrollbar.getVerticalScrollBar().setPreferredSize(new Dimension(8, 695));
 		south.add(scrollbar);
 	}
-	public void panelSetup() {
-		panel = new JPanel(new BorderLayout());
+
+	public void panelSetup(Color col) {
+		panel = new JPanel(new BorderLayout(0, 3));
 		panel.setBackground(Color.black);
 		center = new JPanel(new BorderLayout());
-		center.setBackground(Color.black);
 		center2 = new JPanel(new GridLayout(11, 2, 2, 2));
 		center2.setPreferredSize(new Dimension(380, 380));
 		south2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -397,7 +501,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		west = new JPanel();
 		west.setPreferredSize(new Dimension(160, 680));
 		west.setBackground(col);
-		center2.setBackground(new Color(255, 102, 0));
+		center2.setBackground(col);
 		center2.add(userLabel);
 		center2.add(userText);
 		center2.add(passwordLabel);
@@ -405,18 +509,17 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		center2.add(emailLabel);
 		center2.add(emailText);
 		center2.add(p1Label);
-		center2.add(p1Text);
+		center2.add(pCombo1);
 		center2.add(p2Label);
-		center2.add(p2Text);
+		center2.add(pCombo2);
 		center2.add(p3Label);
-		center2.add(p3Text);
+		center2.add(pCombo3);
 		center2.add(firstNameLabel);
 		center2.add(firstNameText);
 		center2.add(lastNameLabel);
 		center2.add(lastNameText);
 		center2.add(sexLabel);
-		center2.add(sexText);
-		center2.add(birthdayText);
+		center2.add(sexType);
 		center2.add(phoneNumberLabel);
 		center2.add(phoneNumberText);
 		east2.add(Box.createVerticalStrut(380));
@@ -429,9 +532,10 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		panel.add(west, BorderLayout.WEST);
 		panel.add(center, BorderLayout.CENTER);
 	}
-	public void eastPanelSetup() {
+
+	public void eastPanelSetup(Color col) {
 		east.setLayout(new GridLayout(10, 1));
-		east.setBackground(new Color(255, 102, 0));
+		east.setBackground(col);
 		east.setPreferredSize(new Dimension(160, 680));
 		darkMode = new JRadioButton("Dark Mode", false);
 		lightMode = new JRadioButton("Light Mode", false);
@@ -439,7 +543,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		colorPick = new JRadioButton("Other", iconColorChooser, false);
 		darkMode.setBackground(Color.DARK_GRAY);
 		lightMode.setBackground(Color.WHITE);
-		plainMode.setBackground(new Color(255, 102, 0));
+		plainMode.setBackground(col);
 		colorPick.setBackground(Color.LIGHT_GRAY);
 		darkMode.setForeground(Color.WHITE);
 		plainMode.setForeground(Color.WHITE);
@@ -458,6 +562,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		colorPick.addActionListener(this);
 		panel.add(east, BorderLayout.EAST);
 	}
+
 	public void logoutButtonSetup() {
 		logoutButton.setBounds(900, 25, 100, 25);
 		logoutButton.setText("Log out");
@@ -470,6 +575,7 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		// west.add(Box.createVerticalStrut(380));
 		west.add(logoutButton, BorderLayout.NORTH);
 	}
+
 	public int getMessageCount(User user1) {
 		int count = 0;
 		String url = "jdbc:sqlite:socialmedia.db";
@@ -491,19 +597,8 @@ public class MyProfile extends JFrame implements ActionListener, MouseListener {
 		}
 		return count;
 	}
-	public Color getColor() { // returns the color of the panel so other sections of the app can use it
-		return panel.getBackground();
-	}
-	public JPanel getPanel() { // The following methods are created for testing purposes
-		return panel;
-	}
-	public void setPanel(JPanel panel) {
-		this.panel = panel;
-	}
-	public JButton getChangeButton() {
-		return changeButton;
-	}
-	public JLabel getSexLabel() {
-		return sexLabel;
+
+	public void setColor(Color c) {
+		currentColor = c;
 	}
 }

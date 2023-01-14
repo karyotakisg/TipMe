@@ -1,11 +1,22 @@
 package kourpa;
-import javax.swing.*;
-import java.awt.event.*;
-import java.awt.*;
-import java.sql.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Statement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 public class ExplorePanel implements ActionListener {
     String category;
-    private Timer timer;
     private static JPanel p0;
     private static JPanel p1;
     private static JPanel p2;
@@ -17,8 +28,6 @@ public class ExplorePanel implements ActionListener {
     private static JScrollPane scr;
     private static JPanel p8;
     private static JPanel p9;
-    CardLayout cl = new CardLayout();
-    JPanel jp;
     Icon back = new ImageIcon("src\\main\\resources\\goback.png");
     private JButton [] goback;
 	public ExplorePanel(int x, JPanel jf, JPanel south, JPanel east, JPanel west, User u, boolean[] flag) {
@@ -48,7 +57,7 @@ public class ExplorePanel implements ActionListener {
 				category = "Science";
 				p0.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p0.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p0);
+				customizeMessage(u, category, p0);
 				jf.add(p0, BorderLayout.CENTER);
 				scr = hp.getScroll(p1);
 				jf.add(scr, BorderLayout.CENTER);
@@ -57,7 +66,7 @@ public class ExplorePanel implements ActionListener {
 				category = "Science";
 				p0.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p0.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p0);
+				customizeMessage(u, category, p0);
 				jf.add(p0, BorderLayout.CENTER);
 				scr = hp.getScroll(p0);
 				jf.add(scr, BorderLayout.CENTER);
@@ -84,7 +93,7 @@ public class ExplorePanel implements ActionListener {
 				category = "Sports";
 				p1.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p1.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p1);
+				customizeMessage(u, category, p1);
 				jf.add(p1, BorderLayout.CENTER);
 				scr = hp.getScroll(p1);
 				jf.add(scr, BorderLayout.CENTER);
@@ -93,7 +102,7 @@ public class ExplorePanel implements ActionListener {
 				category = "Sports";
 				p1.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p1.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p1);
+				customizeMessage(u, category, p1);
 				jf.add(p1, BorderLayout.CENTER);
 				scr = hp.getScroll(p1);
 				jf.add(scr, BorderLayout.CENTER);
@@ -120,7 +129,7 @@ public class ExplorePanel implements ActionListener {
 				category = "Music";
 				p2.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p2.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p2);
+				customizeMessage(u, category, p2);
 				jf.add(p2, BorderLayout.CENTER);
 				scr = hp.getScroll(p2);
 				jf.add(scr, BorderLayout.CENTER);
@@ -129,7 +138,7 @@ public class ExplorePanel implements ActionListener {
 				category = "Music";
 				p2.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p2.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p2);
+				customizeMessage(u, category, p2);
 				jf.add(p2, BorderLayout.CENTER);
 				scr = hp.getScroll(p2);
 				jf.add(scr, BorderLayout.CENTER);
@@ -146,7 +155,7 @@ public class ExplorePanel implements ActionListener {
 			if (flag [3] == false) {
 				for (int w = 0 ; w < 10 ; w++) {
 					if ( w == x) {
-						west.add(goback[w]);	
+						west.add(goback[w]);
 						goback[w].addActionListener(this);
 					} else {
 						west.remove(goback[w]);
@@ -156,7 +165,7 @@ public class ExplorePanel implements ActionListener {
 				category = "Fashion";
 				p3.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p3.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p3);
+				customizeMessage(u, category, p3);
 				jf.add(p3, BorderLayout.CENTER);
 				scr = hp.getScroll(p3);
 				jf.add(scr, BorderLayout.CENTER);
@@ -165,7 +174,7 @@ public class ExplorePanel implements ActionListener {
 				category = "Fashion";
 				p3.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p3.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p3);
+				customizeMessage(u, category, p3);
 				jf.add(p3, BorderLayout.CENTER);
 				scr = hp.getScroll(p3);
 				jf.add(scr, BorderLayout.CENTER);
@@ -192,7 +201,7 @@ public class ExplorePanel implements ActionListener {
 				category = "Travel";
 				p4.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p4.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p4);
+				customizeMessage(u, category, p4);
 				scr = hp.getScroll(p4);
 				jf.add(scr, BorderLayout.CENTER);
 			} else {
@@ -200,7 +209,7 @@ public class ExplorePanel implements ActionListener {
 				category = "Travel";
 				p4.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p4.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p4);
+				customizeMessage(u, category, p4);
 				scr = hp.getScroll(p4);
 				jf.add(scr, BorderLayout.CENTER);
 				for (int w = 0 ; w < 10 ; w++) {
@@ -226,7 +235,7 @@ public class ExplorePanel implements ActionListener {
 				category = "Fitness";
 				p5.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p5.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p5);
+				customizeMessage(u, category, p5);
 				scr = hp.getScroll(p5);
 				jf.add(scr, BorderLayout.CENTER);
 			} else {
@@ -234,7 +243,7 @@ public class ExplorePanel implements ActionListener {
 				category = "Fitness";
 				p5.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p5.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p5);
+				customizeMessage(u, category, p5);
 				scr = hp.getScroll(p5);
 				jf.add(scr, BorderLayout.CENTER);
 				for (int w = 0 ; w < 10 ; w++) {
@@ -260,7 +269,7 @@ public class ExplorePanel implements ActionListener {
 				category = "Art";
 				p6.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p6.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p6);
+				customizeMessage(u, category, p6);
 				jf.add(p6, BorderLayout.CENTER);
 				scr = hp.getScroll(p6);
 				jf.add(scr, BorderLayout.CENTER);
@@ -269,7 +278,7 @@ public class ExplorePanel implements ActionListener {
 				category = "Art";
 				p6.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p6.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p6);
+				customizeMessage(u, category, p6);
 				jf.add(p6, BorderLayout.CENTER);
 				scr = hp.getScroll(p6);
 				jf.add(scr, BorderLayout.CENTER);
@@ -295,8 +304,8 @@ public class ExplorePanel implements ActionListener {
 			   	p7 = new JPanel();
 			   	category = "Education";
 				p7.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
-				p7.setBackground(Color.BLACK);			
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p7);
+				p7.setBackground(Color.BLACK);
+				customizeMessage(u, category, p7);
 				jf.add(p7, BorderLayout.CENTER);
 				scr = hp.getScroll(p7);
 				jf.add(scr, BorderLayout.CENTER);
@@ -304,8 +313,8 @@ public class ExplorePanel implements ActionListener {
 			   p7 = new JPanel();
 			   	category = "Education";
 				p7.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
-				p7.setBackground(Color.BLACK);			
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p7);
+				p7.setBackground(Color.BLACK);
+				customizeMessage(u, category, p7);
 				jf.add(p7, BorderLayout.CENTER);
 				scr = hp.getScroll(p7);
 				jf.add(scr, BorderLayout.CENTER);
@@ -333,7 +342,7 @@ public class ExplorePanel implements ActionListener {
 				p8.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p8.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
 				p8.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p8);
+				customizeMessage(u, category, p8);
 				jf.add(p8, BorderLayout.CENTER);
 				scr = hp.getScroll(p8);
 				jf.add(scr, BorderLayout.CENTER);
@@ -343,7 +352,7 @@ public class ExplorePanel implements ActionListener {
 				p8.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p8.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
 				p8.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p8);
+				customizeMessage(u, category, p8);
 				jf.add(p8, BorderLayout.CENTER);
 				scr = hp.getScroll(p8);
 				jf.add(scr, BorderLayout.CENTER);
@@ -371,7 +380,7 @@ public class ExplorePanel implements ActionListener {
 				p9.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p9.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
 				p9.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p9);
+				customizeMessage(u, category, p9);
 				jf.add(p9, BorderLayout.CENTER);
 				scr = hp.getScroll(p9);
 				jf.add(scr, BorderLayout.CENTER);
@@ -381,7 +390,7 @@ public class ExplorePanel implements ActionListener {
 				p9.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
 				p9.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
 				p9.setBackground(Color.BLACK);
-				CustomizeMessageKourpa2 m = new CustomizeMessageKourpa2(u, category, p9);
+				customizeMessage(u, category, p9);
 				jf.add(p9, BorderLayout.CENTER);
 				scr = hp.getScroll(p9);
 				jf.add(scr, BorderLayout.CENTER);
@@ -452,8 +461,41 @@ public class ExplorePanel implements ActionListener {
 				}
 				goback[q].setVisible(false);
 				ExplorePage.visibility(q);
-				scr.setVisible(false);	        	    
+				scr.setVisible(false);
 			}
 		}
+	}	
+	public void customizeMessage(User u, String category, JPanel explore) {	
+		String jdbcUrl = "jdbc:sqlite:socialmedia.db";
+		try {
+			// Creating a new Connection
+			Connection conn = DriverManager.getConnection(jdbcUrl);
+			Statement statement = conn.createStatement();
+			// System.out.println("Connected");
+			// Get the right posts from the database
+			String query = "SELECT User.username, Post.text, Post.uploaddate, Post.likes, Post.PostId, Post.Category FROM Post, User WHERE Post.userId = User.userId AND Post.Category = '" + category + "'";
+			ResultSet rs = statement.executeQuery(query);
+			while (rs.next()) {
+				HomePage hp = new HomePage();
+				JPanel post = new JPanel(new BorderLayout(1, 1));
+				JPanel eastern = new JPanel();
+				eastern.setBackground(new Color(245, 245, 245));
+				post.setBackground(Color.black);
+				post.add(hp.getNorthLabel(rs.getString("username"), rs.getString("uploaddate"), rs.getString("Category")),
+					BorderLayout.NORTH);
+				post.add(eastern, BorderLayout.EAST);
+				post.add(hp.getMessageText(rs.getString("text")), BorderLayout.CENTER);
+				post.add(hp.getSouthLike2(rs.getString("text"), explore, post, rs.getInt("PostId")), BorderLayout.SOUTH);
+				Post p = new Post();
+				p.getLikeCount(rs.getInt("PostId"));
+				p.getDislikeCount(rs.getInt("PostId"));
+				//postid = rs.getInt("PostId");
+				explore.add(post);
+			}
+		} catch (SQLException s) {
+			System.out.println("Error");
+			s.printStackTrace();
+		}
 	}
+	
 }

@@ -1,4 +1,5 @@
 package kourpa;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -13,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
 public class LoginPage implements ActionListener {
 	// Log in graphics
 	JFrame frame = new JFrame("Log In");
@@ -28,8 +30,13 @@ public class LoginPage implements ActionListener {
 	static JFrame expl;
 	static JFrame myPr;
 	static JFrame home;
+	static ExplorePage ex;
+	static HomePage hp;
+	final Color col = new Color(255, 102, 0);
+
 	// HashMap<String, String> logininfo = new HashMap<String, String>();
 	Color c;
+
 	public JFrame loginPage() {
 		c = new Color(51, 153, 255);
 		frame.getContentPane().setBackground(c);
@@ -67,6 +74,7 @@ public class LoginPage implements ActionListener {
 		frame.setVisible(true);
 		return frame;
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == resetButton) {
@@ -83,7 +91,7 @@ public class LoginPage implements ActionListener {
 				Connection conn = DriverManager.getConnection(jdbcUrl);
 				Statement st = conn.createStatement();
 				String query = "SELECT userid, username, password, email, PhoneNumber, Sex,"
-					+ " Interest1, Interest2, Interest3, FirstName, LastName FROM User;";
+						+ " Interest1, Interest2, Interest3, FirstName, LastName FROM User;";
 				// String query2 = " SELECT username, password FROM User;";
 				ResultSet rs = st.executeQuery(query);
 				boolean loggedIn = false;
@@ -106,16 +114,16 @@ public class LoginPage implements ActionListener {
 						u.setLastName(rs.getString("LastName"));
 						u.setUserId(rs.getInt("userid"));
 						System.out.println(rs.getInt("Userid"));//
-						HomePage hp = new HomePage(u);
+						hp = new HomePage();
 						MyProfile mp = new MyProfile();
-						ExplorePage ex = new ExplorePage();
-						expl = ex.explorePage(u, new Color(255, 102, 0));
+						ex = new ExplorePage();
+						expl = ex.explorePage(u, col);
 						expl.setVisible(false);
 						setExplore(expl);
-						myPr = mp.myProfile(u);
+						myPr = mp.myProfile(u, col);
 						myPr.setVisible(false);
 						setMyProf(myPr);
-						home = hp.homePage(u);
+						home = hp.homePage(u, col);
 						setHome(home);
 						home.setVisible(true);
 						loggedIn = true;
@@ -142,25 +150,28 @@ public class LoginPage implements ActionListener {
 			Register.register();
 		}
 	}
+
 	public void setExplore(JFrame frame) {
 		expl = frame;
 	}
+
 	public JFrame getExplore() {
-		expl.setVisible(false);
 		return expl;
 	}
+
 	public void setHome(JFrame frame) {
-		home.setVisible(true);
 		home = frame;
 	}
+
 	public JFrame getHome() {
 		return home;
 	}
-	public void setMyProf(JFrame frame) {	
+
+	public void setMyProf(JFrame frame) {
 		myPr = frame;
 	}
+
 	public JFrame getMyProf() {
-		myPr.setVisible(false);
 		return myPr;
 	}
 }
