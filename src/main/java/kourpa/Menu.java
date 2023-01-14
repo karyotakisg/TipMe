@@ -9,14 +9,12 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 public class Menu extends JPanel implements  KeyListener, MouseListener { // creates the menu at the top of the scree                                                                  
     User user = new User();
     Color col = new Color(255, 102, 0);
