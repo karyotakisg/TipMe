@@ -44,6 +44,11 @@ public class HomePage {
 	private JPanel south;
 	private JPanel center;
 
+	public HomePage(User u) {
+		this.user = u;
+		//System.out.println(u.getUserId());
+	}
+	
 	public JFrame homePage(User u, Color col) {
 		frame.setTitle("GetTip");
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -189,7 +194,7 @@ public class HomePage {
 		southLike.setBackground(new Color(243, 243, 243));
 		southLike.setPreferredSize(new Dimension(700, 40));
 		southLike.setBorder(BorderFactory.createRaisedBevelBorder());
-		southLike.add(p.getLikeButton(postid));
+		southLike.add(p.getLikeButton(postid, user.getUserId()));
 		southLike.add(Box.createHorizontalStrut(20));
 		southLike.add(p.getDislikeButton(postid));
 		southLike.add(Box.createHorizontalStrut(395));
@@ -205,7 +210,7 @@ public class HomePage {
 		southLike.setBackground(new Color(243, 243, 243));
 		southLike.setPreferredSize(new Dimension(700, 40));
 		southLike.setBorder(BorderFactory.createRaisedBevelBorder());
-		southLike.add(p.getLikeButton(postid));
+		southLike.add(p.getLikeButton(postid, user.getUserId()));
 		southLike.add(Box.createHorizontalStrut(20));
 		southLike.add(p.getDislikeButton(postid));
 		southLike.add(Box.createHorizontalStrut(425));

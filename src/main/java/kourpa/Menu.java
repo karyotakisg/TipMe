@@ -42,6 +42,9 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 	static int current = 0;
 	static boolean flagColor;
 	public JPanel menuBar(User u, Color col) {
+		
+		this.user = u;
+		
 		menu.add(b1Icon);
 		menu.add(b2Icon);
 		menu.add(b3Icon);

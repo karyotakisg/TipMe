@@ -63,7 +63,7 @@ public class Post {
 		}
 	}
 
-	public JButton getLikeButton(int postid) {
+	public JButton getLikeButton(int postid, int userid) {
 		Font fontLike = new Font("Serif", Font.BOLD, 15);
 		ImageIcon icon = new ImageIcon("src\\main\\resources\\like.png");
 		JButton like = new JButton("" + getLikeCount(postid) + "", icon);
@@ -75,7 +75,7 @@ public class Post {
 			ResultSet rs = statement.executeQuery(qLikes);
 			// System.out.println(user.getUserId());
 			while (rs.next()) {
-				if (rs.getInt("userid") == user.getUserId()){
+				if (rs.getInt("userid") == userid){
 					//System.out.println("UserId" + u.getUserId());
 					liked = true;
 					col1 = Color.green;
@@ -105,7 +105,7 @@ public class Post {
 					liked = true;
 					likes++;
 					like.setText(String.valueOf(likes));
-					getLikeButton(postid).setBackground(Color.green);
+					getLikeButton(postid, userid).setBackground(Color.green);
 				} else if (e.getSource() == like && liked && !disliked) {
 					query = "UPDATE Post SET Likes = Likes-1 WHERE PostId =" + postid;
 					qLikes = "DELETE FROM Likes WHERE postid = " + postid + "  " + "AND userid = " + user.getUserId();

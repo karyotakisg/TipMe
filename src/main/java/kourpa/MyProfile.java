@@ -301,8 +301,8 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 					JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, null, null);
 			if (input == JOptionPane.OK_OPTION) {
 				LoginPage lp = new LoginPage();
+				System.exit(0);
 				lp.loginPage();
-				lp.getMyProf().dispose();
 			}
 		}
 
