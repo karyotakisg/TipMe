@@ -44,6 +44,8 @@ public class HomePage {
 	private JPanel south;
 	private JPanel center;
 
+	public HomePage() {}
+	
 	public HomePage(User u) {
 		this.user = u;
 		//System.out.println(u.getUserId());
