@@ -15,7 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 public class ExplorePage implements ActionListener {
-	private JButton [] buttons;
+	JButton [] buttons = new JButton [10];
 	private JPanel center;
 	private static JPanel east;
 	private static JPanel west;
@@ -54,7 +54,6 @@ public class ExplorePage implements ActionListener {
 		panel.add(east, BorderLayout.EAST);
 		panel.add(west, BorderLayout.WEST);
 		panel.add(south, BorderLayout.SOUTH);
-		buttons = new JButton[10];
 		JButtonCreator(buttons, center);
 		center2 = center;
 		panel.add(menu.menuBar(u, col), BorderLayout.NORTH);
