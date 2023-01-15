@@ -6,6 +6,8 @@ import java.awt.ComponentOrientation;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -51,7 +53,8 @@ public class Upload {
 	public Upload(User u) {
 
 		user = u;
-
+		Image i = Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\logo.png");
+		jf.setIconImage(i);
 		jf.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		jf.setLayout(new BorderLayout(1, 1));
 		jf.setBounds(500, 200, 500, 300);
@@ -86,7 +89,8 @@ public class Upload {
 		JLabel jlc = new JLabel("Choose Category");
 		jpgridright.add(jlc);
 
-		String[] categories = { "", "SCIENCE", "SPORTS", "MUSIC", "FASHION", "TRAVEL", "FITNESS", "ART", "EDUCATION",
+		String[] categories = { "", "SCIENCE", "SPORTS", "MUSIC",
+				"FASHION", "TRAVEL", "FITNESS", "ART", "EDUCATION",
 				"NATURE", "FOOD" };
 		JComboBox<Object> cb = new JComboBox<Object>(categories);
 		jpgridright.add(cb);
@@ -122,10 +126,7 @@ public class Upload {
 			/* informs for the length of context */
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int number = textarea.getText().length(); // - (int) textarea.getText().lines().count();
-				// if (textarea.getText().lines().count() >= 1) {
-				number++;
-				// }
+				int number = textarea.getText().length();
 				JOptionPane.showMessageDialog(null, "The number of character: " + number);
 			}
 		});
@@ -137,10 +138,7 @@ public class Upload {
 			 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int number = textarea.getText().length() -1 ; // - (int) textarea.getText().lines().count();
-				// if (textarea.getText().lines().count() >= 1) {
-				number++;
-				// }
+				int number = textarea.getText().length();
 				String tempcateg = cb.getSelectedItem().toString();
 				if (number < 1) {
 					JOptionPane.showMessageDialog(null,
@@ -170,7 +168,9 @@ public class Upload {
 	}
 
 	public void setTip(String tip) {
-		this.tip = tip;
+		if (tip.length() <= 300) {
+			this.tip = tip;
+		}
 	}
 
 	public String getCateg() {
