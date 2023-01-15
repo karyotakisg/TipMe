@@ -28,14 +28,15 @@ public class Post {
 	SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
 	Date now = new Date();
 	String strDate = sdfDate.format(now);
-	User user = new User();
+	User userPosted = new User();
+	User userConnected = new User();
 
-	// αποθήκευση ποστ στην βαση με στοιχεια όνομα, κατηγορία, κείμενο -- void
+	//αποθήκευση ποστ στην βαση με στοιχεια όνομα, κατηγορία, κείμενο -- void
 	public Post() {
 	}
 
 	public Post(User user) {
-		this.user = user;
+		this.userPosted = user;
 	}
 
 	public void storePost(String tip, String categ) {
@@ -43,7 +44,7 @@ public class Post {
 		try {
 			Connection conn = DriverManager.getConnection(jdbcUrl);
 			Statement statement = conn.createStatement();
-			System.out.println("Connected");
+			//System.out.println("Connected");
 			/*
 			 * String query = "INSERT INTO Post(Text, " + "Category, " + "UploadDate)" +
 			 * " VALUES(" + "'" + up.getTip() + "'" + "," + "'" + up.getCateg() + "'" + ","
@@ -52,7 +53,7 @@ public class Post {
 			 */
 			String query = "INSERT INTO Post(Text, Category, UploadDate, Likes, UserId, Dislikes)"
 					+ " VALUES( '" + tip + "', '" + categ + "', '" + strDate + "', " + 0
-					+ ", '" +  user.getUserId()+ "', ' " + 0  + "');";
+					+ ", '" +  userPosted.getUserId()+ "', ' " + 0  + "');";
 			statement.executeUpdate(query);
 			conn.close();
 		} catch (SQLException s) {
@@ -75,9 +76,11 @@ public class Post {
 			ResultSet rs = statement.executeQuery(qLikes);
 			// System.out.println(user.getUserId());
 			while (rs.next()) {
+				//System.out.println(userid + "param");
+				//System.out.println(rs.getInt("userid") + "db");
 				if (rs.getInt("userid") == userid){
-					//System.out.println("UserId" + u.getUserId());
 					liked = true;
+					//System.out.print("AAAAAAAAAAAAA");
 					col1 = Color.green;
 					break;
 				}
@@ -98,7 +101,7 @@ public class Post {
 				String qLikes = "SELECT userid FROM Dislikes WHERE PostId = " + postid;
 				if (e.getSource() == like && !liked && !disliked) {
 					query = "UPDATE Post SET Likes = Likes + 1 WHERE PostId = " + postid;
-					qLikes = "INSERT INTO Likes(userid, postid) VALUES(" + user.getUserId() + ", " + postid + ")";
+					qLikes = "INSERT INTO Likes(userid, postid) VALUES(" + userid + ", " + postid + ")";
 					col1 = Color.green;
 					like.setBackground(col1);
 					likes = getLikeCount(postid);
@@ -108,7 +111,7 @@ public class Post {
 					getLikeButton(postid, userid).setBackground(Color.green);
 				} else if (e.getSource() == like && liked && !disliked) {
 					query = "UPDATE Post SET Likes = Likes-1 WHERE PostId =" + postid;
-					qLikes = "DELETE FROM Likes WHERE postid = " + postid + "  " + "AND userid = " + user.getUserId();
+					qLikes = "DELETE FROM Likes WHERE postid = " + postid + "  " + "AND userid = " + userid;
 					col1 = new Color(246, 246, 246);
 					like.setBackground(col1);
 					likes = getLikeCount(postid);
@@ -134,7 +137,6 @@ public class Post {
 					conn.close();
 
 				} catch (SQLException s) {
-					System.out.println("Failed to connect and get the number of likes");
 					s.printStackTrace();
 				}
 
@@ -147,7 +149,7 @@ public class Post {
 		return like;
 	}
 
-	public JButton getDislikeButton(int postid) {
+	public JButton getDislikeButton(int postid, int userid) {
 		Font fontdisLike = new Font("Serif", Font.BOLD, 15);
 		ImageIcon icon = new ImageIcon("src\\main\\resources\\dislike.png");
 		JButton dislike = new JButton("" + getDislikeCount(postid) + "", icon);
@@ -161,7 +163,7 @@ public class Post {
 			ResultSet rs = statement.executeQuery(qDislikes);
 			// System.out.println(user.getUserId());
 			while (rs.next()) {
-				if (rs.getInt("userid") == user.getUserId()) {
+				if (rs.getInt("userid") == userid) {
 					disliked = true;
 					col2 = Color.red;
 					break;
@@ -181,19 +183,19 @@ public class Post {
 				String qDislikes = "SELECT userid FROM Dislikes WHERE PostId = " + postid;
 				if (e.getSource() == dislike && !disliked && !liked) {
 					query = "UPDATE Post SET Dislikes = Dislikes + 1 WHERE PostId = " + postid;
-					qDislikes = "INSERT INTO Dislikes(userid, postid) VALUES(" + user.getUserId() + ", " + postid + ")";
+					qDislikes = "INSERT INTO Dislikes(userid, postid) VALUES(" + userid + ", " + postid + ")";
 					col2 = Color.red;
 					dislike.setBackground(col2);
 					dislikes = getDislikeCount(postid);
 					disliked = true;
 					dislikes++;
 					dislike.setText(String.valueOf(dislikes));
-					getDislikeButton(postid).setBackground(Color.red);
+					getDislikeButton(postid, userid).setBackground(Color.red);
 				} else if (e.getSource() == dislike && disliked && !liked) {
 					query = "UPDATE Post SET Dislikes = Dislikes - 1 WHERE PostId =" + postid;
 					// qDislikes = "DELETE FROM Dislikes WHERE postid = " + postid + "AND userid = "
 					// + user.getUserId();
-					qDislikes = "DELETE FROM Dislikes WHERE UserId = " + user.getUserId() + "  " + "AND PostId = "
+					qDislikes = "DELETE FROM Dislikes WHERE UserId = " + userid + "  " + "AND PostId = "
 							+ postid + ";";
 					col2 = new Color(246, 246, 246);
 					dislike.setBackground(col2);

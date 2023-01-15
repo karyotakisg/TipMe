@@ -46,9 +46,12 @@ public class HomePage {
 
 	public HomePage() {}
 	
+	static int userConnectedId;
+	
 	public HomePage(User u) {
 		this.user = u;
-		//System.out.println(u.getUserId());
+		//System.out.println(u.getUserId() +"constr");
+		userConnectedId = u.getUserId();
 	}
 	
 	public JFrame homePage(User u, Color col) {
@@ -191,14 +194,14 @@ public class HomePage {
 	// buttons
 	public JPanel getSouthLike(String text, JPanel center, JPanel post, JFrame frame, int postid) {
 		JPanel southLike = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		User u = new User();
-		Post p = new Post(u);
+		Post p = new Post();
 		southLike.setBackground(new Color(243, 243, 243));
 		southLike.setPreferredSize(new Dimension(700, 40));
 		southLike.setBorder(BorderFactory.createRaisedBevelBorder());
-		southLike.add(p.getLikeButton(postid, user.getUserId()));
+		southLike.add(p.getLikeButton(postid, userConnectedId));
+		//System.out.println(userConnectedId +"home");
 		southLike.add(Box.createHorizontalStrut(20));
-		southLike.add(p.getDislikeButton(postid));
+		southLike.add(p.getDislikeButton(postid, userConnectedId));
 		southLike.add(Box.createHorizontalStrut(395));
 		southLike.add(getCopyButton(text, post));
 		southLike.add(getTemporaryDeleteButton(post, center, frame, postid));
@@ -207,14 +210,14 @@ public class HomePage {
 
 	public JPanel getSouthLike2(String text, JPanel center, JPanel post, int postid) {
 		JPanel southLike = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		User u = new User();
-		Post p = new Post(u);
+		Post p = new Post();
 		southLike.setBackground(new Color(243, 243, 243));
 		southLike.setPreferredSize(new Dimension(700, 40));
 		southLike.setBorder(BorderFactory.createRaisedBevelBorder());
-		southLike.add(p.getLikeButton(postid, user.getUserId()));
+		southLike.add(p.getLikeButton(postid, userConnectedId));
+		//System.out.println(userConnectedId + "home2");
 		southLike.add(Box.createHorizontalStrut(20));
-		southLike.add(p.getDislikeButton(postid));
+		southLike.add(p.getDislikeButton(postid, userConnectedId));
 		southLike.add(Box.createHorizontalStrut(425));
 		southLike.add(getCopyButton(text, post));
 		return southLike;

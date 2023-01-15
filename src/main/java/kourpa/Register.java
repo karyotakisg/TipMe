@@ -19,17 +19,36 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Register class creates a new user registration in our social media application GetTip(). 
+ * When the "Submit" button is pressed, the form's fields are checked for any errors, 
+ * and the user's preferences are saved to the database.
+ * 
+ * @authors Vaggelis Talos, Redi Hena
+ *
+ */
+
 public class Register {
 	// Creating a new user object in order to set User's preferences
 	static User user = new User(); // A new User signs up
 	static JFrame frame; // classe's frame
 
+	/**
+	 * The register() method calls the necessary methods to create Register's graphics.
+	 *
+	 *
+	 */
 	public static void register() { // Create classe's frame and panel
 		JPanel panel = createPanel();
 		frame = createFrame(panel);
 		createLabelsAndFields(frame, panel);
 	}
 
+	/**
+	 * The createPanel() method creates a new JPanel and sets its layout and background color.
+	 * 
+	 * @return the created JPanel
+	 */
 	public static JPanel createPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
@@ -37,6 +56,11 @@ public class Register {
 		return panel;
 	}
 
+	/**
+	 * The createFrame() method creates a new JFrame, sets its size and adds the created panel on it.
+	 * 
+	 * @return the created JFrame
+	 */
 	public static JFrame createFrame(JPanel panel) {
 		JFrame frame = new JFrame("Welcome to GetTip()");
 		frame.setSize(500, 650);
@@ -45,6 +69,19 @@ public class Register {
 		frame.add(panel);
 		return frame;
 	}
+
+	
+	/**
+	 * The createLabelsAndFields(JFrame frame, JPanel panel) method creates and adds the necessary JLabels and JTextFields
+	 * to the panel so the User can declare his preferences (first name, last name, phone number, email and interests).
+	 * The method also sets the font, color, and position of the labels and fields on the panel. 
+	 * An image is also added to the panel using an ImageIcon class.
+	 * 
+	 * This method also checks if User's preferences are valid.
+	 * 
+	 * @param frame The JFrame where the panel is added.
+	 * @param panel The JPanel where the labels and fields are added.
+	 */
 
 	private static void createLabelsAndFields(JFrame frame, JPanel panel) {
 		// code for creating JLabels and JTextFields
@@ -292,8 +329,14 @@ public class Register {
 		});
 	}
 
-	// Checks if the chosen username already exists
-	public static boolean checkSameUserName() {
+	
+	/**
+	 * The checkSameUserName() method checks if the chosen username already belongs to another user.
+	 * It compares the current user's username with all the existing usernames in the system.
+	 * 
+	 * @return true if the chosen username already belongs to another user, false otherwise.
+	 */
+	public static boolean checkSameUserName() { // Checks if the chosen username already exists
 		boolean sameUserName = false;
 		// SQLite connection URL
 		String jdbcUrl = "jdbc:sqlite:socialmedia.db";
@@ -317,8 +360,13 @@ public class Register {
 		return sameUserName;
 	}
 
-	// Insert new User's elements in the database
-	public static void insertUser(User u) {
+	
+	/**
+	 * The insertUser(User u) method inserts the new user that registered in the database.
+	 *
+	 * @param u The User object that is going to be inserted in the database 
+	 */
+	public static void insertUser(User u) { // Insert new User's elements in the database
 		// SQLite connection URL
 		String jdbcUrl = "jdbc:sqlite:socialmedia.db";
 		try {

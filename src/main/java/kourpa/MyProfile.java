@@ -147,6 +147,7 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 		user.setPhoneNumber(phoneNumberText.getText());
 		user.setFirstName(firstNameText.getText());
 		user.setLastName(lastNameText.getText());
+		u = user;
 		String jdbcUrl = "jdbc:sqlite:socialmedia.db";
 		try {
 			// Creating a new Connection

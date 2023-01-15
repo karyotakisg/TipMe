@@ -49,7 +49,7 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 		menu.add(b2Icon);
 		menu.add(b3Icon);
 		menu.add(b4Icon);
-		hp = new HomePage();
+		hp = new HomePage(u);
 		mp = new MyProfile();
 		ex = new ExplorePage();
 		flagColor = false;
