@@ -15,7 +15,7 @@ public class ExplorePageTest {
 		User user = new User("v.talos","8210146","Evangelos",
 		"Talos","Male","v.talos23@gmail.com",
 		"6906502673","2003-02-07","Programming",
-		"Sports","Sports");
+		"Sports","Sports",10);
 		Color color = new Color(255, 102, 0);
 		JFrame frame =  ep.explorePage(user, color);
 		assertNotNull(frame);

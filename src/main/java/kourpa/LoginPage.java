@@ -114,7 +114,7 @@ public class LoginPage implements ActionListener {
 						u.setFirstName(rs.getString("FirstName"));
 						u.setLastName(rs.getString("LastName"));
 						u.setUserId(rs.getInt("userid"));
-						System.out.println(rs.getInt("Userid"));//
+						//System.out.println(rs.getInt("Userid") );
 						hp = new HomePage();
 						MyProfile mp = new MyProfile();
 						ex = new ExplorePage();

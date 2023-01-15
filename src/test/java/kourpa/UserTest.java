@@ -4,7 +4,7 @@ import org.junit.Test;
 public class UserTest {
     @Test
     public void testConstructor() {
-        User user = new User("v.talos","8210146","Evangelos","Talos","Male","v.talos23@gmail.com","6906502673","2003-02-07","Programming","Sports","Sports");
+        User user = new User("v.talos","8210146","Evangelos","Talos","Male","v.talos23@gmail.com","6906502673","2003-02-07","Programming","Sports","Sports",10);
         assertEquals("v.talos",user.getUsername());
         assertEquals("8210146", user.getPassword());
         assertEquals("Evangelos", user.getFirstName());

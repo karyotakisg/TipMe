@@ -68,7 +68,6 @@ public class Post {
 		ImageIcon icon = new ImageIcon("src\\main\\resources\\like.png");
 		JButton like = new JButton("" + getLikeCount(postid) + "", icon);
 		String jdbcUrl = "jdbc:sqlite:socialmedia.db";
-
 		try {
 			String qLikes = "SELECT userid FROM Likes WHERE PostId = " + postid;
 			Connection conn = DriverManager.getConnection(jdbcUrl);
@@ -76,7 +75,8 @@ public class Post {
 			ResultSet rs = statement.executeQuery(qLikes);
 			// System.out.println(user.getUserId());
 			while (rs.next()) {
-				if (rs.getInt("userid") == user.getUserId()) {
+				if (rs.getInt("userid") == user.getUserId()){
+					//System.out.println("UserId" + u.getUserId());
 					liked = true;
 					col1 = Color.green;
 					break;

@@ -184,7 +184,8 @@ public class HomePage {
 	// buttons
 	public JPanel getSouthLike(String text, JPanel center, JPanel post, JFrame frame, int postid) {
 		JPanel southLike = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		Post p = new Post(user);
+		User u = new User();
+		Post p = new Post(u);
 		southLike.setBackground(new Color(243, 243, 243));
 		southLike.setPreferredSize(new Dimension(700, 40));
 		southLike.setBorder(BorderFactory.createRaisedBevelBorder());
@@ -199,7 +200,8 @@ public class HomePage {
 
 	public JPanel getSouthLike2(String text, JPanel center, JPanel post, int postid) {
 		JPanel southLike = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		Post p = new Post(user);
+		User u = new User();
+		Post p = new Post(u);
 		southLike.setBackground(new Color(243, 243, 243));
 		southLike.setPreferredSize(new Dimension(700, 40));
 		southLike.setBorder(BorderFactory.createRaisedBevelBorder());

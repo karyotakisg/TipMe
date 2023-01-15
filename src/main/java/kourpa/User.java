@@ -18,7 +18,7 @@ public class User {
 	}
 
 	public User(String u, String p, String f, String l, String s, String e, String ph, String b, String i1, String i2,
-			String i3) {
+			String i3, int id) {
 		this.username = u;
 		this.password = p;
 		this.firstName = f;
@@ -30,6 +30,7 @@ public class User {
 		this.interest1 = i1;
 		this.interest2 = i2;
 		this.interest3 = i3;
+		this.userId = id;
 	}
 
 	public String getUsername() {

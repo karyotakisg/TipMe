@@ -30,7 +30,7 @@ public class Uploadtest {
 		User user = new User("v.talos","8210146","Evangelos",
 				"Talos","Male","v.talos23@gmail.com",
 				"6906502673","2003-02-07","Programming",
-				"Sports","Sports");
+				"Sports","Sports",10);
 		Upload upload = new Upload(user);
 		upload.setCateg("Sport");
 		upload.setTip("If you are athlete, you should drink at least 3 Lt of water everyday");
@@ -43,7 +43,7 @@ public class Uploadtest {
 		User user = new User("v.talos","8210146","Evangelos",
 				"Talos","Male","v.talos23@gmail.com",
 				"6906502673","2003-02-07","Programming",
-				"Sports","Sports");
+				"Sports","Sports", 10);
 		Upload upload = new Upload(user);
 		StringBuilder sb = new StringBuilder();
 		sb.setLength(310);
