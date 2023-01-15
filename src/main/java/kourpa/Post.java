@@ -50,9 +50,9 @@ public class Post {
 			 * + "'" + strDate + "'" + ");";
 			 * 
 			 */
-			String query = "INSERT INTO Post(Text, Category, UploadDate, Likes, UserId)"
+			String query = "INSERT INTO Post(Text, Category, UploadDate, Likes, UserId, Dislikes)"
 					+ " VALUES( '" + tip + "', '" + categ + "', '" + strDate + "', " + 0
-					+ ", '" +  user.getUserId() + "');";
+					+ ", '" +  user.getUserId()+ "', ' " + 0  + "');";
 			statement.executeUpdate(query);
 			conn.close();
 		} catch (SQLException s) {
