@@ -64,9 +64,7 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 			public void actionPerformed(ActionEvent e) {
 				current = 1;
 				if (countH != 0 && countEx != 0 & countPr != 0) {
-					countH = 0;
 					home = lp.getHome();
-					home.setVisible(true);
 				} else if (countH != 0 && countEx == 0 & countPr != 0) {
 					countH = 0;
 					home = lp.getHome();
@@ -83,6 +81,7 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 					home.setVisible(true);
 					expl.setVisible(false);
 					myProf.setVisible(false);
+				} else if (countH == 0 && countPr!= 0 && countEx != 0) {
 				} else if (countH == 0 && countPr != 0 && countEx == 0) {
 					home.setVisible(true);
 					expl.setVisible(false);
@@ -121,10 +120,6 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 					expl.setVisible(true);
 					home.setVisible(false);
 					myProf.setVisible(false);
-				} else if (countH != 0 && countEx == 0 & countPr == 0) {
-					countEx = 0;
-					expl.setVisible(true);
-					myProf.setVisible(false);
 				} else if (countEx == 0 && countPr != 0 && countH != 0) {
 					expl.setVisible(true);
 				} else if (countEx == 0 && countPr != 0 && countH == 0) {
@@ -133,7 +128,6 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 				} else if (countEx == 0 && countPr == 0 && countH != 0) {
 					expl.setVisible(true);
 					myProf.setVisible(false);
-					home.setVisible(false);
 				} else {
 					expl.setVisible(true);
 					myProf.setVisible(false);
@@ -167,6 +161,7 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 					myProf.setVisible(true);
 					expl.setVisible(false);
 					home.setVisible(false);
+				} else if (countH != 0 && countPr == 0 && countEx != 0) {
 				} else if (countEx == 0 && countPr == 0 && countH != 0) {
 					myProf.setVisible(true);
 					expl.setVisible(false);
@@ -188,30 +183,29 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 			}
 		});
 
-        	menu.add(b5Icon);
-	        b5Icon.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					if (current == 0) {
-						lp.getHome().dispose();
-						home = hp.homePage(u, MyProfile.currentColor);
-						home.setVisible(true);
-					} else if (current == 1) {
-						home.dispose();
-						home = hp.homePage(u, MyProfile.currentColor);
-						home.setVisible(true);
-					}  else if(current == 3) {
-						myProf.dispose();
-						myProf = mp.myProfile(u, MyProfile.currentColor);
-						myProf.setVisible(true);
-					} else {
-						menu.remove(b5Icon);
-					}
+        menu.add(b5Icon);
+        b5Icon.addActionListener(new ActionListener() {
+        	@Override
+			public void actionPerformed(ActionEvent e) {
+        		flagColor = true;
+				if (current == 0) {
+					lp.getHome().dispose();
+					home = hp.homePage(u, MyProfile.currentColor);
+					home.setVisible(true);
+				} else if (current == 1) {
+					home.dispose();
+					home = hp.homePage(u, MyProfile.currentColor);
+					home.setVisible(true);
+				}  else if(current == 3) {
+					myProf.dispose();
+					myProf = mp.myProfile(u, MyProfile.currentColor);
+					myProf.setVisible(true);
+				} else {
+					menu.remove(b5Icon);
 				}
-
-	        });
-		
+			}
+        });
+        
 		b1Icon.addMouseListener(this);
 		b2Icon.addMouseListener(this);
 		b3Icon.addMouseListener(this);

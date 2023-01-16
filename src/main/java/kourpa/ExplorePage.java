@@ -15,18 +15,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 public class ExplorePage implements ActionListener {
-	JButton [] buttons = new JButton [10];
-	private JPanel center;
-	private static JPanel east;
-	private static JPanel west;
-	private static JPanel south;
-	private static JPanel panel = new JPanel();
-	private static JPanel center2;
-    static boolean [] flag = new boolean[10];
+	private static final JButton [] buttons = new JButton [10];
+	private static JPanel center;
+	private JPanel east;
+	private JPanel west;
+	private JPanel south;
+	private JPanel panel = new JPanel();
     private final JFrame frame = new JFrame();
-    User u = new User();
-    public ExplorePage() {}
+    
     public JFrame explorePage(User u, Color col) {
+    	frame.setTitle("GetTip-Explore");
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(180, 50, 1050, 750);
 		frame.setBackground(Color.BLACK);
@@ -55,7 +53,6 @@ public class ExplorePage implements ActionListener {
 		panel.add(west, BorderLayout.WEST);
 		panel.add(south, BorderLayout.SOUTH);
 		JButtonCreator(buttons, center);
-		center2 = center;
 		panel.add(menu.menuBar(u, col), BorderLayout.NORTH);
 		frame.add(panel);
 		return frame;
@@ -64,15 +61,13 @@ public class ExplorePage implements ActionListener {
     	for(int counter = 0; counter < buttons.length; counter++) {
 		   if(e.getSource() == buttons[counter]) {
 			   center.setVisible(false);
-			   center2.setVisible(false);
 			   @SuppressWarnings("unused")
-			ExplorePanel e3 = new ExplorePanel(counter,  panel, south, east, west, u, flag);
+			ExplorePanel e3 = new ExplorePanel(counter,  panel, south, east, west);
 		   }
 		}
     }
-	public static void visibility(int q) {
-		center2.setVisible(true);
-		flag[q] = true;
+	public static void visibility() {
+		center.setVisible(true);
 	}
 	public void applyColors(int c) {
 		if (c == 0) {
