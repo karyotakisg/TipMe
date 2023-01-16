@@ -15,6 +15,14 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+/**
+ * In the LoginPage the user logs in using his username and password . 
+ * When the "Login" button is pressed and username and password are correct, then the HomePage will appear. 
+ * 
+ * @authors Vaggelis Talos, Eqerem Hena, Panagiotis Theocharis
+ *
+ */
+
 public class LoginPage implements ActionListener {
 	// Log in graphics
 	JFrame frame = new JFrame("Log In");
@@ -34,12 +42,18 @@ public class LoginPage implements ActionListener {
 	static HomePage hp;
 	final Color col = new Color(255, 102, 0);
 
-	// HashMap<String, String> logininfo = new HashMap<String, String>();
 	Color c;
-
+	
+	/**
+	 * The loginPage() method adds the buttons, the JLabels and JtextFields  to the frame.
+	 * The method also sets the font, color, and position of the labels and fields on the panel. 
+	 * @return the frame
+	 */
+	
 	public JFrame loginPage() {
 		c = new Color(51, 153, 255);
 		frame.getContentPane().setBackground(c);
+		frame.setBackground(c);
 		userIDLabel.setBounds(50, 100, 75, 25);
 		userPasswordLabel.setBounds(50, 150, 75, 25);
 		messageLabel.setBounds(20, 250, 1200, 35);
@@ -76,6 +90,14 @@ public class LoginPage implements ActionListener {
 		return frame;
 	}
 
+	/** Here it is checked if the username and the password that the user has written are correct.
+	 * When he press the login button and they are correct, the homepage panel will appear, otherwise
+	 * the messages "Wrong username or password!" and "Try again!" will appear and he 
+	 * should write the username and the password again.
+	 * If the user press the reset button then the username field and the password field will be set empty.
+	 * If he press the register button, then the register panel will appear where he can create an account.
+	 * 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == resetButton) {

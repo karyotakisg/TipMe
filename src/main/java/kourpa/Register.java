@@ -24,7 +24,7 @@ import java.sql.SQLException;
  * When the "Submit" button is pressed, the form's fields are checked for any errors, 
  * and the user's preferences are saved to the database.
  * 
- * @author Vaggelis Talos, Redi Hena
+ * @author Vaggelis Talos, Eqerem Hena
  *
  */
 
