@@ -341,7 +341,6 @@ public class ExplorePanel implements ActionListener {
 				p8 = new JPanel();
 				category = "NATURE";
 				p8.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
-				p8.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
 				p8.setBackground(Color.BLACK);
 				customizeMessage(u, category, p8);
 				jf.add(p8, BorderLayout.CENTER);
@@ -351,7 +350,6 @@ public class ExplorePanel implements ActionListener {
 				p8 = new JPanel();
 				category = "NATURE";
 				p8.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
-				p8.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
 				p8.setBackground(Color.BLACK);
 				customizeMessage(u, category, p8);
 				jf.add(p8, BorderLayout.CENTER);
@@ -379,7 +377,6 @@ public class ExplorePanel implements ActionListener {
 				p9 = new JPanel();
 				category = "FOOD";
 				p9.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
-				p9.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
 				p9.setBackground(Color.BLACK);
 				customizeMessage(u, category, p9);
 				jf.add(p9, BorderLayout.CENTER);
@@ -389,7 +386,6 @@ public class ExplorePanel implements ActionListener {
 				p9 = new JPanel();
 				category = "FOOD";
 				p9.setLayout(new GridLayout(getMessageCount(category), 1, 7, 3));
-				p9.setLayout(new GridLayout(hp.getMessageCount(), 1, 7, 3));
 				p9.setBackground(Color.BLACK);
 				customizeMessage(u, category, p9);
 				jf.add(p9, BorderLayout.CENTER);
