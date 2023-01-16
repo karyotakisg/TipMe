@@ -405,7 +405,7 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 		colorPick = new JRadioButton("Other", iconColorChooser, false);
 		darkMode.setBackground(Color.DARK_GRAY);
 		lightMode.setBackground(Color.WHITE);
-		plainMode.setBackground(col);
+		plainMode.setBackground(new Color(255,102,0));
 		colorPick.setBackground(Color.LIGHT_GRAY);
 		darkMode.setForeground(Color.WHITE);
 		plainMode.setForeground(Color.WHITE);

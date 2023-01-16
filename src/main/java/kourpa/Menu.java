@@ -15,6 +15,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import java.awt.Component;
+/**
+ * Creates the menu of the application, so the user can navigate through 
+ * different sections
+ * @author Giannis Karyotakis, Panagiotis Theocharis
+ */
 public class Menu implements MouseListener { // creates the menu at the top of the screen
 	User user = new User();
 	JPanel menu = new JPanel();
@@ -41,10 +46,15 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 	static int countH = 1;
 	static int current = 0;
 	static boolean flagColor;
+	/**
+	 * The method finds in which frame the user is and navigates him 
+	 * to the next feature/frame he clicks
+	 * @param u the data of user
+	 * @param col the current color of background
+	 * @return menu Panel 
+	 */
 	public JPanel menuBar(User u, Color col) {
-		
 		this.user = u;
-		
 		menu.add(b1Icon);
 		menu.add(b2Icon);
 		menu.add(b3Icon);
@@ -58,7 +68,6 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 		b3Icon.setPreferredSize(new Dimension(100, 50));
 		b4Icon.setPreferredSize(new Dimension(100, 50));
 		b5Icon.setPreferredSize(new Dimension(35, 35));
-		
 		b1Icon.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -275,6 +284,11 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 			b4Icon.setBackground(new Color(240, 240, 240));
 		}
 	}
+	/**
+	 * If the uses decides to change color, then all components
+	 * of the app use that color
+	 * @param c the current color of the app
+	 */
 	public void applyColors(int c) {
 		Component[] compsF = home.getComponents();
 		Component[] compsE = expl.getComponents();
@@ -325,4 +339,3 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 		}
 	}
 }
-
