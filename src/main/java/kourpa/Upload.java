@@ -27,11 +27,9 @@ import javax.swing.border.LineBorder;
  * An interface of upload, which contains a text area to write, a checkbox to
  * select a category of the context. The context and the category are able to be
  * stored in a database and it informs of the length of the contex
+ * @author Dimitris Doukas
  **/
 public class Upload {
-	/*
-	 * @tip The context of upload from text area
-	 */
 	private String tip;
 	/* categ The category of the context */
 	private String categ;
@@ -49,7 +47,10 @@ public class Upload {
 
 	JButton jb = new JButton("Upload");
 	JButton jbinfo = new JButton("Info");
-
+	/**
+	 * creates the GUI of  Upload class
+	 * @param u the data of the user
+	 */
 	public Upload(User u) {
 
 		user = u;
@@ -132,10 +133,6 @@ public class Upload {
 		});
 
 		jb.addActionListener(new ActionListener() {
-			/*
-			 * saves the context when it covers the prerequisites of the number of
-			 * characters and displays a message for any condition
-			 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int number = textarea.getText().length();
