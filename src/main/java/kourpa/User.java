@@ -1,5 +1,12 @@
 package kourpa;
 
+
+/**
+ * The User class represents a user and his username, password, first name, last name, 
+ * sex, email, phone number and interests.
+ * 
+ * @author Vaggelis Talos
+ */
 public class User {
 	String username;
 	String password;
