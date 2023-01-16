@@ -39,11 +39,14 @@ When you run the .jar file or main method the frame of **Register** appears. If 
 
 
 ## UML diagram
+In the next graph you can see how our classes are related through the action that happen in the app (**UML state**)
+
+![UML](src\main\resources\UML.png)
 
 ## Overview of data structures
 Our team tried to utilize the capabilities of SQLite. The data are processed and stored through that.
 Our database has 4 tables with a summary of 22 attributes. The entities are User, likes, dislikes and Posts.
 
 
-![Relation model](src\main\resources\323948596_1358668178301399_3789073603966339149_n.png)
+![E-R Model](src\main\resources\db.png)
 

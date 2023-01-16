@@ -97,7 +97,7 @@ public class LoginPage implements ActionListener {
 				ResultSet rs = st.executeQuery(query);
 				boolean loggedIn = false;
 				while (rs.next()) {
-					if ((rs.getString("username").equals(userID) && rs.getString("password").equals(password))
+					if (rs.getString("username").equals(userID) && rs.getString("password").equals(password)
 							&& !(userID.isEmpty() && password.isEmpty())) {
 						messageLabel.setForeground(Color.green);
 						messageLabel.setText("Login successful!");

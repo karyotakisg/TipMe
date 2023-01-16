@@ -356,6 +356,7 @@ public class Register {
 			}
 			conn.close();
 		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return sameUserName;
 	}

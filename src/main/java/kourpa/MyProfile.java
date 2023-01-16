@@ -594,41 +594,25 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 		if (e.getSource() == logoutButton) {
 			int input = JOptionPane.showOptionDialog(null, "Are you sure you want to logout?", null,
 					JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, null, null);
-			if (input == JOptionPane.OK_OPTION) {
-				LoginPage lp = new LoginPage();
-				if (Menu.current == 0) {
-					lp.getHome().dispose();
-				} else if (Menu.current == 1) {
-					Menu.home.dispose();
-					if (Menu.countEx == 0) {
-						Menu.expl.dispose();
-					}
-					if (Menu.countPr == 0) {
-						Menu.myProf.dispose();
-					}
-				} else if (Menu.current == 2) {
-					Menu.expl.dispose();
-					if (Menu.countH == 0) {
-						Menu.home.dispose();
-					} else {
-						lp.getHome().dispose();
-					}			
-					if (Menu.countPr == 0) {
+					if (input == JOptionPane.OK_OPTION) {
+						LoginPage lp = new LoginPage();
 							Menu.myProf.dispose();
+							if (Menu.countH == 0) {
+								Menu.home.dispose();
+							} else {
+								lp.getHome().dispose();
+							}				
+							if (Menu.countEx == 0) {
+								Menu.expl.dispose();
+							} else {
+								lp.getExplore().dispose();
+							}
+						Menu.countH = 1;
+						Menu.countEx = 1;
+						Menu.countPr = 1;
+						Menu.current = 0;
+						lp.loginPage();
 					}
-				} else if (Menu.current == 3) {
-					Menu.myProf.dispose();
-					if (Menu.countH == 0) {
-						Menu.home.dispose();
-					} else {
-						lp.getHome().dispose();
-					}				
-					if (Menu.countEx == 0) {
-						Menu.expl.dispose();
-					}					
-				}
-				lp.loginPage();
-			}
 		}
 	}
 
