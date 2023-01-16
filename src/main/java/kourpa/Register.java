@@ -24,7 +24,7 @@ import java.sql.SQLException;
  * When the "Submit" button is pressed, the form's fields are checked for any errors, 
  * and the user's preferences are saved to the database.
  * 
- * @authors Vaggelis Talos, Redi Hena
+ * @author Vaggelis Talos, Redi Hena
  *
  */
 
@@ -58,7 +58,7 @@ public class Register {
 
 	/**
 	 * The createFrame() method creates a new JFrame, sets its size and adds the created panel on it.
-	 * 
+	 * @param panel the panel that to be added to the frame
 	 * @return the created JFrame
 	 */
 	public static JFrame createFrame(JPanel panel) {

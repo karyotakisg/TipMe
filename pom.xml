@@ -45,6 +45,13 @@
       <version>3.4.1</version>
       <type>maven-plugin</type>
     </dependency>
+    
+    <dependency>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-javadoc-plugin</artifactId>
+      <version>3.4.1</version>
+      <type>maven-plugin</type>
+    </dependency>
 
   </dependencies>
   

@@ -35,7 +35,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 /**
- *Creates the setting and post review section of the app
+ *Creates the settings, post review and personal info change section of the app
  * @author Giannis Karyotakis, Panagiotis Theocharis
  */
 public class MyProfile implements ActionListener, MouseListener { // creation of the necessary components
@@ -102,7 +102,13 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 	private JButton logoutButton = new JButton();
 	static Color col2;
 	static Color currentColor = new Color(255, 102, 0);
-	
+	/** 
+	 * constructor that give values to the components through giving values
+	 *  and calling other methods and forms tha frame
+	 * @param user the data of the users
+	 * @param col the color used as background
+	 * @return the frame for myProfile feauture  of the app
+	*/
 	public JFrame myProfile(User user, Color col) {
 		user1 = user;
 		pCombo1.setSelectedItem(user.getInterest1());
@@ -143,7 +149,11 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 		u = user;
 		return frame;
 	}
-	
+	/** 
+	 * SetTextinPostArea method connects with SQLite to retrieve the data for the posts of the User and appears
+	 * them with a GUI
+	 * @param user1 the data of the user
+	 */
 	public void setTextinPostArea(User user1) {
 		String jdbcUrl = "jdbc:sqlite:socialmedia.db"; // Database URL
 		try {
@@ -170,7 +180,10 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 			s.printStackTrace();
 		}
 	}
-	
+	/** 
+	 * logoutButtonSetup edits the button, puts
+	 * it in the proper panel and adds actionsListener  
+	 */
 	public void logoutButtonSetup() {
 		logoutButton.setBounds(900, 25, 100, 25);
 		logoutButton.setText("Log out");
@@ -182,7 +195,9 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 		logoutButton.setOpaque(true);
 		west.add(logoutButton, BorderLayout.NORTH);
 	}
-	
+	/** 
+	* inserts the data for the JTextAreas and JComboBoxes of the personal info section 
+	*/
 	public void setValuesInTextAreas() {
 		userText.setText(user1.getUsername());
 		passwordText.setText(user1.getPassword());
@@ -215,7 +230,9 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 		}
 	phoneNumberText.setText(user1.getPhoneNumber());
 	}
-	
+	/** 
+	 * makes the fields of personal infos editable after user presses "change " button 
+	 * */
 	public void setFieldsEditable() {
 		passwordText.setEditable(true);
 		emailText.setEditable(true);
@@ -227,7 +244,10 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 		lastNameText.setEditable(true);
 		phoneNumberText.setEditable(true);
 	}
-	
+	/** 
+	 * makes the fields of personal infos uneditable when the user first time 
+	 * opens myProfile
+	 */
 	public void setFieldsUneditable() {
 		userText.setEditable(false);
 		passwordText.setEditable(false);
@@ -240,7 +260,11 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 		lastNameText.setEditable(false);
 		phoneNumberText.setEditable(false);
 	}
-	
+	/** 
+	 * sumbit inputs all the changes the user made at his personal infos 
+	 * in the database
+	 * @param user the data of the user
+	 */
 	public void sumbit(User user) {
 		user.setPassword(String.valueOf(passwordText.getPassword()));
 		user.setEmail(emailText.getText());
@@ -270,7 +294,13 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 		e.printStackTrace();
 		}
 	}
-	
+	/** 
+	 * edits 6 panels, add them Layout Managers and adds JLabels and JTextAreas
+	 * in the center2 panel (personal infos that exist in the middle of GUI).
+	 * Then, adds the center2,west2 etc. panel at the center panel and also
+	 * adds center and west panel to the main Panel 
+	 * @param col color for the background of west2 etc. panels
+	 */
 	public void panelSetup(Color col) {
 		panel = new JPanel(new BorderLayout(0, 3));
 		panel.setBackground(Color.black);
@@ -313,19 +343,26 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 		east2.add(Box.createVerticalStrut(380));
 		east2.add(changeButton);
 		south2.add(labelForPosts);
-		center.add(center2, BorderLayout.CENTER);
+		center.add(center2, BorderLayout.CENTER); //adds at the center and main panel with BorderLayout 
 		center.add(south2, BorderLayout.SOUTH);
 		center.add(east2, BorderLayout.EAST);
 		center.add(west2, BorderLayout.WEST);
 		panel.add(west, BorderLayout.WEST);
 		panel.add(center, BorderLayout.CENTER);
 	}
-	
+	/** 
+	 * Creates south panel and other sub-south panels, black line borders,
+	 * gives size to them, adds sub-panel and south and ,finally, 
+	 * size  and 
+	 * 
+	 * @param col a colour that will be user to set the background color for 
+	 * southwest and southeast panel
+	 */
 	public void southSetup(Color col) {
 		p.setBorder(BorderFactory.createLineBorder(Color.black));
 		south = new JPanel(new BorderLayout(0, 5));
 		south.setPreferredSize(new Dimension(780, 250));
-		southCenter = new JPanel();
+		southCenter = new JPanel(); // creation of subpanels
 		southEast = new JPanel();
 		southWest = new JPanel();
 		southEast.setPreferredSize(new Dimension(135, 680));
@@ -333,7 +370,7 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 		southWest.setBackground(col);
 		southEast.setBackground(col);
 		southCenter.add(p);
-		southEast.setBorder(BorderFactory.createLineBorder(Color.black));
+		southEast.setBorder(BorderFactory.createLineBorder(Color.black)); //black line border
 		southWest.setBorder(BorderFactory.createLineBorder(Color.black));
 		south.add(southCenter, BorderLayout.CENTER);
 		south.add(southEast, BorderLayout.EAST);
@@ -341,7 +378,10 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 		south.setBackground(Color.black);
 		panel.add(south, BorderLayout.SOUTH);
 	}
-	
+	/** 
+	 * Creates the scrollbar, so user can scroll through his posts in myProfile.
+	 * Also, sets the color of the scrollabar black and add it to the south panel
+	 */
 	public void scrollbarSetup() {
 		JScrollPane scrollbar = new JScrollPane(p, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 		JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -350,7 +390,11 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 		scrollbar.getVerticalScrollBar().setPreferredSize(new Dimension(8, 695));
 		south.add(scrollbar);
 	}
-	
+	/** 
+	 * Creates the dark theme, light theme and custom theme feature of the app.
+	 * Uses JRadiobuttonw so that only one optin can be picked at any time
+	 * @param col is the background color for the starting theme 
+	 */
 	public void eastPanelSetup(Color col) {
 		east.setLayout(new GridLayout(10, 1));
 		east.setBackground(col);
@@ -380,7 +424,12 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 		colorPick.addActionListener(this);
 		panel.add(east, BorderLayout.EAST);
 	}
-	
+	/** 
+	 * Uses a counter and a query to calculate how many are the total posts
+	 * the user has made while using the app
+	 * @param user1 data of the user
+	 * @return the number of posts the user has done
+	 */
 	public int getMessageCount(User user1) {
 		int count = 0;
 		String url = "jdbc:sqlite:socialmedia.db";
@@ -402,11 +451,13 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 		}
 		return count;
 	}
-	
+	/**
+	 * changes the color of the background to the one that user gave
+	 * @param c color to be used
+	 */
 	public void setColor(Color c) {
 		currentColor = c;
 	}
-	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == changeButton) { // make TextArea editable and create submit button
