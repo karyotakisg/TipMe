@@ -47,7 +47,6 @@ public class HomePage {
 	private static JPanel west;
 	private static JPanel south;
 	private static JPanel center;
-	private int messageCounter;
 
 	public HomePage() {
 	}
