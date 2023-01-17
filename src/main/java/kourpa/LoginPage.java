@@ -2,6 +2,8 @@ package kourpa;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -54,6 +56,8 @@ public class LoginPage implements ActionListener {
 	 */
 
 	public JFrame loginPage() {
+		Image ic = Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\logo.png");
+		frame.setIconImage(ic);
 		c = new Color(51, 153, 255);
 		frame.getContentPane().setBackground(c);
 		frame.setBackground(c);

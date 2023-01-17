@@ -174,14 +174,11 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 					myProf = lp.getMyProf();
 					myProf.setVisible(true);
 					expl.setVisible(false);
-					home.setVisible(false);
-
 				} else if (countH == 0 && countEx == 0 & countPr != 0) {
 					countPr = 0;
 					myProf = lp.getMyProf();
 					myProf.setVisible(true);
 					expl.setVisible(false);
-					home.setVisible(false);
 				} else if (countH != 0 && countEx != 0 & countPr == 0){
 				} else if (countEx == 0 && countPr == 0 && countH != 0) {
 					myProf.setVisible(true);

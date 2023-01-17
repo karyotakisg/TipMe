@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Statement;
@@ -67,6 +68,8 @@ public class Register {
 	 */
 	public static JFrame createFrame(JPanel panel) {
 		JFrame frame = new JFrame("Welcome to GetTip()");
+		Image ic = Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\logo.png");
+		frame.setIconImage(ic);
 		frame.setSize(500, 650);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
