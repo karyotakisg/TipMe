@@ -46,6 +46,7 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 	static int countH = 1;
 	static int current = 0;
 	static boolean flagColor;
+	JFrame home2;
 	/**
 	 * The method finds in which frame the user is and navigates him 
 	 * to the next feature/frame he clicks
@@ -63,25 +64,30 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 		mp = new MyProfile();
 		ex = new ExplorePage();
 		flagColor = false;
+		
 		b1Icon.setPreferredSize(new Dimension(100, 50));
 		b2Icon.setPreferredSize(new Dimension(100, 50));
 		b3Icon.setPreferredSize(new Dimension(100, 50));
 		b4Icon.setPreferredSize(new Dimension(100, 50));
 		b5Icon.setPreferredSize(new Dimension(35, 35));
+		
 		b1Icon.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				current = 1;
 				if (countH != 0 && countEx != 0 & countPr != 0) {
 					home = lp.getHome();
+					lp.setHome(home);
 				} else if (countH != 0 && countEx == 0 & countPr != 0) {
 					countH = 0;
 					home = lp.getHome();
+					lp.setHome(home);
 					home.setVisible(true);
 					expl.setVisible(false);
 				} else if (countH != 0 && countEx != 0 & countPr == 0) {
 					countH = 0;
 					home = lp.getHome();
+					lp.setHome(home);
 					home.setVisible(true);
 					myProf.setVisible(false);
 				} else if (countH != 0 && countEx == 0 & countPr == 0) {
@@ -92,7 +98,7 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 					myProf.setVisible(false);
 				} else if (countH == 0 && countPr!= 0 && countEx != 0) {
 				} else if (countH == 0 && countPr != 0 && countEx == 0) {
-					home.setVisible(true);
+					home.setVisible(true);					
 					expl.setVisible(false);
 				} else if (countH == 0 && countPr == 0 && countEx != 0) {
 					home.setVisible(true);
@@ -163,7 +169,8 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 					myProf = lp.getMyProf();
 					myProf.setVisible(true);
 					expl.setVisible(false);
-					lp.getHome().setVisible(false);
+					home.setVisible(false);
+					
 				} else if (countH == 0 && countEx == 0 & countPr != 0) {
 					countPr = 0;
 					myProf = lp.getMyProf();
@@ -174,7 +181,7 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 				} else if (countEx == 0 && countPr == 0 && countH != 0) {
 					myProf.setVisible(true);
 					expl.setVisible(false);
-					lp.getHome().setVisible(false);
+					home.setVisible(false);
 				} else if (countEx != 0 && countPr == 0 && countH == 0) {
 					myProf.setVisible(true);
 					home.setVisible(false);
@@ -199,8 +206,10 @@ public class Menu implements MouseListener { // creates the menu at the top of t
         		flagColor = true;
 				if (current == 0) {
 					lp.getHome().dispose();
+					lp.setHome(home);
 					home = hp.homePage(u, MyProfile.currentColor);
 					home.setVisible(true);
+					lp.setHome(home);
 				} else if (current == 1) {
 					home.dispose();
 					home = hp.homePage(u, MyProfile.currentColor);

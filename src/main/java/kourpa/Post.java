@@ -127,7 +127,6 @@ public class Post {
 					int input = JOptionPane.showOptionDialog(null,
 							"Remove your dislike first (click again on the dislike button)", "Help message",
 							JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
-					// query = "SELECT Likes FROM Post";
 				}
 				try {
 					Connection conn = DriverManager.getConnection(jdbcUrl);
@@ -161,7 +160,6 @@ public class Post {
 			Connection conn = DriverManager.getConnection(jdbcUrl);
 			Statement statement = conn.createStatement();
 			ResultSet rs = statement.executeQuery(qDislikes);
-			// System.out.println(user.getUserId());
 			while (rs.next()) {
 				if (rs.getInt("userid") == userid) {
 					disliked = true;
@@ -193,8 +191,6 @@ public class Post {
 					getDislikeButton(postid, userid).setBackground(Color.red);
 				} else if (e.getSource() == dislike && disliked && !liked) {
 					query = "UPDATE Post SET Dislikes = Dislikes - 1 WHERE PostId =" + postid;
-					// qDislikes = "DELETE FROM Dislikes WHERE postid = " + postid + "AND userid = "
-					// + user.getUserId();
 					qDislikes = "DELETE FROM Dislikes WHERE UserId = " + userid + "  " + "AND PostId = "
 							+ postid + ";";
 					col2 = new Color(246, 246, 246);
