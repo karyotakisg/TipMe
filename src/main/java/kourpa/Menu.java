@@ -49,7 +49,7 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 	static int countH = 1;
 	static int current = 0;
 	static boolean flagColor;
-
+	boolean flag = false;
 	JFrame home2;
 
 	/**
@@ -70,13 +70,13 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 		mp = new MyProfile();
 		ex = new ExplorePage();
 		flagColor = false;
-		
+
 		b1Icon.setPreferredSize(new Dimension(100, 50));
 		b2Icon.setPreferredSize(new Dimension(100, 50));
 		b3Icon.setPreferredSize(new Dimension(100, 50));
 		b4Icon.setPreferredSize(new Dimension(100, 50));
 		b5Icon.setPreferredSize(new Dimension(35, 35));
-		
+
 		b1Icon.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -102,9 +102,8 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 					home.setVisible(true);
 					expl.setVisible(false);
 					myProf.setVisible(false);
-				} else if (countH == 0 && countPr != 0 && countEx != 0) {
 				} else if (countH == 0 && countPr != 0 && countEx == 0) {
-					home.setVisible(true);					
+					home.setVisible(true);
 					expl.setVisible(false);
 				} else if (countH == 0 && countPr == 0 && countEx != 0) {
 					home.setVisible(true);
@@ -176,18 +175,17 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 					myProf.setVisible(true);
 					expl.setVisible(false);
 					home.setVisible(false);
-					
+
 				} else if (countH == 0 && countEx == 0 & countPr != 0) {
 					countPr = 0;
 					myProf = lp.getMyProf();
 					myProf.setVisible(true);
 					expl.setVisible(false);
 					home.setVisible(false);
-				} else if (countH != 0 && countPr == 0 && countEx != 0) {
+				} else if (countH != 0 && countEx != 0 & countPr == 0){
 				} else if (countEx == 0 && countPr == 0 && countH != 0) {
 					myProf.setVisible(true);
 					expl.setVisible(false);
-					home.setVisible(false);
 				} else if (countEx != 0 && countPr == 0 && countH == 0) {
 					myProf.setVisible(true);
 					home.setVisible(false);
@@ -201,7 +199,15 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 		b4Icon.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new Upload(u);
+				flag = !flag;
+				if (flag && (current == 0 || current == 1)) {
+					Upload up = new Upload(); 
+					up.upload(u);
+				}
+				if (current != 1 && current != 0) {
+					Upload up = new Upload(); 
+					up.upload(u);
+				}
 			}
 		});
 

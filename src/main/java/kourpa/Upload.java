@@ -37,7 +37,7 @@ public class Upload {
 
 	User user = new User();
 
-	JFrame jf = new JFrame();
+	JFrame jf = new JFrame("Upload");
 	JPanel jp = new JPanel();
 	JPanel jpsouth = new JPanel();
 	JPanel jpnorth = new JPanel();
@@ -54,7 +54,7 @@ public class Upload {
 	 * 
 	 * @param u the data of the user
 	 */
-	public Upload(User u) {
+	public JFrame upload(User u) {
 
 		user = u;
 		Image i = Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\logo.png");
@@ -160,6 +160,7 @@ public class Upload {
 			}
 		});
 
+		return jf;
 	}
 
 	public String getTip() {

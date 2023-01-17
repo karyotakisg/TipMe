@@ -5,13 +5,9 @@ import static org.junit.Assert.*;
 import java.awt.Color;
 
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
-
 import org.junit.Test;
-
-import junit.framework.Assert;
 
 public class HomePageTest {
 

@@ -37,11 +37,7 @@ public class Register {
 	/**
 	 * The register() method calls the necessary methods to create Register's
 	 * graphics.
-<<<<<<< HEAD
-=======
 	 *
-	 *
->>>>>>> 697d525717572a9886ed39e0dbc6fb63d5b2eeed
 	 */
 	public static void register() { // Create classe's frame and panel
 		JPanel panel = createPanel();
@@ -277,10 +273,10 @@ public class Register {
 						|| emailText.getText().isEmpty())
 					emptyFields = true;
 				boolean longFields = false; // Checks for too long fields or invalid phone number
-				if ((userNameText.getText().length() > 30) || (String.valueOf(passwordText.getPassword()).length() > 30)
+				if (userNameText.getText().length() > 30 || String.valueOf(passwordText.getPassword()).length() > 30
 						|| (emailText.getText().length() > 30)
-						|| ((phoneNumberText.getText().length() != 10) && !(phoneNumberText.getText().isEmpty()))
-						|| (firstNameText.getText().length() > 30) || (lastNameText.getText().length() > 30))
+						|| (phoneNumberText.getText().length() != 10 && !phoneNumberText.getText().isEmpty())
+						|| firstNameText.getText().length() > 30 || lastNameText.getText().length() > 30)
 					longFields = true;
 
 				// Saving User's preferences
@@ -336,10 +332,10 @@ public class Register {
 					if (userNameText.getText().length() > 30) // Username should be shorter than 30 characters
 						emptyOrLongUserNameText.setText("Username too long. Try another one!");
 					if (String.valueOf(passwordText.getPassword()).length() > 30) // password should be shorter than 30
-																					// characters
+																				  // characters
 						emptyOrLongPasswordText.setText("Password too long. Try another one!");
-					if ((phoneNumberText.getText().length() != 10) && !(phoneNumberText.getText().isEmpty())) // Phone
-																												// Number
+					if (phoneNumberText.getText().length() != 10 && !phoneNumberText.getText().isEmpty()) // Phone
+																										  // Number
 																												// should
 																												// contain
 																												// 10

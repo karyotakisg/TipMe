@@ -29,7 +29,8 @@ public class Uploadtest {
 	public void testMethods() {
 		User user = new User("v.talos", "8210146", "Evangelos", "Talos", "Male", "v.talos23@gmail.com", "6906502673",
 				"2003-02-07", "Programming", "Sports", "Sports", 10);
-		Upload upload = new Upload(user);
+		Upload upload = new Upload();
+		upload.upload(user);
 		upload.setCateg("Sport");
 		upload.setTip("If you are athlete, you should drink at least 3 Lt of water everyday");
 		assertEquals("Sport", upload.getCateg());
@@ -40,7 +41,8 @@ public class Uploadtest {
 	public void testSetTip() {
 		User user = new User("v.talos", "8210146", "Evangelos", "Talos", "Male", "v.talos23@gmail.com", "6906502673",
 				"2003-02-07", "Programming", "Sports", "Sports", 10);
-		Upload upload = new Upload(user);
+		Upload upload = new Upload();
+		upload.upload(user);
 		StringBuilder sb = new StringBuilder();
 		sb.setLength(310);
 		String text = sb.toString();
