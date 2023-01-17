@@ -267,9 +267,6 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 	public void sumbit(User user) {
 		user.setPassword(String.valueOf(passwordText.getPassword()));
 		user.setEmail(emailText.getText());
-		System.out.println(categories[pCombo1.getSelectedIndex()]);
-		System.out.println(categories[pCombo2.getSelectedIndex()]);
-		System.out.println(categories[pCombo3.getSelectedIndex()]);
 		user.setInterest1(categories[pCombo1.getSelectedIndex()]);
 		user.setInterest2(categories[pCombo2.getSelectedIndex()]);
 		user.setInterest3(categories[pCombo3.getSelectedIndex()]);
