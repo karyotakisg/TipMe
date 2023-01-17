@@ -14,7 +14,7 @@ import javax.swing.JFrame;
 import org.junit.Test;
 
 public class RegisterTest {
-	
+
 	@Test
 	public void testCreatePanel() {
 		Register reg = new Register();
@@ -31,39 +31,40 @@ public class RegisterTest {
 		assertEquals(500, frame.getWidth());
 		assertEquals(650, frame.getHeight());
 	}
-	
+
 	private Register reg;
-    private Connection conn;
+	private Connection conn;
 
-    @Before
-    public void setUp() throws SQLException {
-        reg = new Register();
-        conn = DriverManager.getConnection("jdbc:sqlite:socialmedia.db");
-    }
+	@Before
+	public void setUp() throws SQLException {
+		reg = new Register();
+		conn = DriverManager.getConnection("jdbc:sqlite:socialmedia.db");
+	}
 
-    @After
-    public void tearDown() throws SQLException {
-        conn.close();
-    }
+	@After
+	public void tearDown() throws SQLException {
+		conn.close();
+	}
 
-    @Test
-    public void testSubmit() throws SQLException {
-        User user = new User();
-        user.setUsername("testuser");
-        user.setPassword("password");
-        user.setEmail("test@gmail.com");
-        user.setPhoneNumber("1234567890");
-        user.setFirstName("Test");
-        user.setLastName("User");
-        reg.insertUser(user);
+	@Test
+	public void testSubmit() throws SQLException {
+		User user = new User();
+		user.setUsername("testuser");
+		user.setPassword("password");
+		user.setEmail("test@gmail.com");
+		user.setPhoneNumber("1234567890");
+		user.setFirstName("Test");
+		user.setLastName("User");
+		reg.insertUser(user);
 
-        Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery("SELECT * FROM User WHERE Username='testuser'");
-        rs.next();
-        assertEquals("testuser", rs.getString("Username"));
-        assertEquals("password", rs.getString("password"));
-        assertEquals("test@gmailcom", rs.getString("Email"));
-        assertEquals("1234567890", rs.getString("PhoneNumber"));
-        assertEquals("Test", rs.getString("FirstName"));
-        assertEquals("User", rs.getString("LastName"));
-} }
+		Statement st = conn.createStatement();
+		ResultSet rs = st.executeQuery("SELECT * FROM User WHERE Username='testuser'");
+		rs.next();
+		assertEquals("testuser", rs.getString("Username"));
+		assertEquals("password", rs.getString("password"));
+		assertEquals("test@gmailcom", rs.getString("Email"));
+		assertEquals("1234567890", rs.getString("PhoneNumber"));
+		assertEquals("Test", rs.getString("FirstName"));
+		assertEquals("User", rs.getString("LastName"));
+	}
+}

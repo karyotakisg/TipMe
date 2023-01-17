@@ -1,9 +1,8 @@
 package kourpa;
 
-
 /**
- * The User class represents a user and his username, password, first name, last name, 
- * sex, email, phone number and interests.
+ * The User class represents a user and his username, password, first name, last
+ * name, sex, email, phone number and interests.
  * 
  * @author Vaggelis Talos
  */
@@ -20,10 +19,12 @@ public class User {
 	String interest2;
 	String interest3;
 	int userId;
+
 	public User() {
 	}
+
 	public User(String u, String p, String f, String l, String s, String e, String ph, String b, String i1, String i2,
-		String i3, int id) {
+			String i3, int id) {
 		this.username = u;
 		this.password = p;
 		this.firstName = f;

@@ -20,9 +20,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Register class creates a new user registration in our social media application GetTip(). 
- * When the "Submit" button is pressed, the form's fields are checked for any errors, 
- * and the user's preferences are saved to the database.
+ * Register class creates a new user registration in our social media
+ * application GetTip(). When the "Submit" button is pressed, the form's fields
+ * are checked for any errors, and the user's preferences are saved to the
+ * database.
  * 
  * @author Vaggelis Talos, Eqerem Hena
  *
@@ -34,7 +35,8 @@ public class Register {
 	static JFrame frame; // classe's frame
 
 	/**
-	 * The register() method calls the necessary methods to create Register's graphics.
+	 * The register() method calls the necessary methods to create Register's
+	 * graphics.
 	 *
 	 *
 	 */
@@ -45,7 +47,8 @@ public class Register {
 	}
 
 	/**
-	 * The createPanel() method creates a new JPanel and sets its layout and background color.
+	 * The createPanel() method creates a new JPanel and sets its layout and
+	 * background color.
 	 * 
 	 * @return the created JPanel
 	 */
@@ -57,7 +60,9 @@ public class Register {
 	}
 
 	/**
-	 * The createFrame() method creates a new JFrame, sets its size and adds the created panel on it.
+	 * The createFrame() method creates a new JFrame, sets its size and adds the
+	 * created panel on it.
+	 * 
 	 * @param panel the panel that to be added to the frame
 	 * @return the created JFrame
 	 */
@@ -70,12 +75,12 @@ public class Register {
 		return frame;
 	}
 
-	
 	/**
-	 * The createLabelsAndFields(JFrame frame, JPanel panel) method creates and adds the necessary JLabels and JTextFields
-	 * to the panel so the User can declare his preferences (first name, last name, phone number, email and interests).
-	 * The method also sets the font, color, and position of the labels and fields on the panel. 
-	 * An image is also added to the panel using an ImageIcon class.
+	 * The createLabelsAndFields(JFrame frame, JPanel panel) method creates and adds
+	 * the necessary JLabels and JTextFields to the panel so the User can declare
+	 * his preferences (first name, last name, phone number, email and interests).
+	 * The method also sets the font, color, and position of the labels and fields
+	 * on the panel. An image is also added to the panel using an ImageIcon class.
 	 * 
 	 * This method also checks if User's preferences are valid.
 	 * 
@@ -329,12 +334,13 @@ public class Register {
 		});
 	}
 
-	
 	/**
-	 * The checkSameUserName() method checks if the chosen username already belongs to another user.
-	 * It compares the current user's username with all the existing usernames in the system.
+	 * The checkSameUserName() method checks if the chosen username already belongs
+	 * to another user. It compares the current user's username with all the
+	 * existing usernames in the system.
 	 * 
-	 * @return true if the chosen username already belongs to another user, false otherwise.
+	 * @return true if the chosen username already belongs to another user, false
+	 *         otherwise.
 	 */
 	public static boolean checkSameUserName() { // Checks if the chosen username already exists
 		boolean sameUserName = false;
@@ -361,11 +367,11 @@ public class Register {
 		return sameUserName;
 	}
 
-	
 	/**
-	 * The insertUser(User u) method inserts the new user that registered in the database.
+	 * The insertUser(User u) method inserts the new user that registered in the
+	 * database.
 	 *
-	 * @param u The User object that is going to be inserted in the database 
+	 * @param u The User object that is going to be inserted in the database
 	 */
 	public static void insertUser(User u) { // Insert new User's elements in the database
 		// SQLite connection URL
@@ -377,10 +383,9 @@ public class Register {
 			String query = "INSERT INTO User"
 					+ "(username, password, email, PhoneNumber, Sex, Interest1, Interest2, Interest3, FirstName, LastName)"
 					+ " VALUES(" + "'" + u.getUsername() + "'" + "," + "'" + u.getPassword() + "'" + "," + "'"
-					+ u.getEmail() + "'" + "," + "'" + u.getPhoneNumber() + "'" + "," + "'" + u.getSex() + "'"
-					+ "," + "'" + u.getInterest1() + "'" + "," + "'" + u.getInterest2() + "'" + "," + "'"
-					+ u.getInterest3() + "'" + "," + "'" + u.getFirstName() + "'" + "," + "'" + u.getLastName()
-					+ "'" + ");";
+					+ u.getEmail() + "'" + "," + "'" + u.getPhoneNumber() + "'" + "," + "'" + u.getSex() + "'" + ","
+					+ "'" + u.getInterest1() + "'" + "," + "'" + u.getInterest2() + "'" + "," + "'" + u.getInterest3()
+					+ "'" + "," + "'" + u.getFirstName() + "'" + "," + "'" + u.getLastName() + "'" + ");";
 			statement.executeUpdate(query);
 			conn.close();
 			// After signing up, opening the "Log in" page
