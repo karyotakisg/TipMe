@@ -37,6 +37,11 @@ public class Register {
 	/**
 	 * The register() method calls the necessary methods to create Register's
 	 * graphics.
+<<<<<<< HEAD
+=======
+	 *
+	 *
+>>>>>>> 697d525717572a9886ed39e0dbc6fb63d5b2eeed
 	 */
 	public static void register() { // Create classe's frame and panel
 		JPanel panel = createPanel();

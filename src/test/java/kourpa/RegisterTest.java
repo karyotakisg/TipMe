@@ -47,6 +47,14 @@ public class RegisterTest {
 
 	@Test
 	public void testSubmit() throws SQLException {
+		User user = new User();
+		user.setUsername("testuser");
+		user.setPassword("password");
+		user.setEmail("test@gmail.com");
+		user.setPhoneNumber("1234567890");
+		user.setFirstName("Test");
+		user.setLastName("User");
+		reg.insertUser(user);
 
 		Statement st = conn.createStatement();
 		ResultSet rs = st.executeQuery("SELECT * FROM User WHERE Username='testuser'");

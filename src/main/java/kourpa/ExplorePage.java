@@ -14,18 +14,28 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+/**
+ * ExplorePage class creates the "Explore" section The class generates a JFrame
+ * consisting of five JPanels The center panel includes the working category
+ * buttons that redirect the user to each category
+ * 
+ * @author Apostolos Kourpadakis, Panagiotis Theocharis
+ *
+ */
+
 public class ExplorePage implements ActionListener {
-	private static final JButton [] buttons = new JButton [10];
+	private static final JButton[] buttons = new JButton[10];
 	private static JPanel center;
 	private JPanel east;
 	private JPanel west;
 	private JPanel south;
 	private JPanel panel = new JPanel();
-    private final JFrame frame = new JFrame();
-    
-    public JFrame explorePage(User u, Color col) {
-    	frame.setTitle("GetTip-Explore");
-    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	private final JFrame frame = new JFrame();
+
+	public JFrame explorePage(User u, Color col) {
+		frame.setTitle("GetTip-Explore");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(180, 50, 1050, 750);
 		frame.setBackground(Color.BLACK);
 		frame.setLocationRelativeTo(null);
@@ -33,13 +43,13 @@ public class ExplorePage implements ActionListener {
 		frame.setIconImage(i);
 		center = new JPanel();
 		center.setBackground(Color.black);
-	 	center.setLayout(new GridLayout(2, 5, 10, 10));
-	 	east = new JPanel();
-	 	west = new JPanel();
-	 	south = new JPanel();
-	 	panel = new JPanel();
-	 	panel.setLayout(new BorderLayout(2, 2));
-	 	Menu menu = new Menu();
+		center.setLayout(new GridLayout(2, 5, 10, 10));
+		east = new JPanel();
+		west = new JPanel();
+		south = new JPanel();
+		panel = new JPanel();
+		panel.setLayout(new BorderLayout(2, 2));
+		Menu menu = new Menu(); // The menu bar with the working buttons is created
 		south.setPreferredSize(new Dimension(200, 50));
 		east.setPreferredSize(new Dimension(100, 680));
 		west.setPreferredSize(new Dimension(100, 680));
@@ -56,19 +66,26 @@ public class ExplorePage implements ActionListener {
 		panel.add(menu.menuBar(u, col), BorderLayout.NORTH);
 		frame.add(panel);
 		return frame;
-    }    
-    public void actionPerformed(ActionEvent e) {
-    	for(int counter = 0; counter < buttons.length; counter++) {
-		   if(e.getSource() == buttons[counter]) {
-			   center.setVisible(false);
-			   @SuppressWarnings("unused")
-			ExplorePanel e3 = new ExplorePanel(counter,  panel, south, east, west);
-		   }
+	}
+
+	// Method that will be activated if any of the categories buttons will be
+	// pressed
+	public void actionPerformed(ActionEvent e) {
+		for (int counter = 0; counter < buttons.length; counter++) {
+			if (e.getSource() == buttons[counter]) {
+				center.setVisible(false);
+				@SuppressWarnings("unused")
+				ExplorePanel e3 = new ExplorePanel(counter, panel, south, east, west);
+			}
 		}
-    }
+	}
+
 	public static void visibility() {
 		center.setVisible(true);
 	}
+
+	// Method for changing the panel's colors
+	// It will be activated if the colors change from MyProfile section
 	public void applyColors(int c) {
 		if (c == 0) {
 			east.setBackground(Color.DARK_GRAY);
@@ -88,19 +105,22 @@ public class ExplorePage implements ActionListener {
 			south.setBackground(MyProfile.col2);
 		}
 	}
+
+	// Here the categories buttons will be created
 	public void JButtonCreator(JButton[] buttons, JPanel center) {
-		for (int count = 0; count < buttons.length; count++ ) {
-		 	buttons[count] = new JButton(titles(count), getIcon(count));
-		 	buttons[count].setBackground(colors(count));
-		 	buttons[count].setForeground(Color.white);
-		 	center.add(buttons[count]);
-		 	buttons[count].addActionListener(this);
-		 	buttons[count].setVerticalTextPosition(SwingConstants.BOTTOM);
-		 	buttons[count].setHorizontalTextPosition(SwingConstants.CENTER);
-		 	buttons[count].setHorizontalAlignment(SwingConstants.LEFT);
-		 	buttons[count].setFont(new Font("Calibri", Font.BOLD, 22));
+		for (int count = 0; count < buttons.length; count++) {
+			buttons[count] = new JButton(titles(count), getIcon(count));
+			buttons[count].setBackground(colors(count));
+			buttons[count].setForeground(Color.white);
+			center.add(buttons[count]);
+			buttons[count].addActionListener(this);
+			buttons[count].setVerticalTextPosition(SwingConstants.BOTTOM);
+			buttons[count].setHorizontalTextPosition(SwingConstants.CENTER);
+			buttons[count].setHorizontalAlignment(SwingConstants.LEFT);
+			buttons[count].setFont(new Font("Calibri", Font.BOLD, 22));
 		}
 	}
+
 	public static String titles(int n) {
 		if (n == 0) {
 			String s1 = "Science";
@@ -112,20 +132,20 @@ public class ExplorePage implements ActionListener {
 			String s3 = "Music";
 			return s3;
 		} else if (n == 3) {
-			String s4 =  "Fashion";
+			String s4 = "Fashion";
 			return s4;
 		} else if (n == 4) {
 			String s5 = "Travel";
 			return s5;
-		} else if (n == 5)  {
+		} else if (n == 5) {
 			String s6 = "Fitness";
 			return s6;
 		} else if (n == 6) {
 			String s7 = "Art";
 			return s7;
 		} else if (n == 7) {
-		    String s8 = "Education";
-		    return s8;
+			String s8 = "Education";
+			return s8;
 		} else if (n == 8) {
 			String s9 = "Nature";
 			return s9;
@@ -134,6 +154,7 @@ public class ExplorePage implements ActionListener {
 			return s10;
 		}
 	}
+
 	public static Color colors(int n) {
 		if (n == 0) {
 			Color c1 = new Color(30, 25, 98);
@@ -150,7 +171,7 @@ public class ExplorePage implements ActionListener {
 		} else if (n == 4) {
 			Color c5 = new Color(155, 236, 236);
 			return c5;
-		} else if (n == 5)  {
+		} else if (n == 5) {
 			Color c6 = new Color(147, 236, 156);
 			return c6;
 		} else if (n == 6) {
@@ -158,7 +179,7 @@ public class ExplorePage implements ActionListener {
 			return c7;
 		} else if (n == 7) {
 			Color c8 = new Color(255, 204, 0);
-		    return c8;
+			return c8;
 		} else if (n == 8) {
 			Color c9 = new Color(0, 153, 51);
 			return c9;
@@ -167,29 +188,30 @@ public class ExplorePage implements ActionListener {
 			return c10;
 		}
 	}
+
 	public static ImageIcon getIcon(int n) {
-	   if (n == 0) {
-		   return new ImageIcon("src\\main\\resources\\atom.png");
-	   } else if (n == 1) {
-		   return new ImageIcon("src\\main\\resources\\sports.png");
-	   } else if (n == 2) {
-		   return new ImageIcon("src\\main\\resources\\notes.png");
-	   } else if (n == 3) {
-		   return new ImageIcon("src\\main\\resources\\fashion3.png");
-	   } else if (n == 4) {
+		if (n == 0) {
+			return new ImageIcon("src\\main\\resources\\atom.png");
+		} else if (n == 1) {
+			return new ImageIcon("src\\main\\resources\\sports.png");
+		} else if (n == 2) {
+			return new ImageIcon("src\\main\\resources\\notes.png");
+		} else if (n == 3) {
+			return new ImageIcon("src\\main\\resources\\fashion3.png");
+		} else if (n == 4) {
 			return new ImageIcon("src\\main\\resources\\luggage.png");
-	   } else if (n == 5) {
+		} else if (n == 5) {
 			return new ImageIcon("src\\main\\resources\\dumbbell.png");
-	   } else if (n == 6) {
+		} else if (n == 6) {
 			return new ImageIcon("src\\main\\resources\\creativity.png");
-	   } else if (n == 7) {
-		   return new ImageIcon("src\\main\\resources\\educations.png");
-	   } else if (n == 8) {
-		   return new ImageIcon("src\\main\\resources\\planet.png");
-	   } else if (n == 9) {
-		   return new ImageIcon("src\\main\\resources\\fast-food.png");
-	   } else {
-		   return null;
-	   }
+		} else if (n == 7) {
+			return new ImageIcon("src\\main\\resources\\educations.png");
+		} else if (n == 8) {
+			return new ImageIcon("src\\main\\resources\\planet.png");
+		} else if (n == 9) {
+			return new ImageIcon("src\\main\\resources\\fast-food.png");
+		} else {
+			return null;
+		}
 	}
- }
+}

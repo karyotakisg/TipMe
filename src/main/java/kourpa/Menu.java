@@ -1,4 +1,5 @@
 package kourpa;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -15,9 +16,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import java.awt.Component;
+
 /**
- * Creates the menu of the application, so the user can navigate through 
+ * Creates the menu of the application, so the user can navigate through
  * different sections
+ * 
  * @author Giannis Karyotakis, Panagiotis Theocharis
  */
 public class Menu implements MouseListener { // creates the menu at the top of the screen
@@ -46,13 +49,16 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 	static int countH = 1;
 	static int current = 0;
 	static boolean flagColor;
+
 	JFrame home2;
+
 	/**
-	 * The method finds in which frame the user is and navigates him 
-	 * to the next feature/frame he clicks
-	 * @param u the data of user
+	 * The method finds in which frame the user is and navigates him to the next
+	 * feature/frame he clicks
+	 * 
+	 * @param u   the data of user
 	 * @param col the current color of background
-	 * @return menu Panel 
+	 * @return menu Panel
 	 */
 	public JPanel menuBar(User u, Color col) {
 		this.user = u;
@@ -96,7 +102,7 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 					home.setVisible(true);
 					expl.setVisible(false);
 					myProf.setVisible(false);
-				} else if (countH == 0 && countPr!= 0 && countEx != 0) {
+				} else if (countH == 0 && countPr != 0 && countEx != 0) {
 				} else if (countH == 0 && countPr != 0 && countEx == 0) {
 					home.setVisible(true);					
 					expl.setVisible(false);
@@ -199,11 +205,11 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 			}
 		});
 
-        menu.add(b5Icon);
-        b5Icon.addActionListener(new ActionListener() {
-        	@Override
+		menu.add(b5Icon);
+		b5Icon.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
-        		flagColor = true;
+				flagColor = true;
 				if (current == 0) {
 					lp.getHome().dispose();
 					lp.setHome(home);
@@ -214,7 +220,7 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 					home.dispose();
 					home = hp.homePage(u, MyProfile.currentColor);
 					home.setVisible(true);
-				}  else if(current == 3) {
+				} else if (current == 3) {
 					myProf.dispose();
 					myProf = mp.myProfile(u, MyProfile.currentColor);
 					myProf.setVisible(true);
@@ -222,8 +228,8 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 					menu.remove(b5Icon);
 				}
 			}
-        });
-        
+		});
+
 		b1Icon.addMouseListener(this);
 		b2Icon.addMouseListener(this);
 		b3Icon.addMouseListener(this);
@@ -241,9 +247,11 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 		b5Icon.setBackground(Color.BLACK);
 		return menu;
 	}
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
 	}
+
 	@Override
 	public void mousePressed(MouseEvent e) { // The menu button (top button) change color to cyan when the user presses
 												// them
@@ -260,9 +268,11 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 			b4Icon.setBackground(Color.CYAN);
 		}
 	}
+
 	@Override
 	public void mouseReleased(MouseEvent e) {
 	}
+
 	@Override
 	public void mouseEntered(MouseEvent e) { // hovering a menu button changes its color.
 		if (e.getSource() == b1Icon) {
@@ -278,6 +288,7 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 			b4Icon.setBackground(Color.YELLOW);
 		}
 	}
+
 	@Override
 	public void mouseExited(MouseEvent e) {
 		if (e.getSource() == b1Icon) {
@@ -293,9 +304,11 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 			b4Icon.setBackground(new Color(240, 240, 240));
 		}
 	}
+
 	/**
-	 * If the uses decides to change color, then all components
-	 * of the app use that color
+	 * If the uses decides to change color, then all components of the app use that
+	 * color
+	 * 
 	 * @param c the current color of the app
 	 */
 	public void applyColors(int c) {

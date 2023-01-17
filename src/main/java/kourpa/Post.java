@@ -16,6 +16,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 
+/**
+ * The class "Post" stores in the database the tip that the user writes, sets up
+ * the Like and Dislike buttons and count the nu,,ber of Likes and Dislikes. *
+ *
+ * @author Eqerem Hena, Vaggelis Talos, Panagiotis Theocharis, Dimitris Doukas
+ *
+ */
+
 public class Post {
 
 	private Color col1 = new Color(246, 246, 246);
@@ -31,29 +39,35 @@ public class Post {
 	User userPosted = new User();
 	User userConnected = new User();
 
-	//αποθήκευση ποστ στην βαση με στοιχεια όνομα, κατηγορία, κείμενο -- void
 	public Post() {
 	}
 
+	/**
+	 * 
+	 * @param user
+	 */
 	public Post(User user) {
 		this.userPosted = user;
 	}
 
+	/**
+	 * The method storePost() stores the tip(post) and the
+	 * parameters(Category,UploadDate etc) of it in the database. If an exception
+	 * happens then a message will be printed in the screen.
+	 * 
+	 * @param tip   is the text of the tip(post)
+	 * @param categ the category that the post is for
+	 */
 	public void storePost(String tip, String categ) {
 		String jdbcUrl = "jdbc:sqlite:socialmedia.db";
 		try {
+			// Creating a new connection
 			Connection conn = DriverManager.getConnection(jdbcUrl);
 			Statement statement = conn.createStatement();
-			//System.out.println("Connected");
-			/*
-			 * String query = "INSERT INTO Post(Text, " + "Category, " + "UploadDate)" +
-			 * " VALUES(" + "'" + up.getTip() + "'" + "," + "'" + up.getCateg() + "'" + ","
-			 * + "'" + strDate + "'" + ");";
-			 * 
-			 */
-			String query = "INSERT INTO Post(Text, Category, UploadDate, Likes, UserId, Dislikes)"
-					+ " VALUES( '" + tip + "', '" + categ + "', '" + strDate + "', " + 0
-					+ ", '" +  userPosted.getUserId()+ "', ' " + 0  + "');";
+			String query = "INSERT INTO Post(Text, Category, UploadDate, Likes, UserId, Dislikes)" + " VALUES( '" + tip
+					+ "', '" + categ + "', '" + strDate + "', " + 0 + ", '" + userPosted.getUserId() + "', ' " + 0
+					+ "');";
+			// Store the post in the database
 			statement.executeUpdate(query);
 			conn.close();
 		} catch (SQLException s) {
@@ -64,7 +78,20 @@ public class Post {
 		}
 	}
 
+	/**
+	 * The method getLikeButton creates the Like button and checks if the user likes
+	 * a post. If the user likes a post the like button will be green else it will
+	 * be white. The user can like a post by clicking on the Like button an undo it
+	 * by click it again.
+	 * 
+	 * 
+	 * @param postid the id of the post
+	 * @param userid the id of the user who will like the post or undo the like and
+	 *               is being checked if he likes the post or not
+	 * @return the like button
+	 */
 	public JButton getLikeButton(int postid, int userid) {
+		// Create the Like button
 		Font fontLike = new Font("Serif", Font.BOLD, 15);
 		ImageIcon icon = new ImageIcon("src\\main\\resources\\like.png");
 		JButton like = new JButton("" + getLikeCount(postid) + "", icon);
@@ -74,13 +101,10 @@ public class Post {
 			Connection conn = DriverManager.getConnection(jdbcUrl);
 			Statement statement = conn.createStatement();
 			ResultSet rs = statement.executeQuery(qLikes);
-			// System.out.println(user.getUserId());
+			// Check if the user likes the post already
 			while (rs.next()) {
-				//System.out.println(userid + "param");
-				//System.out.println(rs.getInt("userid") + "db");
-				if (rs.getInt("userid") == userid){
+				if (rs.getInt("userid") == userid) {
 					liked = true;
-					//System.out.print("AAAAAAAAAAAAA");
 					col1 = Color.green;
 					break;
 				}
@@ -99,6 +123,10 @@ public class Post {
 
 				String query = "SELECT Likes FROM Post";
 				String qLikes = "SELECT userid FROM Dislikes WHERE PostId = " + postid;
+				/*
+				 * If the user doesn't like or doesn't dislike already the post he likes it by
+				 * clicking on like button. The like button will be green when he like it
+				 */
 				if (e.getSource() == like && !liked && !disliked) {
 					query = "UPDATE Post SET Likes = Likes + 1 WHERE PostId = " + postid;
 					qLikes = "INSERT INTO Likes(userid, postid) VALUES(" + userid + ", " + postid + ")";
@@ -109,6 +137,11 @@ public class Post {
 					likes++;
 					like.setText(String.valueOf(likes));
 					getLikeButton(postid, userid).setBackground(Color.green);
+					/*
+					 * If the user like and doesn't dislike the post he can undo the like by
+					 * clicking on the like button again. The like button will be white when he undo
+					 * the like
+					 */
 				} else if (e.getSource() == like && liked && !disliked) {
 					query = "UPDATE Post SET Likes = Likes-1 WHERE PostId =" + postid;
 					qLikes = "DELETE FROM Likes WHERE postid = " + postid + "  " + "AND userid = " + userid;
@@ -122,6 +155,10 @@ public class Post {
 						--likes;
 					}
 					like.setText(String.valueOf(likes));
+					/*
+					 * When a user dislikes already the post and wants to like it then a message
+					 * that will ask him to undo the dislike will appear
+					 */
 				} else if (e.getSource() == like && disliked) {
 					@SuppressWarnings("unused")
 					int input = JOptionPane.showOptionDialog(null,
@@ -148,7 +185,20 @@ public class Post {
 		return like;
 	}
 
+	/**
+	 * The method getDislikeButton creates the Dislike button and checks if the user
+	 * dislikes a post. If the user dislikes a post the dislike button will be red
+	 * else it will be white. The user can dislike a post by clicking on the Dislike
+	 * button an undo it by click it again.
+	 * 
+	 * 
+	 * @param postid the id of the post
+	 * @param userid the id of the user who will dislike the post or undo the
+	 *               dislike and is being checked if he dislikes the post or not
+	 * @return the dislike button
+	 */
 	public JButton getDislikeButton(int postid, int userid) {
+		// Create the dislike button
 		Font fontdisLike = new Font("Serif", Font.BOLD, 15);
 		ImageIcon icon = new ImageIcon("src\\main\\resources\\dislike.png");
 		JButton dislike = new JButton("" + getDislikeCount(postid) + "", icon);
@@ -160,6 +210,8 @@ public class Post {
 			Connection conn = DriverManager.getConnection(jdbcUrl);
 			Statement statement = conn.createStatement();
 			ResultSet rs = statement.executeQuery(qDislikes);
+			
+			// Check if the user dislikes the post already
 			while (rs.next()) {
 				if (rs.getInt("userid") == userid) {
 					disliked = true;
@@ -179,6 +231,11 @@ public class Post {
 			public void actionPerformed(ActionEvent e) {
 				String query = "SELECT Dislikes FROM Post";
 				String qDislikes = "SELECT userid FROM Dislikes WHERE PostId = " + postid;
+				/*
+				 * If the user doesn't dislike or doesn't like already the post he dislikes it
+				 * by clicking on dislike button. The dislike button will be red when he dislike
+				 * it
+				 */
 				if (e.getSource() == dislike && !disliked && !liked) {
 					query = "UPDATE Post SET Dislikes = Dislikes + 1 WHERE PostId = " + postid;
 					qDislikes = "INSERT INTO Dislikes(userid, postid) VALUES(" + userid + ", " + postid + ")";
@@ -189,10 +246,17 @@ public class Post {
 					dislikes++;
 					dislike.setText(String.valueOf(dislikes));
 					getDislikeButton(postid, userid).setBackground(Color.red);
+					/*
+					 * If the user dislike and doesn't like the post he can undo the dislike by
+					 * clicking on the dislike button again. The dislike button will be white when
+					 * he undo the dislike
+					 */
 				} else if (e.getSource() == dislike && disliked && !liked) {
 					query = "UPDATE Post SET Dislikes = Dislikes - 1 WHERE PostId =" + postid;
 					qDislikes = "DELETE FROM Dislikes WHERE UserId = " + userid + "  " + "AND PostId = "
 							+ postid + ";";
+					qDislikes = "DELETE FROM Dislikes WHERE UserId = " + userid + "  " + "AND PostId = " + postid + ";";
+
 					col2 = new Color(246, 246, 246);
 					dislike.setBackground(col2);
 					dislikes = getDislikeCount(postid);
@@ -203,12 +267,15 @@ public class Post {
 						--dislikes;
 					}
 					dislike.setText(String.valueOf(dislikes));
+					/*
+					 * When a user likes already the post and wants to dislike it then a message
+					 * that will ask him to undo the like will appear
+					 */
 				} else if (e.getSource() == dislike && liked) {
 					@SuppressWarnings("unused")
 					int input = JOptionPane.showOptionDialog(null,
 							"Remove your like first (click again on the like button)", "Help message",
 							JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
-					// query = "SELECT Likes FROM Post";
 				}
 				try {
 					Connection conn = DriverManager.getConnection(jdbcUrl);
@@ -230,6 +297,13 @@ public class Post {
 		return dislike;
 	}
 
+	/**
+	 * The method getLikeCount gets the number of likes form the database
+	 * 
+	 * @param postid the id of the post that is needed in order to have the correct
+	 *               number of likes displayed
+	 * @return the number of likes
+	 */
 	public int getLikeCount(int postid) {
 		int count = 0;
 		String url = "jdbc:sqlite:socialmedia.db";
@@ -251,6 +325,13 @@ public class Post {
 		return count;
 	}
 
+	/**
+	 * The method getDislikeCount gets the number of dislikes form the database
+	 * 
+	 * @param postid the id of the post that is needed in order to have the correct
+	 *               number of dislikes displayed
+	 * @return the number of dislikes
+	 */
 	public int getDislikeCount(int postid) {
 		int count = 0;
 		String url = "jdbc:sqlite:socialmedia.db";
