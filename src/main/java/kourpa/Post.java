@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -63,12 +64,17 @@ public class Post {
 		try {
 			// Creating a new connection
 			Connection conn = DriverManager.getConnection(jdbcUrl);
-			Statement statement = conn.createStatement();
-			String query = "INSERT INTO Post(Text, Category, UploadDate, Likes, UserId, Dislikes)" + " VALUES( '" + tip
-					+ "', '" + categ + "', '" + strDate + "', " + 0 + ", '" + userPosted.getUserId() + "', ' " + 0
-					+ "');";
+			String sql = "INSERT INTO Post(Text,Category,UploadDate,Likes,UserId,Dislikes) VALUES(?,?,?,?,?,?)";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, tip);
+			pstmt.setString(2, categ);
+			pstmt.setString(3, strDate);
+			pstmt.setInt(4, 0);
+			pstmt.setInt(5, userPosted.getUserId());
+			pstmt.setInt(6, 0);
+			pstmt.executeUpdate();
+
 			// Store the post in the database
-			statement.executeUpdate(query);
 			conn.close();
 		} catch (SQLException s) {
 			System.out.println("Failed to connect and save post");
@@ -210,7 +216,7 @@ public class Post {
 			Connection conn = DriverManager.getConnection(jdbcUrl);
 			Statement statement = conn.createStatement();
 			ResultSet rs = statement.executeQuery(qDislikes);
-			
+
 			// Check if the user dislikes the post already
 			while (rs.next()) {
 				if (rs.getInt("userid") == userid) {
@@ -253,8 +259,7 @@ public class Post {
 					 */
 				} else if (e.getSource() == dislike && disliked && !liked) {
 					query = "UPDATE Post SET Dislikes = Dislikes - 1 WHERE PostId =" + postid;
-					qDislikes = "DELETE FROM Dislikes WHERE UserId = " + userid + "  " + "AND PostId = "
-							+ postid + ";";
+					qDislikes = "DELETE FROM Dislikes WHERE UserId = " + userid + "  " + "AND PostId = " + postid + ";";
 					qDislikes = "DELETE FROM Dislikes WHERE UserId = " + userid + "  " + "AND PostId = " + postid + ";";
 
 					col2 = new Color(246, 246, 246);
