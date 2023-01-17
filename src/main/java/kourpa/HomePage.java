@@ -56,7 +56,6 @@ public class HomePage {
 
 	public HomePage(User u) {
 		this.user = u;
-//System.out.println(u.getUserId() +"constr");
 		userConnectedId = u.getUserId();
 	}
 
@@ -140,7 +139,7 @@ public class HomePage {
 // Creating a new Connection
 			Connection conn = DriverManager.getConnection(jdbcUrl);
 			Statement statement = conn.createStatement();
-// System.out.println("Connected");
+
 // Get the right posts from the database
 //System.out.println(u.getInterest1() + u.getInterest2() + u.getInterest3());
 			String query = "SELECT Post.PostId, User.username, Post.text, Post.uploaddate, Post.likes, Post.Category FROM Post, User WHERE Post.userId = User.userId AND (Post.Category = "
@@ -254,7 +253,6 @@ public class HomePage {
 		southLike.setPreferredSize(new Dimension(700, 40));
 		southLike.setBorder(BorderFactory.createRaisedBevelBorder());
 		southLike.add(p.getLikeButton(postid, userConnectedId));
-//System.out.println(userConnectedId +"home");
 		southLike.add(Box.createHorizontalStrut(20));
 		southLike.add(p.getDislikeButton(postid, userConnectedId));
 		southLike.add(Box.createHorizontalStrut(395));
