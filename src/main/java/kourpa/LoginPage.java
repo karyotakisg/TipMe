@@ -43,7 +43,7 @@ public class LoginPage implements ActionListener {
 	static JFrame home;
 	static ExplorePage ex;
 	static HomePage hp;
-	final Color col = new Color(255, 102, 0);
+	final Color col = new Color(153, 208, 233);
 
 	Color c;
 

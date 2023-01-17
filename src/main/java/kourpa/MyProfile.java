@@ -101,7 +101,7 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 	private ImageIcon iconColorChooser = new ImageIcon("src\\main\\resources\\colors.png");
 	private JButton logoutButton = new JButton();
 	static Color col2;
-	static Color currentColor = new Color(255, 102, 0);
+	static Color currentColor = new Color(153, 208, 233);
 	/** 
 	*Method that give values to the components 
 	*  and calls other methods to form tha frame
@@ -401,7 +401,7 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 		colorPick = new JRadioButton("Other", iconColorChooser, false);
 		darkMode.setBackground(Color.DARK_GRAY);
 		lightMode.setBackground(Color.WHITE);
-		plainMode.setBackground(new Color(255,102,0));
+		plainMode.setBackground(new Color(153, 208, 233));
 		colorPick.setBackground(Color.LIGHT_GRAY);
 		darkMode.setForeground(Color.WHITE);
 		plainMode.setForeground(Color.WHITE);

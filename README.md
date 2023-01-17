@@ -6,12 +6,12 @@ TipMe is a social media application for lifehacks and tips.
 * Make sure to be in the root directory 
 * To build the project run the command:
 ```
-mvn install
+ mvn clean compile assembly:single
 ```
-This will also generate a jar file with all the dependencies which we will run once it has been created.
-* Then, go to the `target` folder and type:
+This will generate a jar file with all the dependencies which can be used.
+* Then, type:
 ```
-java -cp tipme-1.0-SNAPSHOT.jar kourpa.Main
+java -cp ./target/tipme-1.0-SNAPSHOT-jar-with-dependencies.jar kourpa.Main
 ```
 * Alternatively, you can  run the `main` method in `Main.java` in your chosen IDE, e.g. `IntelliJ` .
 ## Instructions for use
