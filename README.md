@@ -1,6 +1,8 @@
 # TipMe
 ## General infos
-TipMe is a social media application for lifehacks and tips.
+TipMe is a social media application for lifehacks and tips, developed for the purpose of our programming courses in the Athens University of Economics and Business, Department of Managment and Science Technology.
+
+![Watch the video](icons8-youtube-48.png)(https://www.youtube.com/watch?v=d76YI5TjrEg)
 ## Run the project
 * Firstly, pull the project from our repository 
 * Make sure to be in the root directory 
@@ -9,15 +11,16 @@ TipMe is a social media application for lifehacks and tips.
  mvn clean compile assembly:single
 ```
 This will generate a jar file with all the dependencies which can be used.
+* Move tipme-1.0-SNAPSHOT-jar-with-dependencies.jar to the `root` directory
 * Then, type:
 ```
-java -cp ./target/tipme-1.0-SNAPSHOT-jar-with-dependencies.jar kourpa.Main
+java -cp tipme-1.0-SNAPSHOT-jar-with-dependencies.jar kourpa.Main
 ```
 * Alternatively, you can  run the `main` method in `Main.java` in your chosen IDE, e.g. `IntelliJ` .
 ## Instructions for use
 When you run the .jar file or main method the frame of **Register** appears. If it is the first time you opens the app then you must create a new acocunt, else you can can press the **Login** button to connect to your exissting account. When you sumbit your infos, you are moving to the **HomePage** section of the App where you can see posts from other users for the interests you submitted and ,as well, like them and dislike them.
 
- <span style="color:magenta">The menu in the upper body of the application can navigate you through the different funcionalities.</span>The home icon represents the homepage, the magnifying glass represents the search section and person icon is for MyProfile section. Lastly, there is a row icon for the Upload.
+ <span style="color:magenta"> *The menu in the upper body of the application can navigate you through the different funcionalities.* </span>The home icon represents the homepage, the magnifying glass represents the search section and person icon is for MyProfile section. Lastly, there is a row icon for the Upload.
 
  In **Search**, there are many categories for tips to find, such as Nature, Sports and Science. When the user presses a category he only sees post from his choice. Next, in **MyProfile** the user can change his personal infos and the interests that were submitted in Register and can see his/her posts. Lastly, in **Upload** you can publish your own tips/lifehacks, as long as it is less than 250 charachters. Generally, small posts are preferable. 
  
