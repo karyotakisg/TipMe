@@ -87,7 +87,7 @@ public class MyProfile implements ActionListener, MouseListener { // creation of
 	private final Color textColor = Color.decode("#ffffff");
 	private final Color backgroundColor = Color.decode("#000000");
 	private final Color hoverColor = Color.decode("#00aced");
-	static final Color col = new Color(255, 102, 0);
+	static final Color col = new Color(153, 208, 233);
 	String s = "submit";
 	private JDialog dial = new JDialog(frame, "Dialog Box");
 	private JButton dialBut = new JButton("OK");

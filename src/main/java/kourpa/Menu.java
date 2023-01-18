@@ -41,13 +41,25 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 	static HomePage hp;
 	static ExplorePage ex;
 	MyProfile mp;
+	
+	/* These variables are needed to change 
+	 * the frame's visibility properly from the menu.
+	 */
 	static JFrame myProf;
 	static JFrame expl;
 	static JFrame home;
+	/* These variables work like flags, if the user has not clicked
+	 * the counterpart  menu button then the value is 1. 
+	 * When the actual counterpart button is clicked the count turns to 0. 
+	 * This way we can find all the appropriate cases. (countH = home button, 
+	 * countEx = explore button, countPr = myProfile button) 
+	 */
 	static int countPr = 1;
 	static int countEx = 1;
 	static int countH = 1;
+	//current frame displayed
 	static int current = 0;
+	//used to transfer the correct color everywhere (plain modes-dark modes etc.)
 	static boolean flagColor;
 	boolean flag = false;
 	JFrame home2;
@@ -81,10 +93,17 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				current = 1;
-				if (countH != 0 && countEx != 0 & countPr != 0) {
+				/* This if-else statement takes all the cases and variations 
+				 * for the time the home page button is clicked. 
+				 * This way it knows, when to set the home page visible and which ones
+				 * to make invisible.(Ex: First case is when no buttons are clicked
+				 * , Second case is when only the explore button is clicked 
+				 * (because it's value is 0)) 
+				 */
+ /* 1st case*/	if (countH != 0 && countEx != 0 & countPr != 0) {
 					home = lp.getHome();
 					lp.setHome(home);
-				} else if (countH != 0 && countEx == 0 & countPr != 0) {
+ /* 2nd case*/	} else if (countH != 0 && countEx == 0 & countPr != 0) {
 					countH = 0;
 					home = lp.getHome();
 					lp.setHome(home);
@@ -115,6 +134,9 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 				}
 			}
 		});
+		/* This if-else statement is the same, but this time with the
+		 * explore button (2nd button of the menu)
+		 */
 		b2Icon.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -155,6 +177,7 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 				}
 			}
 		});
+		// Similar to the previous ones, but with profile button
 		b3Icon.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -193,6 +216,7 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 				}
 			}
 		});
+		//Upload button
 		b4Icon.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -209,10 +233,15 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 		});
 
 		menu.add(b5Icon);
+		/* This is the refresh button, which disposes
+		 * the current frame and re-makes it. This way the user can
+		 * access new data in various ways.
+		 */
 		b5Icon.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				flagColor = true;
+				//the first frame of home after login is the case: current = 0;
 				if (current == 0) {
 					lp.getHome().dispose();
 					lp.setHome(home);
@@ -315,15 +344,14 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 	 * @param c the current color of the app
 	 */
 	public void applyColors(int c) {
+		/* It gets all the homePage's main components
+		 * and paints them the correct colors with a for each statement.
+		 * This is used, because it wouldn't transfer the correct colors 
+		 * immediately after refresh.
+		 */
 		Component[] compsF = home.getComponents();
-		Component[] compsE = expl.getComponents();
 		if (c == 0) {
 			for (Component comp : compsF) {
-				if (comp instanceof JComponent) {
-					((JComponent) comp).setBackground(Color.DARK_GRAY);
-				}
-			}
-			for (Component comp : compsE) {
 				if (comp instanceof JComponent) {
 					((JComponent) comp).setBackground(Color.DARK_GRAY);
 				}
@@ -334,29 +362,16 @@ public class Menu implements MouseListener { // creates the menu at the top of t
 					((JComponent) comp).setBackground(Color.white);
 				}
 			}
-			for (Component comp : compsE) {
-				if (comp instanceof JComponent) {
-					((JComponent) comp).setBackground(Color.white);
-				}
-			}
+			
 		} else if (c == 2) {
 			for (Component comp : compsF) {
 				if (comp instanceof JComponent) {
 					((JComponent) comp).setBackground(col);
 				}
 			}
-			for (Component comp : compsE) {
-				if (comp instanceof JComponent) {
-					((JComponent) comp).setBackground(col);
-				}
-			}
+			
 		} else {
 			for (Component comp : compsF) {
-				if (comp instanceof JComponent) {
-					((JComponent) comp).setBackground(MyProfile.col2);
-				}
-			}
-			for (Component comp : compsE) {
 				if (comp instanceof JComponent) {
 					((JComponent) comp).setBackground(MyProfile.col2);
 				}
