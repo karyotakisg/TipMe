@@ -2,7 +2,8 @@
 ## General infos
 TipMe is a social media application for lifehacks and tips, developed for the purpose of our programming courses in the Athens University of Economics and Business, Department of Managment and Science Technology.
 
-![Watch the video](icons8-youtube-48.png)(https://www.youtube.com/watch?v=d76YI5TjrEg)
+<img src="icons8-youtube-48.png" alt="alt_text" width="40">(https://www.youtube.com/watch?v=d76YI5TjrEg)
+
 ## Run the project
 * Firstly, pull the project from our repository 
 * Make sure to be in the root directory 
