@@ -1,5 +1,5 @@
 # GetTip()
-## General infos
+## General infos 
 GetTip() is a social media application for lifehacks and tips, developed for the purpose of our programming courses in the Athens University of Economics and Business, Department of Managment and Science Technology.
 
 <img src="icons8-youtube-48.png" alt="alt_text" width="40">(https://www.youtube.com/watch?v=d76YI5TjrEg)
@@ -18,7 +18,7 @@ This will generate a jar file with all the dependencies which can be used.
 java -cp tipme-1.0-SNAPSHOT-jar-with-dependencies.jar kourpa.Main
 ```
 * Alternatively, you can  run the `main` method in `Main.java` in your chosen IDE, e.g. `IntelliJ` .
-## Instructions for use
+## Instructions for usage 📒 
 When you run the .jar file or main method the frame of **Register** appears. If it is the first time you opens the app then you must create a new acocunt, else you can can press the **Login** button to connect to your exissting account. When you sumbit your infos, you are moving to the **HomePage** section of the App where you can see posts from other users for the interests you submitted and ,as well, like them and dislike them.
 
  <span style="color:magenta"> *The menu in the upper body of the application can navigate you through the different funcionalities.* </span>The home icon represents the homepage, the magnifying glass represents the search section and person icon is for MyProfile section. Lastly, there is a row icon for the Upload.
