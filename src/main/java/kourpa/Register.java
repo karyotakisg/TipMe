@@ -55,7 +55,7 @@ public class Register {
 	public static JPanel createPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
-		panel.setBackground(new Color(51, 153, 255));
+		panel.setBackground(new Color(153, 208, 233));
 		return panel;
 	}
 

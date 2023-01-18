@@ -45,8 +45,6 @@ public class LoginPage implements ActionListener {
 	static HomePage hp;
 	final Color col = new Color(153, 208, 233);
 
-	Color c;
-
 	/**
 	 * The loginPage() method adds the buttons, the JLabels and JtextFields to the
 	 * frame. The method also sets the font, color, and position of the labels and
@@ -58,9 +56,8 @@ public class LoginPage implements ActionListener {
 	public JFrame loginPage() {
 		Image ic = Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\logo.png");
 		frame.setIconImage(ic);
-		c = new Color(51, 153, 255);
-		frame.getContentPane().setBackground(c);
-		frame.setBackground(c);
+		frame.getContentPane().setBackground(col);
+		frame.setBackground(col);
 		userIDLabel.setBounds(50, 100, 75, 25);
 		userPasswordLabel.setBounds(50, 150, 75, 25);
 		messageLabel.setBounds(20, 250, 1200, 35);
